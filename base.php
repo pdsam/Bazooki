@@ -1,12 +1,9 @@
-<?php
-
-echo '<head>
+<head>
 	<title>Bazooki</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		</head>';
+		</head>
 
-echo '<body>';
-echo '
+<body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Bazooki</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,11 +40,12 @@ echo '
     </form>
 	</div>
   </div>
-</nav>';
+</nav>
+
+<?php
 body();
+?>
 
-
-echo '
 
 <footer class="page-footer font-small blue pt-4">
 
@@ -130,7 +128,5 @@ echo '
   <!-- Copyright -->
 
 </footer>
-<!-- Footer -->';
-echo '</body>';
-
-?>
+<!-- Footer -->
+</body>
