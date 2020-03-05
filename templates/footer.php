@@ -1,11 +1,18 @@
-<!-- Footer -->
-<footer class="page-footer font-small blue pt-4">
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://risinhos.com"> risinhos.com</a>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<footer id="sticky-footer" class="py-4 fixed-bottom">
+  <div class="">
+    <h6>© 2020 Copyright: <a href="https://www.feup.com"> Bazooki.com </a>
+      <span class="footer-links">
+        <a href="#">link1</a>
+        <a href="#">link2</a>
+        <a href="#">link3</a>
+      </span>
+    </h6>
   </div>
-  <!-- Copyright -->
-
+  <div id="social-media" class="">
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-instagram"></a>
+  </div>
+    
 </footer>
-<!-- Footer -->
