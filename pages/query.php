@@ -1,11 +1,16 @@
 <html>
+    <head>
+	<?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
+    <title> Coisa  </title>
+    <?php include_once(getcwd() . '/../templates/bootstrap_includes.php'); bootstrap($files_path);?>
 
-<head>
-  <?php include_once('../templates/bootstrap_includes.php'); ?>
-</head>
 
-<body>
-  <?php include_once('../templates/header.php'); ?>
+
+
+    </head>
+    <body>
+    <?php include_once(getcwd() . '/../templates/header.php'); ?>
+
   <div class="container">
     <div class="row">
       <div class="col-3 p-1 bg-light">
@@ -39,7 +44,6 @@
       </div>
     </div>
   </div>
-  <?php include_once('../templates/footer.php'); ?>
-</body>
-
+    <?php include_once(getcwd() . '/../templates/footer.php');?>
+    </body>
 </html>
