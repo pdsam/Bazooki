@@ -3,50 +3,62 @@
       <?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
       <title> Coisa </title>
       <?php include_once(getcwd() . '/../templates/bootstrap_includes.php'); bootstrap($files_path);?>
+      <link rel="stylesheet" href="<?= $files_path ?>/css/query.css">
     </head>
 <body class="bg-light">
   <div class="container mt-2">
     <?php include_once(getcwd() . '/../templates/header.php'); ?>
     <div class="row">
-      <div class="collapse show col-xs-12 col-md-3 p-4 bg-white shadow-sm rounded-0">
-        <form id="filtersForm">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-          <a class="d-block mt-2 section-toggle" href="#categoryGroup" data-toggle="collapse" data-target="#categoriesGroup">
-            <div class="d-flex justify-content-between">
-              <p>Category</p>
-              <span class="catIcon fas fa-chevron-up"></span>
-            </div>
-          </a>
-          <div id="categoriesGroup" class="collapse show">
-            <div class="custom-control custom-checkbox">
-              <input class="custom-control-input m-0" type="checkbox" name="category" id="firearmCat" value="firearms">
-              <label class="custom-control-label" for="firearmCat">Firearms</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" type="checkbox" name="category" id="swordsCat" value="swords">
-              <label class="custom-control-label" for="swordsCat">Swords</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" type="checkbox" name="category" id="bowsCat" value="bows">
-              <label class="custom-control-label" for="bowsCat">Bows/Crossbows</label>
-            </div>
+      <!-- FILTERS -->
+      <div class="col-xs-12 col-md-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
+        <a id="filters-toggle" class="pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
+          <div class="d-flex justify-content-between">
+            <p class="m-0">Filters</p>
+            <span class="catIcon fas fa-chevron-up"></span>
           </div>
-
-          <a class="d-block mt-2 section-toggle" href="#categoryGroup" data-toggle="collapse" data-target="#maxBidPriceGroup">
-            <div class="d-flex justify-content-between">
-              <p>Max Bid Price</p>
-              <span class="fas fa-chevron-up"></span>
+        </a>
+        <div id="filters" class="collapse show">
+          <form id="filtersForm">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <a class="d-block mt-2 section-toggle" href="#categoryGroup" data-toggle="collapse" data-target="#categoriesGroup">
+              <div class="d-flex justify-content-between">
+                <p class="m-0">Category</p>
+                <span class="catIcon fas fa-chevron-up"></span>
+              </div>
+            </a>
+            <div id="categoriesGroup" class="collapse show">
+              <div class="custom-control custom-checkbox">
+                <input class="custom-control-input m-0" type="checkbox" name="category" id="firearmCat" value="firearms">
+                <label class="custom-control-label" for="firearmCat">Firearms</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" name="category" id="swordsCat" value="swords">
+                <label class="custom-control-label" for="swordsCat">Swords</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" name="category" id="bowsCat" value="bows">
+                <label class="custom-control-label" for="bowsCat">Bows/Crossbows</label>
+              </div>
             </div>
-          </a>
-          <div id="maxBidPriceGroup" class="collapse show">
-            <label for="maxBid">Maximum bid price: <p id="maxBidDisplay"></p>$</label>
-            <input class="custom-range" type="range" name="maximumBid" id="maxBid" min="0" max="1000">
-          </div>
 
-          <button class="btn btn-primary mt-2" type="submit">Apply filters</button>
-        </form>
+            <a class="d-block mt-2 section-toggle" href="#categoryGroup" data-toggle="collapse" data-target="#maxBidPriceGroup">
+              <div class="d-flex justify-content-between">
+                <p class="m-0">Max Bid Price</p>
+                <span class="fas fa-chevron-up"></span>
+              </div>
+            </a>
+            <div id="maxBidPriceGroup" class="collapse show">
+              <label for="maxBid">Maximum bid price: <p id="maxBidDisplay"></p>$</label>
+              <input class="custom-range" type="range" name="maximumBid" id="maxBid" min="0" max="1000">
+            </div>
+
+            <button class="btn btn-primary mt-2" type="submit">Apply filters</button>
+          </form>
+        </div>
       </div>
 
+
+      <!-- CONTENT DISPLAY -->
       <div class="col-xs-12 col-md-9 mt-2 mt-md-0 p-0">
         <div class="ml-md-1">
           <div class="d-flex justify-content-end align-items-baseline bg-white shadow-sm mb-2 p-1">
@@ -74,6 +86,8 @@
           <?php } ?>
         </div>
       </div>
+
+
     </div>
   </div>
   <?php include_once('../templates/footer.php'); ?>
