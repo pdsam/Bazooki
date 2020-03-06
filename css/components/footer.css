@@ -1,12 +1,28 @@
-html,
-body {
-  height: 100%;
+:root {
+
+    --base-green:#32a12c;
+    --base-red: #a12c32;
+    --border-gray: rgb(235,235,235);
+
 }
 
-#page-content {
-  flex: 1 0 auto;
+small{
+  text-align:center;
 }
 
-#sticky-footer {
-  flex-shrink: none;
+footer{
+  padding-left:1em;
+  padding-right:1em;
+  border-top: 1px solid var(--border-gray);
+  display:flex;
+  justify-content: space-between;
+  
+}
+
+.fa{
+  padding-right:1em;
+}
+
+a{
+  color:inherit;
 }
