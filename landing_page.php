@@ -8,65 +8,74 @@
 </head>
 
 <body>
-    <div class="carousel slide" id="myCarousel" data-ride="carousel" >
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="col-xs-3">
-                    <a href="#">
-                        <img src="http://placehold.it/500/e499e4/fff&amp;text=1" class="img-responsive">
-                    </a>
+    <div class="container-fluid">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+            <div class="carousel-inner row w-10 mxauto" role="listbox">
+                <div class="carousel-item col-md-4 active">
+                    <img class="img-fluid mx-auto d-bloc" src="/assets/logo.png" alt="slide 1">
+                </div>
+                <div class="carousel-item col-md-4">
+                    <img class="img-fluid mx-auto d-block" src="/assets/logo.png" alt="slide 2">
+                </div>
+                <div class="carousel-item col-md-4">
+                    <img class="img-fluid mx-auto d-block" src="/assets/logo.png" alt="slide 3">
+                </div>
+                <div class="carousel-item col-md-4">
+                    <img class="img-fluid mx-auto d-block" src="/assets/logo.png" alt="slide 4">
+                </div>
+                <div class="carousel-item col-md-4">
+                    <img class="img-fluid mx-auto d-block" src="/assets/logo.png" alt="slide 5">
+                </div>
+                <div class="carousel-item col-md-4">
+                    <img class="img-fluid mx-auto d-block" src="/assets/logo.png" alt="slide 6">
+                </div>
+                <div class="carousel-item col-md-4">
+                    <img class="img-fluid mx-auto d-block" src="/assets/logo.png" alt="slide 7">
+                </div>
+                <div class="carousel-item col-md-4">
+                    <img class="img-fluid mx-auto d-block" src="/assets/logo.png" alt="slide 7">
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="col-xs-3">
-                    <a href="#">
-                        <img src="http://placehold.it/500/e477e4/fff&amp;text=2" class="img-responsive">
-                    </a>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="col-xs-3">
-                    <a href="#">
-                        <img src="http://placehold.it/500/e477e4/fff&amp;text=3" class="img-responsive">
-                    </a>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="col-xs-3">
-                    <a href="#">
-                        <img src="http://placehold.it/500/e477e4/fff&amp;text=4" class="img-responsive">
-                    </a>
-                </div>
-            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+    </div>
+        
     </div>
     <script type="text/javascript">
-        $('#myCarousel').carousel({
-            interval: false
-        })
+        $('#carouselExample').on('slide.bs.carousel', function (e) {
 
-        $('.carousel .carousel-item').each(function(){
-            let next = $(this).next();
-            if (!next.length) {
-                next = $(this).siblings(':first');
-            }
-            next.children(':first-child').clone().appendTo($(this));
-        
-            for (let i=0;i<2;i++) {
-                next=next.next();
-                if (!next.length) {
-                    next = $(this).siblings(':first');
+            /*
+
+            CC 2.0 License Iatek LLC 2018
+            Attribution required
+
+            */
+
+            let $e = $(e.relatedTarget);
+
+            let idx = $e.index();
+
+            let itemsPerSlide = 8;
+            let totalItems = $('.carousel-item').length;
+
+            if (idx >= totalItems-(itemsPerSlide-1)) {
+                let it = itemsPerSlide - (totalItems - idx);
+                for (let i=0; i<it; i++) {
+                    // append slides to end
+                    if (e.direction=="left") {
+                        $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                    }
+                    else {
+                        $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                    }
                 }
-                
-                next.children(':first-child').clone().appendTo($(this));
             }
         });
     </script>
