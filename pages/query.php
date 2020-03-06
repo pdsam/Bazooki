@@ -29,7 +29,7 @@
           <div class="card shadow-sm rounded-0 border-0 m-1">
             <div class="row no-gutters">
               <div class="col-md-4">
-                <img src="/assets/logo.png" class="card-img" alt="logo">
+	      <img src="<?php echo $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
