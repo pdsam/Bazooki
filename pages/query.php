@@ -1,23 +1,13 @@
 <html>
     <head>
-	<?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
-    <title> Coisa  </title>
-    <?php include_once(getcwd() . '/../templates/bootstrap_includes.php'); bootstrap($files_path);?>
-
-
-<<<<<<< HEAD
-
-
+      <?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
+      <title> Coisa </title>
+      <?php include_once(getcwd() . '/../templates/bootstrap_includes.php'); bootstrap($files_path);?>
     </head>
-    <body>
-    <?php include_once(getcwd() . '/../templates/header.php'); ?>
-
-  <div class="container">
-=======
 <body class="bg-light">
-  <?php include_once('../templates/header.php'); ?>
+  <?php include_once(getcwd() . '/../templates/header.php'); ?>
+
   <div class="container mt-2">
->>>>>>> updated filter form
     <div class="row">
       <div class="col-3 p-4 bg-white shadow-sm rounded-0">
         <form id="filtersForm">
@@ -58,35 +48,21 @@
         </form>
       </div>
 
-<<<<<<< HEAD
-      <div class="col-9 p-1 bg-light">
-        <?php for ($i=0; $i < 10; $i++) { ?>
-          <div class="card shadow-sm rounded-0 border-0 m-1">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-	      <img src="<?php echo $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-=======
-      <div class="col-9 p-0">
-        <div class="ml-2 p-2 bg-white shadow-sm rounded-0">
+      <div class="col-9 p-0 bg-light">
+        <div class="ml-1">
           <?php for ($i=0; $i < 10; $i++) { ?>
-            <div class="card shadow-sm rounded-0 border-0 m-1">
+            <div class="card shadow-sm rounded-0 border-0 mb-1">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="/assets/logo.png" class="card-img" alt="logo">
->>>>>>> updated filter form
+                  <img src="<?php echo $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   </div>
+                  <a href="#" class="stretched-link"></a>
                 </div>
-                <a href="#" class="stretched-link"></a>
               </div>
             </div>
           <?php } ?>
