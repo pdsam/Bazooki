@@ -5,11 +5,10 @@
       <?php include_once(getcwd() . '/../templates/bootstrap_includes.php'); bootstrap($files_path);?>
     </head>
 <body class="bg-light">
-  <?php include_once(getcwd() . '/../templates/header.php'); ?>
-
   <div class="container mt-2">
+    <?php include_once(getcwd() . '/../templates/header.php'); ?>
     <div class="row">
-      <div class="col-3 p-4 bg-white shadow-sm rounded-0">
+      <div class="collapse show col-xs-12 col-md-3 p-4 bg-white shadow-sm rounded-0">
         <form id="filtersForm">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
           <a class="d-block mt-2 section-toggle" href="#categoryGroup" data-toggle="collapse" data-target="#categoriesGroup">
@@ -48,21 +47,28 @@
         </form>
       </div>
 
-      <div class="col-9 p-0 bg-light">
-        <div class="ml-1">
+      <div class="col-xs-12 col-md-9 mt-2 mt-md-0 p-0">
+        <div class="ml-md-1">
+          <div class="d-flex justify-content-end align-items-baseline bg-white shadow-sm mb-2 p-1">
+            <label class="mr-1"for="sort">Sort by:</label>
+            <select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
+              <option value="bid" selected>Highest Bid Price</option>
+              <option value="date">End date</option>
+            </select>
+          </div>
           <?php for ($i=0; $i < 10; $i++) { ?>
             <div class="card shadow-sm rounded-0 border-0 mb-1">
-              <div class="row no-gutters">
-                <div class="col-md-4">
+              <div class="row align-items-center no-gutters">
+                <div class="col-xs-12 col-sm-4">
                   <img src="<?php echo $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
                 </div>
-                <div class="col-md-8">
+                <div class="col-xs-12 col-sm-8">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Weapon</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   </div>
-                  <a href="#" class="stretched-link"></a>
                 </div>
+                <a href="#" class="stretched-link"></a>
               </div>
             </div>
           <?php } ?>
