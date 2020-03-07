@@ -4,6 +4,7 @@
       <title> Coisa </title>
       <?php include_once(getcwd() . '/../templates/bootstrap_includes.php'); bootstrap($files_path);?>
       <link rel="stylesheet" href="<?= $files_path ?>/css/query.css">
+      <link rel="stylesheet" href="../css/components/footer.css">
     </head>
 <body class="bg-light">
   <div class="container mt-2">

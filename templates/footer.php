@@ -4,9 +4,9 @@
   <div class="">
     <h6>© 2020 Copyright: <a href="https://www.feup.com"> Bazooki.com </a>
       <span class="footer-links">
-        <a href="#">link1</a>
-        <a href="#">link2</a>
-        <a href="#">link3</a>
+        <a href="#">About</a>
+        <a href="#">FAQ</a>
+        <a href="#">Terms</a>
       </span>
     </h6>
   </div>
