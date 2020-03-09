@@ -15,7 +15,7 @@
         <a id="filters-toggle" class="pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
           <div class="d-flex justify-content-between">
             <p class="m-0">Filters</p>
-            <span class="catIcon fas fa-chevron-up"></span>
+            <span class="catIcon fa fa-chevron-up"></span>
           </div>
         </a>
         <div id="filters" class="collapse show">
@@ -24,7 +24,7 @@
             <a class="d-block mt-2 section-toggle" href="#categoryGroup" data-toggle="collapse" data-target="#categoriesGroup">
               <div class="d-flex justify-content-between">
                 <p class="m-0">Category</p>
-                <span class="catIcon fas fa-chevron-up"></span>
+                <span class="catIcon fa fa-chevron-up"></span>
               </div>
             </a>
             <div id="categoriesGroup" class="collapse show">
@@ -45,7 +45,7 @@
             <a class="d-block mt-2 section-toggle" href="#categoryGroup" data-toggle="collapse" data-target="#maxBidPriceGroup">
               <div class="d-flex justify-content-between">
                 <p class="m-0">Max Bid Price</p>
-                <span class="fas fa-chevron-up"></span>
+                <span class="fa fa-chevron-up"></span>
               </div>
             </a>
             <div id="maxBidPriceGroup" class="collapse show">
@@ -93,8 +93,8 @@
   </div>
   <?php include_once('../templates/footer.php'); ?>
 
-  <script src="/js/queryFilters.js"></script>
-  <script src="/js/queryRangeFilter.js"></script>
+  <script src="<?php echo $files_path . '/js/queryFilters.js';?>"></script>
+  <script src="<?php echo $files_path . '/js/queryRangeFilter.js';?>"></script>
 </body>
 
 </html>

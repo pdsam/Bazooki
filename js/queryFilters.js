@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $('#categoryGroup').on('show.bs.toggle', function() {
+    $('#categoryGroup').on('click', function() {
+console.log('cona');
         $('.catIcon').addClass('fa-chevron-down').removeClass('fa-chevron-up');
     });
 
