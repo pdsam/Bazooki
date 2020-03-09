@@ -1,10 +1,15 @@
 $(document).ready(function () {
-    $('#categoryGroup').on('click', function() {
-console.log('cona');
-        $('.catIcon').addClass('fa-chevron-down').removeClass('fa-chevron-up');
+    $('.collapse').on('show.bs.collapse', function(event) {
+        event.stopPropagation();
+        const span = $(`[data-target='#${this.id}'] span.fa`);
+        span.addClass('fa-chevron-up');
+        span.removeClass('fa-chevron-down');
     });
 
-    $('#categoryGroup').on('hide.bs.toggle', function() {
-        $('.catIcon').addClass('fa-chevron-up').removeClass('fa-chevron-down');
+    $('.collapse').on('hide.bs.collapse', function(event) {
+        event.stopPropagation();
+        const span = $(`[data-target='#${this.id}'] span.fa`);
+        span.addClass('fa-chevron-down');
+        span.removeClass('fa-chevron-up');
     });
 });
