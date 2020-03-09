@@ -77,8 +77,16 @@
                 </div>
                 <div class="col-xs-12 col-sm-8">
                   <div class="card-body">
-                    <h5 class="card-title">Weapon</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
+                      <div class="">
+                        <h5 class="card-title">Weapon</h5>
+                        <h6 class="card-subtitle text-muted">Ends at: dd/mm/yyyy hh:mm:ss</h6>
+                      </div>
+                      <div>
+                        <span class="mr-1" style="font-size: 2rem">300</span>$
+                      </div>
+                    </div>
+                    <p class="card-text">Big descritpion thingy</p>
                   </div>
                 </div>
                 <a href="#" class="stretched-link"></a>
