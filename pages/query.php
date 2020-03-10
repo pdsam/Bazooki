@@ -4,9 +4,9 @@
       <?php include_once('../templates/header.php');?>
 
       <link rel="stylesheet" href="<?= $files_path ?>/css/query.css">
-	  <link rel="stylesheet" href="<? echo $files_path . '/css/components/header.css';?>">
-	  <link rel="stylesheet" href="<? echo $files_path . '/css/components/footer.css';?>">
-    </head>
+	    <link rel="stylesheet" href="<? echo $files_path . '/css/components/header.css';?>">
+	    <link rel="stylesheet" href="<? echo $files_path . '/css/components/footer.css';?>">
+</head>
 <body class="bg-light">
   <div class="container mt-2">
 		<div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">

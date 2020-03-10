@@ -1,39 +1,39 @@
+<html>
+    <?php include_once("../templates/header.php"); ?>
 
-<?php
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
+    <body class="bg-light">
+        <link rel="stylesheet" href="<?= $files_path . '/css/landing_page.css';?>">
 
-    draw_header("Landing page");
-?>
-    
+        <script type="text/javascript" defer>
+            $(document).ready(function(){
+                //Event for pushed the video
+                $('.carousel').carousel({
+                    pause: true,
+                    interval: false
+                });
+            });
+        </script>        
 
-<script type="text/javascript" defer>
-    $(document).ready(function(){
-        //Event for pushed the video
-        $('.carousel').carousel({
-            pause: true,
-            interval: false
-        });
-    });
-</script>
+        <div id="landing_page" class="container">
 
-<div id="landing_page" class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">Current Auctions</h1>
-        <hr class="my-4">
-        <p class="lead">“Those who dare seek, shall find what they are seeking for.”</p>
-        <p>Lailah Gifty Akita, Think Great: Be Great!</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Signup</a>
-        </p>
-    </div>
+            <?php include_once("../templates/navbar.php"); ?>
+            <div class="jumbotron">
+                <h1 class="display-4">Current Auctions</h1>
+                <hr class="my-4">
+                <p class="lead">“Those who dare seek, shall find what they are seeking for.”</p>
+                <p>Lailah Gifty Akita, Think Great: Be Great!</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Signup</a>
+                </p>
+            </div>
 
-    <?php hot_deals_carousel(); ?>
-    <?php flash_carousel(); ?>
-    <?php main_carousel(); ?>
-</div>
-    
-<?php draw_footer(); ?>
+            <?php hot_deals_carousel(); ?>
+            <?php flash_carousel(); ?>
+            <?php main_carousel(); ?>
+        </div>
+            
+        <?php include_once("../templates/footer.php"); ?>
+    </body>
 
 
 <?php function make_carousel($title, $id, $items, $cardsize) { ?>
