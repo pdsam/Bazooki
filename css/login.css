@@ -76,12 +76,11 @@
 
 #forgot-password {
     margin-top: 2rem;
-    margin-bottom: 0rem;
+    margin-bottom: 2rem;
 }
 
 #register-prompt {
     text-align: left;
-    margin-top: 1rem;
 }
 
 #register-prompt p {
@@ -94,6 +93,7 @@
 
 #login-img img {
     max-width: 100%;
+    box-shadow: 4px 4px 10px 4px rgb(0,0,0,0.4);
 }
 
 #login-img .jumbotron {
