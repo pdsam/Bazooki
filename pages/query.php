@@ -4,11 +4,11 @@
       <?php include_once('../templates/header.php');?>
 
       <link rel="stylesheet" href="<?= $files_path ?>/css/query.css">
-	    <link rel="stylesheet" href="<? echo $files_path . '/css/components/header.css';?>">
 	    <link rel="stylesheet" href="<? echo $files_path . '/css/components/footer.css';?>">
 </head>
 <body class="bg-light">
   <div class="container mt-2">
+    <?php include('../templates/navbar.php') ?>
 		<div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
 			<label class="mr-1"for="sort">Sort by:</label>
 			<select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
@@ -27,7 +27,6 @@
         </a>
         <div id="filters" class="collapse show">
           <form id="filtersForm">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <a class="d-block mt-2 section-toggle" href="#categoriesGroup" data-toggle="collapse" data-target="#categoriesGroup">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="m-0">Category</p>

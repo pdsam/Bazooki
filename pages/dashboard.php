@@ -1,4 +1,3 @@
-<?php include_once('../templates/bootstrap_includes.php') ?>
 <!doctype html>
 <html lang="en">
 
@@ -9,19 +8,16 @@
     $files_path = join("/", $path); ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Coisa</title>
 
-    <!-- Bootstrap core CSS -->
-    <?php bootstrap($files_path); ?>
+    <?php include('../templates/header.php') ?>
 
     <!-- Custom styles for this template -->
     <link href="<?= $files_parh ?>/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
-    <?php include_once('../templates/header.php') ?>
-
-    <div class="container-fluid">
+    <div class="container">
+        <?php include('../templates/navbar.php')?>
         <div class="row">
             <nav class="col-12 col-lg-2 bg-light sidebar">
                 <ul class="nav flex-column">
