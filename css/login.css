@@ -3,14 +3,14 @@
   display: flex;
   -ms-flex-align: center;
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   background-color: #f5f5f5;
 }
 
 #login-container .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 400px;
   padding: 15px;
   margin: auto;
 }
@@ -86,4 +86,16 @@
 
 #register-prompt p {
     margin-bottom: 0rem;
+}
+
+#register-prompt p a {
+    text-decoration: underline;
+}
+
+#login-img img {
+    max-width: 100%;
+}
+
+#login-img .jumbotron {
+    padding: 0;
 }
