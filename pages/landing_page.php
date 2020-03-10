@@ -37,6 +37,7 @@
             
         <?php include_once("../templates/footer.php"); ?>
     </body>
+</html>
 
 
 <?php function make_carousel($title, $id, $items, $cardsize) { ?>
