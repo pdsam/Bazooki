@@ -14,9 +14,12 @@
             });
         </script>        
 
-        <div id="landing_page" class="container-fluid">
-
+        <div class="container">
             <?php include_once("../templates/navbar.php"); ?>
+        </div>
+
+        <div id="landing_page" class="container">
+
             <div class="jumbotron">
                 <h1 class="display-4">Current Auctions</h1>
                 <hr class="my-4">
