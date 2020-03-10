@@ -1,6 +1,18 @@
 button{
     margin-left: 1em;
 }
-nav{
-    margin-bottom: 1rem;
+
+#product-details{
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--border-gray);
+    padding-bottom: 1em;
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#bid-placer{
+    margin-top: 1em;
 }

@@ -2,7 +2,7 @@
 <footer id="sticky-footer" class="py-4">
 <div class="container text-center">
   <div class="">
-    <h6>© 2020 Copyright: <a href="https://www.feup.com"> Bazooki.com </a>
+    <h6>© 2020 Copyright: <a href="../index.php"> Bazooki.com </a>
       <span class="footer-links">
         <a href="#">About</a>
         <a href="#">FAQ</a>
