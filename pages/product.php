@@ -47,35 +47,43 @@
                         </a>
                     </div>
                 </div>
-                <div class=col-lg>
-                    <div>
-                        <h3>Product Title</h3>
-                        
-                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in libero fringilla, pellentesque libero eu, tincidunt velit. Duis odio leo, ultricies tincidunt finibus in, condimentum at purus. Fusce urna dui, fringilla in convallis ut, consequat id risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam aliquam urna et arcu maximus, condimentum hendrerit sem accumsan. Aliquam eleifend orci vitae pharetra venenatis. Suspendisse sagittis dui lacus, sit amet dignissim urna pharetra ac. Sed vestibulum dignissim leo, at faucibus mauris.
+                <div class="col-lg">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Product Title</h3>
 
-</p>
-                    </div>
-                    <div>
+                            <p class="card-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in libero fringilla, pellentesque libero eu, tincidunt velit. Duis odio leo, ultricies tincidunt finibus in, condimentum at purus. Fusce urna dui, fringilla in convallis ut, consequat id risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam aliquam urna et arcu maximus, condimentum hendrerit sem accumsan. Aliquam eleifend orci vitae pharetra venenatis. Suspendisse sagittis dui lacus, sit amet dignissim urna pharetra ac. Sed vestibulum dignissim leo, at faucibus mauris.
 
-                        <h4>$100</h4>
+                            </p>
+                        </div>
+                        <div>
 
-                    </div>
+                            <h4 class="card-subtitle">$100</h4>
 
-                    <div class="form-inline " id="bid-placer">
-                        <label for="bidAmount" class="sr-only">Bid</label>
-                        <input type="number" class="form-control" id="bidAmount" placeholder="110">
-                        <button type="submit" class="btn btn-primary ">Bid</button>
+                        </div>
+
+                        <div class="form-inline " id="bid-placer">
+                            <label for="bidAmount" class="sr-only">Bid</label>
+                            <input type="number" class="form-control" id="bidAmount" placeholder="110">
+                            <button type="submit" class="btn btn-primary ">Bid</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <h3>Documentation</h3>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Documentation</h3>
+                    <p class="card-text"></p>
+                </div>
             </div>
 
-            <div>
-                <h3>Price variation</h3>
-                <img src="../assets/chart.png">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Price variation</h3>
+                    <img src="../assets/chart.png">
+                </div>
+
             </div>
 
 
