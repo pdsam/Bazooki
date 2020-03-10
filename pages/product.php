@@ -6,14 +6,12 @@
     array_pop($path);
     $files_path = join("/", $path); ?>
     <title> That one gun </title>
-    <?php include_once(getcwd() . '/../templates/bootstrap_includes.php');
-    bootstrap($files_path); ?>
+    <?php include_once(getcwd() . '/../templates/header.php')?>
     <link rel="stylesheet" href="<?= $files_path ?>/css/product.css">
     <link rel="stylesheet" href="../css/components/footer.css">
-    <link rel="stylesheet" href="../css/components/header.css">
 </head>
 
-<body>
+
 
     <body class="bg-light">
         <div class="container mt-2">
