@@ -14,7 +14,7 @@
             });
         </script>        
 
-        <div id="landing_page" class="container">
+        <div id="landing_page" class="container-fluid">
 
             <?php include_once("../templates/navbar.php"); ?>
             <div class="jumbotron">
@@ -23,7 +23,7 @@
                 <p class="lead">“Those who dare seek, shall find what they are seeking for.”</p>
                 <p>Lailah Gifty Akita, Think Great: Be Great!</p>
                 <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Signup</a>
+                    <a class="btn btn-primary btn-lg" href="/register.php" role="button">Signup</a>
                 </p>
             </div>
 
@@ -39,12 +39,9 @@
 <?php function make_carousel($title, $id, $items, $cardsize) { ?>
     <div class="carouselParent">
         <h3><?=$title?></h3>
-        <div id="<?=$id?>" class="carousel slide row" data-ride="carousel">
-            <a class="carousel-control-prev col-1" href="#<?=$id?>" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <div class="carousel-inner col-10">
+        <div id="<?=$id?>" class="carousel slide" data-ride="carousel">
+            
+            <div class="carousel-inner">
                 <?php foreach($items as $i => $curr) { ?>
                     <div class="carousel-item<?php if($i===0) echo " active"?>">
                         <div class="row">
@@ -62,11 +59,18 @@
                     </div>
                 <?php } ?>
             </div>
-            <a class="carousel-control-next col-1" href="#<?=$id?>" role="button" data-slide="next">
+        </div>
+        <div class="row carousel-controls">
+            <a class="col-1 btn btn-primary btn-lg" href="#<?=$id?>" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="col-1 btn btn-primary btn-lg" href="#<?=$id?>" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
+        
     </div>
 <?php } ?>
 
@@ -236,7 +240,7 @@
 <?php function make_carousel_card($title, $img, $description, $size) { ?>
     <div class="<?=$size?>">
         <div class="card carousel-card-small">
-            <a href="#batata">
+            <a href="product.php">
                 <img class="card-img-top" src="<?=$img?>" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><?=$title?></h5>
