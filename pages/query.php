@@ -9,6 +9,13 @@
 <body class="bg-light">
   <div class="container mt-2">
     <?php include_once(getcwd() . '/../templates/header.php'); ?>
+		<div class="d-flex justify-content-end align-items-baseline bg-white shadow-sm mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
+			<label class="mr-1"for="sort">Sort by:</label>
+			<select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
+				<option value="bid" selected>Highest Bid Price</option>
+				<option value="date">End date</option>
+			</select>
+			</div>
     <div class="row">
       <!-- FILTERS -->
       <div class="col-xs-12 col-md-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
@@ -62,13 +69,6 @@
       <!-- CONTENT DISPLAY -->
       <div class="col-xs-12 col-md-9 mt-2 mt-md-0 p-0">
         <div class="ml-md-1">
-          <div class="d-flex justify-content-end align-items-baseline bg-white shadow-sm mb-2 p-1">
-            <label class="mr-1"for="sort">Sort by:</label>
-            <select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
-              <option value="bid" selected>Highest Bid Price</option>
-              <option value="date">End date</option>
-            </select>
-          </div>
           <?php for ($i=0; $i < 10; $i++) { ?>
             <div class="card shadow-sm rounded-0 border-0 mb-1">
               <div class="row align-items-center no-gutters">
