@@ -1,15 +1,15 @@
 <html>
     <head>
       <?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
-      <title> Coisa </title>
-      <?php include_once(getcwd() . '/../templates/bootstrap_includes.php'); bootstrap($files_path);?>
+      <?php include_once('../templates/header.php');?>
+
       <link rel="stylesheet" href="<?= $files_path ?>/css/query.css">
-      <link rel="stylesheet" href="../css/components/footer.css">
+	  <link rel="stylesheet" href="<? echo $files_path . '/css/components/header.css';?>">
+	  <link rel="stylesheet" href="<? echo $files_path . '/css/components/footer.css';?>">
     </head>
 <body class="bg-light">
   <div class="container mt-2">
-    <?php include_once(getcwd() . '/../templates/header.php'); ?>
-		<div class="d-flex justify-content-end align-items-baseline bg-white shadow-sm mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
+		<div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
 			<label class="mr-1"for="sort">Sort by:</label>
 			<select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
 				<option value="bid" selected>Highest Bid Price</option>

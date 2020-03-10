@@ -1,11 +1,7 @@
-<?php function draw_header($title) { ?>
   <head>
-    <title><?=$title?></title>
-    <link rel="stylesheet" href="../css/lib/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/landing_page.css">
-    <script type="text/javascript" src="../js/lib/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="../js/lib/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/07ed6a8693.js" crossorigin="anonymous"></script>
+    <title>Bazooki</title>
+	
+	<?php include_once('../templates/bootstrap_includes.php') ?>
 
   </head>
   <body>
@@ -50,4 +46,3 @@
         </div>
       </nav>
     </div>
-<?php } ?>
