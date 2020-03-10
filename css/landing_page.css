@@ -1,3 +1,7 @@
+#landing_page .jumbotron {
+    padding-bottom: 1rem;
+}
+
 .carousel {
     border: 1px solid black;
 }
@@ -14,9 +18,6 @@
 .carouselParent > h3{
     margin-left: 2rem;
     margin-top: 1rem;
-}
-
-.carousel-inner {
 }
 
 .carousel .row .card {
