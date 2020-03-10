@@ -1,8 +1,39 @@
-.carousel-inner {
-    width: 500px;
-    height: 500px;
+.carousel {
+    border: 1px solid black;
 }
 
-#myCarousel .row .card {
+.carousel.row {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.carouselParent {
+    margin-bottom: 5rem;
+}
+
+.carouselParent > h3{
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.carousel-inner {
+}
+
+.carousel .row .card {
     margin: auto;
+}
+
+.carousel-card-small a {
+    color: black;
+}
+
+.carousel-card-small a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.carousel .carousel-control-prev, .carousel .carousel-control-next {
+    background-color: black;
+    width: 5%;
+    position: relative;
 }
