@@ -1,3 +1,8 @@
 Dockerfile
 upload_image.sh
+run_images.sh
+build_image.sh
 README.md
+mockups
+.gitignore
+.git
