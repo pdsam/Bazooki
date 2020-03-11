@@ -1,13 +1,16 @@
 <head>
-	<title>Bazooki</title>
-    <link rel="stylesheet" href="css/profile.css">
-    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
-    <script type="text/javascript" src="js/lib/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+    <title>Bazooki</title>
+    <?php $path = explode('/', $_SERVER['REQUEST_URI']);
+    array_pop($path);
+    array_pop($path);
+    $files_path = join("/", $path); ?>
+    <?php include_once(getcwd() . '/../templates/header.php') ?>
+    <link rel="stylesheet" href="<?= $files_path ?>/css/profile.css">
 </head>
 
 <body>
     <div class="container-fluid">
+        <?php include_once(getcwd() . '/../templates/navbar.php') ?>
         <div class="row">
 
             <div id="profile_pic" class="col-sm-4">
