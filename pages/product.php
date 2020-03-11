@@ -15,7 +15,7 @@
     <div class="container mt-2">
         <?php include_once(getcwd() . '/../templates/navbar.php') ?>
         <div class="row" id="product-details">
-            <div class="col-md-7">
+            <div class="col-lg-7">
                 <div class="card">
                     <div class="shadow-lg">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -49,7 +49,7 @@
                 </div>
 
             </div>
-            <div class="col-md-5">
+            <div class="col-lg-5">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title text-center card-c-element card-body">GSG FIREFLY .22LR PISTOL THREADED</h3>
@@ -61,7 +61,7 @@
                             <div class="row">
                                 <input type="number" class="text-center col-12 col-md-8" value="110"></input>
                                 <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-primary" id="bid-button">Bid Now</button>
+                                    <button type="button" class="btn btn-primary w-100" id="bid-button">Bid Now</button>
                                 </div>
                             </div>
                         </div>
