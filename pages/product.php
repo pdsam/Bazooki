@@ -17,8 +17,8 @@
     <div class="container mt-2">
         <?php include_once(getcwd() . '/../templates/navbar.php') ?>
         <div class="row" id="product-details">
-            <div class="col-md-5">
-                <div class="card h-100">
+            <div class="col-md-7">
+                <div class="card">
                     <div class="shadow-lg">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
@@ -29,13 +29,13 @@
 
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="d-block w-100 image-responsive" src="http://lorempixel.com/400/400" alt="First slide">
+                                    <img class="d-block w-100 image-responsive" src="https://picsum.photos/445/425" alt="First slide">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="d-block w-100 image-responsive" src="http://lorempixel.com/400/400" alt="Second slide">
+                                    <img class="d-block w-100 image-responsive" src="https://picsum.photos/445/425.jpg" alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="d-block w-100 image-responsive" src="http://lorempixel.com/400/400   " alt="Third slide">
+                                    <img class="d-block w-100 image-responsive" src="https://picsum.photos/445/425/" alt="Third slide">
                                 </div>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -51,16 +51,21 @@
                 </div>
 
             </div>
-            <div class="col-md-7">
-                <div class="card h-100">
+            <div class="col-md-5">
+                <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title text-center card-c-element card-body">M1 GARAND</h3>
+                        <h3 class="card-title text-center card-c-element card-body">GSG FIREFLY .22LR PISTOL THREADED</h3>
                         <div id="price" class="card-c-element card-body">
                             <h3 class="card-title text-center" id="price">€100</h3>
+                            <h3 class="card-title text-center">22d 10h</h3>
                         </div>
-                        <div  class="text-center card-body">
-                            <input type="number" class="add-margin text-center" value="110"></input>
-                            <button type="button" class="btn btn-block btn-primary btn-lg center-block" id="bid-button">Bid Now</button>
+                        <div class="card-body d-inline-flex justify-content-between w-100 align-items-center">
+                            
+                                <input type="number" class=" text-center " value="110"></input>
+                                <div class="">
+                                <button type="button" class="btn btn-block btn-primary btn-lg center-block " id="bid-button">Bid Now</button>
+                                </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -70,15 +75,14 @@
 
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title text-center">Documentation</h3>
-                <p class="card-text"></p>
-            </div>
+                <h3 class="card-title">Details </h3>
+                <p class="card-text">The Draco NAK9 pistol is chambered in the cost-effective, low-recoil 9mm cartridge while capturing the look and feel of the AK-47 platform. The magazine well allows for compatibility with GLOCK 17 and GLOCK 19 magazines making it the perfect companion for your EDC 9mm handgun. The NAK9 comes equipped with a top-mounted Picatinny optics rail for mounting modern optics, a rear sling mount, one 33-round magazine and is compatible with aftermarket AKM handguards. The blowback operated design results in a platform as reliable as an AK, but in a smaller package with minimal recoil. Its lightweight and 11.14” barrel make the Draco NAK9 an excellent choice for your next truck gun, CQC or a fun day at the range.</div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title text-center">Price variation</h3>
-                <img src="../assets/chart.png" class="img-responsive" width="100%"/>
+                <h3 class="card-title">Price variation</h3>
+                <img src="../assets/chart.png" class="img-responsive" width="100%" />
             </div>
 
         </div>

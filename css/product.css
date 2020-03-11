@@ -5,14 +5,11 @@
 
 
 .card-c-element{
-    border-bottom: 2px solid var(--border-gray);
+    border-bottom: 2px solid var(--border-grey);
 }
 
-.add-margin{
-    margin-bottom: 1em;
-}
 #price{
-    font-size: 2.2em;
+    font-size: 2em;
     font-weight: 550;
 }
 
@@ -40,6 +37,7 @@ input[type=number] {
 #bid-button{
     background-color: var(--highlight-purple);
     border-color: var(--highlight-purple);
+    border-radius: 5rem;
 }
 
 #bid-button:hover{
