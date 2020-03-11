@@ -17,11 +17,11 @@
             </div>
         </form>
         <ul class="navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="<?= $files_path ?>/pages/faq.php">FAQ<span class="sr-only">(current)</span></a>
+        <li class="nav-item active ">
+            <a class="nav-link custom-hover" id="button1" href="<?= $files_path ?>/pages/faq.php">FAQ<span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="#">About</a>
+        <li class="nav-item active ">
+            <a class="nav-link custom-hover" id="button2" href="#">About</a>
         </li>
         <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

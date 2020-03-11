@@ -17,3 +17,17 @@ nav.navbar {
     border-color: #470047;
     color:white;
 }
+
+
+
+a.nav-link.custom-hover:hover{
+    color: var(--highlight-purple);
+    border-bottom: 1px;
+    border-color: var(--highlight-purple);
+}
+#button1:hover, #button2:hover{
+    color: var(--highlight-purple);
+    border-bottom: 1px;
+    border-color: var(--highlight-purple);
+
+}

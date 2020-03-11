@@ -1,10 +1,9 @@
 :root {
     
-    --base-green:#32a12c;
-    --base-green-darker:#277c23;
-    --base-red: #a12c32;
+
     --highlight-purple: #660066;
     --highlight-purple-darker: #520352;
     --border-grey: rgb(235,235,235);
     --border-gray: rgb(235,235,235);
+    --olive: #9AB973;
 }
