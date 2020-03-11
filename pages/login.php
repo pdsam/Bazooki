@@ -15,11 +15,12 @@
                         <img class="mb-4" src="../assets/panda_transparency.png" alt="" width="150" height="150">
                         <h1 class="h3 mb-3 font-weight-normal">Welcome back Bazooker!</h1>
                         
-                        <label for="inputEmail" class="sr-only">Email address</label>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                        
-                        <label for="inputPassword" class="sr-only">Password</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="loginUsername" aria-describedby="userHelp" placeholder="Username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" name="password">
+                        </div>
                         
                         <div class="checkbox">
                             <label>

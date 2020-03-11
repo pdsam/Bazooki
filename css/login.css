@@ -48,16 +48,8 @@
   margin-right: 0.5rem;
 }
 
-#login-container .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-#login-container .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+#login-container .form-signin .form-group {
+  text-align: left;
 }
 
 #login-container .btn-google {
@@ -98,4 +90,6 @@
 
 #login-img .jumbotron {
     padding: 0;
+    padding-bottom: 5px;
+    margin-bottom: 0;
 }
