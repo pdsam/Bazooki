@@ -21,12 +21,12 @@
         <div id="landing_page" class="container">
 
             <div class="jumbotron">
-                <h1 class="display-4">Current Auctions</h1>
+                <h1 class="display-4">Current Auctions <i class="fas fa-gavel"></i></h1>
                 <hr class="my-4">
                 <p class="lead">“Those who dare seek, shall find what they are seeking for.”</p>
                 <p>Lailah Gifty Akita, Think Great: Be Great!</p>
                 <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="/register.php" role="button">Signup</a>
+                    <a class="btn btn-primary btn-lg" href="./register.php" role="button">Signup</a>
                 </p>
             </div>
 
@@ -231,7 +231,7 @@
     );
 
     make_carousel(
-        "<i class='fas fa-search' style='color:#0064c9'></i> CATEGORIES <i class='fas fa-search' style='color:#0064c9'></i>", 
+        "<i class='fas fa-search' style='color:var(--highlight-purple)'></i> CATEGORIES <i class='fas fa-search' style='color:var(--highlight-purple)'></i>", 
         "main-carousel", 
         $items, 
         "col-4"

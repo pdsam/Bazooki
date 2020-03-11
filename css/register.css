@@ -67,8 +67,22 @@
 }
 
 #register-container .btn-google {
-    color: white;
-    background-color: #ea4335;
+  color: white;
+  background-color: #ea4335;
+}
+
+#register-container .btn-google:hover {
+  background-color: #bb382c;
+}
+
+#register-container .btn-primary {
+  color: white;
+  background-color: var(--highlight-purple);
+  border: none;
+}
+
+#register-container .btn-primary:hover {
+  background-color: var(--highlight-purple-darker);
 }
 
 #register-container .btn {
@@ -82,7 +96,7 @@
 
 #login-img img {
     max-width: 100%;
-    box-shadow: 4px 4px 10px 4px rgb(0,0,0,0.4);
+    box-shadow: 0 0 10px 4px rgba(58, 8, 105, 0.616);
 }
 
 #login-img .jumbotron {

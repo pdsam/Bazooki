@@ -28,7 +28,8 @@
                             </div>
                         </div>
 
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac luctus diam, non porta augue. Pellentesque tempor vel enim ut posuere. Quisque in sagittis quam, sit amet facilisis diam. Nam tellus ipsum, fringilla non nisl id, molestie volutpat neque. Curabitur quis dapibus justo, eget malesuada mauris. Duis quis finibus magna. Mauris laoreet varius dolor, eget semper odio posuere ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin velit sed purus gravida lobortis. Sed ut imperdiet felis. Cras massa mauris, volutpat auctor fringilla nec, imperdiet sit amet mauris. Duis ac lacinia orci. Cras interdum mi dignissim, elementum sapien mattis, pulvinar justo. Duis molestie leo eu nulla suscipit convallis. Nam tristique commodo aliquam.</p>
+                        <p class="lead">I am a history fanatic and love to collect guns from different epochs.</p>
+                        <p class="lead">Always looking for new and exquisite additions to my collection.</p>
                     </div>
                 </div>
                 
@@ -53,23 +54,23 @@
         <div id="profile_tabs" class="tab-content">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <div class="row">
-                    <?php create_current_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
-                    <?php create_current_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
-                    <?php create_current_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
+                    <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                    <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                    <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
                 </div>
             </div>
             <div class="tab-pane" id="tabs-2" role="tabpanel">
                 <div class="row">
-                    <?php create_winning_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
-                    <?php create_winning_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
-                    <?php create_winning_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
+                    <?php create_winning_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                    <?php create_winning_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                    <?php create_winning_bid_card("Super cool gun", "Chuck Norris", "999") ?>
                 </div>
             </div>
             <div class="tab-pane" id="tabs-3" role="tabpanel">
                 <div class="row">
-                    <?php create_own_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
-                    <?php create_own_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
-                    <?php create_own_bid_card("Pistola super fixe", "Chuck Norris", "999") ?>
+                    <?php create_own_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                    <?php create_own_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                    <?php create_own_bid_card("Super cool gun", "Chuck Norris", "999") ?>
                 </div>
             </div>
         </div>
@@ -90,7 +91,7 @@
             </div>
         </div>
         <div class="col-2">
-            <a class="btn btn-primary btn-lg centered_vertically">Visit</a>
+            <a href="product.php" class="btn btn-primary btn-lg centered_vertically">Visit</a>
         </div>
     </div>
 <?php } ?>
@@ -135,7 +136,7 @@
             </div>
         </div>
         <div class="col-2">
-            <a class="btn btn-primary btn-lg centered_vertically">Visit</a>
+            <a href="product.php" class="btn btn-primary btn-lg centered_vertically">Visit</a>
         </div>
     </div>
 <?php } ?>

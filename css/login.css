@@ -57,6 +57,20 @@
   background-color: #ea4335;
 }
 
+#login-container .btn-google:hover {
+  background-color: #bb382c;
+}
+
+#login-container .btn-primary {
+  color: white;
+  background-color: var(--highlight-purple);
+  border: none;
+}
+
+#login-container .btn-primary:hover {
+  background-color: var(--highlight-purple-darker);
+}
+
 #login-container .btn {
     font-size: 80%;
     border-radius: 5rem;
@@ -79,17 +93,17 @@
     margin-bottom: 0rem;
 }
 
-#register-prompt p a {
-    text-decoration: underline;
-}
-
 #login-img img {
     max-width: 100%;
-    box-shadow: 4px 4px 10px 4px rgb(0,0,0,0.4);
+    box-shadow: 0 0 10px 4px rgba(58, 8, 105, 0.616);
 }
 
 #login-img .jumbotron {
     padding: 0;
     padding-bottom: 5px;
     margin-bottom: 0;
+}
+
+#login-container a {
+  color: var(--highlight-purple);
 }

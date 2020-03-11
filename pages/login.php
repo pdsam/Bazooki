@@ -38,7 +38,7 @@
                         </div>
                         
                         <div id="register-prompt">
-                            <p>Want to become a bazooker? <a href="register.php">Register here</a></p>
+                            <p>Want to become a bazooker? <a href="register.php">Register here!</a></p>
                         </div>
                     </form>
                 </div>

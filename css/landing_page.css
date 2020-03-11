@@ -3,6 +3,12 @@
     padding-bottom: 1rem;
 }
 
+#landing_page .jumbotron h1 i {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    color: var(--highlight-purple);
+}
+
 #landing_page .carousel {
     border: 1px solid black;
 }
@@ -53,4 +59,13 @@
 
 #landing_page .carousel-controls a:visited {
     box-shadow: none;
+}
+
+#landing_page .btn {
+    background-color: var(--highlight-purple);
+    border: 1px solid rgba(158, 158, 158, 0.267);
+}
+
+#landing_page .btn:hover {
+    background-color: var(--highlight-purple-darker);
 }

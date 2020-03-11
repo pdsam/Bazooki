@@ -39,21 +39,46 @@ hr.customhr {
     justify-content: center;
 }
 
+#profile_tabs_select .nav-link {
+    color: white;
+    background-color: var(--base-green);
+    border: none;
+}
+
+#profile_tabs_select .nav-link:hover {
+    background-color: var(--base-green-darker);
+}
+
+
+#profile_tabs_select .active {
+    justify-content: center;
+    background-color: var(--highlight-purple);
+}
+
+#profile_tabs_select .active:hover {
+    background-color: var(--highlight-purple-darker);
+}
+
+#profile_tabs_select .active:hover {
+    justify-content: center;
+}
+
 #profile_tabs_select .nav-item{
     margin: 0 20px;
-    border: 1px solid black;
 }
 
 #profile_tabs .profile-tab-entry {
     border: 1px solid black;
     text-align: center;
     padding: 0 0;
-    margin: 10px 0 10px 10px;
+    margin: -1px 0 10px 10px;
     height: 200px;
 }
 
 #profile_tabs .profile-tab-entry .btn {
     color:white;
+    background-color: var(--highlight-purple);
+    border-color: var(--highlight-purple);
 }
 
 #profile_tabs .profile-tab-entry .jumbotron{
@@ -65,6 +90,10 @@ hr.customhr {
 
 #profile_tabs .profile-tab-entry .jumbotron p span{
     font-size: 2rem;
+}
+
+#profile_tabs i {
+    color: var(--highlight-purple);
 }
 
 .profile-tab-entry .image-tab {
@@ -84,3 +113,4 @@ hr.customhr {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
