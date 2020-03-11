@@ -10,7 +10,7 @@
         <form class="nav-item form-inline my-auto mx-auto">
         <div class="input-group">
             <input class="w-auto form-control rounded-0" type="search" placeholder="Search" aria-label="Search">
-            <button class="input-group-light btn btn-outline-primary rounded-0" type="submit">
+            <button class="input-group-light btn btn-reverse-purple rounded-0" type="submit">
             Search
             </button>
         </div>

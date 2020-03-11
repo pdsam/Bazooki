@@ -3,3 +3,17 @@ nav.navbar {
     padding: 1em;
     margin-bottom: 1em;
 }
+
+
+.btn-reverse-purple{
+    background-color: var(--highlight-purple);
+    border-color: var(--highlight-purple);
+    color: white;
+
+}
+
+.btn-reverse-purple:hover{
+    background-color: #470047;
+    border-color: #470047;
+    color:white;
+}
