@@ -19,15 +19,18 @@
     <div class="row">
       <!-- FILTERS -->
       <div class="col-12 col-md-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
-        <a id="filters-toggle" class="pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
+        <a id="filters-toggle" class="d-block d-md-none pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
           <div class="d-flex justify-content-between">
             <p class="m-0">Filters</p>
             <span class="fa fa-chevron-up"></span>
           </div>
         </a>
+        <h3 class="d-none d-md-block mb-4">
+          Filters
+        </h3>
         <div id="filters" class="collapse show">
           <form id="filtersForm">
-            <a class="d-block mt-2 section-toggle" href="#categoriesGroup" data-toggle="collapse" data-target="#categoriesGroup">
+            <a class="d-block mt-2 section-toggle mb-2 mt-3" href="#categoriesGroup" data-toggle="collapse" data-target="#categoriesGroup">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="m-0">Category</p>
                 <span class="fa fa-chevron-up"></span>
@@ -48,14 +51,14 @@
               </div>
             </div>
 
-            <a class="d-block mt-2 section-toggle" href="#maxBidPriceGroup" data-toggle="collapse" data-target="#maxBidPriceGroup">
+            <a class="d-block mt-2 section-toggle mb-2 mt-3" href="#maxBidPriceGroup" data-toggle="collapse" data-target="#maxBidPriceGroup">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="m-0">Max Bid Price</p>
                 <span class="fa fa-chevron-up"></span>
               </div>
             </a>
             <div id="maxBidPriceGroup" class="collapse show">
-              <label for="maxBid">Maximum bid price: <p id="maxBidDisplay"></p>$</label>
+              <label for="maxBid">Maximum bid price: <p id="maxBidDisplay"></p></label>
               <input class="custom-range" type="range" name="maximumBid" id="maxBid" min="0" max="1000">
             </div>
 
@@ -100,6 +103,7 @@
   </div>
   <?php include_once('../templates/footer.php'); ?>
 
+  <script src="https://kit.fontawesome.com/07ed6a8693.js" crossorigin="anonymous"></script>
   <script src="<?php echo $files_path . '/js/queryFilters.js';?>"></script>
   <script src="<?php echo $files_path . '/js/queryRangeFilter.js';?>"></script>
 </body>
