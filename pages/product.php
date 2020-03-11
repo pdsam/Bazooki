@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="../css/components/footer.css">
 </head>
 
-
-
 <body class="bg-light">
     <div class="container mt-2">
         <?php include_once(getcwd() . '/../templates/navbar.php') ?>
@@ -59,13 +57,13 @@
                             <h3 class="card-title text-center" id="price">€100</h3>
                             <h3 class="card-title text-center">22d 10h</h3>
                         </div>
-                        <div class="card-body d-inline-flex justify-content-between w-100 align-items-center">
-                            
-                                <input type="number" class=" text-center " value="110"></input>
-                                <div class="">
-                                <button type="button" class="btn btn-block btn-primary btn-lg center-block " id="bid-button">Bid Now</button>
+                        <div class="card-body w-100">
+                            <div class="row">
+                                <input type="number" class="text-center col-12 col-md-8" value="110"></input>
+                                <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
+                                    <button type="button" class="btn btn-primary" id="bid-button">Bid Now</button>
                                 </div>
-                            
+                            </div>
                         </div>
                     </div>
                 </div>
