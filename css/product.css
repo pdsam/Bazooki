@@ -45,3 +45,6 @@ input[type=number] {
     border-color: #470047;
 }
 
+.color-purple{
+    color:var(--highlight-purple);
+}
