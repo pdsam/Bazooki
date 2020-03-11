@@ -15,7 +15,7 @@
     <link href="<?= $files_parh ?>/css/dashboard.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-light">
     <div class="container">
         <?php include('../templates/navbar.php')?>
         <div class="row">
@@ -54,7 +54,7 @@
                 </ul>
             </nav>
 
-            <main class="col-12 col-lg-10 ml-sm-auto px-0 px-lg-4 tab-content">
+            <main class="col-12 col-lg-10 tab-content">
                 <div id="sales" class="tab-pane active" role="tabpanel">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">Dashboard</h1>

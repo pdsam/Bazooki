@@ -130,7 +130,7 @@
         "<i class='fas fa-fire' style='color:red'></i> HOT DEALS <i class='fas fa-fire' style='color:red'></i>", 
         "hot-deals-carousel", 
         $items, 
-        "col-3"
+        "col-md-3"
     );
 ?>
 <?php } ?>
@@ -187,7 +187,7 @@
         "<i class='fas fa-bolt' style='color:#caa900'></i> FLASH SALES <i class='fas fa-bolt' style='color:#caa900'></i>", 
         "flash-carousel", 
         $items, 
-        "col-3"
+        "col-md-3"
     );
 ?>
 <?php } ?>
@@ -234,7 +234,7 @@
         "<i class='fas fa-search' style='color:var(--highlight-purple)'></i> CATEGORIES <i class='fas fa-search' style='color:var(--highlight-purple)'></i>", 
         "main-carousel", 
         $items, 
-        "col-4"
+        "col-md-4"
     );
 ?>
 <?php } ?>
