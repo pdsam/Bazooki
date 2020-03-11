@@ -16,10 +16,10 @@
                         <h1 class="h3 mb-3 font-weight-normal">Welcome back Bazooker!</h1>
                         
                         <div class="form-group">
-                            <input type="text" class="form-control" id="loginUsername" aria-describedby="userHelp" placeholder="Username" name="username">
+                            <input type="text" class="form-control" id="loginUsername" aria-describedby="userHelp" placeholder="Username" name="username" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" name="password">
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" name="password" required>
                         </div>
                         
                         <div class="checkbox">

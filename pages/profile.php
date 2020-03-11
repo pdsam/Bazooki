@@ -1,7 +1,7 @@
 <html>
     <?php include_once('../templates/header.php') ?>
 
-    <body>
+    <body class="bg-light">
         <link rel="stylesheet" href="<?= $files_path ?>/css/profile.css">
         <div class="container">
             <?php include_once(getcwd() . '/../templates/navbar.php') ?>

@@ -1,10 +1,11 @@
+<?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
 <footer id="sticky-footer" class="py-4">
   <div class="container text-center">
     <div class="">
-      <h6>© 2020 Copyright <a href="../index.php"> Bazooki.com </a><br>
+      <h6>© 2020 Copyright <a href="<?= $files_path ?>/pages/landing_page.php"> Bazooki.com </a><br>
         <span class="footer-links">
           <a href="#">About</a>
-          <a href="#">FAQ</a>
+          <a href="<?= $files_path ?>/pages/faq.php">FAQ</a>
           <a href="#">Terms</a>
         </span>
       </h6>

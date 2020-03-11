@@ -25,13 +25,13 @@
                         <h1 class="h3 mb-3 font-weight-normal">Bazooker Sign Up</h1>
                         
                         <div class="form-group">
-                            <input type="text" class="form-control" id="registerUsername" aria-describedby="userHelp" placeholder="Username" name="username">
+                            <input type="text" class="form-control" id="registerUsername" aria-describedby="userHelp" placeholder="Username" name="username" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Email" name="email">
+                            <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="registerPassword" placeholder="Password" name="password">
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Password" name="password" required>
                         </div>
                         
                         <div class="checkbox">
