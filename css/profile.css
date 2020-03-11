@@ -35,13 +35,6 @@ hr.customhr {
     padding : 5px 15px;
 }
 
-#profile_tabs .tab-pane .row div {
-    border: 1px solid black;
-    text-align: center;
-    padding: 50px 0;
-    margin: 10px 0 10px 10px;
-}
-
 #profile_tabs_select {
     justify-content: center;
 }
@@ -49,4 +42,45 @@ hr.customhr {
 #profile_tabs_select .nav-item{
     margin: 0 20px;
     border: 1px solid black;
+}
+
+#profile_tabs .profile-tab-entry {
+    border: 1px solid black;
+    text-align: center;
+    padding: 0 0;
+    margin: 10px 0 10px 10px;
+    height: 200px;
+}
+
+#profile_tabs .profile-tab-entry .btn {
+    color:white;
+}
+
+#profile_tabs .profile-tab-entry .jumbotron{
+    text-align: left;
+    margin-bottom: 0;
+    padding: 1rem 2rem;
+    padding-bottom: 0;
+}
+
+#profile_tabs .profile-tab-entry .jumbotron p span{
+    font-size: 2rem;
+}
+
+.profile-tab-entry .image-tab {
+    overflow: hidden;
+    padding: 0;
+}
+
+#profile_tabs .profile-tab-entry img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.centered_vertically {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
