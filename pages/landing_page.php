@@ -24,7 +24,7 @@
                 <h1 class="display-4">Current Auctions <i class="fas fa-gavel"></i></h1>
                 <hr class="my-4">
                 <p class="lead">“Those who dare seek, shall find what they are seeking for.”</p>
-                <p>Lailah Gifty Akita, Think Great: Be Great!</p>
+                <p>- Lailah Gifty Akita, Think Great: Be Great!</p>
             </div>
 
             <?php hot_deals_carousel(); ?>
