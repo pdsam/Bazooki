@@ -25,7 +25,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="<?= $files_path ?>/pages/profile.php">Profile</a>
-                <a class="dropdown-item" href="#">Account Settings</a>
+                <a class="dropdown-item" href="<?= $files_path ?>/pages/account_settings.php">Account Settings</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?= $files_path ?>/pages/login.php">Log out</a>
             </div>
