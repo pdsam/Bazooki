@@ -18,6 +18,10 @@ body {
     text-align: left;
 }
 
+#profile_description .jumbotron{
+    padding: 2rem 2rem;
+}
+
 #profile_description .lead {
     text-align: justify;
 }

@@ -35,6 +35,7 @@
 
                         <p class="lead">I am a history fanatic and love to collect guns from different epochs.</p>
                         <p class="lead">Always looking for new and exquisite additions to my collection.</p>
+                        <p class="lead">Love Chuck Norris Super Cool guns.</p>
                     </div>
                 </div>
                 
@@ -59,26 +60,26 @@
         <div id="profile_tabs" class="tab-content">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <div class="card-deck">
-                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
-                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.","Chuck Norris", "999") ?>
-                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.","Chuck Norris", "999") ?>
-                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.","Chuck Norris", "999") ?>
+                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "2000") ?>
+                    <?php create_current_bid_card("Super cool gun 2", "This gun is very strong. It is also very pretty.","Chuck Norris", "100") ?>
+                    <?php create_current_bid_card("Super cool gun 3", "This gun is very strong. It is also very pretty.","Chuck Norris", "12") ?>
+                    <?php create_current_bid_card("Super cool gun 4", "This gun is very strong. It is also very pretty.","Chuck Norris", "58") ?>
                 </div>
             </div>
             <div class="tab-pane" id="tabs-2" role="tabpanel">
                 <div class="card-deck">
-                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
-                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
-                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
-                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
+                    <?php create_winning_bid_card("Super cool gun 5", "This gun is very strong. It is also very pretty.", "Chuck Norris", "666") ?>
+                    <?php create_winning_bid_card("Super cool gun 6", "This gun is very strong. It is also very pretty.", "Chuck Norris", "345") ?>
+                    <?php create_winning_bid_card("Super cool gun 7", "This gun is very strong. It is also very pretty.", "Chuck Norris", "5") ?>
+                    <?php create_winning_bid_card("Super cool gun 8", "This gun is very strong. It is also very pretty.", "Chuck Norris", "68") ?>
                 </div>
             </div>
             <div class="tab-pane" id="tabs-3" role="tabpanel">
                 <div class="card-deck">
-                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
-                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
-                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
-                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
+                    <?php create_own_bid_card("Super cool gun 9", "This gun is very strong. It is also very pretty.", "Mário Gil", "2008") ?>
+                    <?php create_own_bid_card("Super cool gun 10", "This gun is very strong. It is also very pretty.", "Mário Gil", "90000") ?>
+                    <?php create_own_bid_card("Super cool gun 11", "This gun is very strong. It is also very pretty.", "Mário Gil", "50") ?>
+                    <?php create_own_bid_card("Super cool gun 11", "This gun is very strong. It is also very pretty.", "Mário Gil", "46") ?>
                 </div>
             </div>
         </div>
