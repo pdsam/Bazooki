@@ -35,3 +35,16 @@ a.nav-link.custom-hover:hover{
 .nav-link i {
     color: var(--highlight-purple);
 }
+
+div nav{
+    font-family: 'Montserrat';
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Oswald';
+}
+
+p,span{
+
+    font-family: 'Open Sans';
+}

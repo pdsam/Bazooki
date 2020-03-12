@@ -116,7 +116,7 @@
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Super cool gun0",
+                "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
                 "description" => "This gun is very strong. It is also very pretty."
             )
