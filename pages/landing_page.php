@@ -26,7 +26,7 @@
                 <p class="lead">“Those who dare seek, shall find what they are seeking for.”</p>
                 <p>Lailah Gifty Akita, Think Great: Be Great!</p>
                 <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="./register.php" role="button">Signup</a>
+                    <a class="btn btn-olive btn-lg" href="./register.php" role="button">Signup</a>
                 </p>
             </div>
 
@@ -65,11 +65,11 @@
             </div>
         </div>
         <div class="row carousel-controls">
-            <a class="col-1 btn btn-primary btn-lg" href="#<?=$id?>" role="button" data-slide="prev">
+            <a class="col-1 btn btn-olive btn-lg" href="#<?=$id?>" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="col-1 btn btn-primary btn-lg" href="#<?=$id?>" role="button" data-slide="next">
+            <a class="col-1 btn btn-olive btn-lg" href="#<?=$id?>" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>

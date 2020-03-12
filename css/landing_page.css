@@ -21,6 +21,11 @@
     padding-bottom: 2em;
 }
 
+#landing_page .carouselParent:last-child {
+    border-bottom: none;
+    margin-bottom: 2rem;
+}
+
 #landing_page .carouselParent > h3{
     margin-left: 2rem;
     margin-top: 1rem;
@@ -28,6 +33,7 @@
 
 #landing_page .carousel .row .card {
     margin: auto;
+    background-color: #e9ecef;
 }
 
 #landing_page .carousel-card-small a {
@@ -62,15 +68,6 @@
     box-shadow: none;
 }
 
-#landing_page .btn {
-    background-color: var(--highlight-purple);
-    border: 1px solid rgba(158, 158, 158, 0.267);
-}
-
-#landing_page .btn:hover {
-    background-color: var(--highlight-purple-darker);
-}
-
 .add-margin{
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
