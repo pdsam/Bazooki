@@ -203,7 +203,7 @@
                         <div class="card shadow-sm rounded-0 border mt-3 mt-lg-1">
                             <div class="row align-items-center no-gutters">
                                 <div class="col-12 col-sm-4">
-                                    <img src="<?php echo $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
+                                    <img src="<?php echo $files_path . '/assets/gun.jpg' ?>" class="card-img rounded-0" alt="logo">
                                 </div>
                                 <div class="col-12 col-sm-8">
                                     <div class="card-body">
@@ -230,7 +230,7 @@
                             <div class="card rounded-0 border-0">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col-12 col-sm-4">
-                                        <img src="<?php echo $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
+                                        <img src="<?php echo $files_path . '/assets/gun.jpg' ?>" class="card-img rounded-0" alt="logo">
                                     </div>
                                     <div class="col-12 col-sm-8">
                                         <div class="card-body">
@@ -242,28 +242,19 @@
                             </div>
                             <div id="certification<?= $i ?>" class="collapse p-3">
                                 <div>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa omnis dolores, modi vitae vero corporis odio cumque. Cumque ullam velit exercitationem tenetur molestias sint natus reiciendis magnam, libero illum nihil!
-                                    Sed molestias ipsum suscipit ducimus natus ex libero necessitatibus ea voluptatibus, sunt adipisci velit doloribus, ipsam commodi itaque. Ab fugiat quos odit, sapiente accusamus dignissimos a omnis voluptas. Distinctio, blanditiis?
-                                    Laboriosam, dicta. Hic voluptatibus, nulla perspiciatis accusamus nobis quae ipsam in similique sunt, obcaecati consectetur asperiores magnam sed voluptas error nemo, quibusdam modi officia. Repellat corporis architecto deleniti amet hic.
-                                    Modi aspernatur eum voluptates est placeat dicta magni tempora omnis, laudantium nam, maiores dolorum optio neque quaerat debitis. Perferendis quis aliquid perspiciatis ducimus, veniam tempora ipsa sunt doloremque eaque porro!
-                                    Sit nostrum tenetur reprehenderit inventore? Hic facere perspiciatis dignissimos tempora aperiam cumque adipisci tenetur, totam, atque repellat assumenda nam aut doloremque quos error voluptatem distinctio, numquam quisquam ex consequatur. Qui?
-                                    Voluptates sed iste nostrum ad facilis dolore modi. Commodi eligendi fuga magni atque amet consequatur accusantium. Possimus adipisci sequi magni ratione? Repudiandae eos non ex, expedita sequi ratione itaque fugit.
-                                    Dolorem tempora minima dolorum ratione illo iste perferendis neque! Eligendi placeat quaerat iusto autem odit harum suscipit quis quod. Iste exercitationem dignissimos ullam eaque veritatis voluptas. Dolor accusantium dolores dignissimos?
-                                    Itaque sed vitae nulla explicabo id quos nostrum at hic? Culpa nam molestiae sequi voluptatum labore! Tempore veritatis deserunt voluptatum temporibus, nisi repellat fugit quidem. Excepturi ipsam obcaecati iusto illo.
-                                    Veritatis necessitatibus mollitia et, debitis, quae error explicabo rem aperiam, ipsum cupiditate doloribus ut aut neque possimus perspiciatis. Magni nisi iste sapiente temporibus similique! Porro magnam unde ipsam nesciunt asperiores.
-                                    Ratione dignissimos delectus voluptatibus, provident consequuntur, officiis placeat hic et beatae, culpa praesentium! Qui distinctio minus iusto aliquid dicta, cupiditate expedita rem consequuntur saepe autem magnam blanditiis veniam aperiam laborum?
+                                    This is a genuine revolver, I got it from my grandfather. It dates back to WWII.
                                 </div>
                                 <div class="my-3 mx-2">
                                     Certification documents:
                                     <ul>
                                         <li>
-                                            <a href="#">document1</a>
+                                            <a href="<?= $files_path ?>/assets/cert1.pdf">document1</a>
                                         </li>
                                         <li>
-                                            <a href="#">document2</a>
+                                            <a href="<?= $files_path ?>/assets/cert2.pdf">document2</a>
                                         </li>
                                         <li>
-                                            <a href="#">document3</a>
+                                            <a href="<?= $files_path ?>/assets/cert3.pdf">document3</a>
                                         </li>
                                     </ul>
                                 </div>
