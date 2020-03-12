@@ -19,6 +19,10 @@
 				<div class="form-group mt-4 ml-4 mr-4">
 					<input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title">
 				</div>
+
+				<div class="form-group mt-4 ml-4 mr-4">
+					<input class="form-control form-control-sm" rows="5" id="description" placeholder="Short description"></textarea>
+				</div>
 				
 				<div class="form-group mt-4 ml-4 mr-4">
 					<textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>

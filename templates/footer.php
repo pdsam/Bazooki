@@ -4,12 +4,17 @@
   <div class="container text-center">
     <div class="">
       <h6>© 2020 Copyright <a href="<?= $files_path ?>/pages/landing_page.php"> Bazooki.com </a><br>
-        <span class="footer-links">
-          <a href="#">About</a>
-          <a href="<?= $files_path ?>/pages/faq.php">FAQ</a>
-          <a href="#">Contact Us</a>
-          <a href="#">Terms</a>
-        </span>
+      </h6>
+    </div>
+
+    <div class="">
+		<h6>
+			<span class="footer-links">
+			  <a href="#">About</a>
+			  <a href="<?= $files_path ?>/pages/faq.php">FAQ</a>
+			  <a href="#">Contact Us</a>
+			  <a href="#">Terms</a>
+			</span>
       </h6>
     </div>
     <div id="social-media" class="">
