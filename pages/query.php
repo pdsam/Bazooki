@@ -75,20 +75,20 @@
             <div class="card shadow-sm rounded-0 border-0 mb-1">
               <div class="row align-items-center no-gutters">
                 <div class="col-xs-12 col-sm-4">
-                  <img src="<?= $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
+                  <img src="<?= $files_path . '/assets/gun.jpg' ?>" class="card-img" alt="logo">
                 </div>
                 <div class="col-xs-12 col-sm-8">
                   <div class="card-body">
                     <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                       <div class="">
-                        <h5 class="card-title">Weapon</h5>
-                        <h6 class="card-subtitle text-muted">Ends at: dd/mm/yyyy hh:mm:ss</h6>
+                        <h5 class="card-title">Super cool gun</h5>
+                        <h6 class="card-subtitle text-muted">Ends at: 05/07/2020 23:59:59</h6>
                       </div>
                       <div>
                         <span class="mr-1" style="font-size: 2rem">300</span>$
                       </div>
                     </div>
-                    <p class="card-text">Big description thingy</p>
+                    <p class="card-text">This gun is very strong. It is also very pretty.</p>
                   </div>
                 </div>
                 <a href="<?=$files_path . '/pages/product.php'?>" class="stretched-link"></a>

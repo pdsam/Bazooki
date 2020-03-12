@@ -82,46 +82,46 @@
     $items = array(
         0 => array(
             array(
-                "title" => "Card title 1",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 2",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 3",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 4",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             )
         ),
         1 => array(
             array(
-                "title" => "Card title 7",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 8",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 9",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 10",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun0",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             )
         )        
     );
@@ -139,46 +139,46 @@
     $items = array(
         0 => array(
             array(
-                "title" => "Card title 1",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 2",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 3",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 4",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             )
         ),
         1 => array(
             array(
-                "title" => "Card title 7",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 8",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 9",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 10",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun0",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             )
         )        
     );
@@ -196,36 +196,36 @@
     $items = array(
         0 => array(
             array(
-                "title" => "Card title 1",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 2",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 3",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             )
         ),
         1 => array(
             array(
-                "title" => "Card title 5",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 6",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
-                "title" => "Card title 7",
-                "img" => "../assets/logo.png",
-                "description" => "Some quick example text to build on the card title and make up the bulk of the card's content."
+                "title" => "Super cool gun",
+                "img" => "../assets/gun.jpg",
+                "description" => "This gun is very strong. It is also very pretty."
             )
         )        
     );

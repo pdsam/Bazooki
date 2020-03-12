@@ -32,6 +32,8 @@
 
 #landing_page .carousel-card-small a {
     color: black;
+    padding: 0;
+    margin: 0;
 }
 
 #landing_page .carousel-card-small a:hover {
