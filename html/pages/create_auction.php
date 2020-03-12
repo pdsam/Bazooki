@@ -53,14 +53,17 @@
         <div>
 			<form>
 				<div class="form-group mt-4 ml-4 mr-4">
+					<h3>Product title</h3>
 					<input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title" required>
 				</div>
 
 				<div class="form-group mt-4 ml-4 mr-4">
+					<h3>Short product description</h3>
 					<input class="form-control form-control-sm" rows="5" id="description" placeholder="Short description" required></input>
 				</div>
 				
 				<div class="form-group mt-4 ml-4 mr-4">
+					<h3>Product description</h3>
 					<textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
 				</div>
 			
@@ -119,7 +122,7 @@
 								<input type="number" placeholder="Price" step="0.1" class="form-control"/>
 								<input type="checkbox" id="meumeu" class="ml-2" />
 								<label class="ml-2 form-check-label mt-3 mt-md-0" for="meumeu">
-								InstaBuy Price
+								Instant Buy Price
 								</label>
 							</div>
 						</div>
@@ -131,7 +134,7 @@
 				<div class="card mt-4 ml-4 mr-4">
 					<div class="card-body">
 						<div class="card-title">
-						<h3>Certification</h3>
+						<h3>Certification (optional)</h3>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
