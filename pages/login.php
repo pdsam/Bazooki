@@ -50,7 +50,7 @@
                     <h1 class="display-4"></h1>
                     <hr class="my-4">
                     <p class="lead">“The whole point of collecting is the thrill of acquisition, which must be maximized, and maintained at all costs.”</p>
-                    <p>John Baxter, A Pound of Paper: Confessions of a Book Addict</p>
+                    <p>- John Baxter, A Pound of Paper: Confessions of a Book Addict</p>
                 </div>
             </div>
         </div>

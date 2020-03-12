@@ -7,13 +7,18 @@
 <html>
     <?php include_once("../templates/header.php"); ?>    
 
-    <body class="bg-light">
+    <body id="faq-page" class="bg-light">
         <link rel="stylesheet" href="<?=$files_path?>/css/faq.css">
         <div class="container mt-2">
             <?php include_once("../templates/navbar.php"); ?>
-            <div class="container py-3">
+            <div class="jumbotron">
+                <h1 class="display-4">FAQ <i class="fas fa-question-circle"></i></h1>
+                <hr class="my-4">
+                <p class="lead">“It is not the answer that enlightens, but the question.”</p>
+                <p>- Eugene Ionesco</p>
+            </div>
                 <div class="row">
-                    <div class="col-10 mx-auto">
+                    <div class="col-12 mx-auto">
                         <div class="accordion" id="faqExample">
                             <div class="card">
                                 <div class="card-header p-2" id="headingOne">
@@ -76,7 +81,6 @@
 
                     </div>
                 </div>
-            </div>
         </div>
 
         <?php include_once("../templates/footer.php"); ?>

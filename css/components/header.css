@@ -31,3 +31,7 @@ a.nav-link.custom-hover:hover{
     border-color: var(--highlight-purple);
 
 }
+
+.nav-link i {
+    color: var(--highlight-purple);
+}
