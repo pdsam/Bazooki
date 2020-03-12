@@ -58,7 +58,7 @@
                                 <div class="row">
                                     <input type="number" class="text-center col-12 col-md-8" value="110"></input>
                                     <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
-                                        <button type="button" class="btn btn-primary w-100" id="bid-button">Bid Now</button>
+                                        <button type="button" class="btn btn-purple w-100" id="bid-button">Bid Now</button>
                                     </div>
                                 </div>
                             </div>

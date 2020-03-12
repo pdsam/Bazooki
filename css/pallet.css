@@ -24,6 +24,7 @@
 }
 
 .btn-purple {
+    font-family: 'Montserrat';
     color: white;
     background-color: var(--highlight-purple);
     border: none;
@@ -40,6 +41,7 @@
 }
 
 .btn-olive {
+    font-family: 'Montserrat';
     color: white;
     background-color: var(--olive);
     border: none;

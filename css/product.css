@@ -35,15 +35,9 @@ input[type=number] {
 }
 
 #bid-button{
-    background-color: var(--highlight-purple);
-    border-color: var(--highlight-purple);
     border-radius: 5rem;
 }
 
-#bid-button:hover{
-    background-color: #470047;
-    border-color: #470047;
-}
 
 .color-purple{
     color:var(--highlight-purple);

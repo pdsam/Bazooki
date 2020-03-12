@@ -50,6 +50,7 @@ hr.customhr {
     background-color: var(--olive);
     border: none;
     border-radius: .25rem;
+    font-family: 'Montserrat';
 }
 
 #profile_tabs_select .nav-link:hover {
