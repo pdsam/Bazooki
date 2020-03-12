@@ -43,7 +43,7 @@
 <?php function make_carousel($title, $id, $items, $cardsize) { ?>
     <div class="carouselParent">
         <h3><?=$title?></h3>
-        <div id="<?=$id?>" class="carousel slide" data-ride="carousel">
+        <div id="<?=$id?>" class="carousel slide add-margin" data-ride="carousel">
             
             <div class="carousel-inner">
                 <?php foreach($items as $i => $curr) { ?>

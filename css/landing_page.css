@@ -9,9 +9,6 @@
     color: var(--highlight-purple);
 }
 
-#landing_page .carousel {
-    border: 1px solid black;
-}
 
 #landing_page .carousel.row {
     margin-left: 2rem;
@@ -20,6 +17,8 @@
 
 #landing_page .carouselParent {
     margin-bottom: 4rem;
+    border-bottom: 1px solid var(--border-grey);
+    padding-bottom: 2em;
 }
 
 #landing_page .carouselParent > h3{
@@ -68,4 +67,8 @@
 
 #landing_page .btn:hover {
     background-color: var(--highlight-purple-darker);
+}
+
+.add-margin{
+    margin-bottom: 2em;
 }
