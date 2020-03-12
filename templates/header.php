@@ -8,7 +8,6 @@
   <?php include_once('../templates/bootstrap_includes.php') ?>
   <link rel="stylesheet" href="<?= $files_path ?>/css/components/header.css">
   <link rel="stylesheet" href="<?= $files_path ?>/css/pallet.css">
-<<<<<<< HEAD
   <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
