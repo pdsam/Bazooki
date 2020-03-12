@@ -71,3 +71,25 @@
 .add-margin{
     margin-bottom: 1em;
 }
+
+@media only screen and (max-width: 600px) {
+    #landing_page .jumbotron h1{
+        font-size: 2rem;
+    }
+
+    #landing_page .jumbotron p.lead {
+        font-size: 1rem;
+    }
+
+    #landing_page .jumbotron p {
+        font-size: 0.8rem;
+    }
+
+    .carousel .row > div {
+        margin-bottom: 1rem;
+    }
+
+    .carousel-controls a {
+        width: inherit;
+    }
+}
