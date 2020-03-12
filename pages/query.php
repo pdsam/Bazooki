@@ -18,14 +18,14 @@
 			</div>
     <div class="row">
       <!-- FILTERS -->
-      <div class="col-12 col-md-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
-        <a id="filters-toggle" class="d-block d-md-none pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
+      <div class="col-12 col-lg-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
+        <a id="filters-toggle" class="d-block d-lg-none pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
           <div class="d-flex justify-content-between">
             <p class="m-0">Filters</p>
             <span class="fa fa-chevron-up"></span>
           </div>
         </a>
-        <h3 class="d-none d-md-block mb-4">
+        <h3 class="d-none d-lg-block mb-4">
           Filters
         </h3>
         <div id="filters" class="collapse show">
@@ -57,9 +57,8 @@
                 <span class="fa fa-chevron-up"></span>
               </div>
             </a>
-            <div id="maxBidPriceGroup" class="collapse show">
-              <label for="maxBid">Maximum bid price: <p id="maxBidDisplay"></p></label>
-              <input class="custom-range" type="range" name="maximumBid" id="maxBid" min="0" max="1000">
+            <div id="maxBidPriceGroup" class="collapse show form-row">
+              <input class="control-form col-auto" type="number" name="maxBid" id="maxBid" min="0">
             </div>
 
             <button class="btn btn-primary mt-2 btn-olive" type="submit">Apply filters</button>
@@ -69,13 +68,13 @@
 
 
       <!-- CONTENT DISPLAY -->
-      <div class="col-12 col-md-9 mt-2 mt-md-0 p-0">
+      <div class="col-12 col-lg-9 mt-2 mt-md-0 p-0">
         <div class="ml-md-1">
           <?php for ($i=0; $i < 10; $i++) { ?>
             <div class="card shadow-sm rounded-0 border-0 mb-1">
               <div class="row align-items-center no-gutters">
                 <div class="col-xs-12 col-sm-4">
-                  <img src="<?= $files_path . '/assets/gun.jpg' ?>" class="card-img" alt="logo">
+                  <img src="<?= $files_path . '/assets/gun.jpg' ?>" class="card-img rounded-0" alt="logo">
                 </div>
                 <div class="col-xs-12 col-sm-8">
                   <div class="card-body">
