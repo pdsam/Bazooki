@@ -1,9 +1,44 @@
 :root {
-    
-
     --highlight-purple: #660066;
     --highlight-purple-darker: #520352;
     --border-grey: rgb(235,235,235);
     --border-gray: rgb(235,235,235);
     --olive: #9AB973;
+    --olive-darker: #7b945c;
+}
+
+.bg-purple {
+    background-color: var(--highlight-purple) !important;
+}
+
+.color-purple {
+    color: var(--highlight-purple) !important;
+}
+
+.bg-olive {
+    background-color: var(--olive) !important;
+}
+
+.color-olive {
+    color: var(--olive) !important;
+}
+
+.btn-purple {
+    color: white;
+    background-color: var(--highlight-purple);
+    border: none;
+}
+  
+.btn-purple:hover {
+    background-color: var(--highlight-purple-darker);
+}
+
+.btn-olive {
+    color: white;
+    background-color: var(--olive);
+    border: none;
+}
+  
+.btn-olive:hover {
+    background-color: var(--olive-darker);
 }

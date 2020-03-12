@@ -41,12 +41,12 @@ hr.customhr {
 
 #profile_tabs_select .nav-link {
     color: white;
-    background-color: var(--base-green);
+    background-color: var(--olive);
     border: none;
 }
 
 #profile_tabs_select .nav-link:hover {
-    background-color: var(--base-green-darker);
+    background-color: var(--olive-darker);
 }
 
 
@@ -75,17 +75,12 @@ hr.customhr {
     height: 200px;
 }
 
-#profile_tabs .profile-tab-entry .btn {
-    color:white;
-    background-color: var(--highlight-purple);
-    border-color: var(--highlight-purple);
-}
-
 #profile_tabs .profile-tab-entry .jumbotron{
     text-align: left;
     margin-bottom: 0;
     padding: 1rem 2rem;
     padding-bottom: 0;
+    background-color: inherit;
 }
 
 #profile_tabs .profile-tab-entry .jumbotron p span{

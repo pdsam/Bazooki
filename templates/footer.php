@@ -1,5 +1,6 @@
 <?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
 <footer id="sticky-footer" class="py-4">
+  <link rel="stylesheet" href="../css/components/footer.css">
   <div class="container text-center">
     <div class="">
       <h6>© 2020 Copyright <a href="<?= $files_path ?>/pages/landing_page.php"> Bazooki.com </a><br>

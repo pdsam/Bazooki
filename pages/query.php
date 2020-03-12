@@ -62,7 +62,7 @@
               <input class="custom-range" type="range" name="maximumBid" id="maxBid" min="0" max="1000">
             </div>
 
-            <button class="btn btn-primary mt-2" type="submit">Apply filters</button>
+            <button class="btn btn-primary mt-2 btn-olive" type="submit">Apply filters</button>
           </form>
         </div>
       </div>

@@ -15,7 +15,12 @@
                 </div>
                 <div id="profile_description" class="col-sm-8">
                     <div class="jumbotron">
-                        <h1 class="display-4">Mário Gil</h1>
+                        <div class="d-flex justify-content-between">
+                            <h1 class="display-4">Mário Gil</h1>
+                            <div class="align-self-center">
+                                <button class="btn btn-primary btn-lg btn-olive">Edit</button>
+                            </div>                            
+                        </div>
                         <div id="profile_stats" class="row">
                             <div class="col-sm-4">
                                 <p>8 Users</p>
@@ -53,7 +58,7 @@
         <!-- Tab panes -->
         <div id="profile_tabs" class="tab-content">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                <div class="row">
+                <div class="row bg-light">
                     <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
                     <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
                     <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
@@ -91,7 +96,7 @@
             </div>
         </div>
         <div class="col-2">
-            <a href="product.php" class="btn btn-primary btn-lg centered_vertically">Visit</a>
+            <a href="product.php" class="btn btn-primary btn-lg btn-olive centered_vertically">Visit</a>
         </div>
     </div>
 <?php } ?>
@@ -136,7 +141,7 @@
             </div>
         </div>
         <div class="col-2">
-            <a href="product.php" class="btn btn-primary btn-lg centered_vertically">Visit</a>
+            <a href="product.php" class="btn btn-primary btn-lg btn-olive centered_vertically">Visit</a>
         </div>
     </div>
 <?php } ?>
