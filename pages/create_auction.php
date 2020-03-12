@@ -9,8 +9,10 @@
     <?php include_once(getcwd() . '/../templates/header.php') ?>
     <link rel="stylesheet" href="<?= $files_path ?>/css/product.css">
     <link rel="stylesheet" href="<?= $files_path ?>/css/components/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
 	<script>
 	$(function () {
 
@@ -31,7 +33,7 @@
         $('#pickedDate').html(pickedDate);
     });
 });
-
+	$(function(){$("select").imagepicker();});
 	</script>
 	
 	<style>
@@ -61,6 +63,30 @@
 				<div class="form-group mt-4 ml-4 mr-4">
 					<textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
 				</div>
+			
+				<div class="card mt-4 ml-4 mr-4">
+					<div class="card-body">
+						<div class="card-title">
+							<h3>
+							Pictures
+							</h3>
+						</div>
+						<select class="image-picker show-html">
+						<div class="form-row">
+						<?php for($i = 0;$i<4; $i++){?>
+						<div class="col-3">
+						<option
+  data-img-src='https://picsum.photos/100/100'
+  value='<?= $i?>'
+>
+						</div>
+						<?php }?>
+						</div>
+						</select>
+						<input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
+						
+					</div>
+				</div>
 
 				<div class="card mt-4 ml-4 mr-4">
 					<div class="card-body">
@@ -69,8 +95,15 @@
 						</div>
 						
 						<div class="form-row">
-							<div class="datepicker-start date input-group p-0 shadow-sm">
-								<input type="text" placeholder="Choose start date" class="form-control py-4 px-4" id="reservationDate">
+							<div class="col-3 datepicker-start date input-group p-0 shadow-sm">
+								<input type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate">
+								<div class="input-group-append"></div>
+							</div>
+							<div class="col-6"></div>
+							<div class="col-3 input-group">
+								<input type="number" class="form-control" style="height:100%;" placeholder="Days">
+								<input type="number" class="form-control" style="height:100%;" placeholder="Hours">
+								<input type="number" class="form-control" style="height:100%;" placeholder="Minutes">
 								<div class="input-group-append"></div>
 							</div>
 						</div>
