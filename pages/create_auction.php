@@ -94,17 +94,15 @@
 							<h3>Duration</h3>
 						</div>
 						
-						<div class="form-row">
-							<div class="col-3 datepicker-start date input-group p-0 shadow-sm">
+						<div class="row justify-content-between">
+							<div class="col-md-3 datepicker-start date input-group p-0 shadow-sm">
 								<input type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate">
 								<div class="input-group-append"></div>
 							</div>
-							<div class="col-6"></div>
-							<div class="col-3 input-group">
-								<input type="number" class="form-control" style="height:100%;" placeholder="Days">
-								<input type="number" class="form-control" style="height:100%;" placeholder="Hours">
-								<input type="number" class="form-control" style="height:100%;" placeholder="Minutes">
-								<div class="input-group-append"></div>
+							<div class="col-md-4 input-group">
+								<input type="number" class="form-control" style="height:100%;" placeholder="days">
+								<input type="number" class="form-control" style="height:100%;" placeholder="hours">
+								<input type="number" class="form-control" style="height:100%;" placeholder="mins">
 							</div>
 						</div>
 					</div>
