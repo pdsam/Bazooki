@@ -19,11 +19,11 @@
     <div class="container">
         <?php include('../templates/navbar.php')?>
         <div class="row">
-            <nav class="col-12 col-lg-2 bg-light sidebar">
+            <nav class="col-12 col-lg-3 bg-light sidebar">
                 <ul class="nav flex-column" role="tablist">
                     <li class="nav-item py-2">
                         <a class="nav-link active" href="#sales" data-toggle="tab" role="tab">
-                            <i class="fas fa-money-bill-wave"></i>
+                            <i class="fa fa-money-bill-wave"></i>
                             Sales <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -54,7 +54,7 @@
                 </ul>
             </nav>
 
-            <main class="col-12 col-lg-10 tab-content">
+            <main class="col-12 col-lg-9 tab-content">
                 <!-- <h1 class="h2 border-bottom">Dashboard</h1> -->
                 <div id="sales" class="tab-pane active" role="tabpanel">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
@@ -73,125 +73,38 @@
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Header</th>
-                                    <th>Header</th>
-                                    <th>Header</th>
-                                    <th>Header</th>
+                                    <th>Day</th>
+                                    <th>Profit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1,001</td>
-                                    <td>Lorem</td>
-                                    <td>ipsum</td>
-                                    <td>dolor</td>
-                                    <td>sit</td>
+                                    <td> Sunday </td>
+                                    <td>15339</td>
                                 </tr>
                                 <tr>
-                                    <td>1,002</td>
-                                    <td>amet</td>
-                                    <td>consectetur</td>
-                                    <td>adipiscing</td>
-                                    <td>elit</td>
+                                    <td> Monday </td>
+                                    <td>21345</td>
                                 </tr>
                                 <tr>
-                                    <td>1,003</td>
-                                    <td>Integer</td>
-                                    <td>nec</td>
-                                    <td>odio</td>
-                                    <td>Praesent</td>
+                                    <td> Tuesday </td>
+                                    <td>18483</td>
                                 </tr>
                                 <tr>
-                                    <td>1,003</td>
-                                    <td>libero</td>
-                                    <td>Sed</td>
-                                    <td>cursus</td>
-                                    <td>ante</td>
+                                    <td> Wednesday </td>
+                                    <td>24003</td>
                                 </tr>
                                 <tr>
-                                    <td>1,004</td>
-                                    <td>dapibus</td>
-                                    <td>diam</td>
-                                    <td>Sed</td>
-                                    <td>nisi</td>
+                                    <td> Thursday </td>
+                                    <td>23489</td>
                                 </tr>
                                 <tr>
-                                    <td>1,005</td>
-                                    <td>Nulla</td>
-                                    <td>quis</td>
-                                    <td>sem</td>
-                                    <td>at</td>
+                                    <td> Friday </td>
+                                    <td>24092</td>
                                 </tr>
                                 <tr>
-                                    <td>1,006</td>
-                                    <td>nibh</td>
-                                    <td>elementum</td>
-                                    <td>imperdiet</td>
-                                    <td>Duis</td>
-                                </tr>
-                                <tr>
-                                    <td>1,007</td>
-                                    <td>sagittis</td>
-                                    <td>ipsum</td>
-                                    <td>Praesent</td>
-                                    <td>mauris</td>
-                                </tr>
-                                <tr>
-                                    <td>1,008</td>
-                                    <td>Fusce</td>
-                                    <td>nec</td>
-                                    <td>tellus</td>
-                                    <td>sed</td>
-                                </tr>
-                                <tr>
-                                    <td>1,009</td>
-                                    <td>augue</td>
-                                    <td>semper</td>
-                                    <td>porta</td>
-                                    <td>Mauris</td>
-                                </tr>
-                                <tr>
-                                    <td>1,010</td>
-                                    <td>massa</td>
-                                    <td>Vestibulum</td>
-                                    <td>lacinia</td>
-                                    <td>arcu</td>
-                                </tr>
-                                <tr>
-                                    <td>1,011</td>
-                                    <td>eget</td>
-                                    <td>nulla</td>
-                                    <td>Class</td>
-                                    <td>aptent</td>
-                                </tr>
-                                <tr>
-                                    <td>1,012</td>
-                                    <td>taciti</td>
-                                    <td>sociosqu</td>
-                                    <td>ad</td>
-                                    <td>litora</td>
-                                </tr>
-                                <tr>
-                                    <td>1,013</td>
-                                    <td>torquent</td>
-                                    <td>per</td>
-                                    <td>conubia</td>
-                                    <td>nostra</td>
-                                </tr>
-                                <tr>
-                                    <td>1,014</td>
-                                    <td>per</td>
-                                    <td>inceptos</td>
-                                    <td>himenaeos</td>
-                                    <td>Curabitur</td>
-                                </tr>
-                                <tr>
-                                    <td>1,015</td>
-                                    <td>sodales</td>
-                                    <td>ligula</td>
-                                    <td>in</td>
-                                    <td>libero</td>
+                                    <td> Saturday </td>
+                                    <td>12034</td>
                                 </tr>
                             </tbody>
                         </table>

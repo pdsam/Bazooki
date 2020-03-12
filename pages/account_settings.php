@@ -32,7 +32,7 @@
                         <label for="confirmPass">Confirm new password</label>
                         <input class="form-control" type="password" name="confirmPass" id="confirmPass">
                     </div>
-                    <button class="btn btn-primary" type="submit">Update</button>
+                    <button class="btn btn-olive" type="submit">Update</button>
                 </form>
             </div>
             <div class="mb-5">
