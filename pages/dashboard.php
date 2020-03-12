@@ -12,7 +12,7 @@
     <?php include('../templates/header.php') ?>
 
     <!-- Custom styles for this template -->
-    <link href="<?= $files_parh ?>/css/dashboard.css" rel="stylesheet">
+    <link href="<?= $files_path ?>/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
@@ -280,7 +280,7 @@
     <?php include_once('../templates/footer.php') ?>
     <script src="https://kit.fontawesome.com/07ed6a8693.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="<?= $files_parh ?>/js/dashboard.js"></script>
+    <script src="<?= $files_path ?>/js/dashboard.js"></script>
 </body>
 
 </html>
