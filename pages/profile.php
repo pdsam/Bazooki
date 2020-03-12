@@ -18,7 +18,7 @@
                         <div class="d-flex justify-content-between">
                             <h1 class="display-4">Mário Gil</h1>
                             <div class="align-self-center">
-                                <button class="btn btn-primary btn-lg btn-olive">Edit</button>
+                                <button class="btn btn-lg btn-olive">Edit</button>
                             </div>                            
                         </div>
                         <div id="profile_stats" class="row">
@@ -58,24 +58,27 @@
         <!-- Tab panes -->
         <div id="profile_tabs" class="tab-content">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                <div class="row bg-light">
-                    <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
-                    <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
-                    <?php create_current_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                <div class="card-deck">
+                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
+                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.","Chuck Norris", "999") ?>
+                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.","Chuck Norris", "999") ?>
+                    <?php create_current_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.","Chuck Norris", "999") ?>
                 </div>
             </div>
             <div class="tab-pane" id="tabs-2" role="tabpanel">
-                <div class="row">
-                    <?php create_winning_bid_card("Super cool gun", "Chuck Norris", "999") ?>
-                    <?php create_winning_bid_card("Super cool gun", "Chuck Norris", "999") ?>
-                    <?php create_winning_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                <div class="card-deck">
+                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
+                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
+                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
+                    <?php create_winning_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Chuck Norris", "999") ?>
                 </div>
             </div>
             <div class="tab-pane" id="tabs-3" role="tabpanel">
-                <div class="row">
-                    <?php create_own_bid_card("Super cool gun", "Chuck Norris", "999") ?>
-                    <?php create_own_bid_card("Super cool gun", "Chuck Norris", "999") ?>
-                    <?php create_own_bid_card("Super cool gun", "Chuck Norris", "999") ?>
+                <div class="card-deck">
+                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
+                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
+                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
+                    <?php create_own_bid_card("Super cool gun", "This gun is very strong. It is also very pretty.", "Mário Gil", "999") ?>
                 </div>
             </div>
         </div>
@@ -83,65 +86,53 @@
     </body>
 </html>
 
-<?php function create_current_bid_card($title, $owner, $currentbid) { ?>
-    <div class="col-12 row profile-tab-entry">
-        <div class="col-3 image-tab">
-            <img src="../assets/gun.jpg">
-        </div>
-        <div class="col-7">
-            <div class="jumbotron">
-                <h2><?=$title?></h2>
-                <p class="lead"><?=$owner?></p>
-                <p class="lead">Current bid: <span><?=$currentbid?></span>€</p>
+<?php function create_current_bid_card($title, $description, $owner, $currentbid) { ?>
+    
+    <div class="card">
+        <a href="../pages/product.php">
+            <img class="card-img-top" src="../assets/gun.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><?=$title?></h5>            
+                <p class="card-text"><small class="text-muted"><?=$owner?></small></p>
+                <p class="card-text"><?=$description?></p>
+                <h5>Current bid: <?=$currentbid?>€</h5>
             </div>
-        </div>
-        <div class="col-2">
-            <a href="product.php" class="btn btn-primary btn-lg btn-olive centered_vertically">Visit</a>
-        </div>
+        </a>
     </div>
 <?php } ?>
 
-<?php function create_winning_bid_card($title, $owner, $currentbid) { ?>
-    <div class="col-12 row profile-tab-entry">
-        <div class="col-3 image-tab">
-            <img src="../assets/gun.jpg">
-        </div>
-        <div class="col-6">
-            <div class="jumbotron">
-                <h2><?=$title?></h2>
-                <p class="lead"><?=$owner?></p>
-                <p class="lead">Winning bid: <span><?=$currentbid?></span>€</p>
+<?php function create_winning_bid_card($title, $description, $owner, $currentbid) { ?>
+    <div class="card">
+        <a href="../pages/product.php">
+            <img class="card-img-top" src="../assets/gun.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><?=$title?></h5>            
+                <p class="card-text"><small class="text-muted"><?=$owner?></small></p>
+                <p class="card-text"><?=$description?></p>
+                <h5>Winning bid: <?=$currentbid?>€</h5>
+                <div class="card-rating">
+                    <p>Leave a rating: </p> 
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
             </div>
-        </div>
-        <div class="col-3">
-            <div class="jumbotron">
-                <p class="lead">Rating: </p>
-                <span>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </span>
-            </div>
-        </div>
+        </a>
     </div>
 <?php } ?>
 
-<?php function create_own_bid_card($title, $owner, $currentbid) { ?>
-    <div class="col-12 row profile-tab-entry">
-        <div class="col-3 image-tab">
-            <img src="../assets/gun.jpg">
-        </div>
-        <div class="col-7">
-            <div class="jumbotron">
-                <h2><?=$title?></h2>
-                <p class="lead"><?=$owner?></p>
-                <p class="lead">Highest bid: <span><?=$currentbid?></span>€</p>
+<?php function create_own_bid_card($title, $description, $owner, $currentbid) { ?>
+    <div class="card">
+        <a href="../pages/product.php">
+            <img class="card-img-top" src="../assets/gun.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><?=$title?></h5>            
+                <p class="card-text"><small class="text-muted"><?=$owner?></small></p>
+                <p class="card-text"><?=$description?></p>
+                <h5>Highest bid: <?=$currentbid?>€</h5>
             </div>
-        </div>
-        <div class="col-2">
-            <a href="product.php" class="btn btn-primary btn-lg btn-olive centered_vertically">Visit</a>
-        </div>
+        </a>
     </div>
 <?php } ?>

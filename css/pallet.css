@@ -30,7 +30,13 @@
 }
   
 .btn-purple:hover {
+    color: white;
     background-color: var(--highlight-purple-darker);
+    border: 0;
+}
+  
+.btn-purple:focus {
+    box-shadow: 0 0 0 0.2rem none; /*#660066;*/
 }
 
 .btn-olive {
@@ -40,5 +46,10 @@
 }
   
 .btn-olive:hover {
+    color: white;
     background-color: var(--olive-darker);
+}
+  
+.btn-olive:focus {
+    box-shadow: none; /*0 0 0 0.2rem #9AB973;*/
 }

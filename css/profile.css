@@ -37,12 +37,15 @@ hr.customhr {
 
 #profile_tabs_select {
     justify-content: center;
+    border-bottom: none;
+    margin-bottom: 1rem;
 }
 
 #profile_tabs_select .nav-link {
     color: white;
     background-color: var(--olive);
     border: none;
+    border-radius: .25rem;
 }
 
 #profile_tabs_select .nav-link:hover {
@@ -67,40 +70,6 @@ hr.customhr {
     margin: 0 20px;
 }
 
-#profile_tabs .profile-tab-entry {
-    border: 1px solid black;
-    text-align: center;
-    padding: 0 0;
-    margin: -1px 0 10px 10px;
-    height: 200px;
-}
-
-#profile_tabs .profile-tab-entry .jumbotron{
-    text-align: left;
-    margin-bottom: 0;
-    padding: 1rem 2rem;
-    padding-bottom: 0;
-    background-color: inherit;
-}
-
-#profile_tabs .profile-tab-entry .jumbotron p span{
-    font-size: 2rem;
-}
-
-#profile_tabs i {
-    color: var(--highlight-purple);
-}
-
-.profile-tab-entry .image-tab {
-    overflow: hidden;
-    padding: 0;
-}
-
-#profile_tabs .profile-tab-entry img {
-    height: 100%;
-    object-fit: cover;
-}
-
 .centered_vertically {
     position: absolute;
     top: 50%;
@@ -109,3 +78,29 @@ hr.customhr {
     transform: translate(-50%, -50%);
 }
 
+#profile_tabs {
+    margin-bottom: 2rem;
+}
+
+#profile_tabs .card-deck .card-body .card-title {
+    margin-bottom: 0;
+}
+
+#profile_tabs .card-deck .card > a{
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+
+#profile_tabs .card-deck .card > a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+#profile_tabs .card-rating p {
+    display: inline;
+}
+
+#profile_tabs .card-rating i {
+    color: var(--highlight-purple);
+}
