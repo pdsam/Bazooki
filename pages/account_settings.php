@@ -66,14 +66,16 @@
                 <h2 class="text-danger">Danger zone</h5>
                 <p class="text-muted">The things in this area are very <span class="font-weight-bold">D A N G E R O U S</span></p>
                 <div id="danger-zone-area" class="collapse mb-3 border border-danger">
-                    <div class="d-flex justify-content-between border p-3">
-                        <div>
+                    <div class="row justify-content-between border mx-0 p-3">
+                        <div class="col-12 col-md-6">
                             <strong>
                                 Delete account
                             </strong>
                             <p class="m-0">Once you delete your account, you can't get it back.</p>
                         </div>
-                        <button class="btn btn-danger">Delete Account</button>
+                        <div class="col-12 col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
+                            <button class="btn btn-danger mt-2 mt-md-0">Delete Account</button>
+                        </div>
                     </div>
                 </div>
                 <button class="btn btn-outline-danger" data-toggle="collapse" data-target="#danger-zone-area">Show</button>
