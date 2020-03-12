@@ -23,13 +23,13 @@
                 <ul class="nav flex-column" role="tablist">
                     <li class="nav-item py-2">
                         <a class="nav-link active" href="#sales" data-toggle="tab" role="tab">
-                            <i class="fas fa-home"></i>
-                            Dashboard <span class="sr-only">(current)</span>
+                            <i class="fas fa-money-bill-wave"></i>
+                            Sales <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item py-2">
                         <a class="nav-link" href="#auctions" data-toggle="tab" role="tab">
-                            <i class="fa fa-money-bill-wave"></i>
+                            <i class="fa fa-gavel"></i>
                             Auctions
                         </a>
                     </li>
@@ -55,9 +55,10 @@
             </nav>
 
             <main class="col-12 col-lg-10 tab-content">
+                <!-- <h1 class="h2 border-bottom">Dashboard</h1> -->
                 <div id="sales" class="tab-pane active" role="tabpanel">
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                        <h1 class="h2">Dashboard</h1>
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                        <h2>Sales</h2>
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                                 <span data-feather="calendar"></span>
@@ -65,8 +66,6 @@
                             </button>
                         </div>
                     </div>
-
-                    <h2>Sales</h2>
 
                     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
@@ -199,6 +198,7 @@
                     </div>
                 </div>
                 <div id="auctions" class="tab-pane" role="tabpanel">
+                    <h2>Auctions</h2>
                     <?php for ($i=0; $i < 10; $i++) { ?>
                         <div class="card shadow-sm rounded-0 border mt-3 mt-lg-1">
                             <div class="row align-items-center no-gutters">
@@ -225,6 +225,7 @@
                     <?php } ?>
                 </div>
                 <div id="certifications" class="tab-pane" role="tabpanel">
+                    <h2>Certifications</h2>
                     <?php for ($i=0; $i < 10; $i++) { ?>
                         <div class="shadow-sm border mt-3 mt-lg-1">
                             <div class="card rounded-0 border-0">
