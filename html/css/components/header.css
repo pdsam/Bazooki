@@ -36,6 +36,10 @@ a.nav-link.custom-hover:hover{
     color: var(--highlight-purple);
 }
 
+.nav-link:hover {
+    background-color: #e4e4e4;
+}
+
 div nav{
     font-family: 'Montserrat';
 }

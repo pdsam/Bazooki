@@ -53,11 +53,11 @@
         <div>
 			<form>
 				<div class="form-group mt-4 ml-4 mr-4">
-					<input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title">
+					<input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title" required>
 				</div>
 
 				<div class="form-group mt-4 ml-4 mr-4">
-					<input class="form-control form-control-sm" rows="5" id="description" placeholder="Short description"></textarea>
+					<input class="form-control form-control-sm" rows="5" id="description" placeholder="Short description" required></input>
 				</div>
 				
 				<div class="form-group mt-4 ml-4 mr-4">
@@ -76,9 +76,9 @@
 						<?php for($i = 0;$i<4; $i++){?>
 						<div class="col-3">
 						<option
-  data-img-src='https://picsum.photos/100/100'
-  value='<?= $i?>'
->
+							data-img-src='https://picsum.photos/100/100'
+							value='<?= $i?>'
+							>
 						</div>
 						<?php }?>
 						</div>
@@ -96,13 +96,13 @@
 						
 						<div class="row justify-content-between">
 							<div class="col-md-3 datepicker-start date input-group p-0 ml-3 mr-3">
-								<input type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate">
+								<input type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate" required>
 								<div class="input-group-append"></div>
 							</div>
 							<div class="col-md-4 input-group mt-4 mt-md-0">
-								<input type="number" class="form-control" style="height:100%;" placeholder="days">
-								<input type="number" class="form-control" style="height:100%;" placeholder="hours">
-								<input type="number" class="form-control" style="height:100%;" placeholder="mins">
+								<input type="number" class="form-control" style="height:100%;" placeholder="days" required>
+								<input type="number" class="form-control" style="height:100%;" placeholder="hours" required>
+								<input type="number" class="form-control" style="height:100%;" placeholder="mins" required>
 							</div>
 						</div>
 					</div>
@@ -116,8 +116,8 @@
 						
 						<div class="form-inline">
 							<div class="form-group">
-								<input type="number" placeholder="Price" step="0.1" class="form-control" />
-								<input type="checkbox" id="meumeu" class="ml-2"/>
+								<input type="number" placeholder="Price" step="0.1" class="form-control"/>
+								<input type="checkbox" id="meumeu" class="ml-2" />
 								<label class="ml-2 form-check-label mt-3 mt-md-0" for="meumeu">
 								InstaBuy Price
 								</label>
@@ -143,7 +143,7 @@
 					</div>
 				</div>
 				<div class="mt-4 ml-4 mr-4">
-				<button type="button" class="btn btn-olive" style="width:100%;">Submit</button>
+					<button type="button" class="btn btn-olive" style="width:100%;">Submit</button>
 				</div>
 
 			</form>

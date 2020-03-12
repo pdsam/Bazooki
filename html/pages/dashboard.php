@@ -130,6 +130,10 @@
                                             </div>
                                         </div>
                                         <p class="card-text">This gun is very strong. It is also very pretty.</p>
+                                        <div>
+                                            <button class="btn btn-large btn-primary">Freeze</button>
+                                            <button class="btn btn-large btn-danger">Remove</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <a href="#" class="stretched-link"></a>

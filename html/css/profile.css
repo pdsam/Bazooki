@@ -60,11 +60,11 @@ hr.customhr {
 
 #profile_tabs_select .active {
     justify-content: center;
-    background-color: var(--highlight-purple);
+    background-color: var(--olive-darker);
 }
 
 #profile_tabs_select .active:hover {
-    background-color: var(--highlight-purple-darker);
+    background-color: var(--olive-darker);
 }
 
 #profile_tabs_select .active:hover {
