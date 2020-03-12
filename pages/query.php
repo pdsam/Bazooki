@@ -4,7 +4,7 @@
       <?php include_once('../templates/header.php');?>
 
       <link rel="stylesheet" href="<?= $files_path ?>/css/query.css">
-	    <link rel="stylesheet" href="<? echo $files_path . '/css/components/footer.css';?>">
+	    <link rel="stylesheet" href="<?= $files_path . '/css/components/footer.css'?>">
 </head>
 <body class="bg-light">
   <div class="container mt-2">
@@ -75,7 +75,7 @@
             <div class="card shadow-sm rounded-0 border-0 mb-1">
               <div class="row align-items-center no-gutters">
                 <div class="col-xs-12 col-sm-4">
-                  <img src="<?php echo $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
+                  <img src="<?= $files_path . '/assets/logo.png' ?>" class="card-img" alt="logo">
                 </div>
                 <div class="col-xs-12 col-sm-8">
                   <div class="card-body">
@@ -88,10 +88,10 @@
                         <span class="mr-1" style="font-size: 2rem">300</span>$
                       </div>
                     </div>
-                    <p class="card-text">Big descritpion thingy</p>
+                    <p class="card-text">Big description thingy</p>
                   </div>
                 </div>
-                <a href="#" class="stretched-link"></a>
+                <a href="<?=$files_path . '/pages/product.php'?>" class="stretched-link"></a>
               </div>
             </div>
           <?php } ?>
