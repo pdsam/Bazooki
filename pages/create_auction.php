@@ -113,6 +113,26 @@
 				<div class="card mt-4 ml-4 mr-4">
 					<div class="card-body">
 						<div class="card-title">
+							<h3>Price</h3>
+						</div>
+						
+						<div class="form-inline">
+							<div class="form-group">
+								<input type="number" placeholder="Price" step="0.1" class="form-control" />
+								<input type="checkbox" id="meumeu" class="ml-2"/>
+								<label class="ml-2 form-check-label" for="meumeu">
+								InstaBuy Price
+								</label>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+				<div class="card mt-4 ml-4 mr-4">
+					<div class="card-body">
+						<div class="card-title">
 						<h3>Certification</h3>
 						</div>
 						<div class="form-check">
@@ -123,6 +143,9 @@
 						</div>
 						<input type="file" class="form-control-file" id="exampleFormControlFile1">
 					</div>
+				</div>
+				<div class="mt-4 ml-4 mr-4">
+				<button type="button" class="btn btn-olive" style="width:100%;">Submit</button>
 				</div>
 
 			</form>
