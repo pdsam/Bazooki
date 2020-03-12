@@ -109,3 +109,30 @@ hr.customhr {
 #profile_tabs .card-rating i {
     color: var(--highlight-purple);
 }
+
+@media only screen and (max-width: 600px) {
+    #profile_description .jumbotron h1{
+        font-size: 2rem;
+    }
+
+    #profile_stats > div{
+        font-size: 1rem;
+        display: inline;
+        width: inherit;
+        margin-bottom: 1rem;
+    }
+
+    #profile_stats p{
+        font-size: 1rem;
+        display: inline;
+    }
+
+    #profile_description .lead {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #profile_tabs_select .nav-item {
+        margin-bottom: 1rem;
+    }
+}
