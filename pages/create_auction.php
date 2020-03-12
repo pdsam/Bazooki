@@ -95,11 +95,11 @@
 						</div>
 						
 						<div class="row justify-content-between">
-							<div class="col-md-3 datepicker-start date input-group p-0 shadow-sm">
+							<div class="col-md-3 datepicker-start date input-group p-0 ml-3 mr-3">
 								<input type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate">
 								<div class="input-group-append"></div>
 							</div>
-							<div class="col-md-4 input-group">
+							<div class="col-md-4 input-group mt-4 mt-md-0">
 								<input type="number" class="form-control" style="height:100%;" placeholder="days">
 								<input type="number" class="form-control" style="height:100%;" placeholder="hours">
 								<input type="number" class="form-control" style="height:100%;" placeholder="mins">
@@ -118,7 +118,7 @@
 							<div class="form-group">
 								<input type="number" placeholder="Price" step="0.1" class="form-control" />
 								<input type="checkbox" id="meumeu" class="ml-2"/>
-								<label class="ml-2 form-check-label" for="meumeu">
+								<label class="ml-2 form-check-label mt-3 mt-md-0" for="meumeu">
 								InstaBuy Price
 								</label>
 							</div>

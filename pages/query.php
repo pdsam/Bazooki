@@ -71,7 +71,7 @@
       <div class="col-12 col-lg-9 mt-2 mt-md-0 p-0">
         <div class="ml-md-1">
           <?php for ($i=0; $i < 10; $i++) { ?>
-            <div class="card shadow-sm rounded-0 border-0 mb-1">
+            <div class="card shadow-sm rounded-0 border-0 mb-1 mt-5 mt-md-0">
               <div class="row align-items-center no-gutters">
                 <div class="col-xs-12 col-sm-4">
                   <img src="<?= $files_path . '/assets/gun.jpg' ?>" class="card-img rounded-0" alt="logo">
