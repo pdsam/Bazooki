@@ -22,7 +22,7 @@
         <a id="filters-toggle" class="d-block d-lg-none pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
           <div class="d-flex justify-content-between">
             <p class="m-0">Filters</p>
-            <span class="fa fa-chevron-up"></span>
+            <i class="fa fa-chevron-up"></i>
           </div>
         </a>
         <h3 class="d-none d-lg-block mb-4">
@@ -33,7 +33,7 @@
             <a class="d-block mt-2 section-toggle mb-2 mt-3" href="#categoriesGroup" data-toggle="collapse" data-target="#categoriesGroup">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="m-0">Category</p>
-                <span class="fa fa-chevron-up"></span>
+                <i class="fa fa-chevron-up"></i>
               </div>
             </a>
             <div id="categoriesGroup" class="collapse show">
@@ -54,7 +54,7 @@
             <a class="d-block mt-2 section-toggle mb-2 mt-3" href="#maxBidPriceGroup" data-toggle="collapse" data-target="#maxBidPriceGroup">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="m-0">Max Bid Price</p>
-                <span class="fa fa-chevron-up"></span>
+                <i class="fa fa-chevron-up"></i>
               </div>
             </a>
             <div id="maxBidPriceGroup" class="collapse show form-row">
@@ -103,8 +103,7 @@
   <?php include_once('../templates/footer.php'); ?>
 
   <script src="https://kit.fontawesome.com/07ed6a8693.js" crossorigin="anonymous"></script>
-  <script src="<?php echo $files_path . '/js/queryFilters.js';?>"></script>
-  <script src="<?php echo $files_path . '/js/queryRangeFilter.js';?>"></script>
+  <script src="<?php echo $files_path . '/js/collapseChevron.js';?>"></script>
 </body>
 
 </html>

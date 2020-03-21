@@ -8,8 +8,8 @@
 }
 
 .sidebar .nav-link.active {
-  color: var(--olive);
-  font-weight: bold;
+  color: var(--highlight-purple);
+  font-weight: 800;
 }
 
 .sidebar-heading {

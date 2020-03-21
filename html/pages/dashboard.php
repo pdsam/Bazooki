@@ -11,6 +11,7 @@
 
     <?php include('../templates/header.php') ?>
 
+
     <!-- Custom styles for this template -->
     <link href="<?= $files_path ?>/css/dashboard.css" rel="stylesheet">
 </head>
@@ -152,16 +153,18 @@
                                     </div>
                                     <div class="col-12 col-sm-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Super cool gun</h5>
-                                            <h6 class="card-subtitle text-muted">Owner</h6>
+                                            <h4 class="card-title">Super cool gun</h4>
+                                            <h6 class="card-subtitle text-muted">Owned by: <a href="profile.php">super_cool_man</a></h6>
+                                            <div class="mt-3">
+                                                <p>
+                                                This is a genuine revolver, I got it from my grandfather. It dates back to WWII.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div id="certification<?= $i ?>" class="collapse p-3">
-                                <div>
-                                    This is a genuine revolver, I got it from my grandfather. It dates back to WWII.
-                                </div>
                                 <div class="my-3 mx-2">
                                     Certification documents:
                                     <ul>
@@ -185,9 +188,9 @@
                                     </button>
                                 </div>
                             </div>
-                                <a href="#certification<?= $i ?>" class="cert-toggle justify-content-center d-flex py-3 text-muted bg-light" data-toggle="collapse">
-                                    <i class="fa fa-chevron-down"></i>
-                                </a>
+                            <a href="#certification<?= $i ?>" class="cert-toggle justify-content-center d-flex py-3 text-muted bg-light" data-toggle="collapse" data-target="#certification<?= $i?>">
+                                <p class="m-0">Documents <span class="fa fa-chevron-down"></span></p>
+                            </a>
                         </div>
                     <?php } ?>
                 </div>
@@ -199,6 +202,7 @@
     <script src="https://kit.fontawesome.com/07ed6a8693.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="<?= $files_path ?>/js/dashboard.js"></script>
+    <script src="<?= $files_path ?>/js/collapseChevron.js"></script>
 </body>
 
 </html>
