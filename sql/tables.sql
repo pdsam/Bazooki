@@ -96,7 +96,7 @@ CREATE TABLE auction_transaction(value int NOT NULL CHECK (value > 0),
                                  receiver SERIAL NOT NULL REFERENCES bazooker(id),
                                  sender SERIAL NOT NULL REFERENCES bazooker(id),
                                  PRIMARY KEY(auction_id, receiver, sender),
-                                 CONSTRAINT sender_receiver CHECK (sender IS NOT receiver));
+                                 CONSTRAINT sender_receiver CHECK (sender <> receiver));
 
 DROP TABLE IF EXISTS watch_list;
 CREATE TABLE watch_list(auction_id SERIAL NOT NULL REFERENCES auction(id),
