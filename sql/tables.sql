@@ -277,5 +277,12 @@ CREATE TRIGGER prevent_repeated_bid_action
     EXECUTE PROCEDURE prevent_repeated_bid_action();
 
 
-
+CREATE INDEX bid_auction_id ON bid USING hash(auction_id);
+CREATE INDEX bid_bidder_id ON bid USING hash(bidder_id);
+CREATE INDEX item_image_auction_id ON item_image USING hash(auction_id);
+CREATE INDEX feedback_f_type ON feedback USING hash(f_type);
+CREATE INDEX bid_moderator_action_activate ON bid_moderator_action USING hash(activate);
+CREATE INDEX auction_moderator_action_activate ON auction_moderator_action USING hash(activate);
+CREATE INDEX start_auction ON auction USING btree(start_time);
+CREATE INDEX auction_search_dix ON auction USING GIST(item_name)
 
