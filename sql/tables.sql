@@ -132,3 +132,18 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
 						UNIQUE (rater_id, rated_id, auction),
 						CONSTRAINT cant_rate_same CHECK (rater_id != rated_id));
 
+						
+CREATE FUNCTION bid_on_auction() RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM auction AS A WHERE A.id = NEW.auction_id AND A.owner = NEW.bidder_id) THEN
+        RAISE EXCEPTION 'A bazooker cannot bid on his own auction.';
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER bid_on_auction
+    BEFORE INSERT OR UPDATE ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE bid_on_auction();
+
