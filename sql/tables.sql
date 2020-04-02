@@ -36,6 +36,7 @@ CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     insta_buy INT CHECK (insta_buy > 0),
 					item_name TEXT NOT NULL,
 					item_description TEXT NOT NULL,
+					search tsvector,
                     CONSTRAINT base_bid_lower_than_insta CHECK (base_bid >=0 AND base_bid < insta_buy)
                     );
 
@@ -132,7 +133,30 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
 						UNIQUE (rater_id, rated_id, auction),
 						CONSTRAINT cant_rate_same CHECK (rater_id != rated_id));
 
-						
+
+
+DROP FUNCTION IF EXISTS only_one_ban;
+CREATE FUNCTION only_one_ban() RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM ban AS B WHERE B.bazooker_id = NEW.bazooker_id AND B.active = true AND NEW.active = true) THEN
+        RAISE EXCEPTION 'There can only be at most one active ban against each bazooker';
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS ban ON ban;
+CREATE TRIGGER only_one_ban
+    BEFORE INSERT OR UPDATE ON ban
+    FOR EACH ROW
+    EXECUTE PROCEDURE only_one_ban();
+    
+    
+    
+    
+    
+    
+DROP FUNCTION IF EXISTS bid_on_auction;
 CREATE FUNCTION bid_on_auction() RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS (SELECT * FROM auction AS A WHERE A.id = NEW.auction_id AND A.owner = NEW.bidder_id) THEN
@@ -142,8 +166,116 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS bid_on_auction ON bid;
 CREATE TRIGGER bid_on_auction
     BEFORE INSERT OR UPDATE ON bid
     FOR EACH ROW
     EXECUTE PROCEDURE bid_on_auction();
+
+
+
+
+
+DROP FUNCTION IF EXISTS fts_auction_update;
+CREATE FUNCTION fts_auction_update() RETURNS TRIGGER AS $$
+BEGIN
+	IF TG_OP = 'INSERT' THEN
+		NEW.search = to_tsvector('english', NEW.name);
+	END IF;
+	IF TG_OP = 'UPDATE' THEN
+		IF NEW.name <> OLD.name THEN
+			NEW.search = to_tsvector('english', NEW.name);
+		END IF;
+	END IF;
+	RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS precalculate_auction_fts on auction;
+CREATE TRIGGER precalculate_auction_fts
+    AFTER INSERT OR UPDATE ON auction
+    FOR EACH ROW
+    EXECUTE PROCEDURE fts_auction_update();
+    
+    
+    
+    
+    
+    
+ DROP FUNCTION IF EXISTS prevent_bid_on_finished_auction;
+    CREATE FUNCTION prevent_bid_on_finished_auction() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.time > (SELECT start_time + duration * interval '1 second' FROM auction WHERE id = NEW.auction_id ) THEN
+        RAISE EXCEPTION 'Auction has already closed.';
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS prevent_bid_on_finished_auction ON bid;
+CREATE TRIGGER prevent_bid_on_finished_auction
+    AFTER INSERT OR UPDATE ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE prevent_bid_on_finished_auction();
+
+
+
+
+
+DROP FUNCTION IF EXISTS prevent_repeated_suspentions;
+CREATE FUNCTION prevent_repeated_suspentions() RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS(SELECT * FROM suspension WHERE bazooker_id = NEW.id AND NEW.time_of_suspension < suspension.time_of_suspension + suspension.duration * interval '1 second') THEN
+        RAISE EXCEPTION 'User already suspended';
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+
+DROP TRIGGER IF EXISTS prevent_repeated_suspentions on suspension;
+CREATE TRIGGER prevent_repeated_suspentions
+    AFTER INSERT OR UPDATE ON suspension
+    FOR EACH ROW
+    EXECUTE PROCEDURE prevent_repeated_suspentions();
+
+
+
+DROP FUNCTION IF EXISTS prevent_repeated_auction_action;
+CREATE FUNCTION prevent_repeated_auction_action() RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS(SELECT * FROM auction_moderator_action WHERE auction_id = NEW.auction_id AND active = true AND NEW.active = true) THEN
+        RAISE EXCEPTION 'There is already an action on this auction.';
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS prevent_repeated_auction_action ON auction_moderator_action;
+CREATE TRIGGER prevent_repeated_auction_action
+    AFTER INSERT OR UPDATE ON auction_moderator_action
+    FOR EACH ROW
+    EXECUTE PROCEDURE prevent_repeated_auction_action();
+    
+    
+
+
+DROP FUNCTION IF EXISTS prevent_repeated_bid_action;
+CREATE FUNCTION prevent_repeated_bid_action() RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS(SELECT * FROM bid_moderator_action WHERE bid_id = NEW.bid_id AND active = true AND NEW.active = true) THEN
+        RAISE EXCEPTION 'There is already an action on this bid.';
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS prevent_repeated_bid_action ON bid_moderator_action;
+CREATE TRIGGER prevent_repeated_bid_action
+    AFTER INSERT OR UPDATE ON bid_moderator_action
+    FOR EACH ROW
+    EXECUTE PROCEDURE prevent_repeated_bid_action();
+
+
+
 
