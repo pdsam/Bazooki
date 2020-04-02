@@ -86,7 +86,7 @@ CREATE TABLE bid_moderator_action(id SERIAL PRIMARY KEY,
                                    activate BOOL NOT NULL DEFAULT TRUE,
                                    time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
                                    action moderator_action,
-                                   auction_id SERIAL NOT NULL REFERENCES bid(id),
+                                   bid_id SERIAL NOT NULL REFERENCES bid(id),
                                    mod_id SERIAL NOT NULL REFERENCES moderator(id));
 
 DROP TABLE IF EXISTS auction_transaction;
