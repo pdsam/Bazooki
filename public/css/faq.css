@@ -1,0 +1,19 @@
+.btn-link{
+    color: #000;
+}
+
+.btn-link:hover{
+    color: #000;
+}
+
+#faq-page .jumbotron {
+    padding-top: 0;
+    padding-bottom: 1rem;
+}
+
+#faq-page .jumbotron h1 i {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    color: var(--highlight-purple);
+    font-size: 3rem;
+}

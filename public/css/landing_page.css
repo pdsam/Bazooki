@@ -1,70 +1,70 @@
-#landing-page .jumbotron {
+#landing_page .jumbotron {
     padding-top: 0;
     padding-bottom: 1rem;
 }
 
-#landing-page .jumbotron h1 i {
+#landing_page .jumbotron h1 i {
     padding-top: 2rem;
     padding-bottom: 1rem;
     color: var(--highlight-purple);
 }
 
 
-#landing-page .carousel.row {
+#landing_page .carousel.row {
     margin-left: 2rem;
     margin-right: 2rem;
 }
 
-#landing-page .carouselParent {
+#landing_page .carouselParent {
     margin-bottom: 4rem;
     border-bottom: 1px solid var(--border-grey);
     padding-bottom: 2em;
 }
 
-#landing-page .carouselParent:last-child {
+#landing_page .carouselParent:last-child {
     border-bottom: none;
     margin-bottom: 2rem;
 }
 
-#landing-page .carouselParent > h3{
+#landing_page .carouselParent > h3{
     margin-left: 2rem;
     margin-top: 1rem;
 }
 
-#landing-page .carousel .row .card {
+#landing_page .carousel .row .card {
     margin: auto;
     background-color: #e9ecef;
 }
 
-#landing-page .carousel-card-small a {
+#landing_page .carousel-card-small a {
     color: black;
     padding: 0;
     margin: 0;
 }
 
-#landing-page .carousel-card-small a:hover {
+#landing_page .carousel-card-small a:hover {
     text-decoration: none;
     color: black;
 }
 
-#landing-page .carousel-controls {
+#landing_page .carousel-controls {
     justify-content: center;
 }
 
-#landing-page .carousel-controls a {
+#landing_page .carousel-controls a {
     margin: 0.1rem 1rem;
     box-shadow: none;
 }
 
-#landing-page .carousel-controls a:active {
+#landing_page .carousel-controls a:active {
     box-shadow: none;
 }
 
-#landing-page .carousel-controls a:hover {
+#landing_page .carousel-controls a:hover {
     box-shadow: none;
 }
 
-#landing-page .carousel-controls a:visited {
+#landing_page .carousel-controls a:visited {
     box-shadow: none;
 }
 
@@ -73,15 +73,15 @@
 }
 
 @media only screen and (max-width: 600px) {
-    #landing-page .jumbotron h1{
+    #landing_page .jumbotron h1{
         font-size: 2rem;
     }
 
-    #landing-page .jumbotron p.lead {
+    #landing_page .jumbotron p.lead {
         font-size: 1rem;
     }
 
-    #landing-page .jumbotron p {
+    #landing_page .jumbotron p {
         font-size: 0.8rem;
     }
 

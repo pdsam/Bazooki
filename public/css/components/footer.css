@@ -1,0 +1,21 @@
+small{
+  text-align:center;
+}
+
+footer{
+  padding-left:1em;
+  padding-right:1em;
+  border-top: 1px solid var(--border-gray);
+  display:flex;
+  justify-content: space-between;
+  
+}
+
+.fa{
+  padding-right:1em;
+}
+
+a{
+  color:inherit;
+  padding-right: 1em;
+}

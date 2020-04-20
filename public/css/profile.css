@@ -1,0 +1,119 @@
+body {
+    width: 80%;
+    margin: auto !important;
+}
+
+#profile_description .lead {
+    text-align: justify;
+}
+
+hr.customhr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+#exTab2 h3 {
+    color : white;
+    background-color: #428bca;
+    padding : 5px 15px;
+}
+
+#profile_tabs_select {
+    justify-content: center;
+    border-bottom: none;
+    margin-bottom: 1rem;
+}
+
+#profile_tabs_select .nav-link {
+    color: white;
+    background-color: var(--olive);
+    border: none;
+    border-radius: .25rem;
+    font-family: 'Montserrat';
+}
+
+#profile_tabs_select .nav-link:hover {
+    background-color: var(--olive-darker);
+}
+
+
+#profile_tabs_select .active {
+    justify-content: center;
+    background-color: var(--olive-darker);
+}
+
+#profile_tabs_select .active:hover {
+    background-color: var(--olive-darker);
+}
+
+#profile_tabs_select .active:hover {
+    justify-content: center;
+}
+
+#profile_tabs_select .nav-item{
+    margin: 0 20px;
+}
+
+.centered_vertically {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#profile_tabs {
+    margin-bottom: 2rem;
+}
+
+#profile_tabs .card-deck .card-body .card-title {
+    margin-bottom: 0;
+}
+
+#profile_tabs .card-deck .card > a{
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+
+#profile_tabs .card-deck .card > a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+#profile_tabs .card-rating p {
+    display: inline;
+}
+
+#profile_tabs .card-rating i {
+    color: var(--highlight-purple);
+}
+
+@media only screen and (max-width: 600px) {
+    #profile_description .jumbotron h1{
+        font-size: 2rem;
+    }
+
+    #profile_stats > div{
+        font-size: 1rem;
+        display: inline;
+        width: inherit;
+        margin-bottom: 1rem;
+    }
+
+    #profile_stats p{
+        font-size: 1rem;
+        display: inline;
+    }
+
+    #profile_description .lead {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #profile_tabs_select .nav-item {
+        margin-bottom: 1rem;
+    }
+}

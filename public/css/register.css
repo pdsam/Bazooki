@@ -1,0 +1,23 @@
+#register-container .btn-google {
+  color: white;
+  background-color: #ea4335;
+}
+
+#register-container .btn-google:hover {
+  background-color: #bb382c;
+}
+
+#register-container .btn-primary {
+  color: white;
+  background-color: var(--highlight-purple);
+  border: none;
+}
+
+#register-container .btn-primary:hover {
+  background-color: var(--highlight-purple-darker);
+}
+
+#register-container .btn {
+    font-size: 80%;
+    letter-spacing: .1rem;
+}

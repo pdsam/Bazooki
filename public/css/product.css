@@ -1,0 +1,44 @@
+
+.card{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+
+.card-c-element{
+    border-bottom: 2px solid var(--border-grey);
+}
+
+#price{
+    font-size: 2em;
+    font-weight: 550;
+}
+
+#resize{
+    height:auto;
+}
+
+.row{
+    padding-bottom: 2rem;
+}
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#bid-button{
+    border-radius: 5rem;
+}
+
+
+.color-purple{
+    color:var(--highlight-purple);
+}

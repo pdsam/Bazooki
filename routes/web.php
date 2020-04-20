@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'Auth\LoginController@home');
+Route::redirect('/', '/auctions');
+Route::view('/auctions', 'pages.auctions');
 // Cards
 Route::get('cards', 'CardController@list');
 Route::get('cards/{id}', 'CardController@show');

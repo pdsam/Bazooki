@@ -1,0 +1,57 @@
+:root {
+    --highlight-purple: #801980;
+    --highlight-purple-darker: #591259;
+    --border-grey: rgb(235,235,235);
+    --border-gray: rgb(235,235,235);
+    --olive: #9AB973;
+    --olive-darker: #69804e;
+}
+
+.bg-purple {
+    background-color: var(--highlight-purple) !important;
+}
+
+.color-purple {
+    color: var(--highlight-purple) !important;
+}
+
+.bg-olive {
+    background-color: var(--olive) !important;
+}
+
+.color-olive {
+    color: var(--olive) !important;
+}
+
+.btn-purple {
+    font-family: 'Montserrat';
+    color: white;
+    background-color: var(--highlight-purple);
+    border: none;
+}
+  
+.btn-purple:hover {
+    color: white;
+    background-color: var(--highlight-purple-darker);
+    border: 0;
+}
+  
+.btn-purple:focus {
+    box-shadow: 0 0 0 0.2rem none; /*#660066;*/
+}
+
+.btn-olive {
+    font-family: 'Montserrat';
+    color: white;
+    background-color: var(--olive);
+    border: none;
+}
+  
+.btn-olive:hover {
+    color: white;
+    background-color: var(--olive-darker);
+}
+  
+.btn-olive:focus {
+    box-shadow: none; /*0 0 0 0.2rem #9AB973;*/
+}

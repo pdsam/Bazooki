@@ -1,0 +1,27 @@
+#login-container .btn-google {
+  color: white;
+  background-color: #ea4335;
+}
+
+#login-container .btn-google:hover {
+  background-color: #bb382c;
+}
+
+#login-container .btn-primary {
+  color: white;
+  background-color: var(--highlight-purple);
+  border: none;
+}
+
+#login-container .btn-primary:hover {
+  background-color: var(--highlight-purple-darker);
+}
+
+#login-container .btn {
+    font-size: 80%;
+    letter-spacing: .1rem;
+}
+
+#login-container a {
+  color: var(--highlight-purple);
+}
