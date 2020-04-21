@@ -32,5 +32,13 @@ class BazookerController extends Controller
 
         return view('pages.profile', ['user' => $user]);
     }
+
+    public function settings() {
+        if (!Auth::check()) {
+            return redirect('auctions');
+        }
+
+        return view('pages.settings');
+    }
 }
 ?>

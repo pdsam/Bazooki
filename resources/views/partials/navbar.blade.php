@@ -19,10 +19,10 @@
         @if(Auth::check())
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/profile#profile_tabs">My Bids<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/profile#profile_tabs">My Bids</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/auctions/add">Create Auction<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/auctions/add">Create Auction</a>
                 </li>
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,7 +33,7 @@
                         <a class="dropdown-item" href="/profile">Profile</a>
                         <a class="dropdown-item" href="/dashboard">Dashboard</a>
                         <a class="dropdown-item" href="/profile#tabs-3">My auctions</a>
-                        <a class="dropdown-item" href="/account/settings.php">Account Settings</a>
+                        <a class="dropdown-item" href="/account/settings">Account Settings</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Log out</a>
                     </div>
