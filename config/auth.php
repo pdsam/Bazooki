@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'bazooker',
         ],
 
         'api' => [
@@ -65,10 +65,18 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'bazooker' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Bazooker::class,
         ],
+        /*'moderator' => [
+            'driver' => 'eloquent',
+            'model' => App\Moderator::class
+        ],
+        'administrator' => [
+            'driver' => 'eloquent',
+            'model' => App\Administrator::class
+        ],*/
 
         // 'users' => [
         //     'driver' => 'database',

@@ -135,7 +135,7 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
 
 
 
-DROP FUNCTION IF EXISTS only_one_ban;
+DROP FUNCTION IF EXISTS only_one_ban();
 CREATE FUNCTION only_one_ban() RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS (SELECT * FROM ban AS B WHERE B.bazooker_id = NEW.bazooker_id AND B.active = true AND NEW.active = true) THEN
@@ -156,7 +156,7 @@ CREATE TRIGGER only_one_ban
     
     
     
-DROP FUNCTION IF EXISTS bid_on_auction;
+DROP FUNCTION IF EXISTS bid_on_auction();
 CREATE FUNCTION bid_on_auction() RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS (SELECT * FROM auction AS A WHERE A.id = NEW.auction_id AND A.owner = NEW.bidder_id) THEN
@@ -176,7 +176,7 @@ CREATE TRIGGER bid_on_auction
 
 
 
-DROP FUNCTION IF EXISTS fts_auction_update;
+DROP FUNCTION IF EXISTS fts_auction_update();
 CREATE FUNCTION fts_auction_update() RETURNS TRIGGER AS $$
 BEGIN
 	IF TG_OP = 'INSERT' THEN
@@ -202,7 +202,7 @@ CREATE TRIGGER precalculate_auction_fts
     
     
     
- DROP FUNCTION IF EXISTS prevent_bid_on_finished_auction;
+ DROP FUNCTION IF EXISTS prevent_bid_on_finished_auction();
     CREATE FUNCTION prevent_bid_on_finished_auction() RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.time > (SELECT start_time + duration * interval '1 second' FROM auction WHERE id = NEW.auction_id ) THEN
@@ -222,7 +222,7 @@ CREATE TRIGGER prevent_bid_on_finished_auction
 
 
 
-DROP FUNCTION IF EXISTS prevent_repeated_suspentions;
+DROP FUNCTION IF EXISTS prevent_repeated_suspentions();
 CREATE FUNCTION prevent_repeated_suspentions() RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS(SELECT * FROM suspension WHERE bazooker_id = NEW.id AND NEW.time_of_suspension < suspension.time_of_suspension + suspension.duration * interval '1 second') THEN
@@ -241,7 +241,7 @@ CREATE TRIGGER prevent_repeated_suspentions
 
 
 
-DROP FUNCTION IF EXISTS prevent_repeated_auction_action;
+DROP FUNCTION IF EXISTS prevent_repeated_auction_action();
 CREATE FUNCTION prevent_repeated_auction_action() RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS(SELECT * FROM auction_moderator_action WHERE auction_id = NEW.auction_id AND active = true AND NEW.active = true) THEN
@@ -260,7 +260,7 @@ CREATE TRIGGER prevent_repeated_auction_action
     
 
 
-DROP FUNCTION IF EXISTS prevent_repeated_bid_action;
+DROP FUNCTION IF EXISTS prevent_repeated_bid_action();
 CREATE FUNCTION prevent_repeated_bid_action() RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS(SELECT * FROM bid_moderator_action WHERE bid_id = NEW.bid_id AND active = true AND NEW.active = true) THEN
@@ -280,9 +280,9 @@ CREATE TRIGGER prevent_repeated_bid_action
 CREATE INDEX bid_auction_id ON bid USING hash(auction_id);
 CREATE INDEX bid_bidder_id ON bid USING hash(bidder_id);
 CREATE INDEX item_image_auction_id ON item_image USING hash(auction_id);
-CREATE INDEX feedback_f_type ON feedback USING hash(f_type);
+CREATE INDEX feedback_f_type ON feedback USING hash(ftype);
 CREATE INDEX bid_moderator_action_activate ON bid_moderator_action USING hash(activate);
 CREATE INDEX auction_moderator_action_activate ON auction_moderator_action USING hash(activate);
 CREATE INDEX start_auction ON auction USING btree(start_time);
-CREATE INDEX auction_search_dix ON auction USING GIST(item_name)
+CREATE INDEX auction_search_dix ON auction USING GIST(search);
 
