@@ -12,31 +12,42 @@
                 <input class="w-auto form-control rounded-0" type="search" placeholder="Search" aria-label="Search">
                 <button class="input-group-light btn btn-olive rounded-0" type="submit">
                     <i class="fa fa-search p-0"></i>
-                Search
+                    Search
                 </button>
             </div>
         </form>
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/profile#profile_tabs">My Bids<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/auctions/add">Create Auction<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user p-0"></i>
-                    User
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/profile">Profile</a>
-                    <a class="dropdown-item" href="/dashboard">Dashboard</a>
-                    <a class="dropdown-item" href="/profile#tabs-3">My auctions</a>
-                    <a class="dropdown-item" href="/account/settings.php">Account Settings</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/login">Log out</a>
-                </div>
-            </li>
-        </ul>
+        @if(Auth::check())
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/profile#profile_tabs">My Bids<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/auctions/add">Create Auction<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user p-0"></i>
+                        User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile">Profile</a>
+                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                        <a class="dropdown-item" href="/profile#tabs-3">My auctions</a>
+                        <a class="dropdown-item" href="/account/settings.php">Account Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Log out</a>
+                    </div>
+                </li>
+            </ul>
+        @else
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+            </ul>
+        @endif
     </div>
 </nav>
