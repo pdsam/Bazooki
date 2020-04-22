@@ -3,6 +3,10 @@
 @section('title', 'Bazooki - Create auction')
 
 @section('head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
     <link rel="stylesheet" href={{ asset('css/product.css') }}>
     <script>
 		$(function () {
@@ -40,20 +44,31 @@
 
 @section('content')
     <div>
-        <form>
+        <form action="/auctions/add" method="POST">
+            @csrf
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Product title</h3>
-                <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title" required>
+                <input name="name" type="text" class="form-control form-control-lg" id="productTitle" aria-describedby="prodTitle" placeholder="Title" required>
             </div>
 
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Short product description</h3>
-                <input class="form-control form-control-sm" rows="5" id="description" placeholder="Short description" required></input>
+                <input name="short_description" class="form-control form-control-sm" rows="5" id="description" placeholder="Short description" required></input>
             </div>
             
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Product description</h3>
-                <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+                <textarea name="description" class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+            </div>
+            
+            <div class="form-group mt-4 ml-4 mr-4">
+                <h3>Base bid</h3>
+                <input name="base_bid" type="number" placeholder="Base bid" step="0.1" class="form-control"/>
+            </div>
+            
+            <div class="form-group mt-4 ml-4 mr-4">
+                <h3>Instant buy price (optional)</h3>
+                <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="0.1" class="form-control"/>
             </div>
         
             <div class="card mt-4 ml-4 mr-4">
@@ -88,7 +103,7 @@
                     
                     <div class="row justify-content-between">
                         <div class="col-md-3 datepicker-start date input-group p-0 ml-3 mr-3">
-                            <input type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate" required>
+                            <input name="start_time" type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate" required>
                             <div class="input-group-append"></div>
                         </div>
                         <div class="col-md-4 input-group mt-4 mt-md-0">
@@ -97,26 +112,6 @@
                             <input type="number" class="form-control" style="height:100%;" placeholder="mins" required>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="card mt-4 ml-4 mr-4">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h3>Price</h3>
-                    </div>
-                    
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input type="number" placeholder="Price" step="0.1" class="form-control"/>
-                            <input type="checkbox" id="meumeu" class="ml-2" />
-                            <label class="ml-2 form-check-label mt-3 mt-md-0" for="meumeu">
-                            Instant Buy Price
-                            </label>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
 
@@ -131,11 +126,11 @@
                         I confirm I have a certificate and it's genuine.
                         </label>
                     </div>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input name="certification" type="file" class="form-control-file" id="exampleFormControlFile1">
                 </div>
             </div>
             <div class="mt-4 ml-4 mr-4">
-                <button type="button" class="btn btn-olive" style="width:100%;">Submit</button>
+                <button class="btn btn-olive" style="width:100%;">Submit</button>
             </div>
 
         </form>

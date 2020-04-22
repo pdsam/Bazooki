@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Bazooker;
+use Illuminate\Http\Request;
+use App\Auction;
 
 class AuctionController extends Controller
 {
@@ -45,25 +47,29 @@ class AuctionController extends Controller
             return redirect('auctions');
         }
 
-        $validator->validate();
+        //$validator->validate();
 
         $userID = Auth::user()->id;
+        $insta_buy = null;
+        if ($request->has('insta_buy'))
+            $insta_buy = $request->insta_buy;
         $newAuction = Auction::create([
             'owner' => $userID,
             'base_bid' => $request->base_bid,
             'start_time' => $request->start_time,
             'duration' => $request->duration,
             'item_name' => $request->name,
-            'item_description' => $request->description
+            'item_description' => $request->description,
+            'insta_buy' => $insta_buy
         ]);
 
         if(empty($newAuction)) return redirect('auctions');
-        
-        if($request->has('photos'))
-            $newAuction->photos = $request->photos;
-        if($request->has('insta_buy'))
-            $newAuction->insta_buy = $request->insta_buy;
-        $newAuction->save();
+
+        if($request->has('photos')) {
+            // TODO save photos
+        }
+
+        // TODO certifications and short description!
 
         return redirect("auctions/$newAuctionID");
     }
