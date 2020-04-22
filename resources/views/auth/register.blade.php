@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Bazzoki - Register')
+@section('title', 'Bazooki - Register')
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">       

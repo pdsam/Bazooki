@@ -14,34 +14,35 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
 	<script>
-	$(function () {
+		$(function () {
 
-    // INITIALIZE DATEPICKER PLUGIN
-    $('.datepicker-start').datepicker({
-        clearbtn: true,
-        format: "dd/mm/yyyy"
-    });
+			// INITIALIZE DATEPICKER PLUGIN
+			$('.datepicker-start').datepicker({
+				clearbtn: true,
+				format: "dd/mm/yyyy"
+			});
 
-    $('.datepicker-end').datepicker({
-        clearbtn: true,
-        format: "dd/mm/yyyy"
-    });
+			$('.datepicker-end').datepicker({
+				clearbtn: true,
+				format: "dd/mm/yyyy"
+			});
 
-    // FOR DEMO PURPOSE
-    $('#reservationDate').on('change', function () {
-        var pickedDate = $('input').val();
-        $('#pickedDate').html(pickedDate);
-    });
-});
-	$(function(){$("select").imagepicker();});
+			// FOR DEMO PURPOSE
+			$('#reservationDate').on('change', function () {
+				var pickedDate = $('input').val();
+				$('#pickedDate').html(pickedDate);
+			});
+		});
+
+		$(function(){$("select").imagepicker();});
 	</script>
 	
 	<style>
 		.datepicker td, .datepicker th {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 0.85rem;
-}
+			width: 2.5rem;
+			height: 2.5rem;
+			font-size: 0.85rem;
+		}
 
 	</style>
 
