@@ -15,7 +15,7 @@
 Route::redirect('/', '/auctions');
 Route::view('/auctions', 'pages.auctions')->name('auctions');
 Route::get('auctions/add', 'AuctionController@createForm');
-Route::get('/auctions/{id?}', 'AuctionController@auctionPage')->name('auction');
+Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
 // User
 Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');
 Route::get('/account/settings', 'BazookerController@settings');
