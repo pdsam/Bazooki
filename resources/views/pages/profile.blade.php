@@ -13,24 +13,46 @@
             <div class="jumbotron m-0 p-4 h-100">
                 <div class="d-flex justify-content-between">
                     <h1 class="display-4">{{ $user->name }}</h1>
-                    <div class="align-self-center">
-                        <button class="btn btn-lg btn-olive">Edit</button>
-                    </div>
+                    @if (Auth::user()->id == $user->id)
+                        <div class="align-self-center">
+                            <button class="btn btn-olive" data-toggle="modal" data-target="#edit-form">Edit</button>
+                        </div>
+                    @endif
                 </div>
                 <p class="lead">{{ $user->description }}</p>
             </div>
         </div>
-        <form method="POST" action="/profile/{{ $user->id }}">
-            @csrf
-            @method('PATCH')
-            <div class="form-group">
-                <input type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+        @if (Auth::user()->id == $user->id)
+            <div id="edit-form" class="modal fade">
+                <form class="w-100" method="POST" action="/profile/{{ $user->id }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="m-0">
+                                    Edit Profile
+                                </h5>
+                            </div>
+                            <div class="modal-body">
+                                @csrf
+                                @method('PATCH')
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <textarea class="form-control" id="dsription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-start">
+                                    <input class="btn btn-olive mr-3" type="submit" value="Done">
+                                    <button class="btn btn-purple" data-toggle="modal" data-target="#edit-form">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <textarea id="desription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
-            </div>
-            <input type="submit">
-        </form>
+        @endif
     </div>
 
     <hr class="customhr">
