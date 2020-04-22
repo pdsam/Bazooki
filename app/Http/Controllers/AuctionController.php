@@ -34,13 +34,13 @@ class AuctionController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => ['required|string|max:100'],
-            'description' => ['required|string|max:2000'],
-            'base_bid' => ['required|numeric|gte:0'],
-            'start_time' => ['required|date'],
-            'duration' => ['required|numeric|gt:0'],
-            'photos' => ['nullable|array'],
-            'insta_buy' => ['nullable|numeric|gt:0']
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:2000',
+            'base_bid' => 'required|numeric|gte:0',
+            'start_time' => 'required|date',
+            'duration' => 'required|numeric|gt:0',
+            'photos' => 'nullable|array',
+            'insta_buy' => 'nullable|numeric|gt:0'
         ]);
 
         if ($validator->fails()) {

@@ -8,29 +8,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
     <link rel="stylesheet" href={{ asset('css/product.css') }}>
-    <script>
-		$(function () {
-
-			// INITIALIZE DATEPICKER PLUGIN
-			$('.datepicker-start').datepicker({
-				clearbtn: true,
-				format: "dd/mm/yyyy"
-			});
-
-			$('.datepicker-end').datepicker({
-				clearbtn: true,
-				format: "dd/mm/yyyy"
-			});
-
-			// FOR DEMO PURPOSE
-			$('#reservationDate').on('change', function () {
-				var pickedDate = $('input').val();
-				$('#pickedDate').html(pickedDate);
-			});
-		});
-
-		$(function(){$("select").imagepicker();});
-	</script>
+    <script type="text/javascript" src="{{ asset('/js/create_auction.js') }}" defer></script>
 	
 	<style>
 		.datepicker td, .datepicker th {
@@ -44,7 +22,7 @@
 
 @section('content')
     <div>
-        <form action="/auctions/add" method="POST">
+        <form action="/auctions/add" method="POST" id="createAuctionForm" onsubmit="return addRequiredInputs();">
             @csrf
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Product title</h3>
@@ -107,9 +85,9 @@
                             <div class="input-group-append"></div>
                         </div>
                         <div class="col-md-4 input-group mt-4 mt-md-0">
-                            <input type="number" class="form-control" style="height:100%;" placeholder="days" required>
-                            <input type="number" class="form-control" style="height:100%;" placeholder="hours" required>
-                            <input type="number" class="form-control" style="height:100%;" placeholder="mins" required>
+                            <input type="number" class="form-control" style="height:100%;" placeholder="days" id="days" required>
+                            <input type="number" class="form-control" style="height:100%;" placeholder="hours" id="hours" required>
+                            <input type="number" class="form-control" style="height:100%;" placeholder="mins" id="mins" required>
                         </div>
                     </div>
                 </div>
