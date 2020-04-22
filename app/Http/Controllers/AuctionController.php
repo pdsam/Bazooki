@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Bazooker;
+use App\Auction;
 
 class AuctionController extends Controller
 {
@@ -22,10 +22,18 @@ class AuctionController extends Controller
 
         return view('pages.create_auction');
     }
-    public function show()
+    public function show($id = null)
     {
-        $user = find
+        if($id = null){
+            return redirect('auctions');
+        }
+        $auction = Auction::find($id);
+        
+        if ($auction == null) {
+            return redirect('auctions');
+        }
 
+        return view('pages.auctionPage',['id'=>$id]);
 
     }
 }
