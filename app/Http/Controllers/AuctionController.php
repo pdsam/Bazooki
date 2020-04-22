@@ -21,5 +21,11 @@ class AuctionController extends Controller
 
         return view('pages.create_auction');
     }
+    public function auctionPage()
+    {
+        
+
+
+    }
 }
 ?>
