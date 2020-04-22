@@ -1,0 +1,11 @@
+#div-404 {
+    text-align: center;
+}
+
+#div-404 img{
+    max-width: 80%;
+}   
+
+#div-404 .lead{
+    margin-bottom: 0;
+}
