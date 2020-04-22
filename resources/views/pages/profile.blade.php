@@ -10,29 +10,27 @@
             <img class="rounded-circle" src="https://picsum.photos/300/300">
         </div>
         <div id="profile_description" class="col-sm-8 text-left">
-            <div class="jumbotron m-0 p-4">
+            <div class="jumbotron m-0 p-4 h-100">
                 <div class="d-flex justify-content-between">
                     <h1 class="display-4">{{ $user->name }}</h1>
                     <div class="align-self-center">
                         <button class="btn btn-lg btn-olive">Edit</button>
                     </div>
                 </div>
-                <div id="profile_stats" class="row">
-                    <div class="col-sm-4">
-                        <p>8 Users</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <p>8 Users</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <p>8 Users</p>
-                    </div>
-                </div>
-
                 <p class="lead">{{ $user->description }}</p>
             </div>
         </div>
-
+        <form method="POST" action="/profile/{{ $user->id }}">
+            @csrf
+            @method('PATCH')
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+            </div>
+            <div class="form-group">
+                <textarea id="desription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
+            </div>
+            <input type="submit">
+        </form>
     </div>
 
     <hr class="customhr">
