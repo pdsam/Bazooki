@@ -45,9 +45,9 @@
                 <div class="col-lg-5">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title text-center card-c-element card-body">GSG FIREFLY .22LR PISTOL THREADED</h3>
+                            <h3 class="card-title text-center card-c-element card-body">{{ $auction->name }}</h3>
                             <div id="price" class="card-c-element card-body">
-                                <h3 class="card-title text-center" id="price">€100</h3>
+                                <h3 class="card-title text-center" id="price">{{$auction->base_bid}}</h3>
                                 <h3 class="card-title text-center">22d 10h</h3>
                             </div>
                             <div class="card-body w-100">
@@ -67,7 +67,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h3 class="card-title">Details </h3>
-                    <p class="card-text">The Draco NAK9 pistol is chambered in the cost-effective, low-recoil 9mm cartridge while capturing the look and feel of the AK-47 platform. The magazine well allows for compatibility with GLOCK 17 and GLOCK 19 magazines making it the perfect companion for your EDC 9mm handgun. The NAK9 comes equipped with a top-mounted Picatinny optics rail for mounting modern optics, a rear sling mount, one 33-round magazine and is compatible with aftermarket AKM handguards. The blowback operated design results in a platform as reliable as an AK, but in a smaller package with minimal recoil. Its lightweight and 11.14” barrel make the Draco NAK9 an excellent choice for your next truck gun, CQC or a fun day at the range.</div>
+                    <p class="card-text">{{$auction->description}}</div>
             </div>
 
             <div class="card">
