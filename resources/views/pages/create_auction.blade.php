@@ -41,12 +41,12 @@
             
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Base bid</h3>
-                <input name="base_bid" type="number" placeholder="Base bid" step="0.1" class="form-control"/>
+                <input name="base_bid" type="number" placeholder="Base bid" step="0.1" class="form-control" required></input>
             </div>
             
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Instant buy price (optional)</h3>
-                <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="0.1" class="form-control"/>
+                <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="0.1" class="form-control"></input>
             </div>
         
             <div class="card mt-4 ml-4 mr-4">
