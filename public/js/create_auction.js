@@ -3,12 +3,12 @@ $(function () {
     // INITIALIZE DATEPICKER PLUGIN
     $('.datepicker-start').datepicker({
         clearbtn: true,
-        format: "dd/mm/yyyy"
+        format: "dd-mm-yyyy"
     });
 
     $('.datepicker-end').datepicker({
         clearbtn: true,
-        format: "dd/mm/yyyy"
+        format: "dd-mm-yyyy"
     });
 
     // FOR DEMO PURPOSE
@@ -38,11 +38,12 @@ function addRequiredInputs() {
 
     document.querySelectorAll(".image_picker_image").forEach((node) => {
         const newInput = document.createElement("input");
-        newInput.setAttribute("name", "photos");
+        newInput.setAttribute("name", "photos[]");
         newInput.setAttribute("type", "hidden");
         newInput.setAttribute("value", node.getAttribute("src"));
         formBody.appendChild(newInput);
     });
+
 
     return true;
 }

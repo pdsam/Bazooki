@@ -180,11 +180,11 @@ DROP FUNCTION IF EXISTS fts_auction_update();
 CREATE FUNCTION fts_auction_update() RETURNS TRIGGER AS $$
 BEGIN
 	IF TG_OP = 'INSERT' THEN
-		NEW.search = to_tsvector('english', NEW.name);
+		NEW.search = to_tsvector('english', NEW.item_name);
 	END IF;
 	IF TG_OP = 'UPDATE' THEN
-		IF NEW.name <> OLD.name THEN
-			NEW.search = to_tsvector('english', NEW.name);
+		IF NEW.item_name <> OLD.item_name THEN
+			NEW.search = to_tsvector('english', NEW.item_name);
 		END IF;
 	END IF;
 	RETURN NEW;

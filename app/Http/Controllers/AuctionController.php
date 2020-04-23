@@ -38,9 +38,9 @@ class AuctionController extends Controller
             'description' => 'required|string|max:2000',
             'short_description' => 'required|string|max:1000',
             'base_bid' => 'required|numeric|gte:0',
-//            'start_time' => 'required|date', TODO error here in validator
+            'start_time' => 'required|date_format:d-m-Y',
             'duration' => 'required|numeric|gt:0',
-//            'photos' => 'nullable|array', TODO error here in validator
+            'photos' => 'nullable|array',
             'insta_buy' => 'nullable|numeric|gt:0'
         ]);
 
@@ -48,23 +48,22 @@ class AuctionController extends Controller
             return redirect('auctions');
         }
 
-        //$validator->validate();
-
         $userID = Auth::user()->id;
+        $startDate = date('Y-m-d', strtotime($request->start_time));
         $insta_buy = null;
         if ($request->has('insta_buy'))
             $insta_buy = $request->insta_buy;
         $newAuction = Auction::create([
             'owner' => $userID,
             'base_bid' => $request->base_bid,
-            'start_time' => $request->start_time,
+            'start_time' => $startDate,
             'duration' => $request->duration,
             'item_name' => $request->name,
             'item_description' => $request->description,
             'insta_buy' => $insta_buy
         ]);
 
-        if(empty($newAuction)) return redirect('auctions');
+        if(empty($newAuction)) return redirect('profile');
 
         if($request->has('photos')) {
             // TODO save photos
@@ -72,7 +71,7 @@ class AuctionController extends Controller
 
         // TODO certifications and short description!
 
-        return redirect("auctions/$newAuctionID");
+        return redirect("auctions/$newAuction->id");
     }
 }
 ?>
