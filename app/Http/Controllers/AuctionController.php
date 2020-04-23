@@ -38,7 +38,7 @@ class AuctionController extends Controller
             'base_bid' => 'required|numeric|gte:0',
             'start_time' => 'required|date_format:d-m-Y',
             'duration' => 'required|numeric|gt:0',
-            'photos' => 'required|nullable|array',
+            'photos' => 'nullable|array',
             'insta_buy' => 'nullable|numeric|gt:0'
         ]);
 
@@ -62,19 +62,19 @@ class AuctionController extends Controller
             'insta_buy' => $insta_buy
         ]);
 
-        if(empty($newAuction)) return redirect('profile');
-
+        if(empty($newAuction)) return redirect('auctions');
+/*
         if($request->photos)
         {
             $photos = $request->photos;
             foreach ($photos as $photo) {
-                $path = $request->$photos[$i]->store('auction_images'); //store image in storage/app/auction_images
+                $path = $photo->store('auction_images'); //store image in storage/app/auction_images
                 AuctionPhoto::create([
                     'auction_id' => $newAuction->id,
                     'image_path' => $path
                 ]);
             }
-        }
+        }*/
 
         // TODO certifications
 
