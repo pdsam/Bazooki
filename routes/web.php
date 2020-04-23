@@ -32,6 +32,4 @@ Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('r
 Route::post('/register', 'Auth\RegisterController@register');
 
 // 404
-Route::fallback(function() {
-    return view('pages.404');
-});
+Route::fallback('FallbackController@notFound');
