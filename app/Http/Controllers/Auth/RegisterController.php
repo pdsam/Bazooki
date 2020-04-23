@@ -53,6 +53,9 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255|unique:bazooker',
             'email' => 'required|string|email|unique:bazooker',
             'password' => 'required|string|min:6',
+            'accepted' => 'accepted'
+        ], [
+            'accepted.accepted' => 'You must accept the Terms and Conditions'
         ]);
     }
 

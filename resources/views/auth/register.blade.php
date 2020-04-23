@@ -23,21 +23,46 @@
                     <h1 class="h3 mb-3 font-weight-normal">Bazooker Sign Up</h1>
 
                     <div class="form-group">
+                        @error('name')
+                            <div class="text-left">
+                                <p class="text-danger m-0">{{ $message }}</p>
+                            </div>
+                        @enderror
                         <input type="text" class="form-control h-auto p-2" id="registerName" aria-describedby="userHelp" placeholder="Name" name="name" required>
                     </div>
                     <div class="form-group">
+                        @error('username')
+                            <div class="text-left">
+                                <p class="text-danger m-0">{{ $message }}</p>
+                            </div>
+                        @enderror
                         <input type="text" class="form-control h-auto p-2" id="registerUsername" aria-describedby="userHelp" placeholder="Username" name="username" required>
                     </div>
                     <div class="form-group">
+                        @error('email')
+                            <div class="text-left">
+                                <p class="text-danger m-0">{{ $message }}</p>
+                            </div>
+                        @enderror
                         <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Email" name="email" required>
                     </div>
                     <div class="form-group">
+                        @error('password')
+                            <div class="text-left">
+                                <p class="text-danger m-0">{{ $message }}</p>
+                            </div>
+                        @enderror
                         <input type="password" class="form-control h-auto p-2" id="registerPassword" placeholder="Password" name="password" required>
                     </div>
 
                     <div class="checkbox font-weight-bold text-left my-1">
+                        @error('accepted')
+                            <div class="text-left">
+                                <p class="text-danger m-0">{{ $message }}</p>
+                            </div>
+                        @enderror
                         <label>
-                            <input class="p-2" type="checkbox" value="terms-and-conditions" required> I accept the Terms and Conditions 
+                            <input class="p-2" type="checkbox" value="terms-and-conditions" name="accepted" required> I accept the Terms and Conditions 
                         </label>
                     </div>
 
@@ -48,5 +73,5 @@
             </div>
         </div>
     </div>
-</form>
+    </form>
 @endsection

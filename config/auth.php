@@ -101,7 +101,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'bazooker',
             'table' => 'password_resets',
             'expire' => 60,
         ],

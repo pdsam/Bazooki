@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
 class Bazooker extends Authenticatable
 {
     use Notifiable;
@@ -20,7 +19,7 @@ class Bazooker extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password',
+        'name', 'username', 'email', 'password', 'description'
     ];
 
     /**

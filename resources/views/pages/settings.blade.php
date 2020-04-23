@@ -6,7 +6,11 @@
     <div class="px-2">
         <div class="mb-5">
             <h2>Change Password</h2>
-            <form action="/account/settings/password">
+            @foreach ($errors->pass_change->all() as $message)
+                <p class="text-danger">{{ $message }}</p>
+            @endforeach
+            <form method="POST" action="/account/settings/password">
+                @csrf
                 @method('PUT')
                 <div class="form-group">
                     <label for="oldPass">Old password</label>

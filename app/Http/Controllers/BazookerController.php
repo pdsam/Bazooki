@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use App\Bazooker;
 
 class BazookerController extends Controller
@@ -31,6 +33,30 @@ class BazookerController extends Controller
         }
 
         return view('pages.profile', ['user' => $user]);
+    }
+
+    public function editProfile(Request $request, $id) {
+        if (!Auth::check()) {
+            return redirect()->route('auctions');
+        }
+        $user = Auth::user();
+        if ($user->id != $id) {
+            return redirect()->route('auctions');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'description' => 'string|max:200'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('profile')
+                ->withErrors($validator);
+        }
+
+        Bazooker::find($id)->update($request->only('name','description'));
+
+        return redirect()->route('profile', ['id'=>$id]);
     }
 
     public function settings() {
