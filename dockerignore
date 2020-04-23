@@ -1,8 +1,9 @@
+.git/
 Dockerfile
 upload_image.sh
 README.md
 docs/
 html/
-piu-screenshots/
+piu_screenshots/
 sql/
 mockups/
