@@ -1,0 +1,1 @@
+INSERT into bazooker(name, username, email, password, description) values ('Manuel Serafim', 'manuel', 'manuel@example.com','$2y$10$v/qD7CFwpIkqExGDYWM0T.8hUB57P3DYgFm8IUV0vPPx/z1fGSLe.', 'I am Manuel.');
