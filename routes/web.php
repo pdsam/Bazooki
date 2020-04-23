@@ -11,6 +11,13 @@
 |
 */
 
+//API
+Route::get('/api/auctions/bids/{id?}', 'ApiController@auction_bids');
+Route::get('/api/reviews/bidder/{id?}', 'ApiController@bidder_review');
+Route::get('/api/reviews/auctioneer/{id?}', 'ApiController@auctioneer_review');
+Route::get('/api/sales', 'ApiController@sales');
+Route::get('/api/auctions', 'ApiController@auctions');
+
 // Auctions
 Route::redirect('/', '/auctions');
 Route::view('/auctions', 'pages.auctions')->name('auctions');
