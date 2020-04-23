@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Auction;
 
@@ -40,7 +41,7 @@ class AuctionController extends Controller
             'base_bid' => 'required|numeric|gte:0',
             'start_time' => 'required|date_format:d-m-Y',
             'duration' => 'required|numeric|gt:0',
-            'photos' => 'nullable|array',
+            'photos' => 'required|nullable|array',
             'insta_buy' => 'nullable|numeric|gt:0'
         ]);
 
@@ -66,14 +67,16 @@ class AuctionController extends Controller
 
         if(empty($newAuction)) return redirect('profile');
 
-        if($request->has('photos')) {
-            /*foreach($request->photos as $photo) {
-                // TODO save photo on disk
+        if($request->photos)
+        {
+            $photos = $request->photos;
+            foreach ($photos as $photo) {
+                $path = $request->$photos[$i]->store('auction_images'); //store image in storage/app/auction_images
                 AuctionPhoto::create([
                     'auction_id' => $newAuction->id,
-                    'image_path' => $photo
+                    'image_path' => $path
                 ]);
-            }*/
+            }
         }
 
         // TODO certifications

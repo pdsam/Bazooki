@@ -59,6 +59,7 @@
                 <div class="card-body">
                     <div class="card-title">
                         <h3>Pictures</h3>
+                        <p>May select more than one</p>
                     </div>
                     <select class="image-picker show-html">
                     </select>
