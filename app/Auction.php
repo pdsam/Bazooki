@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Auction extends Model
 {
-    //
     public $timestamps  = false;
     public $table = 'auction';
 
@@ -16,6 +15,13 @@ class Auction extends Model
      * @var array
      */
     protected $fillable = [
-        'owner', 'base_bid', 'start_time', 'duration', 'insta_buy', 'item_name', 'item_description'
+        'owner', 
+        'base_bid', 
+        'start_time', 
+        'duration', 
+        'insta_buy', 
+        'item_name', 
+        'item_description', 
+        'item_short_description'
     ];
 }

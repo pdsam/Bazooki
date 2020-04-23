@@ -17,6 +17,12 @@
 			font-size: 0.85rem;
 		}
 
+        .thumbnails img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
 	</style>
 @endsection
 
@@ -52,23 +58,11 @@
             <div class="card mt-4 ml-4 mr-4">
                 <div class="card-body">
                     <div class="card-title">
-                        <h3>
-                        Pictures
-                        </h3>
+                        <h3>Pictures</h3>
                     </div>
                     <select class="image-picker show-html">
-                    <div class="form-row">
-                    <?php for($i = 0;$i<4; $i++){?>
-                    <div class="col-3">
-                    <option
-                        data-img-src='https://picsum.photos/100/100'
-                        value='<?= $i?>'
-                        >
-                    </div>
-                    <?php }?>
-                    </div>
                     </select>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
+                    <input name="photos[]" type="file" accept='image/*' class="form-control-file" id="auctionImageInput" multiple>
                     
                 </div>
             </div>

@@ -35,15 +35,30 @@ function addRequiredInputs() {
     durationInput.setAttribute("type", "hidden");
     durationInput.setAttribute("value", durationInSeconds);
     formBody.appendChild(durationInput);
-
-    document.querySelectorAll(".image_picker_image").forEach((node) => {
-        const newInput = document.createElement("input");
-        newInput.setAttribute("name", "photos[]");
-        newInput.setAttribute("type", "hidden");
-        newInput.setAttribute("value", node.getAttribute("src"));
-        formBody.appendChild(newInput);
-    });
-
-
+    
     return true;
 }
+
+let nextImageID = 1;
+$("#auctionImageInput").change(function() {
+    document.querySelector(".thumbnails").innerHTML = "";
+    for (let i = 0; i < $(this).prop("files").length; i++) {
+        const newLi = document.createElement("li");
+        const newDiv = document.createElement("div");
+        newDiv.classList="thumbnail";
+        const newImg = document.createElement("img");
+        newImg.classList="image_picker_image";
+        newLi.appendChild(newDiv);
+        newDiv.appendChild(newImg);
+        
+        const file = $(this).prop("files")[i];
+        const reader = new FileReader();
+    
+        reader.onloadend = function() {
+            newImg.setAttribute("src", reader.result);
+        }
+
+        reader.readAsDataURL(file);
+        document.querySelector(".thumbnails").appendChild(newLi);
+    }
+});

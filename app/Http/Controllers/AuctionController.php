@@ -36,7 +36,7 @@ class AuctionController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:2000',
-            'short_description' => 'required|string|max:1000',
+            'short_description' => 'required|string|max:500',
             'base_bid' => 'required|numeric|gte:0',
             'start_time' => 'required|date_format:d-m-Y',
             'duration' => 'required|numeric|gt:0',
@@ -60,16 +60,23 @@ class AuctionController extends Controller
             'duration' => $request->duration,
             'item_name' => $request->name,
             'item_description' => $request->description,
+            'item_short_description' => $request->short_description,
             'insta_buy' => $insta_buy
         ]);
 
         if(empty($newAuction)) return redirect('profile');
 
         if($request->has('photos')) {
-            // TODO save photos
+            /*foreach($request->photos as $photo) {
+                // TODO save photo on disk
+                AuctionPhoto::create([
+                    'auction_id' => $newAuction->id,
+                    'image_path' => $photo
+                ]);
+            }*/
         }
 
-        // TODO certifications and short description!
+        // TODO certifications
 
         return redirect("auctions/$newAuction->id");
     }
