@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class FallbackController extends Controller
 {
 
-    public function notfound() {
+    public function notFound() {
         return view('pages.404');
     }
 }
