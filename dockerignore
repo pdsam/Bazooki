@@ -1,3 +1,8 @@
 Dockerfile
 upload_image.sh
 README.md
+docs/
+html/
+piu-screenshots/
+sql/
+mockups/
