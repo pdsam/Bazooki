@@ -35,14 +35,8 @@ class BazookerController extends Controller
         return view('pages.profile', ['user' => $user]);
     }
 
-    public function editProfile(Request $request, $id) {
-        if (!Auth::check()) {
-            return redirect()->route('auctions');
-        }
-        $user = Auth::user();
-        if ($user->id != $id) {
-            return redirect()->route('auctions');
-        }
+    public function editProfile(Request $request, Bazooker $bazooker) {
+        $this->authorize('editProfile', $bazooker);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -54,9 +48,9 @@ class BazookerController extends Controller
                 ->withErrors($validator);
         }
 
-        Bazooker::find($id)->update($request->only('name','description'));
+        $bazooker->update($request->only('name','description'));
 
-        return redirect()->route('profile', ['id'=>$id]);
+        return redirect()->route('profile', ['id'=>$bazooker->id]);
     }
 
     public function settings() {

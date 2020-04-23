@@ -13,8 +13,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-    ];
-
+        'App\Bazooker' => 'App\Policies\BazookerPolicy'
+    ]; 
     /**
      * Register any authentication / authorization services.
      *

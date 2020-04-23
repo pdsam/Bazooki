@@ -27,7 +27,7 @@ Route::post('auctions/add', 'AuctionController@create');
 
 // User
 Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');
-Route::patch('/profile/{id}', 'BazookerController@editProfile');
+Route::patch('/profile/{bazooker}', 'BazookerController@editProfile');
 Route::get('/account/settings', 'BazookerController@settings')->name('settings');
 Route::put('/account/settings/password', 'ChangePasswordController');
 
