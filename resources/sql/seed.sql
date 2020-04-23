@@ -36,6 +36,7 @@ CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     insta_buy INT CHECK (insta_buy > 0),
 					item_name TEXT NOT NULL,
 					item_description TEXT NOT NULL,
+                    item_short_description TEXT NOT NULL,
 					search tsvector,
                     CONSTRAINT base_bid_lower_than_insta CHECK (base_bid >=0 AND base_bid < insta_buy)
                     );
@@ -180,11 +181,11 @@ DROP FUNCTION IF EXISTS fts_auction_update();
 CREATE FUNCTION fts_auction_update() RETURNS TRIGGER AS $$
 BEGIN
 	IF TG_OP = 'INSERT' THEN
-		NEW.search = to_tsvector('english', NEW.name);
+		NEW.search = to_tsvector('english', NEW.item_name);
 	END IF;
 	IF TG_OP = 'UPDATE' THEN
-		IF NEW.name <> OLD.name THEN
-			NEW.search = to_tsvector('english', NEW.name);
+		IF NEW.item_name <> OLD.item_name THEN
+			NEW.search = to_tsvector('english', NEW.item_name);
 		END IF;
 	END IF;
 	RETURN NEW;

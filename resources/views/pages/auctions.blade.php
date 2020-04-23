@@ -29,21 +29,25 @@
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     ),
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     ),
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     ),
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     )
                 ),
@@ -51,21 +55,25 @@
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     ),
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     ),
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     ),
                     array(
                         "title" => "Super cool gun",
                         "img" => "../assets/gun.jpg",
+                        "id" => 1,
                         "description" => "This gun is very strong. It is also very pretty."
                     )
                 )        
@@ -75,21 +83,25 @@
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             )
         ),
@@ -97,21 +109,25 @@
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun0",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             )
         )        
@@ -121,16 +137,19 @@
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             )
         ),
@@ -138,16 +157,19 @@
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             ),
             array(
                 "title" => "Super cool gun",
                 "img" => "../assets/gun.jpg",
+                        "id" => 1,
                 "description" => "This gun is very strong. It is also very pretty."
             )
         )        
