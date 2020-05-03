@@ -11,7 +11,7 @@
 		<h6>
 			<span class="footer-links">
 			  <a href="#">About</a>
-			  <a href="<?= $files_path ?>/pages/faq.php">FAQ</a>
+			  <a href="/faq">FAQ</a>
 			  <a href="#">Contact Us</a>
 			  <a href="#">Terms</a>
 			</span>

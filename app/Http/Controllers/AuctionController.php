@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use App\Auction;
 
 class AuctionController extends Controller
@@ -49,8 +50,9 @@ class AuctionController extends Controller
         $userID = Auth::user()->id;
         $startDate = date('Y-m-d', strtotime($request->start_time));
         $insta_buy = null;
-        if ($request->has('insta_buy'))
+        if ($request->has('insta_buy')) {
             $insta_buy = $request->insta_buy;
+        }
         $newAuction = Auction::create([
             'owner' => $userID,
             'base_bid' => $request->base_bid,
@@ -82,7 +84,7 @@ class AuctionController extends Controller
     }
     public function show($id = null)
     {
-        if($id = null){
+        if($id == null){
             return redirect('auctions');
         }
         $auction = Auction::find($id);
@@ -91,7 +93,7 @@ class AuctionController extends Controller
             return redirect('auctions');
         }
 
-        return view('pages.auctionPage',['id'=>$id]);
+        return view('pages.auctionPage',['auction'=>$auction]);
 
     }
 }

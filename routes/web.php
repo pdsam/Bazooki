@@ -19,7 +19,6 @@ Route::get('/api/sales', 'ApiController@sales');
 Route::get('/api/auctions', 'ApiController@auctions');
 
 // Auctions/*
-Route::redirect('/', '/auctions');
 Route::view('/auctions', 'pages.auctions')->name('auctions');
 Route::get('auctions/add', 'AuctionController@createForm');
 Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
@@ -40,4 +39,5 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');
+Route::redirect('/', '/auctions');
 Route::fallback('FallbackController@notFound');
