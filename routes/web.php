@@ -23,6 +23,7 @@ Route::view('/auctions', 'pages.auctions')->name('auctions');
 Route::get('auctions/add', 'AuctionController@createForm');
 Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
 Route::post('auctions/add', 'AuctionController@create');
+Route::post('auctions/{id}/bid', 'AuctionController@bid');
 
 // User
 Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');

@@ -93,7 +93,16 @@ class AuctionController extends Controller
             return redirect('auctions');
         }
 
-        return view('pages.auctionPage',['auction'=>$auction]);
+        return view('pages.auctionPage',[
+            'id' => $auction->id,
+            'name'=>$auction->item_name,
+            'base_bid'=>$auction->base_bid,
+            'description'=>$auction->item_description
+        ]);
 
+    }
+
+    public function bid(Request $request, $id) {
+        return response($request->input('amount'));
     }
 }
