@@ -25,4 +25,8 @@ class Administrator extends Authenticatable implements User
     public function isAdmin() {
         return true;
     }
+
+    public function mod() {
+        return $this->belongsTo('App\Moderator');
+    }
 }

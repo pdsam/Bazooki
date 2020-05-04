@@ -18,7 +18,19 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/profile');
+            switch ($guard) {
+            case "bazooker":
+                return redirect('/profile');
+                break;
+            case "mod":
+                return redirect('/dashboard');
+                break;
+            case "admin":
+                return redirect('/dashboard');
+                break;
+            default:
+                break;
+            }
         }
 
         return $next($request);

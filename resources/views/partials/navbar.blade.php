@@ -16,7 +16,7 @@
                 </button>
             </div>
         </form>
-        @if(Auth::check())
+        @if(Auth::guard('bazooker')->check() || Auth::guard('mod')->check() || Auth::guard('admin')->check())
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="/profile#profile_tabs">My Bids</a>
@@ -27,13 +27,25 @@
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user p-0"></i>
-                        {{ Auth::user()->name }}
+                        @auth('bazooker')
+                            {{ Auth::user()->name }}
+                        @endauth
+                        @auth('mod')
+                            {{ Auth::guard('mod')->user()->email }}
+                        @endauth
+                        @auth('admin')
+                            {{ Auth::guard('admin')->user()->email }}
+                        @endauth
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @if(Auth::check())
                         <a class="dropdown-item" href="/profile">Profile</a>
-                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
                         <a class="dropdown-item" href="/profile#tabs-3">My auctions</a>
                         <a class="dropdown-item" href="/account/settings">Account Settings</a>
+                        @endif
+                        @if(Auth::guard('mod')->check() || Auth::guard('admin')->check())
+                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                        @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Log out</a>
                     </div>

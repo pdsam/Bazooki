@@ -29,7 +29,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
         $this->middleware('guest:bazooker')->except('logout');
         $this->middleware('guest:admin')->except('logout');
         $this->middleware('guest:mod')->except('logout');
@@ -40,16 +39,16 @@ class LoginController extends Controller
         $password = $request->password;
 
         if (Auth::guard('admin')->attempt(['email' => $username, 'password'=>$password])) {
-            return response('administrator');
+            return redirect('/dashboard');
         }
         if (Auth::guard('mod')->attempt(['email' => $username, 'password'=>$password])) {
-            return response('moderator');
+            return redirect('/dashboard');
         }
         if (Auth::guard('bazooker')->attempt(['username' => $username, 'password'=>$password])) {
             return redirect()->route('profile');
         }
 
         return redirect()->route('login')
-                         ->withErrors([ 'username' => '1', ]);
+                         ->withErrors([ 'username' => 'Invalid username or password.', ]);
     }
 }
