@@ -12,12 +12,10 @@ $('#bid-form').submit( async (e) => {
             'X-CSRF-TOKEN': valArray[0].value,
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        //credentials: 'same-origin',
         body: form.serialize()
     });
 
     const val = await amount.text();
     $('#price').html(val);
-
 });
 

@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'bazooker',
         'passwords' => 'users',
     ],
 
@@ -36,11 +36,18 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'bazooker' => [
             'driver' => 'session',
             'provider' => 'bazooker',
         ],
-
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'administrator',
+        ],
+        'mod' => [
+            'driver' => 'session',
+            'provider' => 'moderator',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -69,19 +76,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Bazooker::class,
         ],
-        /*'moderator' => [
+        'moderator' => [
             'driver' => 'eloquent',
             'model' => App\Moderator::class
         ],
         'administrator' => [
-            'driver' => 'eloquent',
-            'model' => App\Administrator::class
-        ],*/
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+            'driver' => 'admin-driver',
+        ]
     ],
 
     /*

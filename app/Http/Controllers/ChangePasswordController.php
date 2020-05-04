@@ -16,7 +16,7 @@ class ChangePasswordController extends Controller
         
     }
 
-    public function __invoke(Request $request) {
+    public function changeBazookerPass(Request $request) {
         $validator = Validator::make($request->all(), [
             'oldPass' => ['required', new MatchesOldPassword],
             'newPass' => 'required|string|min:6',

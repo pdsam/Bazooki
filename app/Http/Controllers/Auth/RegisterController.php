@@ -38,6 +38,9 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:bazooker');
+        $this->middleware('guest:admin');
+        $this->middleware('guest:mod');
     }
 
     /**
@@ -74,4 +77,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function createModerator(Request $request) {
+
+    }
+
+    public function createAdministrator(Request $request) {
+
+    }
+
 }

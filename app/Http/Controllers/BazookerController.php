@@ -19,8 +19,8 @@ class BazookerController extends Controller
     public function show($id = null)
     {
         if ($id == null) {
-            if (Auth::check()) {
-                $id = Auth::user()->id;
+            if (Auth::guard('bazooker')->check()) {
+                $id = Auth::guard('bazooker')->user();
                 return redirect()->route('profile', ['id'=>$id]);
             }
             return redirect('auctions');
@@ -54,7 +54,7 @@ class BazookerController extends Controller
     }
 
     public function settings() {
-        if (!Auth::check()) {
+        if (!Auth::guard('bazooker')->check()) {
             return redirect('auctions');
         }
 

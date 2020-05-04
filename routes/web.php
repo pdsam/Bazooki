@@ -11,25 +11,20 @@
 |
 */
 
-//API
-Route::get('/api/auctions/bids/{id?}', 'ApiController@auction_bids');
-Route::get('/api/reviews/bidder/{id?}', 'ApiController@bidder_review');
-Route::get('/api/reviews/auctioneer/{id?}', 'ApiController@auctioneer_review');
-Route::get('/api/sales', 'ApiController@sales');
-Route::get('/api/auctions', 'ApiController@auctions');
+Route::redirect('/', '/auctions');
 
 // Auctions/*
 Route::view('/auctions', 'pages.auctions')->name('auctions');
-Route::get('auctions/add', 'AuctionController@createForm');
+Route::get('/auctions/add', 'AuctionController@createForm');
 Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
-Route::post('auctions/add', 'AuctionController@create');
-Route::post('auctions/{id}/bid', 'AuctionController@bid');
+Route::post('/auctions/add', 'AuctionController@create');
+Route::post('/auctions/{id}/bid', 'AuctionController@bid');
 
 // User
 Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');
 Route::patch('/profile/{bazooker}', 'BazookerController@editProfile');
 Route::get('/account/settings', 'BazookerController@settings')->name('settings');
-Route::put('/account/settings/password', 'ChangePasswordController');
+Route::put('/account/settings/password', 'ChangePasswordController@changeBazookerPass');
 
 // Authentication
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -40,5 +35,4 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');
-Route::redirect('/', '/auctions');
 Route::fallback('FallbackController@notFound');
