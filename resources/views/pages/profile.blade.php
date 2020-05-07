@@ -7,7 +7,10 @@
 @section('content')
     <div class="row">
         <div id="profile_pic" class="col-sm-4 d-flex text-center align-items-center justify-content-center">
-            <img class="rounded-circle" src="https://picsum.photos/300/300">
+            <img class="rounded-circle" src={{ asset("storage/avatars/$user->id") }}>
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
         </div>
         <div id="profile_description" class="col-sm-8 text-left">
             <div class="jumbotron m-0 p-4 h-100">
@@ -24,7 +27,9 @@
         </div>
         @if (Auth::user()->id == $user->id)
             <div id="edit-form" class="modal fade">
-                <form class="w-100" method="POST" action="/profile/{{ $user->id }}">
+                <form class="w-100" method="POST" action="/profile/{{ $user->id }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -33,15 +38,22 @@
                                 </h5>
                             </div>
                             <div class="modal-body">
-                                @csrf
-                                @method('PATCH')
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description:</label>
-                                    <textarea class="form-control" id="dsription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
+                                <div class="d-flex">
+                                    <div>
+                                        <div class="form-group">
+                                            <input type="file" name="profilePic" id="profilePic">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea class="form-control" id="dsription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-start">

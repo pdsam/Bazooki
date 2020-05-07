@@ -22,7 +22,7 @@ class Bazooker extends Authenticatable implements User
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'description'
+        'name', 'username', 'email', 'password', 'description', 'profile_pic'
     ];
 
     /**
