@@ -8,9 +8,6 @@
     <div class="row">
         <div id="profile_pic" class="col-sm-4 d-flex text-center align-items-center justify-content-center">
             <img class="rounded-circle" src={{ asset("storage/avatars/$user->id") }}>
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
         </div>
         <div id="profile_description" class="col-sm-8 text-left">
             <div class="jumbotron m-0 p-4 h-100">
