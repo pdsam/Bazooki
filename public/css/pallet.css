@@ -65,6 +65,10 @@
     margin-bottom: 0;
 }
 
+.section-jumbotron .lead {
+    margin-bottom: 0.2rem;
+}
+
 .section-jumbotron h1 i {
     padding-top: 2rem;
     padding-bottom: 1rem;
