@@ -3,7 +3,6 @@
 @section('title', 'Bazooki - Terms and Conditions')
 
 @section('head')
-    <!--<link rel="stylesheet" href={{ asset('css/contact_us.css') }}>-->
 @endsection
 
 @section('content')

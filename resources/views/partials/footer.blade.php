@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="../css/components/footer.css">
   <div class="container text-center">
     <div class="">
-      <h6>© 2020 Copyright <a href="<?= $files_path ?>/pages/landing_page.php"> Bazooki.com </a><br>
+      <h6>© 2020 Copyright <a href="<?= $files_path ?>/auctions"> Bazooki.com </a><br>
       </h6>
     </div>
 

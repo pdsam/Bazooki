@@ -1,0 +1,12 @@
+.row img {
+    height: 250px;
+    text-align: right;
+}
+
+.row > div:first-of-type {
+    text-align: right;
+}
+
+.contact-div {
+    padding-top: 2rem;
+}
