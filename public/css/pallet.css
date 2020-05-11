@@ -55,3 +55,40 @@
 .btn-olive:focus {
     box-shadow: none; /*0 0 0 0.2rem #9AB973;*/
 }
+
+.section-jumbotron {
+    padding-top: 0;
+    padding-bottom: 1rem;
+}
+
+.section-jumbotron h1 {
+    margin-bottom: 0;
+}
+
+.section-jumbotron h1 i {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    color: var(--highlight-purple);
+}
+
+@media only screen and (max-width: 600px) {
+    .section-jumbotron h1{
+        font-size: 2rem;
+    }
+
+    .section-jumbotron p.lead {
+        font-size: 1rem;
+    }
+
+    .section-jumbotron p {
+        font-size: 0.8rem;
+    }
+
+    .carousel .row > div {
+        margin-bottom: 1rem;
+    }
+
+    .carousel-controls a {
+        width: inherit;
+    }
+}

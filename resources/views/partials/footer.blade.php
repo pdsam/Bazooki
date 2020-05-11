@@ -10,10 +10,10 @@
     <div class="">
 		<h6>
 			<span class="footer-links">
-			  <a href="#">About</a>
+			  <a href="/about">About</a>
 			  <a href="/faq">FAQ</a>
-			  <a href="#">Contact Us</a>
-			  <a href="#">Terms</a>
+			  <a href="/contact">Contact Us</a>
+			  <a href="/terms">Terms</a>
 			</span>
       </h6>
     </div>

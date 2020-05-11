@@ -35,4 +35,7 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');
+Route::view('/about', 'pages.about')->name('about');
+Route::view('/contact', 'pages.contact')->name('contact');
+Route::view('/terms', 'pages.terms')->name('terms');
 Route::fallback('FallbackController@notFound');

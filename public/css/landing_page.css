@@ -1,15 +1,3 @@
-#landing-page .jumbotron {
-    padding-top: 0;
-    padding-bottom: 1rem;
-}
-
-#landing-page .jumbotron h1 i {
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-    color: var(--highlight-purple);
-}
-
-
 #landing-page .carousel.row {
     margin-left: 2rem;
     margin-right: 2rem;
@@ -73,17 +61,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-    #landing-page .jumbotron h1{
-        font-size: 2rem;
-    }
-
-    #landing-page .jumbotron p.lead {
-        font-size: 1rem;
-    }
-
-    #landing-page .jumbotron p {
-        font-size: 0.8rem;
-    }
 
     .carousel .row > div {
         margin-bottom: 1rem;

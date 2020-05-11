@@ -1,0 +1,8 @@
+.about-div {
+    padding-left: 2rem;
+    padding-right: 1rem;
+}
+
+.card-columns {
+    column-count: 2;
+}
