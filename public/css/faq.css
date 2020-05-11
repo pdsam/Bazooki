@@ -6,14 +6,19 @@
     color: #000;
 }
 
-#faq-page .jumbotron {
-    padding-top: 0;
-    padding-bottom: 1rem;
+.card .card-header h5 button span{
+    color: var(--highlight-purple);
+    font-family: inherit;
 }
 
-#faq-page .jumbotron h1 i {
-    padding-top: 2rem;
-    padding-bottom: 1rem;
+.card .card-header h5 button {
+    color: var(--olive-darker);
+}
+
+.card .card-body a {
     color: var(--highlight-purple);
-    font-size: 3rem;
+}
+
+.card .card-body a:hover {
+    color: var(--highlight-purple-darker);
 }
