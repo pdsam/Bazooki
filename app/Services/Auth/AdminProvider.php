@@ -10,8 +10,8 @@ use App\Administrator;
 
 class AdminProvider implements UserProvider {
 
-    private UserProvider $modProvider;
-    private UserProvider $adminProvider;
+   // private UserProvider $modProvider;
+   // private UserProvider $adminProvider;
 
     public function __construct($app) {
         $this->modProvider = Auth::createUserProvider('moderator');
