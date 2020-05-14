@@ -41,4 +41,14 @@ class Bazooker extends Authenticatable implements User
     public function isAdmin() {
         return false;
     }
+
+    public function bids() {
+        $this->hasMany('App\Bid', 'bidder_id');
+    }
+
+    public function paymentMethods() {
+        return $this->hasMany('App\PaymentMethod');
+    }
+
+    //TODO feedbacks
 }

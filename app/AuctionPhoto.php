@@ -18,4 +18,8 @@ class AuctionPhoto extends Model
         'auction_id', 
         'image_path'
     ];
+
+    public function auction() {
+        return $this->hasOne('App\Auction');
+    }
 }
