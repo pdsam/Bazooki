@@ -12,6 +12,6 @@ class PaymentMethod extends Model
     protected $fillable = ['bazooker_id', 'card_number', 'type', 'validated'];
 
     public function bazooker() {
-        return $this->hasOne('App\Bazooker');
+        return $this->belongsTo('App\Bazooker');
     }
 }

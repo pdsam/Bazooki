@@ -29,15 +29,15 @@ class Auction extends Model
     }
 
     public function owner() {
-        return $this->hasOne('App\Bazooker.php');
+        return $this->belongsTo('App\Bazooker.php');
     }
 
     public function certification() {
-        return $this->belongsTo('App\Certification');
+        return $this->hasOne('App\Certification');
     }
 
     public function bids() {
-        return $this->belongsToMany('App\Bid');
+        return $this->hasMany('App\Bid');
     }
 
     public function maxBid() {

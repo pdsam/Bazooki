@@ -26,6 +26,6 @@ class PaymentMethodPolicy
     }
 
     public function remove(Bazooker $bazooker, PaymentMethod $method) {
-        return $bazooker->getAuthIdentifier() == $method->bazooker()->getAuthIdentifier();
+        return $bazooker->getAuthIdentifier() == $method->bazooker->getAuthIdentifier();
     }
 }

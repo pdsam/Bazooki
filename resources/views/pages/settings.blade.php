@@ -72,7 +72,12 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $method->card_number }}</h5>
                                 <p class="card-text">{{ $method->type }}</p>
-                                <a href="#" class="btn btn-danger">Remove</a>
+                                <form method="POST" action="/account/settings/payment">
+                                    @csrf
+                                    @method("DELETE")
+                                    <input type="hidden" name="methodId" value="{{ $method->id }}">
+                                    <input class="btn btn-olive" type="submit" value="Remove">
+                                </form>
                             </div>
                         </div>
                     </div>

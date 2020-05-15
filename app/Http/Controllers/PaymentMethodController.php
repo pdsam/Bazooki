@@ -33,9 +33,11 @@ class PaymentMethodController extends Controller
     }
 
     public function remove(Request $request) {
-        $method = PaymentMethod::find($request->method_id);
+        $method = PaymentMethod::find($request->methodId);
         $this->authorize('remove', $method);
 
-        //TODO remove method
+        $method->delete();
+
+        return redirect()->route('settings');
     }
 }

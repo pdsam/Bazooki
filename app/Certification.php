@@ -9,6 +9,6 @@ class Certification extends Model
     protected $table = 'certification';
 
     public function auction() {
-        return $this->hasOne('App\Auction');
+        return $this->belongsTo('App\Auction');
     }
 }
