@@ -35,7 +35,6 @@
 
         @yield('head')
 
-        </script>
     </head>
     <body class="bg-light">
         <div class="container">

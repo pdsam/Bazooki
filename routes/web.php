@@ -25,6 +25,7 @@ Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');
 Route::patch('/profile/{bazooker}', 'BazookerController@editProfile');
 Route::get('/account/settings', 'BazookerController@settings')->name('settings');
 Route::put('/account/settings/password', 'ChangePasswordController@changeBazookerPass');
+Route::post('/account/settings/payment', 'PaymentMethodController@create');
 
 // Authentication
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

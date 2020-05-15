@@ -34,25 +34,49 @@
                 <h2>
                     Payment methods
                 </h2>
-                <a class="ml-0 ml-md-4" href="#">
+                <a class="ml-0 ml-md-4" href="" data-toggle="modal" data-target="#add-method-form">
                     <i class="fa fa-plus p-0"></i>
                     Add
                 </a>
+                <div id="add-method-form" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Add a New Payment Method</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form" action="/account/settings/payment" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <div class="form-group">
+                                        <label for="cardNumber">Card Number:</label>
+                                        <input class="form-control" type="text" name="cardNumber" id="cardNumber">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardType">Card Type:</label>
+                                        <input class="form-control" type="text" name="cardType" id="cardtype">
+                                    </div>
+                                    <input class="form-control" type="submit" value="Add Card">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
-                @for($i = 0; $i < 4; $i++)
+                @foreach($payment_methods as $method)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4 mx-auto" style="max-width: 16rem">
                             <img src="{{ asset('assets/master-card-logo.jpg') }}" alt="" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">**** **** **** abcd</h5>
-                                <p class="card-text">Master Card</p>
+                                <h5 class="card-title">{{ $method->card_number }}</h5>
+                                <p class="card-text">{{ $method->type }}</p>
                                 <a href="#" class="btn btn-danger">Remove</a>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
 

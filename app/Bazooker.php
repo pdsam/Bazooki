@@ -47,7 +47,7 @@ class Bazooker extends Authenticatable implements User
     }
 
     public function paymentMethods() {
-        return $this->hasMany('App\PaymentMethod');
+        return $this->hasMany('App\PaymentMethod', "bazooker_id");
     }
 
     //TODO feedbacks

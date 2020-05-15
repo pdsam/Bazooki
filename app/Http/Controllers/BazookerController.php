@@ -72,11 +72,12 @@ class BazookerController extends Controller
     }
 
     public function settings() {
-        if (!Auth::guard('bazooker')->check()) {
+        $bazooker = Auth::guard('bazooker')->user();
+        if (is_null($bazooker)) {
             return redirect('auctions');
         }
 
-        return view('pages.settings');
+        return view('pages.settings', ['payment_methods' => $bazooker->paymentMethods]);
     }
 }
 ?>
