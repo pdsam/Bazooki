@@ -46,7 +46,7 @@
             <div class="card-body">
                 <h3 class="card-title text-center card-c-element card-body">{{ $name }}</h3>
                 <div class="card-c-element card-body">
-                    <h3 class="card-title text-center" id="price">${{ $base_bid }}</h3>
+                    <h3 class="card-title text-center" id="price">{{ $base_bid }}</h3>
                     <h3 id="duration-place" class="card-title text-center"></h3>
                     <p hidden id="timer-start-time">{{ $start_time }}</p>
                     <p hidden id="timer-duration">{{ $duration }}</p>
@@ -67,19 +67,13 @@
                             let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                             let seconds = Math.floor((distance % (1000 * 60)) / 1000);
                             if(distance > 0 ){
-                                
                                 output.innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s "
                             }
                             else{
                                 output.innerHTML = "Expired"
                                 clearInterval(f)
-                                
                             }
                         }, 1000)
-
-
-
-                        
                     </script>
                 </div>
                 <div class="card-body w-100">
@@ -88,9 +82,28 @@
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" name="form-id" value="{{ $id }}">
-                                <input type="number" class="form-control text-center col-12 col-md-8" name="amount" value="110"></input>
+                                <input id="money" type="number" class="form-control text-center col-12 col-md-8" name="amount" value="110"></input>
                                 <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
+                                    <script>
+                                        let button = document.getElementById("bid-button");
+                                        button.addEventListener("click",
+                                            (e)=>{
+                                                e.preventDefault();
+                                                let value = parseInt(document.getElementById("money").value)
+                                                let baseBid = parseInt(document.getElementById("price").innerText)
+                                                if(value <= baseBid){
+                                                    alert("Temp error msg, but invalid bid")
+                                                }
+
+                                                else{
+                                                    let request = new XMLHttpRequest()
+                                                    request.open("POST",window.location.href+"/bid",true)
+                                                    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                                    request.send(JSON.stringify({bid: value}))
+                                                }
+                                        })
+                                    </script>
                                 </div>
                         </form>
                     </div>
