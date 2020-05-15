@@ -97,7 +97,9 @@ class AuctionController extends Controller
             'id' => $auction->id,
             'name'=>$auction->item_name,
             'base_bid'=>$auction->base_bid,
-            'description'=>$auction->item_description
+            'description'=>$auction->item_description,
+            'duration'=>$auction->duration,
+            'start_time'=>$auction->start_time
         ]);
 
     }

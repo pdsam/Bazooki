@@ -11,9 +11,7 @@ class Auction extends Model
     public $table = 'auction';
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * 
      */
     protected $fillable = [
         'owner', 
