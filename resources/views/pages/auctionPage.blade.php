@@ -10,29 +10,29 @@
     <div class="col-lg-7">
         <div class="card">
             <div class="shadow-lg">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        @for ($i = 0; $i < count($photos); $i++)
+                            <li data-target="carouselIndicators" data-slide-to="{{ $i }}"
+                                @if($i == 0)
+                                    class="active"
+                                @endif
+                            >
+                        @endfor
                     </ol>
 
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100 image-responsive" src="https://picsum.photos/445/425" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100 image-responsive" src="https://picsum.photos/445/425.jpg" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100 image-responsive" src="https://picsum.photos/445/425/" alt="Third slide">
-                        </div>
+                        @for ($i = 0; $i < count($photos); $i++)
+                            <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
+                                <img class="d-block w-100 image-responsive" src={{ asset($photos[$i]) }} alt="Slide {{ $i }}">
+                            </div>
+                        @endfor
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>

@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use App\Auction;
+use App\AuctionPhoto;
 
 class AuctionController extends Controller
 {
@@ -65,18 +67,24 @@ class AuctionController extends Controller
         ]);
 
         if(empty($newAuction)) return redirect('auctions');
-/*
-        if($request->photos)
-        {
-            $photos = $request->photos;
-            foreach ($photos as $photo) {
-                $path = $photo->store('auction_images'); //store image in storage/app/auction_images
-                AuctionPhoto::create([
-                    'auction_id' => $newAuction->id,
-                    'image_path' => $path
-                ]);
+
+        if($request->hasFile('photos')) {
+            $allowedfileExtension=['jpg', 'png'];
+            $files = $request->file('photos');
+            foreach($files as $file){
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension, $allowedfileExtension);
+                
+                if($check) {
+                    $filename = $file->store('public/auction_images'); //store image in storage/app/auction_images
+                    AuctionPhoto::create([
+                        'auction_id' => $newAuction->id,
+                        'image_path' => $filename
+                    ]);
+                }
+
             }
-        }*/
+        }
 
         // TODO certifications
 
@@ -92,6 +100,15 @@ class AuctionController extends Controller
         if ($auction == null) {
             return redirect('auctions');
         }
+        
+        $auction_photos = $auction->photos()->get();
+        $photo_paths = array();
+        foreach($auction_photos as $photo) {
+            $path = str_replace("public", "storage", $photo->image_path);
+            array_push($photo_paths, $path);
+        }
+
+        // TODO add default image in case there is none
 
         return view('pages.auctionPage',[
             'id' => $auction->id,
@@ -99,7 +116,8 @@ class AuctionController extends Controller
             'base_bid'=>$auction->base_bid,
             'description'=>$auction->item_description,
             'duration'=>$auction->duration,
-            'start_time'=>$auction->start_time
+            'start_time'=>$auction->start_time,
+            'photos'=>$photo_paths
         ]);
 
     }

@@ -44,7 +44,7 @@
                                 <p class="text-danger m-0">{{ $message }}</p>
                             </div>
                         @enderror
-                        <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp" placeholder="Email" name="email" required>
+                        <input type="email" class="form-control h-auto p-2" id="registerEmail" aria-describedby="emailHelp" placeholder="Email" name="email" required>
                     </div>
                     <div class="form-group">
                         @error('password')

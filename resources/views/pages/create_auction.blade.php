@@ -28,7 +28,7 @@
 
 @section('content')
     <div>
-        <form action="/auctions/add" method="POST" id="createAuctionForm" onsubmit="return addRequiredInputs();">
+        <form action="/auctions/add" method="POST" id="createAuctionForm" onsubmit="return addRequiredInputs();" enctype="multipart/form-data">
             @csrf
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Product title</h3>
