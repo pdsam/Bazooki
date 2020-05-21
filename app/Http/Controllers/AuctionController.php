@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Auction;
 use App\AuctionPhoto;
+use App\Certification;
 
 class AuctionController extends Controller
 {
@@ -68,6 +69,8 @@ class AuctionController extends Controller
 
         if(empty($newAuction)) return redirect('auctions');
 
+        //TODO send errors to user somehow?
+
         if($request->hasFile('photos')) {
             $allowedfileExtension=['jpg', 'png'];
             $files = $request->file('photos');
@@ -76,7 +79,7 @@ class AuctionController extends Controller
                 $check = in_array($extension, $allowedfileExtension);
                 
                 if($check) {
-                    $filename = $file->store('public/auction_images'); //store image in storage/app/auction_images
+                    $filename = $file->store('public/auction_images'); //store image in storage/app/public/auction_images
                     AuctionPhoto::create([
                         'auction_id' => $newAuction->id,
                         'image_path' => $filename
@@ -86,7 +89,18 @@ class AuctionController extends Controller
             }
         }
 
-        // TODO certifications
+        if($request->hasFile('certification')) {
+            $certification = $request->file('certification');
+            $filename = $certification->store('certifications');
+            $newCert = Certification::create([
+                'auction_id' => $newAuction->id,
+                'certification_doc_path' => $filename
+            ]);
+
+            Log::debug($newCert);
+        }
+
+
 
         return redirect("auctions/$newAuction->id");
     }
@@ -108,7 +122,9 @@ class AuctionController extends Controller
             array_push($photo_paths, $path);
         }
 
-        // TODO add default image in case there is none
+        if (count($photo_paths) == 0) {
+            $photo_paths = array("assets/unknown_item.png");
+        }
 
         return view('pages.auctionPage',[
             'id' => $auction->id,

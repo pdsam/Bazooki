@@ -94,9 +94,9 @@
                     <h3>Certification (optional)</h3>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="certification_check">
                         <label class="form-check-label" for="defaultCheck1">
-                        I confirm I have a certificate and it's genuine.
+                            I confirm I have a certificate and it's genuine.
                         </label>
                     </div>
                     <input name="certification" type="file" class="form-control-file" id="exampleFormControlFile1">

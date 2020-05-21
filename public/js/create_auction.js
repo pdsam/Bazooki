@@ -25,6 +25,12 @@ function addRequiredInputs() {
 
     const formBody = document.getElementById("createAuctionForm");
 
+    // if certification uploaded, must select checkbox
+    const certification = formBody.querySelector("input[name=certification]");
+    const certification_check = formBody.querySelector("input[name=certification_check]");
+    if (certification.value != "" && certification_check.checked != true)
+        return false;
+
     const days = $("#days").val();
     const hours = $("#hours").val();
     const mins = $("#mins").val();
