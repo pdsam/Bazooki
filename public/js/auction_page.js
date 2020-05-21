@@ -47,10 +47,11 @@ $("#bid-form").submit(async (e) => {
 
 if (typeof(Worker) !== "undefined") {
     if (typeof(w) == "undefined") {
-    w = new Worker("bidWorker.js");
+    w = new Worker("/js/bidWorker.js");
+    w.postMessage("/api/auctions/bids/" + window.location.href.match("[0-9]+$")[0])
+    console.log("sending message")
     w.onmessage = function (event) {
-        console.log("worket pong")
-        $("#price)")=event.data
+        document.getElementById("price").innerHTML=event.data
         
   };
     }

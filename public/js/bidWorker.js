@@ -1,7 +1,9 @@
+let adress = ""
+let counter = 0
+
 function getBids(){
     let request = new XMLHttpRequest();
-        let id = window.location.href.split([0 - 9] * $)
-        request.open("GET", "/api/auctions/bids/" + document.getElementById("aux-id").innerText, true)
+        request.open("GET",adress , true)
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
         
         request.addEventListener("load",() =>{
@@ -9,8 +11,8 @@ function getBids(){
             if(res.size == 0){
                 return
             }
-                postMessage("FINISH WEB WORKER")
-            
+                counter++;
+                postMessage(counter)
             
 
 
@@ -20,4 +22,9 @@ function getBids(){
 
     setTimeout("getBids()",3000)
 }
-getBids()
+
+self.addEventListener("message",function(e){
+    adress = e.data
+    console.log("got message updating")
+    getBids()
+})
