@@ -66,10 +66,9 @@
                             let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                             let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                             let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                            if(distance > 0 ){
-                                output.innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s "
-                            }
-                            else{
+                            if (distance > 0) {
+                                output.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
+                            } else {
                                 output.innerHTML = "Expired"
                                 clearInterval(f)
                             }
@@ -88,21 +87,22 @@
                                     <script>
                                         let button = document.getElementById("bid-button");
                                         button.addEventListener("click",
-                                            (e)=>{
+                                            (e) => {
+                                                //TODO big one, get csrf token
                                                 e.preventDefault();
                                                 let value = parseInt(document.getElementById("money").value)
                                                 let baseBid = parseInt(document.getElementById("price").innerText)
-                                                if(value <= baseBid){
+                                                if (value <= baseBid) {
                                                     alert("Temp error msg, but invalid bid")
-                                                }
-
-                                                else{
+                                                } else {
                                                     let request = new XMLHttpRequest()
-                                                    request.open("POST",window.location.href+"/bid",true)
+                                                    request.open("POST", window.location.href + "/bid", true)
                                                     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                                                    request.send(JSON.stringify({bid: value}))
+                                                    request.send(JSON.stringify({
+                                                        bid: value
+                                                    }))
                                                 }
-                                        })
+                                            })
                                     </script>
                                 </div>
                         </form>
@@ -129,4 +129,28 @@
     </div>
 
 </div>
+<p id="aux-id" hidden>{{$id}}</p>
+<script>
+    async function getBids() {
+        let request = new XMLHttpRequest();
+        let id = window.location.href.split([0 - 9] * $)
+        request.open("GET", "/api/auctions/bids/" + document.getElementById("aux-id").innerText, true)
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        request.addEventListener("load",() =>{
+            const res = JSON.parse(request.responseText);
+            if(res.size == 0){
+                return
+            }
+
+            
+            
+
+
+        })
+        request.send()
+
+
+    }
+    getBids()
+</script>
 @endsection
