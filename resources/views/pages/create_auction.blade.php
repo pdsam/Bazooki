@@ -27,6 +27,15 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div>
         <form action="/auctions/add" method="POST" id="createAuctionForm" onsubmit="return addRequiredInputs();" enctype="multipart/form-data">
             @csrf
@@ -91,15 +100,15 @@
             <div class="card mt-4 ml-4 mr-4">
                 <div class="card-body">
                     <div class="card-title">
-                    <h3>Certification (optional)</h3>
+                        <h3>Certification (optional)</h3>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="certification_check">
                         <label class="form-check-label" for="defaultCheck1">
-                            I confirm I have a certificate and it's genuine.
+                            I confirm I have a certificate in PDF format and it's genuine.
                         </label>
                     </div>
-                    <input name="certification" type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input name="certification" accept="application/pdf" type="file" class="form-control-file" id="exampleFormControlFile1">
                 </div>
             </div>
             <div class="mt-4 ml-4 mr-4">

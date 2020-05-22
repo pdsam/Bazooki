@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
 use App\Auction;
 use App\AuctionPhoto;
 use App\Certification;
@@ -43,11 +44,25 @@ class AuctionController extends Controller
             'start_time' => 'required|date_format:d-m-Y',
             'duration' => 'required|numeric|gt:0',
             'photos' => 'nullable|array',
-            'insta_buy' => 'nullable|numeric|gt:0'
+            'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff |max:10240',
+            'insta_buy' => 'nullable|numeric|gt:0',
+            'certification' => 'nullable|mimes:pdf |max:4096'
+        ], $messages = [
+            'name.max' => 'Name has a maximum of 100 characters',
+            'description.max' => 'Name has a maximum of 2000 characters',
+            'short_description.max' => 'Name has a maximum of 500 characters',
+            'base_bid.gte' => "Base bid must be greater than or equal to 0",
+            'start_time.date_format' => "Invalid date format, must be d-m-Y",
+            'duration.gt' => "Duration must be greater than 0",
+            'insta_buy.gt' => "Instant buy price must be greater than 0",
+            'photos.*.mimes' => 'Photos must be of image format',
+            'photos.*.max' => 'Photos must be less than 10 MB',
+            'certification.mimes' => 'Certification must be a PDF',
+            'certification.max' => 'Certification should be less than 4 MB'
         ]);
 
         if ($validator->fails()) {
-            return redirect('auctions');
+            return Redirect::back()->withErrors($validator);
         }
 
         $userID = Auth::user()->id;
@@ -69,22 +84,14 @@ class AuctionController extends Controller
 
         if(empty($newAuction)) return redirect('auctions');
 
-        //TODO send errors to user somehow?
-
         if($request->hasFile('photos')) {
-            $allowedfileExtension=['jpg', 'png'];
             $files = $request->file('photos');
             foreach($files as $file){
-                $extension = $file->getClientOriginalExtension();
-                $check = in_array($extension, $allowedfileExtension);
-                
-                if($check) {
-                    $filename = $file->store('public/auction_images'); //store image in storage/app/public/auction_images
-                    AuctionPhoto::create([
-                        'auction_id' => $newAuction->id,
-                        'image_path' => $filename
-                    ]);
-                }
+                $filename = $file->store('public/auction_images'); //store image in storage/app/public/auction_images
+                AuctionPhoto::create([
+                    'auction_id' => $newAuction->id,
+                    'image_path' => $filename
+                ]);
 
             }
         }
@@ -96,11 +103,7 @@ class AuctionController extends Controller
                 'auction_id' => $newAuction->id,
                 'certification_doc_path' => $filename
             ]);
-
-            Log::debug($newCert);
         }
-
-
 
         return redirect("auctions/$newAuction->id");
     }
