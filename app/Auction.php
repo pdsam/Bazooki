@@ -41,7 +41,11 @@ class Auction extends Model
     }
 
     public function maxBid() {
-        return Bid::where('auction_id', $this->id)->max('amount')->get();
+        $maxBid = $this->bids->max('amount');
+        if (is_null($maxBid)) {
+            return $this->base_bid;
+        }
+        return $maxBid;
     }
 
     //TODO categories

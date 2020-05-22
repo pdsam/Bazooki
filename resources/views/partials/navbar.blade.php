@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form class="nav-item form-inline my-auto mx-auto" action="/auctions/query" method="GET">
             <div class="input-group">
-                <input class="w-auto form-control rounded-0" type="search" placeholder="Search" aria-label="Search">
+                <input class="w-auto form-control rounded-0" type="text" name="auction_name" placeholder="Search" aria-label="Search">
                 <button class="input-group-light btn btn-olive rounded-0" type="submit">
                     <i class="fa fa-search p-0"></i>
                     Search

@@ -144,4 +144,24 @@ class AuctionController extends Controller
     public function bid(Request $request, $id) {
         return response($request->input('amount'));
     }
+
+    public function query(Request $request) {
+        $filters = $request->only(['auction_name', 'categories', 'max_bid']);
+
+        $auctionsQuery = null;
+        if (isset($filters['auction_name']) && !empty($filters['auction_name'])) {
+            $auctionsQuery = Auction::whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
+        }
+
+        $auctions = null;
+        if ($auctionsQuery == null) {
+            $auctions = Auction::all();
+        } else {
+            $auctions = $auctionsQuery->get();
+        }
+        return view('pages.query', [
+            'filters'=>$filters,
+            'auctions'=>$auctions
+        ]);
+    }
 }

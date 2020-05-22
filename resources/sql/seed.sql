@@ -194,7 +194,7 @@ $$ LANGUAGE 'plpgsql';
 
 DROP TRIGGER IF EXISTS precalculate_auction_fts on auction;
 CREATE TRIGGER precalculate_auction_fts
-    AFTER INSERT OR UPDATE ON auction
+    BEFORE INSERT OR UPDATE ON auction
     FOR EACH ROW
     EXECUTE PROCEDURE fts_auction_update();
     
