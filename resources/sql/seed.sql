@@ -1,3 +1,5 @@
+-- noinspection SqlDialectInspectionForFile
+
 DROP TABLE IF EXISTS bazooker CASCADE;
 CREATE TABLE bazooker(id BIGSERIAL PRIMARY KEY, 
                       name text NOT NULL, 
@@ -34,6 +36,7 @@ CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     duration INT NOT NULL CHECK (duration >= 60*30) DEFAULT (3600*24*7),
                     insta_buy INT CHECK (insta_buy > 0),
+                    current_price INT,
 					item_name TEXT NOT NULL,
 					item_description TEXT NOT NULL,
                     item_short_description TEXT NOT NULL,
@@ -135,7 +138,7 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
 						CONSTRAINT cant_rate_same CHECK (rater_id != rated_id));
 
 
-
+---- ONLY ONE AN
 DROP FUNCTION IF EXISTS only_one_ban();
 CREATE FUNCTION only_one_ban() RETURNS TRIGGER AS $$
 BEGIN
@@ -152,11 +155,7 @@ CREATE TRIGGER only_one_ban
     FOR EACH ROW
     EXECUTE PROCEDURE only_one_ban();
     
-    
-    
-    
-    
-    
+---- BID ON OWN AUCTION
 DROP FUNCTION IF EXISTS bid_on_auction();
 CREATE FUNCTION bid_on_auction() RETURNS TRIGGER AS $$
 BEGIN
@@ -173,10 +172,7 @@ CREATE TRIGGER bid_on_auction
     FOR EACH ROW
     EXECUTE PROCEDURE bid_on_auction();
 
-
-
-
-
+-- FTS UPDATE
 DROP FUNCTION IF EXISTS fts_auction_update();
 CREATE FUNCTION fts_auction_update() RETURNS TRIGGER AS $$
 BEGIN
@@ -197,12 +193,8 @@ CREATE TRIGGER precalculate_auction_fts
     BEFORE INSERT OR UPDATE ON auction
     FOR EACH ROW
     EXECUTE PROCEDURE fts_auction_update();
-    
-    
-    
-    
-    
-    
+
+-- BIDS ON FINISHED AUCTIONS
  DROP FUNCTION IF EXISTS prevent_bid_on_finished_auction();
     CREATE FUNCTION prevent_bid_on_finished_auction() RETURNS TRIGGER AS $$
 BEGIN
@@ -219,10 +211,53 @@ CREATE TRIGGER prevent_bid_on_finished_auction
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_bid_on_finished_auction();
 
+-- SET AUCTION CURRENT PRICE WHEN IT IS CREATED
+DROP FUNCTION IF EXISTS set_current_auction_price();
+    CREATE FUNCTION set_current_auction_price() RETURNS TRIGGER AS $$
+BEGIN
+    NEW.current_price = NEW.base_price;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
 
+DROP trigger if exists set_current_auction_price on auction;
+CREATE TRIGGER set_current_auction_price
+    BEFORE INSERT ON auction
+    FOR EACH ROW
+    EXECUTE PROCEDURE set_current_auction_price();
 
+-- PREVENT BIDS OF LOWER VALUE
+DROP Function if exists prevent_lower_value_bids();
+create function prevent_lower_value_bids() returns trigger as $$
+Begin
+    IF NEW.amount <= (SELECT max(amount) from bid where bid.auction_id = NEW.auction_id group by bid.auction_id) then
+        raise exception 'Bid is lower than current biggest bid';
+    end if;
+END
+$$ LANGUAGE  'plpgsql';
 
+DROP TRIGGER IF EXISTS prevent_lower_value_bid on bid;
+CREATE TRIGGER prevent_lower_value_bid
+    BEFORE INSERT ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE prevent_lower_value_bids();
 
+-- UPDATE AUCTION CURRENT PRICE ON BID
+DROP Function if exists update_auction_current_price();
+create function update_auction_current_price() returns trigger as $$
+Begin
+    update auction set current_price = NEW.amount where auction.id = NEW.auction_id;
+    return NEW;
+END
+$$ LANGUAGE  'plpgsql';
+
+DROP TRIGGER IF EXISTS update_auction_current_price on bid;
+CREATE TRIGGER update_auction_current_price
+    AFTER INSERT ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_auction_current_price();
+
+-- PREVENT MULTIPLE ACTIVE SUSPENSIONS
 DROP FUNCTION IF EXISTS prevent_repeated_suspentions();
 CREATE FUNCTION prevent_repeated_suspentions() RETURNS TRIGGER AS $$
 BEGIN
@@ -233,15 +268,13 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
-
 DROP TRIGGER IF EXISTS prevent_repeated_suspentions on suspension;
 CREATE TRIGGER prevent_repeated_suspentions
     AFTER INSERT OR UPDATE ON suspension
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_suspentions();
 
-
-
+-- PREVENT MULTIPLE AUCTION ACTIONS
 DROP FUNCTION IF EXISTS prevent_repeated_auction_action();
 CREATE FUNCTION prevent_repeated_auction_action() RETURNS TRIGGER AS $$
 BEGIN
@@ -257,10 +290,8 @@ CREATE TRIGGER prevent_repeated_auction_action
     AFTER INSERT OR UPDATE ON auction_moderator_action
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_auction_action();
-    
-    
 
-
+-- PREVENT MULTIPLE BID ACTIONS
 DROP FUNCTION IF EXISTS prevent_repeated_bid_action();
 CREATE FUNCTION prevent_repeated_bid_action() RETURNS TRIGGER AS $$
 BEGIN

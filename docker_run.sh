@@ -1,7 +1,11 @@
 #!/bin/bash
 set -e
 
-cd /var/www; php artisan config:cache; php artisan route:cache
+cd /var/www
+php artisan config:cache
+php artisan route:cache
+php artisan db:seed
+mkdir -p storage/app/public/avatars
 env >> /var/www/.env
 php-fpm7.2 -D
 nginx -g "daemon off;"

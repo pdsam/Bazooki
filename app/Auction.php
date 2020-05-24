@@ -48,5 +48,7 @@ class Auction extends Model
         return $maxBid;
     }
 
-    //TODO categories
+    public function categories() {
+        return $this->belongsToMany(Category::class, 'auction_category', 'auction_id', 'cat_id');
+    }
 }

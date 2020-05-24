@@ -148,16 +148,51 @@ class AuctionController extends Controller
     public function query(Request $request) {
         $filters = $request->only(['auction_name', 'categories', 'max_bid']);
 
+        //dd($filters);
+
         $auctionsQuery = null;
         if (isset($filters['auction_name']) && !empty($filters['auction_name'])) {
-            $auctionsQuery = Auction::whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
+            if (is_null($auctionsQuery)) {
+                $auctionsQuery = Auction::from('auction as A1')->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
+            } else {
+                $auctionsQuery = $auctionsQuery->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
+            }
         }
 
+        if (isset($filters['categories'])) {
+            $constraint = function ($q) use($filters) {
+                $q->select('auction_id')
+                    ->from('auction_category')
+                    ->whereIn('cat_id', $filters['categories'])
+                    ->groupBy('auction_id')
+                    ->havingRaw('count(*) = ?', [count($filters['categories'])]);
+            };
+
+            if (is_null($auctionsQuery)) {
+                $auctionsQuery = Auction::from('auction as A1')->whereIn('id', $constraint);
+            } else {
+                $auctionsQuery = $auctionsQuery->whereIn('id', $constraint);
+            }
+        }
+
+        if (isset($filters['max_bid'])) {
+            $closure = function ($query) {
+                //$query->table(DB)
+            };
+            if (is_null($auctionsQuery)) {
+                $auctionsQuery = Auction::from('auction as A1')->where($closure,'>=',$filters['max_bid']);
+            } else {
+                $auctionsQuery = $auctionsQuery->where($closure,'>=',$filters['max_bid']);
+            }
+        }
+
+        dd($auctionsQuery->toSql());
+
         $auctions = null;
-        if ($auctionsQuery == null) {
-            $auctions = Auction::all();
+        if (is_null($auctionsQuery)) {
+            $auctions = Auction::all()->take(20);
         } else {
-            $auctions = $auctionsQuery->get();
+            $auctions = $auctionsQuery->limit(20)->get();
         }
         return view('pages.query', [
             'filters'=>$filters,

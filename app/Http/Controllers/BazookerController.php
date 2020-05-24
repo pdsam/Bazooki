@@ -13,12 +13,6 @@ use Intervention\Image\Facades\Image;
 
 class BazookerController extends Controller
 {
-    /**
-     * Show the profile for the given user.
-     *
-     * @param  int  $id
-     * @return View
-     */
     public function show($id = null)
     {
         if ($id == null) {
@@ -48,7 +42,6 @@ class BazookerController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($request);
             return redirect()->route('profile')
                 ->withErrors($validator);
         }
@@ -60,7 +53,7 @@ class BazookerController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->encode('jpg');
-            $profilePicPath = "public/avatars/$bazooker->id"; 
+            $profilePicPath = "public/avatars/$bazooker->id";
             if (Storage::put($profilePicPath, $profilePic)) {
                 $updateContent = Arr::add($updateContent, 'profile_pic', $profilePicPath);
             }
@@ -80,4 +73,3 @@ class BazookerController extends Controller
         return view('pages.settings', ['payment_methods' => $bazooker->paymentMethods]);
     }
 }
-?>
