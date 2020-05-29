@@ -138,7 +138,7 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
 						CONSTRAINT cant_rate_same CHECK (rater_id != rated_id));
 
 
----- ONLY ONE AN
+---- ONLY ONE BAN
 DROP FUNCTION IF EXISTS only_one_ban();
 CREATE FUNCTION only_one_ban() RETURNS TRIGGER AS $$
 BEGIN
@@ -215,7 +215,7 @@ CREATE TRIGGER prevent_bid_on_finished_auction
 DROP FUNCTION IF EXISTS set_current_auction_price();
     CREATE FUNCTION set_current_auction_price() RETURNS TRIGGER AS $$
 BEGIN
-    NEW.current_price = NEW.base_price;
+    NEW.current_price = NEW.base_bid;
     RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
@@ -230,7 +230,7 @@ CREATE TRIGGER set_current_auction_price
 DROP Function if exists prevent_lower_value_bids();
 create function prevent_lower_value_bids() returns trigger as $$
 Begin
-    IF NEW.amount <= (SELECT max(amount) from bid where bid.auction_id = NEW.auction_id group by bid.auction_id) then
+    IF EXISTS (select current_price from auction where auction.id = NEW.auction_id) then
         raise exception 'Bid is lower than current biggest bid';
     end if;
 END

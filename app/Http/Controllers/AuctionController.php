@@ -187,16 +187,13 @@ class AuctionController extends Controller
 
         if (isset($filters['max_bid'])) {
             $closure = function ($query) {
-                //$query->table(DB)
             };
             if (is_null($auctionsQuery)) {
-                $auctionsQuery = Auction::from('auction as A1')->where($closure,'>=',$filters['max_bid']);
+                $auctionsQuery = Auction::where('current_price', '<=', $filters['max_bid']);
             } else {
-                $auctionsQuery = $auctionsQuery->where($closure,'>=',$filters['max_bid']);
+                $auctionsQuery = $auctionsQuery->where('current_price', '<=', $filters['max_bid']);
             }
         }
-
-        dd($auctionsQuery->toSql());
 
         $auctions = null;
         if (is_null($auctionsQuery)) {
@@ -204,6 +201,7 @@ class AuctionController extends Controller
         } else {
             $auctions = $auctionsQuery->limit(20)->get();
         }
+        //dd($filters['categories']);
         return view('pages.query', [
             'filters'=>$filters,
             'auctions'=>$auctions

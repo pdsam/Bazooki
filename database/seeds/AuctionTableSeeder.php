@@ -1,5 +1,6 @@
 <?php
 
+use App\Auction;
 use Illuminate\Database\Seeder;
 
 class AuctionTableSeeder extends Seeder
@@ -11,6 +12,6 @@ class AuctionTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Auction::class, 10)->create();
     }
 }

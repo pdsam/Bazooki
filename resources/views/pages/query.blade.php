@@ -29,7 +29,8 @@
                     @foreach(\App\Category::all() as $category)
                         <div id="categoriesGroup" class="collapse show">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input m-0" type="checkbox" name="categories[]" id="cat{{ $category->id }}" value="{{ $category->id }}" @if(isset($filters['categories'][$category->id])) checked="checked" @endif>
+                                <input class="custom-control-input m-0" type="checkbox" name="categories[]"
+                                       id="cat{{ $category->id }}" value="{{ $category->id }}" @if(isset($filters['categories']) && in_array($category->id, $filters['categories'])) checked="checked" @endif>
                                 <label class="custom-control-label" for="cat{{ $category->id }}">{{ $category->name }}</label>
                             </div>
                         </div>
@@ -43,7 +44,7 @@
                     </a>
                     <div id="maxBidPriceGroup" class="collapse show form-row">
                         <input class="control-form col-auto" type="number" name="max_bid" id="maxBid" min="0"
-                               value="@if(isset($filters['max_bid'])) {{ $filters['max_bid'] }} @endif">
+                               value="{{ $filters['max_bid'] }}">
                     </div>
 
                     <button class="btn btn-primary mt-2 btn-olive" type="submit">Apply filters</button>
