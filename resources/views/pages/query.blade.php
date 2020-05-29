@@ -4,14 +4,16 @@
     <link rel="stylesheet" href="{{ asset('/css/query.css') }}">
 @endsection
 
+@section('searchContent', isset($filters['auction_name']) ? $filters['auction_name'] : '')
+
 @section('content')
     <div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
-        <label class="mr-1"for="sort">Sort by:</label>
-        <select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
-            <option value="bidDesc" selected>Highest Bid (descending)</option>
-            <option value="bidAsc" selected>Highest Bid (ascending)</option>
-            <option value="dateEarl">End date (Earliest)</option>
-            <option value="dateLate">End date (Latest)</option>
+        <label class="mr-1" for="sortByInput">Sort by:</label>
+        <select class="w-auto custom-select rounded-0" id="sortByInput">
+            <option value="bidDesc" @if(isset($filters['sortOrder']) && strcmp($filters['sortOrder'], 'bidDesc') == 0) selected="selected" @endif>Highest Bid (descending)</option>
+            <option value="bidAsc" @if(!isset($filters['sortOrder']) || strcmp($filters['sortOrder'], 'bidAsc') == 0) selected="selected" @endif>Highest Bid (ascending)</option>
+            <option value="dateEarl" @if(isset($filters['sortOrder']) && strcmp($filters['sortOrder'], 'dateEarl') == 0) selected="selected" @endif>End date (Earliest)</option>
+            <option value="dateLate" @if(isset($filters['sortOrder']) && strcmp($filters['sortOrder'], 'dateLate') == 0) selected="selected" @endif>End date (Latest)</option>
         </select>
     </div>
     <div class="row">
@@ -29,6 +31,7 @@
             <div id="filters" class="collapse show">
                 <form id="filtersForm">
                     <input type="hidden" name="auction_name" value="@if (isset($filters['auction_name'])){{ $filters['auction_name'] }} @endif">
+                    <input type="hidden" id="sortOrder" name="sortOrder" value="@if (isset($filters['sortOrder'])){{ $filters['sortOrder'] }} @endif">
                     <a class="d-block mt-2 section-toggle mb-2 mt-3" href="#categoriesGroup" data-toggle="collapse" data-target="#categoriesGroup">
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="m-0">Category</p>
@@ -53,7 +56,7 @@
                     </a>
                     <div id="maxBidPriceGroup" class="collapse show form-row">
                         <input class="control-form col-auto" type="number" name="max_bid" id="maxBid" min="0"
-                               value="{{ $filters['max_bid'] }}">
+                               value="@if (isset($filters['max_bid'])){{ $filters['max_bid'] }} @endif">
                     </div>
 
                     <button class="btn btn-primary mt-2 btn-olive" type="submit">Apply filters</button>
@@ -76,7 +79,13 @@
                                     <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                                         <div class="">
                                             <h5 class="card-title">{{ $auction->item_name }}</h5>
-                                            <h6 class="card-subtitle text-muted">Ends at: 05/07/2020 23:59:59</h6>
+                                            @php
+                                                $duration = $auction->duration;
+                                                $start_time =
+                                                    DateTime::createFromFormat('Y-m-d H:i:s', $auction->start_time)
+                                                    ->modify("+$duration seconds")->format('d M Y H:i:s');
+                                            @endphp
+                                            <h6 class="card-subtitle text-muted">Ends: {{ $start_time }}</h6>
                                         </div>
                                         <div>
                                             <span class="mr-1" style="font-size: 2rem">{{ $auction->maxBid() }}</span>$
@@ -92,4 +101,10 @@
             </div>
         </div>
     <div>
+    <script>
+        $('#sortByInput').change(function(e) {
+            $('#sortOrder').val(this.value);
+            $('#filtersForm').submit();
+        });
+    </script>
 @endsection

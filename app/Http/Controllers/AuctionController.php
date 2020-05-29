@@ -156,17 +156,13 @@ class AuctionController extends Controller
     }
 
     public function query(Request $request) {
-        $filters = $request->only(['auction_name', 'categories', 'max_bid']);
+        $filters = $request->only(['auction_name', 'categories', 'max_bid', 'sortOrder']);
 
         //dd($filters);
 
         $auctionsQuery = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
         if (isset($filters['auction_name']) && !empty($filters['auction_name'])) {
-            if (is_null($auctionsQuery)) {
-                $auctionsQuery = Auction::from('auction as A1')->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
-            } else {
-                $auctionsQuery = $auctionsQuery->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
-            }
+            $auctionsQuery = $auctionsQuery->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
         }
 
         if (isset($filters['categories'])) {
@@ -178,29 +174,34 @@ class AuctionController extends Controller
                     ->havingRaw('count(*) = ?', [count($filters['categories'])]);
             };
 
-            if (is_null($auctionsQuery)) {
-                $auctionsQuery = Auction::from('auction as A1')->whereIn('id', $constraint);
-            } else {
-                $auctionsQuery = $auctionsQuery->whereIn('id', $constraint);
-            }
+            $auctionsQuery = $auctionsQuery->whereIn('id', $constraint);
         }
 
         if (isset($filters['max_bid'])) {
-            $closure = function ($query) {
-            };
-            if (is_null($auctionsQuery)) {
-                $auctionsQuery = Auction::where('current_price', '<=', $filters['max_bid']);
-            } else {
-                $auctionsQuery = $auctionsQuery->where('current_price', '<=', $filters['max_bid']);
+            $auctionsQuery = $auctionsQuery->where('current_price', '<=', $filters['max_bid']);
+        }
+        if (isset($filters['sortOrder'])) {
+            switch ($filters['sortOrder']) {
+                case 'bidDesc':
+                    $auctionsQuery->orderBy('current_price', 'desc');
+                    break;
+                case 'bidAsc':
+                    $auctionsQuery->orderBy('current_price', 'asc');
+                    break;
+                case 'dateEarl':
+                    $auctionsQuery->orderByRaw('(start_time + duration * interval \'1 second\') asc');
+                    break;
+                case 'dateLate':
+                    $auctionsQuery->orderByRaw('(start_time + duration * interval \'1 second\') desc');
+                    break;
+                default:
+                    break;
             }
+        } else {
+            $auctionsQuery->orderBy('current_price', 'asc');
         }
 
-        $auctions = null;
-        if (is_null($auctionsQuery)) {
-            $auctions = Auction::all()->take(20);
-        } else {
-            $auctions = $auctionsQuery->limit(20)->get();
-        }
+        $auctions = $auctionsQuery->limit(20)->get();
         //dd($filters['categories']);
         return view('pages.query', [
             'filters'=>$filters,
