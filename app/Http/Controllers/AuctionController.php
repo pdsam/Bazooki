@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -205,13 +207,17 @@ class AuctionController extends Controller
             $pageNum = intval($request->input('p'));
         }
 
-        $pageSize = 20;
+        $pageSize = 10;
         $total = $auctionsQuery->count();
 
         $offset = 0;
         $num_pages = ceil($total / $pageSize);
         if ($num_pages > $pageNum && $pageNum >= 0) {
             $offset = $pageSize * $pageNum;
+        } else {
+            $input = $filters;
+            $input['p'] = '0';
+            return redirect()->route('query', $input);
         }
 
         $auctions = $auctionsQuery->offset($offset)->limit($pageSize)->get();

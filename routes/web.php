@@ -15,7 +15,7 @@ Route::redirect('/', '/auctions');
 
 // Auctions/*
 Route::view('/auctions', 'pages.auctions')->name('auctions');
-Route::get('/auctions/query', 'AuctionController@query');
+Route::get('/auctions/query', 'AuctionController@query')->name('query');
 Route::get('/auctions/add', 'AuctionController@createForm');
 Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
 Route::post('/auctions/add', 'AuctionController@create');

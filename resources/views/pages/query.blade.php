@@ -105,11 +105,22 @@
                         $last_page = $current_page + 3;
                         $last_page = $last_page < $num_pages ? $last_page : $num_pages;
                             @endphp
+
+                    @if ($current_page > 0)
+                        <div class="page-btn m-1 mr-4 p-2 btn btn-olive rounded-0" data-content="{{ $current_page-1 }}">
+                            <i class="p-0 fa fa-chevron-left"></i>
+                        </div>
+                    @endif
                     @for($i = $first_page; $i < $last_page; $i++)
                         <div class="page-btn m-1 p-2 btn btn-olive rounded-0" data-content="{{ $i }}">
-                            {{ $i }}
+                            {{ $i+1 }}
                         </div>
                     @endfor
+                    @if ($current_page < $num_pages-1)
+                        <div class="page-btn m-1 ml-4 p-2 btn btn-olive rounded-0" data-content="{{ $current_page+1 }}">
+                            <i class="p-0 fa fa-chevron-right"></i>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
