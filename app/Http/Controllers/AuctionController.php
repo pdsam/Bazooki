@@ -160,7 +160,7 @@ class AuctionController extends Controller
 
         //dd($filters);
 
-        $auctionsQuery = null;
+        $auctionsQuery = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
         if (isset($filters['auction_name']) && !empty($filters['auction_name'])) {
             if (is_null($auctionsQuery)) {
                 $auctionsQuery = Auction::from('auction as A1')->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);

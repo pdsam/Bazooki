@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+    <div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
+        <label class="mr-1"for="sort">Sort by:</label>
+        <select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
+            <option value="bidDesc" selected>Highest Bid (descending)</option>
+            <option value="bidAsc" selected>Highest Bid (ascending)</option>
+            <option value="dateEarl">End date (Earliest)</option>
+            <option value="dateLate">End date (Latest)</option>
+        </select>
+    </div>
     <div class="row">
         <!-- FILTERS -->
         <div class="col-12 col-lg-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
@@ -57,7 +66,7 @@
         <div class="col-12 col-lg-9 mt-2 mt-md-0 p-0">
             <div class="ml-md-1">
                 @foreach ($auctions as $auction)
-                    <div class="card shadow-sm rounded-0 border-0 mb-1 mt-5 mt-md-0">
+                    <div class="card shadow-sm rounded-0 border-0 @if (!$loop->last) mb-1 @endif mt-5 mt-md-0">
                         <div class="row align-items-center no-gutters">
                             <div class="col-xs-12 col-sm-4">
                                 <img src="{{ asset('assets/gun.jpg') }}" class="card-img rounded-0" alt="logo">

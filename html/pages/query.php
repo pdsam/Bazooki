@@ -9,13 +9,13 @@
 <body class="bg-light">
   <div class="container mt-2">
     <?php include('../templates/navbar.php') ?>
-		<div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
-			<label class="mr-1"for="sort">Sort by:</label>
-			<select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
-				<option value="bid" selected>Highest Bid Price</option>
-				<option value="date">End date</option>
-			</select>
-			</div>
+      <div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
+          <label class="mr-1"for="sort">Sort by:</label>
+          <select class="w-auto custom-select rounded-0" name="sortBy" id="sort">
+              <option value="bid" selected>Highest Bid Price</option>
+              <option value="date">End date</option>
+          </select>
+      </div>
     <div class="row">
       <!-- FILTERS -->
       <div class="col-12 col-lg-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
