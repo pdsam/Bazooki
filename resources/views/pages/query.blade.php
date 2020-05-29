@@ -18,7 +18,7 @@
     </div>
     <div class="row">
         <!-- FILTERS -->
-        <div class="col-12 col-lg-3 p-2 p-md-4 bg-white shadow-sm rounded-0">
+        <div class="col-12 col-lg-3 p-2 p-md-4 bg-white shadow-sm rounded-0 mb-auto">
             <a id="filters-toggle" class="d-block d-lg-none pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
                 <div class="d-flex justify-content-between">
                     <p class="m-0">Filters</p>
@@ -112,7 +112,7 @@
                         </div>
                     @endif
                     @for($i = $first_page; $i < $last_page; $i++)
-                        <div class="page-btn m-1 p-2 btn btn-olive rounded-0" data-content="{{ $i }}">
+                        <div class="page-btn m-1 p-2 btn btn-olive rounded-0" @if ($i == $current_page) style="background-color: var(--olive-darker); font-weight: bolder" @endif data-content="{{ $i }}">
                             {{ $i+1 }}
                         </div>
                     @endfor
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div>
+    </div>
             <script>
                 $('#sortByInput').change(function(e) {
                     $('#sortOrder').val(this.value);
