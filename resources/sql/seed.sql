@@ -194,22 +194,42 @@ CREATE TRIGGER precalculate_auction_fts
     FOR EACH ROW
     EXECUTE PROCEDURE fts_auction_update();
 
--- BIDS ON FINISHED AUCTIONS
- DROP FUNCTION IF EXISTS prevent_bid_on_finished_auction();
-    CREATE FUNCTION prevent_bid_on_finished_auction() RETURNS TRIGGER AS $$
+-- CHECK DATE BOUNDS
+ DROP FUNCTION IF EXISTS check_auction_time_bounds();
+    CREATE FUNCTION check_auction_time_bounds() RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.time > (SELECT start_time + duration * interval '1 second' FROM auction WHERE id = NEW.auction_id ) THEN
         RAISE EXCEPTION 'Auction has already closed.';
+    END IF;
+    IF CURRENT_TIMESTAMP < (SELECT start_time FROM auction WHERE id = NEW.auction_id ) THEN
+        RAISE EXCEPTION  'Auction hasnt started yet';
     END IF;
     RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
 
-DROP TRIGGER IF EXISTS prevent_bid_on_finished_auction ON bid;
-CREATE TRIGGER prevent_bid_on_finished_auction
+DROP TRIGGER IF EXISTS check_auction_time_bounds ON bid;
+CREATE TRIGGER check_auction_time_bounds
     AFTER INSERT OR UPDATE ON bid
     FOR EACH ROW
-    EXECUTE PROCEDURE prevent_bid_on_finished_auction();
+    EXECUTE PROCEDURE check_auction_time_bounds();
+
+-- EXTEND AUCTION DURATION WHEN BIDDING
+ DROP FUNCTION IF EXISTS extend_auction();
+    CREATE FUNCTION extend_auction() RETURNS TRIGGER AS $$
+BEGIN
+    IF (SELECT start_time + duration * interval '1 second' from auction where id = NEW.auction_id) - NEW.TIME < interval '120 seconds' THEN
+        UPDATE auction set duration = duration + 60 WHERE id = NEW.auction_id;
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS extend_auction ON bid;
+CREATE TRIGGER extend_auction
+    AFTER INSERT ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE extend_auction();
 
 -- SET AUCTION CURRENT PRICE WHEN IT IS CREATED
 DROP FUNCTION IF EXISTS set_current_auction_price();
@@ -230,9 +250,10 @@ CREATE TRIGGER set_current_auction_price
 DROP Function if exists prevent_lower_value_bids();
 create function prevent_lower_value_bids() returns trigger as $$
 Begin
-    IF EXISTS (select current_price from auction where auction.id = NEW.auction_id) then
-        raise exception 'Bid is lower than current biggest bid';
+    IF NEW.amount <= (select current_price from auction where id = NEW.auction_id) then
+        raise exception 'Bid is lower or equal to current biggest bid';
     end if;
+    RETURN new;
 END
 $$ LANGUAGE  'plpgsql';
 
