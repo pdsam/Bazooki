@@ -156,32 +156,31 @@ class AuctionController extends Controller
     }
 
     public function query(Request $request) {
-        $filters = $request->only(['auction_name', 'categories', 'max_bid', 'sortOrder']);
-
-        //dd($filters);
+        $filters = $request->only(['s', 'c', 'm', 'o']);
 
         $auctionsQuery = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
-        if (isset($filters['auction_name']) && !empty($filters['auction_name'])) {
-            $auctionsQuery = $auctionsQuery->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['auction_name'].'\'']);
+        if (isset($filters['s']) && !empty($filters['s'])) {
+            $auctionsQuery = $auctionsQuery->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['s'].'\'']);
         }
 
-        if (isset($filters['categories'])) {
+        if (isset($filters['c'])) {
             $constraint = function ($q) use($filters) {
                 $q->select('auction_id')
                     ->from('auction_category')
-                    ->whereIn('cat_id', $filters['categories'])
+                    ->whereIn('cat_id', $filters['c'])
                     ->groupBy('auction_id')
-                    ->havingRaw('count(*) = ?', [count($filters['categories'])]);
+                    ->havingRaw('count(*) = ?', [count($filters['c'])]);
             };
 
             $auctionsQuery = $auctionsQuery->whereIn('id', $constraint);
         }
 
-        if (isset($filters['max_bid'])) {
-            $auctionsQuery = $auctionsQuery->where('current_price', '<=', $filters['max_bid']);
+        if (isset($filters['m'])) {
+            $auctionsQuery = $auctionsQuery->where('current_price', '<=', $filters['m']);
         }
-        if (isset($filters['sortOrder'])) {
-            switch ($filters['sortOrder']) {
+
+        if (isset($filters['o'])) {
+            switch ($filters['o']) {
                 case 'bidDesc':
                     $auctionsQuery->orderBy('current_price', 'desc');
                     break;
@@ -201,11 +200,26 @@ class AuctionController extends Controller
             $auctionsQuery->orderBy('current_price', 'asc');
         }
 
-        $auctions = $auctionsQuery->limit(20)->get();
-        //dd($filters['categories']);
+        $pageNum = 0;
+        if ($request->exists('p') && is_numeric($request->input('p'))) {
+            $pageNum = intval($request->input('p'));
+        }
+
+        $pageSize = 20;
+        $total = $auctionsQuery->count();
+
+        $offset = 0;
+        $num_pages = ceil($total / $pageSize);
+        if ($num_pages > $pageNum && $pageNum >= 0) {
+            $offset = $pageSize * $pageNum;
+        }
+
+        $auctions = $auctionsQuery->offset($offset)->limit($pageSize)->get();
         return view('pages.query', [
             'filters'=>$filters,
-            'auctions'=>$auctions
+            'auctions'=>$auctions,
+            'current_page' => $pageNum,
+            'num_pages'=> $num_pages
         ]);
     }
 }
