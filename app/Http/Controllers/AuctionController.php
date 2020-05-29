@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Auction;
 use App\AuctionPhoto;
 use App\Certification;
+use App\Bid;
 
 class AuctionController extends Controller
 {
@@ -142,6 +143,15 @@ class AuctionController extends Controller
     }
 
     public function bid(Request $request, $id) {
+
+        $bid = Bid::create([
+            'auction_id'=> $request->form_id,
+            'bidder_id'=> Auth::user()->id,
+            'amount'=> $request->amount,
+        ]);
+
+
+
         return response($request->input('amount'));
     }
 
