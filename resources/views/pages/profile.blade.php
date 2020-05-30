@@ -6,22 +6,21 @@
 
 @section('content')
     <div class="row">
-        <div id="profile_pic" class="col-sm-4 d-flex text-center align-items-center justify-content-center">
-            <img class="rounded-circle" src={{ asset("storage/avatars/$user->id") }}>
+        <div id="profile_pic" class="col-12 col-md-4 d-flex text-center align-items-center justify-content-center">
+            <img class="rounded-circle" style="max-width: 200px" src={{ asset($user->photo()) }}>
         </div>
-        <div id="profile_description" class="col-sm-8 text-left">
-            <div class="jumbotron m-0 p-4 h-100">
-                <div class="d-flex justify-content-between">
-                    <h1 class="display-4">{{ $user->name }}</h1>
-                    @if (Auth::user()->id == $user->id)
-                        <div class="align-self-center">
-                            <button class="btn btn-olive" data-toggle="modal" data-target="#edit-form">Edit</button>
-                        </div>
-                    @endif
-                </div>
-                <p class="lead">{{ $user->description }}</p>
+        <div id="profile_description" class="col-12 col-md-8 mt-3 mt-md-0 text-left">
+            <div class="d-flex justify-content-between">
+                <h1 class="display-4">{{ $user->name }}</h1>
+                @if (Auth::user()->id == $user->id)
+                    <div class="align-self-center">
+                        <button class="btn btn-olive" data-toggle="modal" data-target="#edit-form">Edit</button>
+                    </div>
+                @endif
             </div>
+            <p class="lead">{{ $user->description }}</p>
         </div>
+
         @if (Auth::user()->id == $user->id)
             <div id="edit-form" class="modal fade">
                 <form class="w-100" method="POST" action="/profile/{{ $user->id }}" enctype="multipart/form-data">

@@ -37,11 +37,12 @@ class BazookerController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'description' => 'string|max:200',
+            'description' => 'nullable|string|max:200',
             'profilePic' => 'image|max:2048'
         ]);
 
         if ($validator->fails()) {
+            dd($request);
             return redirect()->route('profile')
                 ->withErrors($validator);
         }

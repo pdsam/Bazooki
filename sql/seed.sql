@@ -1,3 +1,5 @@
+-- noinspection SqlDialectInspectionForFile
+
 DROP TABLE IF EXISTS bazooker CASCADE;
 CREATE TABLE bazooker(id BIGSERIAL PRIMARY KEY, 
                       name text NOT NULL, 
@@ -34,6 +36,7 @@ CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     duration INT NOT NULL CHECK (duration >= 60*30) DEFAULT (3600*24*7),
                     insta_buy INT CHECK (insta_buy > 0),
+                    current_price INT,
 					item_name TEXT NOT NULL,
 					item_description TEXT NOT NULL,
                     item_short_description TEXT NOT NULL,
@@ -135,11 +138,14 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
 						CONSTRAINT cant_rate_same CHECK (rater_id != rated_id));
 
 
-
+---- ONLY ONE BAN
 DROP FUNCTION IF EXISTS only_one_ban();
 CREATE FUNCTION only_one_ban() RETURNS TRIGGER AS $$
 BEGIN
-    IF EXISTS (SELECT * FROM ban AS B WHERE B.bazooker_id = NEW.bazooker_id AND B.active = true AND NEW.active = true) THEN
+    IF NEW.active = false THEN
+        RETURN NEW;
+    END IF;
+    IF EXISTS (SELECT * FROM ban AS B WHERE B.bazooker_id = NEW.bazooker_id AND B.active = true) THEN
         RAISE EXCEPTION 'There can only be at most one active ban against each bazooker';
     END IF;
     RETURN NEW;
@@ -152,13 +158,9 @@ CREATE TRIGGER only_one_ban
     FOR EACH ROW
     EXECUTE PROCEDURE only_one_ban();
     
-    
-    
-    
-    
-    
-DROP FUNCTION IF EXISTS bid_on_auction();
-CREATE FUNCTION bid_on_auction() RETURNS TRIGGER AS $$
+---- BID ON OWN AUCTION
+DROP FUNCTION IF EXISTS bid_on_own_auction();
+CREATE FUNCTION bid_on_own_auction() RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS (SELECT * FROM auction AS A WHERE A.id = NEW.auction_id AND A.owner = NEW.bidder_id) THEN
         RAISE EXCEPTION 'A bazooker cannot bid on his own auction.';
@@ -167,16 +169,13 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS bid_on_auction ON bid;
-CREATE TRIGGER bid_on_auction
+DROP TRIGGER IF EXISTS bid_on_own_auction ON bid;
+CREATE TRIGGER bid_on_own_auction
     BEFORE INSERT OR UPDATE ON bid
     FOR EACH ROW
     EXECUTE PROCEDURE bid_on_auction();
 
-
-
-
-
+-- FTS UPDATE
 DROP FUNCTION IF EXISTS fts_auction_update();
 CREATE FUNCTION fts_auction_update() RETURNS TRIGGER AS $$
 BEGIN
@@ -197,55 +196,121 @@ CREATE TRIGGER precalculate_auction_fts
     BEFORE INSERT OR UPDATE ON auction
     FOR EACH ROW
     EXECUTE PROCEDURE fts_auction_update();
-    
-    
-    
-    
-    
-    
- DROP FUNCTION IF EXISTS prevent_bid_on_finished_auction();
-    CREATE FUNCTION prevent_bid_on_finished_auction() RETURNS TRIGGER AS $$
+
+-- CHECK DATE BOUNDS
+ DROP FUNCTION IF EXISTS check_auction_time_bounds();
+    CREATE FUNCTION check_auction_time_bounds() RETURNS TRIGGER AS $$
 BEGIN
+    IF NEW.time = NULL THEN
+        NEW.time = CURRENT_TIMESTAMP;
+    END IF;
     IF NEW.time > (SELECT start_time + duration * interval '1 second' FROM auction WHERE id = NEW.auction_id ) THEN
         RAISE EXCEPTION 'Auction has already closed.';
+    END IF;
+    IF NEW.time < (SELECT start_time FROM auction WHERE id = NEW.auction_id ) THEN
+        RAISE EXCEPTION  'Auction hasnt started yet';
     END IF;
     RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
 
-DROP TRIGGER IF EXISTS prevent_bid_on_finished_auction ON bid;
-CREATE TRIGGER prevent_bid_on_finished_auction
-    AFTER INSERT OR UPDATE ON bid
+DROP TRIGGER IF EXISTS check_auction_time_bounds ON bid;
+CREATE TRIGGER check_auction_time_bounds
+    BEFORE INSERT OR UPDATE ON bid
     FOR EACH ROW
-    EXECUTE PROCEDURE prevent_bid_on_finished_auction();
+    EXECUTE PROCEDURE check_auction_time_bounds();
 
+-- EXTEND AUCTION DURATION WHEN BIDDING
+ DROP FUNCTION IF EXISTS extend_auction();
+    CREATE FUNCTION extend_auction() RETURNS TRIGGER AS $$
+BEGIN
+    IF (SELECT start_time + duration * interval '1 second' from auction where id = NEW.auction_id) - NEW.TIME < interval '120 seconds' THEN
+        UPDATE auction set duration = duration + 60 WHERE id = NEW.auction_id;
+    END IF;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
 
+DROP TRIGGER IF EXISTS extend_auction ON bid;
+CREATE TRIGGER extend_auction
+    AFTER INSERT ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE extend_auction();
 
+-- SET AUCTION CURRENT PRICE WHEN IT IS CREATED
+DROP FUNCTION IF EXISTS set_current_auction_price();
+    CREATE FUNCTION set_current_auction_price() RETURNS TRIGGER AS $$
+BEGIN
+    NEW.current_price = NEW.base_bid;
+    RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
 
+DROP trigger if exists set_current_auction_price on auction;
+CREATE TRIGGER set_current_auction_price
+    BEFORE INSERT ON auction
+    FOR EACH ROW
+    EXECUTE PROCEDURE set_current_auction_price();
 
+-- PREVENT BIDS OF LOWER VALUE
+DROP Function if exists prevent_lower_value_bids();
+create function prevent_lower_value_bids() returns trigger as $$
+Begin
+    IF NEW.amount <= (select current_price from auction where id = NEW.auction_id) then
+        raise exception 'Bid is lower or equal to current biggest bid';
+    end if;
+    RETURN new;
+END
+$$ LANGUAGE  'plpgsql';
+
+DROP TRIGGER IF EXISTS prevent_lower_value_bid on bid;
+CREATE TRIGGER prevent_lower_value_bid
+    BEFORE INSERT ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE prevent_lower_value_bids();
+
+-- UPDATE AUCTION CURRENT PRICE ON BID
+DROP Function if exists update_auction_current_price();
+create function update_auction_current_price() returns trigger as $$
+Begin
+    update auction set current_price = NEW.amount where auction.id = NEW.auction_id;
+    return NEW;
+END
+$$ LANGUAGE  'plpgsql';
+
+DROP TRIGGER IF EXISTS update_auction_current_price on bid;
+CREATE TRIGGER update_auction_current_price
+    AFTER INSERT ON bid
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_auction_current_price();
+
+-- PREVENT MULTIPLE ACTIVE OVERLAPPING SUSPENSIONS
 DROP FUNCTION IF EXISTS prevent_repeated_suspentions();
 CREATE FUNCTION prevent_repeated_suspentions() RETURNS TRIGGER AS $$
 BEGIN
-    IF EXISTS(SELECT * FROM suspension WHERE bazooker_id = NEW.id AND NEW.time_of_suspension < suspension.time_of_suspension + suspension.duration * interval '1 second') THEN
+    IF EXISTS(SELECT * FROM suspension WHERE bazooker_id = NEW.id AND suspension.id <> NEW.id AND
+        NEW.time_of_suspension <= suspension.time_of_suspension + suspension.duration * interval '1 second' AND
+        NEW.time_of_suspension + NEW.duration * interval '1 second' >= suspension.time_of_suspension) THEN
         RAISE EXCEPTION 'User already suspended';
     END IF;
     RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
 
-
 DROP TRIGGER IF EXISTS prevent_repeated_suspentions on suspension;
 CREATE TRIGGER prevent_repeated_suspentions
-    AFTER INSERT OR UPDATE ON suspension
+    BEFORE INSERT OR UPDATE ON suspension
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_suspentions();
 
-
-
+-- PREVENT MULTIPLE AUCTION ACTIONS
 DROP FUNCTION IF EXISTS prevent_repeated_auction_action();
 CREATE FUNCTION prevent_repeated_auction_action() RETURNS TRIGGER AS $$
 BEGIN
-    IF EXISTS(SELECT * FROM auction_moderator_action WHERE auction_id = NEW.auction_id AND active = true AND NEW.active = true) THEN
+    IF NEW.active = false THEN
+        RETURN NEW;
+    END IF;
+    IF EXISTS(SELECT * FROM auction_moderator_action WHERE auction_id = NEW.auction_id AND active = true) THEN
         RAISE EXCEPTION 'There is already an action on this auction.';
     END IF;
     RETURN NEW;
@@ -254,17 +319,18 @@ $$ LANGUAGE 'plpgsql';
 
 DROP TRIGGER IF EXISTS prevent_repeated_auction_action ON auction_moderator_action;
 CREATE TRIGGER prevent_repeated_auction_action
-    AFTER INSERT OR UPDATE ON auction_moderator_action
+    BEFORE INSERT OR UPDATE ON auction_moderator_action
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_auction_action();
-    
-    
 
-
+-- PREVENT MULTIPLE BID ACTIONS
 DROP FUNCTION IF EXISTS prevent_repeated_bid_action();
 CREATE FUNCTION prevent_repeated_bid_action() RETURNS TRIGGER AS $$
 BEGIN
-    IF EXISTS(SELECT * FROM bid_moderator_action WHERE bid_id = NEW.bid_id AND active = true AND NEW.active = true) THEN
+    IF NEW.active = false THEN
+        RETURN NEW;
+    END IF;
+    IF EXISTS(SELECT * FROM bid_moderator_action WHERE bid_id = NEW.bid_id AND active = true) THEN
         RAISE EXCEPTION 'There is already an action on this bid.';
     END IF;
     RETURN NEW;
@@ -273,7 +339,7 @@ $$ LANGUAGE 'plpgsql';
 
 DROP TRIGGER IF EXISTS prevent_repeated_bid_action ON bid_moderator_action;
 CREATE TRIGGER prevent_repeated_bid_action
-    AFTER INSERT OR UPDATE ON bid_moderator_action
+    BEFORE INSERT OR UPDATE ON bid_moderator_action
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_bid_action();
 

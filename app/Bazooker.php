@@ -50,5 +50,13 @@ class Bazooker extends Authenticatable implements User
         return $this->hasMany('App\PaymentMethod', "bazooker_id");
     }
 
+    public function photo() {
+        if (file_exists( public_path() . "/storage/avatars/$this->id")) {
+            return "/storage/avatars/$this->id";
+        } else {
+            return '/assets/default_profile_pic.jpg';
+        }
+    }
+
     //TODO feedbacks
 }
