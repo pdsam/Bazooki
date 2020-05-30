@@ -42,6 +42,15 @@ class Bazooker extends Authenticatable implements User
         return false;
     }
 
+    public function ownAuctions() {
+        return $this->hasMany('App\Auction', 'owner');
+    }
+
+    public function wonAuctions() {
+        //TODO
+        return null;
+    }
+
     public function bids() {
         return $this->hasMany('App\Bid', 'bidder_id');
     }

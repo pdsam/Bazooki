@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
@@ -120,6 +121,17 @@ class AuctionController extends Controller
         if ($auction == null) {
             return redirect('auctions');
         }
+
+        if ($auction->hasmodAction()) {
+            if (!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
+                $baz = Auth::guard('bazooker')->user();
+                if (is_null($baz)) {
+                    return redirect()->route('auctions');
+                } else if ($auction->owner != $baz->id) {
+                    return redirect()->route('auctions');
+                }
+            }
+        }
         
         $auction_photos = $auction->photos()->get();
         $photo_paths = array();
@@ -135,7 +147,7 @@ class AuctionController extends Controller
         return view('pages.auctionPage',[
             'id' => $auction->id,
             'name'=>$auction->item_name,
-            'base_bid'=>$auction->maxBid(),
+            'base_bid'=>$auction->currentPrice(),
             'description'=>$auction->item_description,
             'duration'=>$auction->duration,
             'start_time'=>$auction->start_time,
@@ -167,7 +179,10 @@ class AuctionController extends Controller
     public function query(Request $request) {
         $filters = $request->only(['s', 'c', 'm', 'o']);
 
-        $auctionsQuery = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
+        $auctionsQuery = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')
+            ->whereDoesntHave('moderatorActions', function (Builder $builder) {
+                $builder->where('activate', '=', 'true');
+            });
         if (isset($filters['s']) && !empty($filters['s'])) {
             $auctionsQuery = $auctionsQuery->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['s'].'\'']);
         }
@@ -235,4 +250,19 @@ class AuctionController extends Controller
             'num_pages'=> $num_pages
         ]);
     }
+
+    public function myAuctions(Request $request) {
+        $baz = Auth::guard('bazooker')->user();
+
+        if (is_null($baz)) {
+            return redirect()->route('auctions');
+        }
+
+        $auctions = $baz->ownAuctions()->orderByRaw('(start_time + duration * interval \'1 second\') desc')->get();
+
+        return view('pages.activity.myauctions', ['auctions' => $auctions]);
+    }
+    //TODO bids
+    //TODO won auctions
+    //TODO transactions
 }

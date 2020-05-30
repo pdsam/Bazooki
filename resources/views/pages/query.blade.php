@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Search for auctions')
+
 @section('head')
     <link rel="stylesheet" href="{{ asset('/css/query.css') }}">
 @endsection

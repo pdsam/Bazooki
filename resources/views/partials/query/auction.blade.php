@@ -8,13 +8,11 @@
                 <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                     <div class="">
                         <h4 class="card-title">{{ $auction->item_name }}</h4>
-                        @php
-                            $duration = $auction->duration;
-                            $start_time =
-                                DateTime::createFromFormat('Y-m-d H:i:s', $auction->start_time)
-                                ->modify("+$duration seconds")->format('d M Y H:i:s');
-                        @endphp
-                        <h6 class="card-subtitle text-muted">Ends: {{ $start_time }}</h6>
+                        @if ($auction->isOver())
+                            <h6 class="card-subtitle text-muted">Already over</h6>
+                        @else
+                            <h6 class="card-subtitle text-muted">Ends: {{ $auction->endTime()->format('d M Y H:i:s') }}</h6>
+                        @endif
 
                         <div>
                             @foreach($auction->categories as $cat)
@@ -23,7 +21,7 @@
                         </div>
                     </div>
                     <div>
-                        <span class="mr-1 auction-price">{{ $auction->maxBid() }}</span>$
+                        <span class="mr-1 auction-price">{{ $auction->currentPrice() }}</span>$
                     </div>
                 </div>
                 <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>

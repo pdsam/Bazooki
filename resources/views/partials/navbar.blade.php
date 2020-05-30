@@ -42,7 +42,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if(Auth::check())
                         <a class="dropdown-item" href="/profile">Profile</a>
-                        <a class="dropdown-item" href="/profile#tabs-3">My auctions</a>
+                        <a class="dropdown-item" href="/activity">My activity</a>
                         <a class="dropdown-item" href="/account/settings">Account Settings</a>
                         @endif
                         @if(Auth::guard('mod')->check() || Auth::guard('admin')->check())

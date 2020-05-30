@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Bid;
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class Auction extends Model
@@ -40,7 +41,16 @@ class Auction extends Model
         return $this->hasMany('App\Bid');
     }
 
-    public function maxBid() {
+    public function moderatorActions() {
+        return $this->hasMany('App\AuctionModeratorAction');
+    }
+
+    public function hasModAction() {
+        $action = $this->moderatorActions()->where('activate', '=', 'true')->get();
+        return !is_null($action);
+    }
+
+    public function currentPrice() {
         $maxBid = $this->bids->max('amount');
         if (is_null($maxBid)) {
             return $this->base_bid;
@@ -50,5 +60,13 @@ class Auction extends Model
 
     public function categories() {
         return $this->belongsToMany(Category::class, 'auction_category', 'auction_id', 'cat_id');
+    }
+
+    public function endTime() {
+        return DateTime::createFromFormat('Y-m-d H:i:s', $this->start_time)->modify("+$this->duration seconds");
+    }
+
+    public function isOver() {
+        return $this->endTime() < new DateTime();
     }
 }
