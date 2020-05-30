@@ -7,7 +7,7 @@
 @section('searchContent', isset($filters['s']) ? $filters['s'] : '')
 
 @section('content')
-    <div class="d-flex justify-content-end align-items-baseline mb-2 p-1" style="margin-left:-15px; margin-right:-15px;">
+    <div class="d-flex justify-content-end align-items-baseline mb-2 p-1 m-2 m-sm-0" style="margin-left:-15px; margin-right:-15px;">
         <label class="mr-1" for="sortByInput">Sort by:</label>
         <select class="w-auto custom-select rounded-0" id="sortByInput">
             <option value="bidDesc" @if(isset($filters['o']) && strcmp($filters['o'], 'bidDesc') == 0) selected="selected" @endif>Highest Bid (descending)</option>
@@ -16,11 +16,11 @@
             <option value="dateLate" @if(isset($filters['o']) && strcmp($filters['o'], 'dateLate') == 0) selected="selected" @endif>End date (Latest)</option>
         </select>
     </div>
-    <div class="row">
+    <div class="row m-2 m-sm-0">
         <!-- FILTERS -->
         <div class="col-12 col-lg-3 p-2 p-md-4 bg-white shadow-sm rounded-0 mb-auto">
             <a id="filters-toggle" class="d-block d-lg-none pb-1 border-bottom" href="#filters" data-toggle="collapse" data-target="#filters">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between align-items-center">
                     <p class="m-0">Filters</p>
                     <i class="fa fa-chevron-up"></i>
                 </div>
@@ -69,16 +69,16 @@
         <div class="col-12 col-lg-9 mt-2 mt-md-0 p-0">
             <div class="ml-md-1">
                 @foreach ($auctions as $auction)
-                    <div class="card shadow-sm rounded-0 border-0 @if (!$loop->last) mb-1 @endif mt-5 mt-md-0">
-                        <div class="row align-items-center no-gutters">
+                    <div class="card shadow-sm rounded-0 border-0 @if (!$loop->first) mt-3 mt-sm-2 @endif">
+                        <div class="row align-items-top no-gutters">
                             <div class="col-xs-12 col-sm-4">
-                                <img src="{{ asset('assets/gun.jpg') }}" class="card-img rounded-0" alt="logo">
+                                <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
                             </div>
                             <div class="col-xs-12 col-sm-8">
                                 <div class="card-body">
                                     <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                                         <div class="">
-                                            <h5 class="card-title">{{ $auction->item_name }}</h5>
+                                            <h4 class="card-title">{{ $auction->item_name }}</h4>
                                             @php
                                                 $duration = $auction->duration;
                                                 $start_time =
@@ -86,15 +86,21 @@
                                                     ->modify("+$duration seconds")->format('d M Y H:i:s');
                                             @endphp
                                             <h6 class="card-subtitle text-muted">Ends: {{ $start_time }}</h6>
+
+                                            <div>
+                                                @foreach($auction->categories as $cat)
+                                                    <span class="badge badge-light border mr-1 mt-2">{{ $cat->name }}</span>
+                                                @endforeach
+                                            </div>
                                         </div>
                                         <div>
-                                            <span class="mr-1" style="font-size: 2rem">{{ $auction->maxBid() }}</span>$
+                                            <span class="mr-1 auction-price">{{ $auction->maxBid() }}</span>$
                                         </div>
                                     </div>
-                                    <p class="card-text">{{ $auction->item_short_description }}</p>
+                                    <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
                                 </div>
                             </div>
-                            <a href="/auctions/{{ $auction->id }}" class="stretched-link"></a>
+                            <a href="{{ route('auction', $auction->id) }}" class="stretched-link"></a>
                         </div>
                     </div>
                 @endforeach
