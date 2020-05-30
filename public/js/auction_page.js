@@ -4,7 +4,7 @@ let output = document.getElementById("duration-place");
 let t = start_time.split(/[- :]/);
 let x = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
 start_time = x.getTime();
-let end_time = start_time + parseInt(duration);
+let end_time = start_time + parseInt(duration)*1000;
 
 let f = setInterval(function () {
   let now = new Date().getTime();
