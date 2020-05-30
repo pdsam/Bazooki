@@ -3,6 +3,7 @@
 @section('head')
 <link rel="stylesheet" href={{ asset('css/product.css') }}>
 <script src="{{ asset('js/auction_page.js') }}" defer></script>
+<script src="{{ asset('js/chart.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -82,7 +83,8 @@
 <div class="card">
     <div class="card-body">
         <h3 class="card-title">Price variation</h3>
-        <img src="../assets/chart.png" class="img-responsive" width="100%" />
+        <!--<img src="../assets/chart.png" class="img-responsive" width="100%" />-->
+        <canvas id="chart"  width="400" height="400"></canvas>
     </div>
 
 </div>
