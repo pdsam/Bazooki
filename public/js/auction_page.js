@@ -20,7 +20,7 @@ let f = setInterval(function () {
     output.innerHTML = "Expired";
     clearInterval(f);
   }
-}, 10000000);
+}, 1000);
 
 
 
