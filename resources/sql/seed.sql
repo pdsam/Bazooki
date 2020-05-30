@@ -351,5 +351,6 @@ CREATE INDEX feedback_f_type ON feedback USING hash(ftype);
 CREATE INDEX bid_moderator_action_activate ON bid_moderator_action USING hash(activate);
 CREATE INDEX auction_moderator_action_activate ON auction_moderator_action USING hash(activate);
 CREATE INDEX start_auction ON auction USING btree(start_time);
+CREATE INDEX end_time on auction using btree((start_time + duration * interval '1 second'));
 CREATE INDEX auction_search_dix ON auction USING GIST(search);
 
