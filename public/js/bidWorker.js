@@ -26,5 +26,5 @@ function getBids(){
 self.addEventListener("message",function(e){
     adress = e.data
     console.log("got message updating")
-    getBids()
+    //getBids()
 })

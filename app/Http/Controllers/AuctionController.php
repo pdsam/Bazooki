@@ -135,7 +135,7 @@ class AuctionController extends Controller
         return view('pages.auctionPage',[
             'id' => $auction->id,
             'name'=>$auction->item_name,
-            'base_bid'=>$auction->base_bid,
+            'base_bid'=>$auction->maxBid(),
             'description'=>$auction->item_description,
             'duration'=>$auction->duration,
             'start_time'=>$auction->start_time,
@@ -146,10 +146,17 @@ class AuctionController extends Controller
 
     public function bid(Request $request, $id) {
 
+        $validator = Validator::make($request->all(),[
+            'form-id' => 'required|numeric',
+            'amount' => 'required|numeric',
+
+
+        ]);
+
         $bid = Bid::create([
-            'auction_id'=> $request->form_id,
+            'auction_id'=> $request->input('form-id'),
             'bidder_id'=> Auth::user()->id,
-            'amount'=> $request->amount,
+            'amount'=> $request->input('amount'),
         ]);
 
 
