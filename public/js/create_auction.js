@@ -18,7 +18,7 @@ $(function () {
     });
 });
 
-$(function(){$("select").imagepicker();});
+$(function(){$("select.image-picker").imagepicker();});
 
 
 function addRequiredInputs() {
