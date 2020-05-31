@@ -263,7 +263,7 @@ class AuctionController extends Controller
 
         $offset = 0;
         $num_pages = ceil($total / $pageSize);
-        if ($num_pages > $pageNum && $pageNum >= 0) {
+        if ($num_pages >= $pageNum && $pageNum >= 0) {
             $offset = $pageSize * $pageNum;
         } else {
             $input = $filters;
