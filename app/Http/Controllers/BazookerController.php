@@ -73,4 +73,10 @@ class BazookerController extends Controller
 
         return view('pages.settings', ['payment_methods' => $bazooker->paymentMethods]);
     }
+
+    public function deleteAccount(Request $request, Bazooker $bazooker){
+        $this->authorize('editProfile', $bazooker);
+
+        return redirect('auctions');
+    }
 }

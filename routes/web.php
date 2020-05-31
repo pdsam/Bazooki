@@ -21,16 +21,15 @@ Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
 Route::post('/auctions/add', 'AuctionController@create');
 Route::post('/auctions/{id}/bid', 'AuctionController@bid');
 
-// User
+// User aka Bazooker
 Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');
 Route::patch('/profile/{bazooker}', 'BazookerController@editProfile');
 Route::get('/account/settings', 'BazookerController@settings')->name('settings');
 Route::put('/account/settings/password', 'ChangePasswordController@changeBazookerPass');
 Route::post('/account/settings/payment', 'PaymentMethodController@create');
 Route::delete('/account/settings/payment', 'PaymentMethodController@remove');
-
 Route::get('/activity/myauctions', 'AuctionController@myAuctions')->name('myauctions');
-
+Route::delete('/account/{id?}','BazookerController@deleteAccount');
 
 // Authentication
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
