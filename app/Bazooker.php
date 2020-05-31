@@ -47,8 +47,7 @@ class Bazooker extends Authenticatable implements User
     }
 
     public function wonAuctions() {
-        //TODO
-        return null;
+        return $this->hasMany('App\Auction', 'highest_bidder')->whereRaw('start_time + duration * interval \'1 second\'');
     }
 
     public function bids() {
