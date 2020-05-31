@@ -8,7 +8,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
     <link rel="stylesheet" href={{ asset('css/product.css') }}>
-    <script type="text/javascript" src="{{ asset('/js/create_auction.js') }}" defer></script>
+    <script src="{{ asset('/js/create_auction.js') }}" defer></script>
 	
 	<style>
 		.datepicker td, .datepicker th {
@@ -41,12 +41,12 @@
             @csrf
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Product title</h3>
-                <input name="name" type="text" class="form-control form-control-lg" id="productTitle" aria-describedby="prodTitle" placeholder="Title" required>
+                <input name="name" type="text" class="form-control form-control-lg" id="productTitle" placeholder="Title" required>
             </div>
 
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Short product description</h3>
-                <input name="short_description" class="form-control form-control-sm" rows="5" id="description" placeholder="Short description" required></input>
+                <textarea name="short_description" class="form-control form-control-sm" rows="2" id="short-description" placeholder="Short description" required></textarea>
             </div>
             
             <div class="form-group mt-4 ml-4 mr-4">

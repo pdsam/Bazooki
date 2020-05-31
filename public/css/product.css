@@ -42,3 +42,12 @@ input[type=number] {
 .color-purple{
     color:var(--highlight-purple);
 }
+
+@media print{
+
+    #bid-div{
+        display: none;
+    }
+
+
+}

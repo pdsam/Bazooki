@@ -170,7 +170,7 @@ class AuctionController extends Controller
             'bidder_id'=> Auth::user()->id,
             'amount'=> $request->input('amount'),
         ]);
-
+        
 
 
         return response($request->input('amount'));

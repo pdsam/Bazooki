@@ -52,7 +52,7 @@
                     <p hidden id="timer-start-time">{{ $start_time }}</p>
                     <p hidden id="timer-duration">{{ $duration }}</p>
                 </div>
-                <div class="card-body w-100">
+                <div class="card-body w-100" id="bid-div">
                     <div class="row">
                         <form id="bid-form" class="form-inline" action="POST">
                             @csrf
