@@ -42,7 +42,7 @@
         </div>
 
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-5">   
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center card-c-element card-body">{{ $name }}</h3>
@@ -58,7 +58,7 @@
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" name="form-id" value="{{ $id }}">
-                                <input id="money" type="number" class="form-control text-center col-12 col-md-8" name="amount" value="110"></input>
+                                <input id="money" type="number" class="form-control text-center col-12 col-md-8" name="amount" value="{{$base_bid +1}}"></input>
                                 <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
 

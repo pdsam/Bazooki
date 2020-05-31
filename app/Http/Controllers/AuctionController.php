@@ -18,6 +18,7 @@ use App\Auction;
 use App\AuctionPhoto;
 use App\Certification;
 use App\Bid;
+use Illuminate\Database\QueryException;
 
 class AuctionController extends Controller
 {
@@ -145,6 +146,7 @@ class AuctionController extends Controller
         }
 
         return view('pages.auctionPage',[
+            'owner' => $auction->owner,
             'id' => $auction->id,
             'name'=>$auction->item_name,
             'base_bid'=>$auction->currentPrice(),
@@ -165,11 +167,16 @@ class AuctionController extends Controller
 
         ]);
 
+        try{
         $bid = Bid::create([
             'auction_id'=> $request->input('form-id'),
             'bidder_id'=> Auth::user()->id,
             'amount'=> $request->input('amount'),
         ]);
+        }
+        catch(QueryException $e){
+            abort(403,"Invalid bid");
+        }
         
 
 
