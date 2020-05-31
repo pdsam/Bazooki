@@ -91,6 +91,23 @@
                     </div>
                 </div>
             </div>
+
+        
+            <div class="card mt-4 ml-4 mr-4">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Categories</h3>
+                        <p>Select all that apply</p>
+                    </div>
+                    <div class="row">
+                        @foreach($categories as $cat)
+                            <div class="col-lg-4">
+                                <input name="categories[]" type="checkbox" class="form-control">
+                            </div>
+                        @endforeach
+                    </div>                    
+                </div>
+            </div>
         
             <div class="card mt-4 ml-4 mr-4">
                 <div class="card-body">

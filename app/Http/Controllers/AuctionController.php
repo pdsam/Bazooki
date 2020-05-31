@@ -18,6 +18,7 @@ use App\Auction;
 use App\AuctionPhoto;
 use App\Certification;
 use App\Bid;
+use App\Category;
 
 class AuctionController extends Controller
 {
@@ -32,7 +33,9 @@ class AuctionController extends Controller
             return redirect('auctions');
         }
 
-        return view('pages.create_auction');
+        $categories = Category::all();
+
+        return view('pages.create_auction', ["categories" => $categories]);
     }
     
     public function create(Request $request) {
