@@ -11,7 +11,7 @@
                         @if ($auction->isOver())
                             <h6 class="card-subtitle text-muted">Already over</h6>
                         @else
-                            <h6 class="card-subtitle text-muted">Ends: {{ $auction->endTime()->format('d M Y H:i:s') }}</h6>
+                            <h6 class="card-subtitle text-muted">Ends: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
                         @endif
 
                         <div>
