@@ -19,6 +19,8 @@ use App\AuctionPhoto;
 use App\Certification;
 use App\Bid;
 use Illuminate\Database\QueryException;
+use App\Category;
+use App\AuctionCategory;
 
 class AuctionController extends Controller
 {
@@ -33,7 +35,8 @@ class AuctionController extends Controller
             return redirect('auctions');
         }
 
-        return view('pages.create_auction');
+        $categories = Category::all();
+        return view('pages.create_auction', ["categories" => $categories]);
     }
     
     public function create(Request $request) {
@@ -51,7 +54,9 @@ class AuctionController extends Controller
             'photos' => 'nullable|array',
             'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff |max:10240',
             'insta_buy' => 'nullable|numeric|gt:0',
-            'certification' => 'nullable|mimes:pdf |max:4096'
+            'certification' => 'nullable|mimes:pdf |max:4096',
+            'categories' => 'nullable|array',
+            'categories.*' => 'numeric'
         ], $messages = [
             'name.max' => 'Name has a maximum of 100 characters',
             'description.max' => 'Name has a maximum of 2000 characters',
@@ -60,10 +65,13 @@ class AuctionController extends Controller
             'start_time.date_format' => "Invalid date format, must be d-m-Y",
             'duration.gt' => "Duration must be greater than 0",
             'insta_buy.gt' => "Instant buy price must be greater than 0",
+            'photos.array' => "Photos must be an array",
             'photos.*.mimes' => 'Photos must be of image format',
             'photos.*.max' => 'Photos must be less than 10 MB',
             'certification.mimes' => 'Certification must be a PDF',
-            'certification.max' => 'Certification should be less than 4 MB'
+            'certification.max' => 'Certification should be less than 4 MB',
+            'categories.array' => "Categories must be an array",
+            'categories.*.numeric' => "Categories must be numeric"
         ]);
 
         if ($validator->fails()) {
@@ -88,6 +96,17 @@ class AuctionController extends Controller
         ]);
 
         if(empty($newAuction)) return redirect('auctions');
+
+        if ($request->has('categories')) {
+            $categories = $request->categories;
+            foreach($categories as $cat) {
+                if(Category::where('id', $cat)->exists()) {
+                    DB::table('auction_category')->insert([
+                        ['auction_id' => $newAuction->id, 'cat_id' => $cat]
+                    ]);
+                }
+            }
+        }
 
         if($request->hasFile('photos')) {
             $files = $request->file('photos');
@@ -145,6 +164,8 @@ class AuctionController extends Controller
             $photo_paths = array("assets/unknown_item.png");
         }
 
+        $categories = $auction->categories()->get();
+
         return view('pages.auctionPage',[
             'owner' => $auction->owner,
             'id' => $auction->id,
@@ -153,7 +174,8 @@ class AuctionController extends Controller
             'description'=>$auction->item_description,
             'duration'=>$auction->duration,
             'start_time'=>$auction->start_time,
-            'photos'=>$photo_paths
+            'photos'=>$photo_paths,
+            'categories'=>$categories
         ]);
 
     }

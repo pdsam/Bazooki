@@ -42,10 +42,15 @@
         </div>
 
     </div>
-    <div class="col-lg-5">   
-        <div class="card">
+    <div class="col-lg-5">
+        <div id="product_info" class="card">
             <div class="card-body">
-                <h3 class="card-title text-center card-c-element card-body">{{ $name }}</h3>
+                <div id="product_info_header" class="card-c-element">
+                    <h3 class="card-title text-center card-body">{{ $name }}</h3>
+                    @foreach($categories as $cat)
+                        <span class="badge badge-primary bg-olive">{{ $cat->name }}</span>
+                    @endforeach
+                </div>
                 <div class="card-c-element card-body">
                     <h3 class="card-title text-center" id="price">{{ $base_bid }}</h3>
                     <h3 id="duration-place" class="card-title text-center"></h3>

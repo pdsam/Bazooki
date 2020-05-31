@@ -18,7 +18,7 @@ $(function () {
     });
 });
 
-$(function(){$("select").imagepicker();});
+$(function(){$("select.image-picker").imagepicker();});
 
 
 function addRequiredInputs() {
@@ -67,4 +67,12 @@ $("#auctionImageInput").change(function() {
         reader.readAsDataURL(file);
         document.querySelector(".thumbnails").appendChild(newLi);
     }
+});
+
+$(document).ready(function() {
+    $('.auction_categories').select2({
+        theme: "classic",
+        closeOnSelect: false,
+        placeholder: "Categories",
+    });
 });
