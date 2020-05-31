@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
          $this->call([
              BazookerTableSeeder::class,
              CategoryTableSeeder::class,
-             AuctionTableSeeder::class
+             AuctionTableSeeder::class,
+             AdminTableSeeder::class
          ]);
      }
 }
