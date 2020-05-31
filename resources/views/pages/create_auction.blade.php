@@ -7,7 +7,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
-    <link rel="stylesheet" href={{ asset('css/product.css') }}>
     <script type="text/javascript" src="{{ asset('/js/create_auction.js') }}" defer></script>
 	
 	<style>
@@ -41,12 +40,12 @@
             @csrf
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Product title</h3>
-                <input name="name" type="text" class="form-control form-control-lg" id="productTitle" aria-describedby="prodTitle" placeholder="Title" required>
+                <input name="name" type="text" class="form-control" id="productTitle" aria-describedby="prodTitle" placeholder="Title" required>
             </div>
 
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Short product description</h3>
-                <input name="short_description" class="form-control form-control-sm" rows="5" id="description" placeholder="Short description" required></input>
+                <input name="short_description" class="form-control" id="short_description" placeholder="Short description" required></input>
             </div>
             
             <div class="form-group mt-4 ml-4 mr-4">
@@ -54,14 +53,43 @@
                 <textarea name="description" class="form-control" rows="5" id="description" placeholder="Description"></textarea>
             </div>
             
-            <div class="form-group mt-4 ml-4 mr-4">
-                <h3>Base bid</h3>
-                <input name="base_bid" type="number" placeholder="Base bid" step="0.1" class="form-control" required></input>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="form-group ml-4 mr-4">
+                        <h3>Base bid</h3>
+                        <input name="base_bid" type="number" placeholder="Base bid" step="0.1" min="0" class="form-control" required></input>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-sm-12">
+                    <div class="form-group ml-4 mr-4">
+                        <h3>Instant buy price (optional)</h3>
+                        <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="0.1" min="0" class="form-control"></input>
+                    </div>
+                </div>
             </div>
             
-            <div class="form-group mt-4 ml-4 mr-4">
-                <h3>Instant buy price (optional)</h3>
-                <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="0.1" class="form-control"></input>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="form-group ml-4 mr-4">
+                        <h3>Start date</h3>    
+                        <div class="datepicker-start date input-group p-0">
+                            <input name="start_time" type="text" placeholder="Start date" class="form-control" id="reservationDate" required>
+                            <div class="input-group-append"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-sm-12">
+                    <div class="form-group ml-4 mr-4">
+                        <h3>Duration</h3>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Days" id="days" step="1" min="0" required>
+                            <input type="number" class="form-control" placeholder="Hours" id="hours" step="1" min="0" max="24" required>
+                            <input type="number" class="form-control" placeholder="Minutes" id="mins" step="1" min="0" max="60" required>
+                        </div>
+                    </div>
+                </div>
             </div>
         
             <div class="card mt-4 ml-4 mr-4">
@@ -80,29 +108,9 @@
             <div class="card mt-4 ml-4 mr-4">
                 <div class="card-body">
                     <div class="card-title">
-                        <h3>Duration</h3>
-                    </div>
-                    
-                    <div class="row justify-content-between">
-                        <div class="col-md-3 datepicker-start date input-group p-0 ml-3 mr-3">
-                            <input name="start_time" type="text" placeholder="Start date" class="form-control py-4 px-4" id="reservationDate" required>
-                            <div class="input-group-append"></div>
-                        </div>
-                        <div class="col-md-4 input-group mt-4 mt-md-0">
-                            <input type="number" class="form-control" style="height:100%;" placeholder="days" id="days" required>
-                            <input type="number" class="form-control" style="height:100%;" placeholder="hours" id="hours" required>
-                            <input type="number" class="form-control" style="height:100%;" placeholder="mins" id="mins" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mt-4 ml-4 mr-4">
-                <div class="card-body">
-                    <div class="card-title">
                         <h3>Certification (optional)</h3>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check" style="margin-bottom: 10px;">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="certification_check">
                         <label class="form-check-label" for="defaultCheck1">
                             I confirm I have a certificate in PDF format and it's genuine.
