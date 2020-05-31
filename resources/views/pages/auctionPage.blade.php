@@ -65,8 +65,11 @@
                                 <input type="hidden" name="form-id" value="{{ $id }}">
                                 <input id="money" type="number" class="form-control text-center col-12 col-md-8" name="amount" value="{{$base_bid +1}}"></input>
                                 <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
-                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
-
+                                    @if(!Auth::check() || Auth::id() == $owner )
+                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now" disabled></input>
+                                    @else
+                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
+                                    @endif
                                 </div>
                         </form>
                     </div>

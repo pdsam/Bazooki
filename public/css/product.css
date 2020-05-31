@@ -37,11 +37,18 @@ input[type=number] {
 #bid-button{
     border-radius: 5rem;
 }
+#bid-button:disabled{
+    background-color: var(--highlight-purple);
+    opacity: 0.3;
+}
 
+#bid-button:disabled:hover{
+    background-color: var(--highlight-purple);
+}
 
 .color-purple{
     color:var(--highlight-purple);
-}
+}   
 
 @media print{
 
