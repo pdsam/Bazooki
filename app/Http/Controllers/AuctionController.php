@@ -34,7 +34,6 @@ class AuctionController extends Controller
         }
 
         $categories = Category::all();
-
         return view('pages.create_auction', ["categories" => $categories]);
     }
     

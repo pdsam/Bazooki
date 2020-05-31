@@ -8,21 +8,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
     <script type="text/javascript" src="{{ asset('/js/create_auction.js') }}" defer></script>
-	
-	<style>
-		.datepicker td, .datepicker th {
-			width: 2.5rem;
-			height: 2.5rem;
-			font-size: 0.85rem;
-		}
-
-        .thumbnails img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
-
-	</style>
+    <link rel="stylesheet" href={{ asset('css/create_auction.css') }}>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 @endsection
 
 @section('content')
@@ -99,13 +87,11 @@
                         <h3>Categories</h3>
                         <p>Select all that apply</p>
                     </div>
-                    <div class="row">
+                    <select class="auction_categories" name="categories[]" multiple="multiple">
                         @foreach($categories as $cat)
-                            <div class="col-lg-4">
-                                <input name="categories[]" type="checkbox" class="form-control">
-                            </div>
+                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                         @endforeach
-                    </div>                    
+                    </select>            
                 </div>
             </div>
         

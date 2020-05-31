@@ -68,3 +68,11 @@ $("#auctionImageInput").change(function() {
         document.querySelector(".thumbnails").appendChild(newLi);
     }
 });
+
+$(document).ready(function() {
+    $('.auction_categories').select2({
+        theme: "classic",
+        closeOnSelect: false,
+        placeholder: "Categories",
+    });
+});
