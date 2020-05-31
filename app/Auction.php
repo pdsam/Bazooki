@@ -25,6 +25,10 @@ class Auction extends Model
         'item_short_description'
     ];
 
+    protected $dates = [
+        'start_time',
+    ];
+
     public function photos() {
         return $this->hasMany('App\AuctionPhoto');
     }
@@ -51,7 +55,7 @@ class Auction extends Model
     }
 
     public function currentPrice() {
-        $maxBid = $this->bids->max('amount');
+        $maxBid = $this->bids()->max('amount');
         if (is_null($maxBid)) {
             return $this->base_bid;
         }
@@ -62,11 +66,11 @@ class Auction extends Model
         return $this->belongsToMany(Category::class, 'auction_category', 'auction_id', 'cat_id');
     }
 
-    public function endTime() {
-        return DateTime::createFromFormat('Y-m-d H:i:s', $this->start_time)->modify("+$this->duration seconds");
+    public function endDateTime() {
+        return $this->start_time->modify("+$this->duration seconds");
     }
 
     public function isOver() {
-        return $this->endTime() < new DateTime();
+        return $this->endDateTime() < new DateTime('now');
     }
 }

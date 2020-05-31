@@ -13,7 +13,7 @@ class Bid extends Model
         'auction_id',
         'bidder_id',
         'amount',
-        
+        'time'
     ];
 
     public function bidder() {
