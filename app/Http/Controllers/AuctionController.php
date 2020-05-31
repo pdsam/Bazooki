@@ -163,6 +163,8 @@ class AuctionController extends Controller
             $photo_paths = array("assets/unknown_item.png");
         }
 
+        $categories = $auction->categories()->get();
+
         return view('pages.auctionPage',[
             'id' => $auction->id,
             'name'=>$auction->item_name,
@@ -170,7 +172,8 @@ class AuctionController extends Controller
             'description'=>$auction->item_description,
             'duration'=>$auction->duration,
             'start_time'=>$auction->start_time,
-            'photos'=>$photo_paths
+            'photos'=>$photo_paths,
+            'categories'=>$categories
         ]);
 
     }
