@@ -84,7 +84,7 @@
     <div class="card-body">
         <h3 class="card-title">Price variation</h3>
         <!--<img src="../assets/chart.png" class="img-responsive" width="100%" />-->
-        <canvas id="chart"  width="400" height="400"></canvas>
+        <canvas id="chart"  width="400" height="200"></canvas>
     </div>
 
 </div>

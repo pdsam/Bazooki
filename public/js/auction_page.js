@@ -51,7 +51,8 @@ if (typeof(Worker) !== "undefined") {
     w.postMessage("/api/auctions/bids/" + window.location.href.match("[0-9]+$")[0])
     console.log("sending message")
     w.onmessage = function (event) {
-        //document.getElementById("price").innerHTML=event.data
+      console.log(event.data)
+        document.getElementById("price").innerHTML=event.data
         
   };
     }

@@ -1,5 +1,4 @@
 let adress = ""
-let counter = 0
 
 function getBids(){
     let request = new XMLHttpRequest();
@@ -8,11 +7,10 @@ function getBids(){
         
         request.addEventListener("load",() =>{
             const res = JSON.parse(request.responseText);
-            if(res.size == 0){
-                return
+            if(res.length != 0){
+                postMessage(res[0]['amount'])//TODO
             }
-                counter++;
-                postMessage(counter)
+            
             
 
 
