@@ -258,9 +258,139 @@ class AuctionController extends Controller
             return redirect()->route('auctions');
         }
 
-        $auctions = $baz->ownAuctions()->orderByRaw('(start_time + duration * interval \'1 second\') desc')->get();
+        $auctions = $baz->ownAuctions();
 
-        return view('pages.activity.myauctions', ['auctions' => $auctions]);
+        if ($request->exists('o')) {
+            switch ($request->input('o')) {
+                case 'dateEarl':
+                    $auctions->orderByRaw('(start_time + duration * interval \'1 second\') asc');
+                    break;
+                case 'dateLate':
+                    $auctions->orderByRaw('(start_time + duration * interval \'1 second\') desc');
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            $auctions->orderByRaw('(start_time + duration * interval \'1 second\') desc');
+        }
+
+        if ($request->exists('f')) {
+            switch($request->input('f')) {
+                case 'onlyLive':
+                    $auctions->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
+                    break;
+                case 'onlyOver':
+                    $auctions->whereRaw('start_time + duration * interval \'1 second\' < CURRENT_TIMESTAMP');
+                    break;
+                case 'both':
+                default:
+                    break;
+
+            }
+        }
+
+        $pageNum = 0;
+        if ($request->exists('p') && is_numeric($request->input('p'))) {
+            $pageNum = intval($request->input('p'));
+        }
+
+        $pageSize = 20;
+        $total = $auctions->count();
+
+        $offset = 0;
+        $num_pages = ceil($total / $pageSize);
+        if ($num_pages > $pageNum && $pageNum >= 0) {
+            $offset = $pageSize * $pageNum;
+        } else {
+            return redirect()->route('myauctions', ['p'=>0]);
+        }
+
+        $auctions = $auctions->offset($offset)->limit($pageSize)->get();
+
+        return view('pages.activity.myauctions', [
+            'auctions' => $auctions,
+            'sortOrder'=>$request->input('o'),
+            'filter'=>$request->input('f'),
+            'current_page' => $pageNum,
+            'num_pages'=> $num_pages
+            ]);
+    }
+
+    public function myBids(Request $request) {
+        $baz = Auth::guard('bazooker')->user();
+
+        if (is_null($baz)) {
+            return redirect()->route('auctions');
+        }
+
+        $bids = $baz->bids();
+
+        if ($request->exists('o')) {
+            switch ($request->input('o')) {
+                case 'bidDesc':
+                    $bids->orderBy('amount', 'desc');
+                    break;
+                case 'bidAsc':
+                    $bids->orderBy('amount', 'asc');
+                    break;
+                case 'dateEarl':
+                    $bids->orderBy('time', 'asc');
+                    break;
+                case 'dateLate':
+                    $bids->orderBy('time', 'desc');
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            $bids->orderBy('time', 'desc');
+        }
+
+        if ($request->exists('f')) {
+            switch($request->input('f')) {
+                case 'onlyLive':
+                    $bids->whereHas('auction', function($q) {
+                        $q->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
+                    });
+                    break;
+                case 'onlyOver':
+                    $bids->whereHas('auction', function($q) {
+                        $q->whereRaw('start_time + duration * interval \'1 second\' < CURRENT_TIMESTAMP');
+                    });
+                    break;
+                case 'both':
+                default:
+                    break;
+
+            }
+        }
+
+        $pageNum = 0;
+        if ($request->exists('p') && is_numeric($request->input('p'))) {
+            $pageNum = intval($request->input('p'));
+        }
+
+        $pageSize = 20;
+        $total = $bids->count();
+
+        $offset = 0;
+        $num_pages = ceil($total / $pageSize);
+        if ($num_pages > $pageNum && $pageNum >= 0) {
+            $offset = $pageSize * $pageNum;
+        } else {
+            return redirect()->route('mybids', ['p'=>0]);
+        }
+
+        $bids = $bids->offset($offset)->limit($pageSize)->get();
+
+        return view('pages.activity.mybids', [
+            'bids' => $bids,
+            'sortOrder'=>$request->input('o'),
+            'filter'=>$request->input('f'),
+            'current_page' => $pageNum,
+            'num_pages'=> $num_pages
+        ]);
     }
     //TODO bids
     //TODO won auctions

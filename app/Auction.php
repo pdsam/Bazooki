@@ -34,7 +34,7 @@ class Auction extends Model
     }
 
     public function owner() {
-        return $this->belongsTo('App\Bazooker.php');
+        return $this->belongsTo('App\Bazooker');
     }
 
     public function certification() {
@@ -50,8 +50,7 @@ class Auction extends Model
     }
 
     public function hasModAction() {
-        $action = $this->moderatorActions()->where('activate', '=', 'true')->get();
-        return !is_null($action);
+        return $this->moderatorActions()->where('activate', '=', 'true')->exists();
     }
 
     public function currentPrice() {

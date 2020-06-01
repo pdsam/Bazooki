@@ -29,7 +29,9 @@ Route::put('/account/settings/password', 'ChangePasswordController@changeBazooke
 Route::post('/account/settings/payment', 'PaymentMethodController@create');
 Route::delete('/account/settings/payment', 'PaymentMethodController@remove');
 
+Route::get('/activity', 'BazookerController@activityPage')->name('activity');
 Route::get('/activity/myauctions', 'AuctionController@myAuctions')->name('myauctions');
+Route::get('/activity/mybids', 'AuctionController@myBids')->name('mybids');
 
 
 // Authentication
