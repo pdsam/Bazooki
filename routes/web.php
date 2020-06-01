@@ -48,9 +48,9 @@ Route::get('/mod/certifications', 'Dashboard\CertificationController@show');
 Route::patch('/mod/certifications/{certification}', 'Dashboard\CertificationController@updateStatus');
 Route::get('/mod/users', 'Dashboard\UserController@show');
 Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
-Route::post('mod/auctions/freeze/{id?}','Dashboard\AuctionController@freeze');
-Route::patch('mod/auctions/freeze/{id?}','Dashboard\AuctionController@unfreeze');
-Route::delete('mod/auctions/{id?}','Dashboard\AuctionController@delete');
+Route::post('/mod/auctions/freeze/{id?}','Dashboard\AuctionController@freeze');
+Route::patch('/mod/auctions/freeze/{id?}','Dashboard\AuctionController@unfreeze');
+Route::delete('/mod/auctions/{id?}','Dashboard\AuctionController@delete');
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');

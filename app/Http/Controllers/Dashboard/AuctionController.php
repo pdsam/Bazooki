@@ -95,8 +95,12 @@ class AuctionController extends Controller
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
         
+        $auction = Auction::find($id);
+        
 
-        return redirect('mod/auctions');
+
+
+        return "button working";
     }
 
 }
