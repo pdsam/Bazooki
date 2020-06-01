@@ -27,10 +27,18 @@
                 </div>
                 <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
                 <div class="row ml-0">
+                    @if (!$auction->isFrozen())
                     <form method="post" action="/mod/auctions/freeze/{{$auction->id}}" class="mr-1">
                         @csrf
                         <button type="submit" class="btn btn-large btn-primary">Freeze</button>
                     </form>
+                    @else
+                    <form method="post" action="/mod/auctions/freeze/{{$auction->id}}" class="mr-1">
+                        @method('PATCH')
+                        @csrf
+                        <button type="submit" class="btn btn-large btn-primary">Unfreeze</button>
+                    </form>
+                    @endif
                     <form>
                         @method('DELETE')
                         @csrf
