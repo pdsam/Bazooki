@@ -22,12 +22,32 @@ class AuctionController extends Controller
     }
 
     public function freeze($id){
+         /*
+        if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
+            return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+        }
+        */
+
+        $auction = Auction::find($id);
+        $actions = $auction->moderatorActions();
 
 
-        return redirect('mod/auctions');
+
+        return $actions->get();
+        //return redirect('mod/auctions');
+    }
+
+    public function unfreeze($id){
+
     }
 
     public function delete($id){
+
+         /*
+        if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
+            return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+        }
+        */
 
         return redirect('mod/auctions');
     }
