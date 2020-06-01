@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Moderator;
@@ -18,22 +20,34 @@ class ModeratorController extends Controller
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
 
-        $moderators = Moderator::whereNotExists(function($query) {
-            $query->select(DB::raw(1))
-                    ->from('administrator')
-                    ->whereRaw('administrator.mod_id = moderator.id');
-        })->get();
-
-        return view('dashboard.moderators', ['moderators' => $moderators]);
+        return view('dashboard.moderators', ['moderators' => $this->getModerators()]);
     }
 
     public function create(Request $request)
     {
         if(!Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+
+        }$validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:100|unique:moderator',
+            'password' => 'required|string|max:100'
+        ], $messages = [
+            'email.unique' => 'Moderator with given email already exists',
+            'email.email' => 'Invalid email format',
+            'email.max' => 'Email is too big',
+            'password.max' => 'Password is too big'
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
         }
 
-        return view('dashboard.moderators');
+        Moderator::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return view('dashboard.moderators', ['moderators' => $this->getModerators()]);
     }
 
     public function delete()
@@ -43,5 +57,14 @@ class ModeratorController extends Controller
         }
 
         return view('dashboard.moderators');
+    }
+
+    public function getModerators() {
+        $moderators = Moderator::whereNotExists(function($query) {
+            $query->select(DB::raw(1))
+                    ->from('administrator')
+                    ->whereRaw('administrator.mod_id = moderator.id');
+        })->get();
+        return $moderators;
     }
 }

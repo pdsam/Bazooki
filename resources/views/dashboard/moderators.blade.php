@@ -14,27 +14,30 @@
         <h4>Add moderator</h4>
         <div class="shadow-sm border mt-3 mt-lg-1 add-moderator-card">
             <div class="card rounded-0 border-0">
-                <div class="row align-items-center no-gutters">
-                    <div class="col-lg-5 col-sm-6">
-                        <div class="card-body">
-                            <label for="staticEmail2" class="card-subtitle sr-only">Email</label>
-                            <input type="email" class="form-control" id="staticEmail2" placeholder="Email">
+                <form action="/mod/moderators" method="POST">
+                    @csrf
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-lg-5 col-sm-6">
+                            <div class="card-body">
+                                <label for="staticEmail2" class="card-subtitle sr-only">Email</label>
+                                <input name="email" type="email" class="form-control" id="staticEmail2" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-sm-6">
+                            <div class="card-body">
+                                <label for="inputPassword2" class="card-subtitle sr-only">Password</label>
+                                <input name="password" type="password" class="form-control" id="inputPassword2" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-12 moderator-delete">
+                            <div class="card-body">
+                                <button class="btn btn-success">
+                                    <i class="fas fa-plus-circle"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-sm-6">
-                        <div class="card-body">
-                            <label for="inputPassword2" class="card-subtitle sr-only">Password</label>
-                            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-12 moderator-delete">
-                        <div class="card-body">
-                            <button class="btn btn-success">
-                                <i class="fas fa-plus-circle"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
