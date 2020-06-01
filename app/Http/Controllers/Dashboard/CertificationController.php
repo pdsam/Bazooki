@@ -29,10 +29,10 @@ class CertificationController extends Controller
         foreach($auctions as $auction) {
             $certification = $auction->certification()->get()[0];
             $auction["certification_id"] = $certification["id"];
-            $auction["certification_path"] = $certification["certification_doc_path"];
+            $auction["certification_path"] = str_replace("public", "storage", $certification["certification_doc_path"]);
             
             $owner = $auction->owner;
-            $auction["owner"] = Bazooker::where('id', $owner)->get()[0]["username"];
+            $auction["owner_name"] = Bazooker::where('id', $owner)->get()[0]["username"];
 
             $auction_photos = AuctionPhoto::where('auction_id', $auction->id)->get();
             $auction["photo"] = count($auction_photos) ? 

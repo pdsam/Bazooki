@@ -16,36 +16,33 @@
                     <div class="col-12 col-sm-8">
                         <div class="card-body">
                             <h4 class="card-title">{{ $auction->item_name }}</h4>
-                            <h6 class="card-subtitle text-muted">Owned by: <a href="/profile">{{ $auction->owner }}</a></h6>
+                            <h6 class="card-subtitle text-muted">Owned by: <a href="/profile/{{ $auction->owner }}">{{ $auction->owner_name }}</a></h6>
                             <div class="mt-3">
                                 <p>
                                     {{ $auction->item_short_description }}
                                 </p>
                             </div>
+                            <a class="btn btn-primary" href="{{ asset($auction->certification_path) }}">View certification</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="certification{{ $auction->id }}" class="collapse p-3">
-                <div class="my-3 mx-2">
-                    Certification document:
-                    <ul>
-                        <li>
-                            <a href="/assets/cert1.pdf">document1</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mt-2">
-                    <button class="btn btn-success">
-                        Accept
-                    </button>
-                    <button class="btn btn-danger">
-                        Reject
-                    </button>
+            <div id="certification{{ $auction->id }}" class="certification_actions collapse">
+                <div class="row my-3 mx-2">
+                    <div class="col-lg-6">
+                        <button class="btn btn-success">
+                            Accept
+                        </button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn btn-danger">
+                            Reject
+                        </button>
+                    </div>
                 </div>
             </div>
             <a href="#certification{{ $auction->id }}" class="cert-toggle justify-content-center d-flex py-3 text-muted bg-light" data-toggle="collapse" data-target="#certification{{ $auction->id }}">
-                <p class="m-0">Document <span class="fa fa-chevron-down"></span></p>
+                <p class="m-0">Actions <span class="fa fa-chevron-down"></span></p>
             </a>
         </div>
     @endforeach

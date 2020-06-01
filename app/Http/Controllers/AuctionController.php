@@ -122,7 +122,7 @@ class AuctionController extends Controller
 
         if($request->hasFile('certification')) {
             $certification = $request->file('certification');
-            $filename = $certification->store('certifications');
+            $filename = $certification->store('public/certifications');
             $newCert = Certification::create([
                 'auction_id' => $newAuction->id,
                 'certification_doc_path' => $filename
