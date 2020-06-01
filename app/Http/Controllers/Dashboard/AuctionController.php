@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Auction;
+use App\AuctionModeratorAction;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -28,6 +29,17 @@ class AuctionController extends Controller
         }
         */
 
+        
+        $action = AuctionModeratorAction::create([
+            'reason' => 'Please email us for that',
+            'active' => true,
+            'action' => 'freezed',
+            'mod_id' => Auth::user()->id,
+            'auction_id' => $id
+
+        ]);
+
+            
         $auction = Auction::find($id);
         $actions = $auction->moderatorActions();
 
