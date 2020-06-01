@@ -2,6 +2,7 @@
     <div class="row align-items-top no-gutters">
         <div class="col-xs-12 col-sm-4">
             <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
+            <a href="{{ route('auction', $auction->id) }}" class="stretched-link"></a>
         </div>
         <div class="col-xs-12 col-sm-8">
             <div class="card-body">
@@ -25,12 +26,19 @@
                     </div>
                 </div>
                 <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
-                <div>
-                    <button class="btn btn-large btn-primary">Freeze</button>
-                    <button class="btn btn-large btn-danger">Remove</button>
+                <div class="row ml-0">
+                    <form method="post" action="/mod/auctions/freeze/{{$auction->id}}" class="mr-1">
+                        @csrf
+                        <button type="submit" class="btn btn-large btn-primary">Freeze</button>
+                    </form>
+                    <form>
+                        @method('DELETE')
+                        @csrf
+                        <button type='submit' class="btn btn-large btn-danger">Remove</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <a href="{{ route('auction', $auction->id) }}" class="stretched-link"></a>
+
     </div>
 </div>

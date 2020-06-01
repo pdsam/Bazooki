@@ -44,6 +44,8 @@ Route::get('/mod/auctions', 'Dashboard\AuctionController@show');
 Route::get('/mod/certifications', 'Dashboard\CertificationController@show');
 Route::get('/mod/users', 'Dashboard\UserController@show');
 Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
+Route::post('mod/auctions/freeze/{id?}','Dashboard\AuctionController@freeze');
+Route::delete('mod/auctions/{id?}','Dashboard\AuctionController@delete');
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');

@@ -11,16 +11,25 @@ class AuctionController extends Controller
 {
     public function show()
     {
-        
+        /*
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
-        
+        */
         $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
         $auctions = $auctions->get();
         return view('dashboard.auctions',['auctions' =>$auctions]);
     }
 
+    public function freeze($id){
 
+
+        return redirect('mod/auctions');
+    }
+
+    public function delete($id){
+
+        return redirect('mod/auctions');
+    }
 
 }
