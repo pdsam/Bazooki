@@ -6,10 +6,6 @@
     <h2>Manage moderators</h2>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    @if(count($moderators) == 0)
-        <p class="mt-3">There are no moderators \_(ツ)_/¯</p>
-    @endif
-
     <div class="mb-3">
         <h4>Add moderator</h4>
         <div class="shadow-sm border mt-3 mt-lg-1 add-moderator-card">
@@ -43,9 +39,14 @@
     </div>
 
     <div class="mb-3">
-        <h4>Moderator list</h4>
+        <h4 id="moderator-list">Moderator list</h4>
+
+        @if(count($moderators) == 0)
+            <p class="mt-3">There are no moderators \_(ツ)_/¯</p>
+        @endif
+
         @foreach ($moderators as $moderator)
-            <div class="shadow-sm border mt-3 mt-lg-1 moderator-card">
+            <div class="shadow-sm border mt-3 mt-lg-1 moderator-card" id="moderator{{$moderator->id}}">
                 <div class="card rounded-0 border-0">
                     <div class="row align-items-center no-gutters">
                         <div class="col-lg-5 col-sm-6">
@@ -62,7 +63,7 @@
                         </div>
                         <div class="col-lg-2 col-sm-12 moderator-delete">
                             <div class="card-body">
-                                <button class="btn btn-danger">
+                                <button class="btn btn-danger" onclick="deleteModerator({{ $moderator->id }})">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
@@ -74,4 +75,5 @@
     </div>
     
     
+    <script src="{{ asset('js/dashboard_moderators.js') }}" defer></script>
 @endsection

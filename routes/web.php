@@ -49,7 +49,7 @@ Route::patch('/mod/certifications/{certification}', 'Dashboard\CertificationCont
 Route::get('/mod/users', 'Dashboard\UserController@show');
 Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
 Route::post('/mod/moderators', 'Dashboard\ModeratorController@create');
-Route::delete('/mod/moderators', 'Dashboard\ModeratorController@delete');
+Route::delete('/mod/moderators/{moderator}', 'Dashboard\ModeratorController@delete');
 Route::post('mod/auctions/freeze/{id?}','Dashboard\AuctionController@freeze');
 Route::delete('mod/auctions/{id?}','Dashboard\AuctionController@delete');
 
