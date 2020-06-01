@@ -56,4 +56,5 @@
             </tbody>
         </table>
     </div>
+    <script src="{{ asset('js/dashboard_chart.js') }}"></script>
 @endsection

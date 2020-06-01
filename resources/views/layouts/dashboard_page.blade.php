@@ -68,6 +68,6 @@
         @yield('tab-content')       
     </main>
 </div>
-<script src="{{ asset('js/dashboard.js') }}"></script>
+
 <script src="{{ asset('js/collapseChevron.js') }}"></script>
 @endsection
