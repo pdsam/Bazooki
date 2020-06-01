@@ -7,7 +7,7 @@
 
         
     @foreach ($auctions as $auction)
-        <div class="shadow-sm border mt-3 mt-lg-1">
+        <div class="shadow-sm border mt-3 mt-lg-1 certification-card">
             <div class="card rounded-0 border-0">
                 <div class="row align-items-center no-gutters">
                     <div class="col-12 col-sm-4">
@@ -22,20 +22,20 @@
                                     {{ $auction->item_short_description }}
                                 </p>
                             </div>
-                            <a class="btn btn-primary" href="{{ asset($auction->certification_path) }}">View certification</a>
+                            <a class="btn btn-primary" href="{{ asset($auction->certification_path) }}" target="_blank" rel="noopener noreferrer">View certification</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="certification{{ $auction->id }}" class="certification_actions collapse">
-                <div class="row my-3 mx-2">
+                <div class="row my-3 mx-2">                    
                     <div class="col-lg-6">
-                        <button class="btn btn-success">
+                        <button class="btn btn-success" onclick="updateCertificationStatus({{ $auction->id }}, 'accepted')">
                             Accept
                         </button>
                     </div>
                     <div class="col-lg-6">
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" onclick="updateCertificationStatus({{ $auction->id }}, 'rejected')">
                             Reject
                         </button>
                     </div>
@@ -47,5 +47,5 @@
         </div>
     @endforeach
 
-    <script src="{{ asset('js/collapseChevron.js') }}"></script>
+    <script src="{{ asset('js/dashboard_certifications.js') }}" defer></script>
 @endsection

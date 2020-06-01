@@ -13,3 +13,14 @@ $(document).ready(function () {
         span.removeClass('fa-chevron-up');
     });
 });
+
+function updateCertificationStatus(auction_id, newCertificationStatus) {
+    $.ajax({
+        url: "/mod/certifications/" + auction_id,
+        type: "PATCH",
+        data: {certificationStatus: newCertificationStatus, _method: "PATCH"},
+        success: () => {
+            $("#certification" + auction_id).closest(".certification-card").slideUp();
+        }
+    });
+}
