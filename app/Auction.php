@@ -80,25 +80,15 @@ class Auction extends Model
     }
 
     public function isFrozen(){
-        $actions = $this->moderatorActions()->get();
-        foreach($actions as $action){
-            if(strcmp($action->action,'freezed') === 0 && $action->active){
-                return true;
-            }
-
-        }
-        return false;
+        return $this->moderatorActions()
+            ->where('action', '=', 'freezed')
+            ->Where('active', '=', true)
+            ->exists();
     }
 
     public function getFreezingAction(){
-        $actions = $this->moderatorActions()->get();
-        foreach($actions as $action){
-            if(strcmp($action->action,'freezed') === 0 && $action->active){
-                return $action;
-            }
-
-        }
-        return null;
-
+        return $this->moderatorActions()
+            ->where('action', '=', 'freezed')
+            ->Where('active', '=', true)->get();
     }
 }
