@@ -83,7 +83,7 @@ DROP TYPE IF EXISTS moderator_action CASCADE;
 CREATE TYPE moderator_action AS ENUM('freezed', 'removed');
 CREATE TABLE auction_moderator_action(id BIGSERIAL PRIMARY KEY,
                                       reason TEXT NOT NULL,
-                                      activate BOOL NOT NULL DEFAULT TRUE,
+                                      active BOOL NOT NULL DEFAULT TRUE,
                                       time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                       action moderator_action,
                                       auction_id BIGINT NOT NULL REFERENCES auction(id),
@@ -92,7 +92,7 @@ CREATE TABLE auction_moderator_action(id BIGSERIAL PRIMARY KEY,
 DROP TABLE IF EXISTS bid_moderator_action;
 CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
                                    reason TEXT NOT NULL,
-                                   activate BOOL NOT NULL DEFAULT TRUE,
+                                   active BOOL NOT NULL DEFAULT TRUE,
                                    time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
                                    action moderator_action,
                                    bid_id BIGINT NOT NULL REFERENCES bid(id),
@@ -126,7 +126,7 @@ CREATE TABLE ban(id BIGSERIAL PRIMARY KEY,
                  bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                  reason TEXT NOT NULL, 
                  time_of_ban TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                 activate BOOLEAN NOT NULL DEFAULT TRUE);
+                 active BOOLEAN NOT NULL DEFAULT TRUE);
 
 DROP TABLE IF EXISTS feedback;
 DROP TYPE IF EXISTS feedback_type;
@@ -373,8 +373,8 @@ CREATE INDEX bid_auction_id ON bid USING hash(auction_id);
 CREATE INDEX bid_bidder_id ON bid USING hash(bidder_id);
 CREATE INDEX item_image_auction_id ON item_image USING hash(auction_id);
 CREATE INDEX feedback_f_type ON feedback USING hash(ftype);
-CREATE INDEX bid_moderator_action_activate ON bid_moderator_action USING hash(activate);
-CREATE INDEX auction_moderator_action_activate ON auction_moderator_action USING hash(activate);
+CREATE INDEX bid_moderator_action_active ON bid_moderator_action USING hash(active);
+CREATE INDEX auction_moderator_action_active ON auction_moderator_action USING hash(active);
 CREATE INDEX start_auction ON auction USING btree(start_time);
 CREATE INDEX end_time on auction using btree((start_time + duration * interval '1 second'));
 CREATE INDEX auction_status on auction using hash(status);
