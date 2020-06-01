@@ -28,8 +28,11 @@ Route::get('/account/settings', 'BazookerController@settings')->name('settings')
 Route::put('/account/settings/password', 'ChangePasswordController@changeBazookerPass');
 Route::post('/account/settings/payment', 'PaymentMethodController@create');
 Route::delete('/account/settings/payment', 'PaymentMethodController@remove');
+
+Route::get('/activity', 'BazookerController@activityPage')->name('activity');
 Route::get('/activity/myauctions', 'AuctionController@myAuctions')->name('myauctions');
-Route::delete('/account/{id?}','BazookerController@deleteAccount');
+Route::get('/activity/mybids', 'AuctionController@myBids')->name('mybids');
+
 
 // Authentication
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

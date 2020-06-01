@@ -42,7 +42,6 @@ class BazookerController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($request);
             return redirect()->route('profile')
                 ->withErrors($validator);
         }
@@ -72,6 +71,14 @@ class BazookerController extends Controller
         }
 
         return view('pages.settings', ['payment_methods' => $bazooker->paymentMethods]);
+    }
+
+    public function activityPage() {
+        if (!Auth::guard('bazooker')->check()) {
+            return redirect()->route('auctions');
+        }
+
+        return view('pages.activity.main');
     }
 
     public function deleteAccount(Request $request, Bazooker $bazooker){

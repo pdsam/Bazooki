@@ -21,7 +21,7 @@
         @if(Auth::guard('bazooker')->check() || Auth::guard('mod')->check() || Auth::guard('admin')->check())
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/profile#profile_tabs">My Bids</a>
+                    <a class="nav-link" href="{{ url()->route('mybids') }}">My Bids</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/auctions/add">Create Auction</a>

@@ -1,20 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'Activity - My Auctions')
+@section('title', 'Activity - My Bids')
 
 @section('head')
-    <link rel="stylesheet" href="{{ asset('css/query.css') }}">
 @endsection
 
 @section('content')
-    <h1>Your auctions</h1>
+    <h1>Your bids</h1>
     <div class="d-flex justify-content-end align-items-baseline mb-2 p-1 m-2 m-sm-0" style="margin-left:-15px; margin-right:-15px;">
-        <form id="sortOrderForm" class="form-inline" action="/activity/myauctions" method="GET">
+        <form id="sortOrderForm" class="form-inline" action="/activity/mybids" method="GET">
             <div class="form-group">
                 <label class="mr-1" for="sortByInput">Sort by:</label>
                 <select class="w-auto custom-select rounded-0" id="sortByInput" name="o">
-                    <option value="dateEarl" @if(isset($sortOrder) && strcmp($sortOrder, 'dateEarl') == 0) selected="selected" @endif>End date (Earliest)</option>
-                    <option value="dateLate" @if(!isset($sortOrder) || strcmp($sortOrder, 'dateLate') == 0) selected="selected" @endif>End date (Latest)</option>
+                    <option value="bidAsc" @if(isset($sortOrder) && strcmp($sortOrder, 'bidAsc') == 0) selected="selected" @endif>Highest Bid (Ascending)</option>
+                    <option value="bidDesc" @if(isset($sortOrder) && strcmp($sortOrder, 'bidDesc') == 0) selected="selected" @endif>Highest Bid (Descending)</option>
+                    <option value="dateEarl" @if(isset($sortOrder) && strcmp($sortOrder, 'dateEarl') == 0) selected="selected" @endif>Time of bid (Earliest)</option>
+                    <option value="dateLate" @if(!isset($sortOrder) || strcmp($sortOrder, 'dateLate') == 0) selected="selected" @endif>Time of bid (Latest)</option>
                 </select>
             </div>
             <div class="form-group ml-0 ml-lg-3">
@@ -28,38 +29,21 @@
         </form>
     </div>
     <div>
-        @foreach($auctions as $auction)
-            <div class="card shadow-sm rounded-0 border-0 mb-2">
-                <div class="row align-items-top no-gutters">
-                    <div class="col-xs-12 col-sm-4">
-                        <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
-                    </div>
-                    <div class="col-xs-12 col-sm-8">
-                        <div class="card-body">
-                            <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
-                                <div class="">
-                                    <h4 class="card-title">{{ $auction->item_name }}</h4>
-                                    @if ($auction->isOver())
-                                        <h6 class="card-subtitle text-muted">Already over</h6>
-                                    @else
-                                        <h6 class="card-subtitle text-muted">Ends: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
-                                    @endif
+        @foreach($bids as $bid)
+            <div class="row bg-white shadow-sm p-2 m-2">
+                <h4 class="col-12">{{ $bid->amount }}$ - {{ $bid->time }}</h4>
+                <a class="col-12" href="{{ url()->route('auction', [$bid->auction->id]) }}">
+                    <h5>
+                        {{ $bid->auction->item_name }}
+                    </h5>
+                </a>
+                @if ($bid->auction->isOver())
+                    <span class="col-6 text-danger" style="font-size: 0.8rem">Ended</span>
+                @endif
 
-                                    <div>
-                                        @foreach($auction->categories as $cat)
-                                            <span class="badge badge-light border mr-1 mt-2">{{ $cat->name }}</span>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="mr-1 auction-price">{{ $auction->currentPrice() }}</span>$
-                                </div>
-                            </div>
-                            <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
-                        </div>
-                    </div>
-                    <a href="{{ route('auction', $auction->id) }}" class="stretched-link"></a>
-                </div>
+                @if ($bid->bidder_id == $bid->auction->highest_bidder && $bid->amount == $bid->auction->current_price)
+                    <p class="col-6 m-0" style="color: var(--olive)">Winning Bid</p>
+                @endif
             </div>
         @endforeach
     </div>
