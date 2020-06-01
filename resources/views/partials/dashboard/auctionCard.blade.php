@@ -1,4 +1,4 @@
-<div class="card shadow-sm rounded-0 border-0 @if (!$first) mt-3 mt-sm-2 @endif">
+<div class="card shadow-sm rounded-0 border-0">
     <div class="row align-items-top no-gutters">
         <div class="col-xs-12 col-sm-4">
             <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
@@ -9,14 +9,14 @@
                     <div class="">
                         <h4 class="card-title">{{ $auction->item_name }}</h4>
                         @if ($auction->isOver())
-                            <h6 class="card-subtitle text-muted">Already over</h6>
+                        <h6 class="card-subtitle text-muted">Already over</h6>
                         @else
-                            <h6 class="card-subtitle text-muted">Ends: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
+                        <h6 class="card-subtitle text-muted">Ends: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
                         @endif
 
                         <div>
                             @foreach($auction->categories as $cat)
-                                <span class="badge badge-light border mr-1 mt-2">{{ $cat->name }}</span>
+                            <span class="badge badge-light border mr-1 mt-2">{{ $cat->name }}</span>
                             @endforeach
                         </div>
                     </div>
@@ -25,6 +25,10 @@
                     </div>
                 </div>
                 <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
+                <div>
+                    <button class="btn btn-large btn-primary">Freeze</button>
+                    <button class="btn btn-large btn-danger">Remove</button>
+                </div>
             </div>
         </div>
         <a href="{{ route('auction', $auction->id) }}" class="stretched-link"></a>

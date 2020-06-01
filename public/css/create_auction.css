@@ -1,0 +1,25 @@
+.datepicker td, .datepicker th {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.85rem;
+}
+
+.thumbnails img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.select2 {
+    width: 100% !important;
+}
+
+.select2-container--classic .select2-selection--multiple .select2-selection__choice {
+    background-color: var(--olive) !important;
+    color: white !important;
+    font-weight: 700;
+}
+
+.select2-container--classic .select2-selection--multiple .select2-selection__choice__remove {
+    color: white !important;
+}

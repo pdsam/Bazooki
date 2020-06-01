@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div>        
-        <a class="navbar-brand" href="/auctions"><img src={{ asset('/assets/small_panda.png') }}>Bazooki</a>
+        <a class="navbar-brand" href="/auctions"><img src={{ asset('/assets/small_panda.png') }} alt="Bazooki">Bazooki</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
                         <a class="dropdown-item" href="/account/settings">Account Settings</a>
                         @endif
                         @if(Auth::guard('mod')->check() || Auth::guard('admin')->check())
-                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                        <a class="dropdown-item" href="/mod">Dashboard</a>
                         @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Log out</a>

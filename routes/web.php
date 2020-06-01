@@ -21,7 +21,7 @@ Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
 Route::post('/auctions/add', 'AuctionController@create');
 Route::post('/auctions/{id}/bid', 'AuctionController@bid');
 
-// User
+// User aka Bazooker
 Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');
 Route::patch('/profile/{bazooker}', 'BazookerController@editProfile');
 Route::get('/account/settings', 'BazookerController@settings')->name('settings');
@@ -40,6 +40,13 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
+
+// Dashboard
+Route::view('/mod', 'dashboard.main')->name('dashboard');
+Route::get('/mod/auctions', 'Dashboard\AuctionController@show');
+Route::get('/mod/certifications', 'Dashboard\CertificationController@show');
+Route::get('/mod/users', 'Dashboard\UserController@show');
+Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');

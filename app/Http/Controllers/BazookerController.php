@@ -74,10 +74,16 @@ class BazookerController extends Controller
     }
 
     public function activityPage() {
-       if (!Auth::guard('bazooker')->check()) {
-           return redirect()->route('auctions');
-       }
+        if (!Auth::guard('bazooker')->check()) {
+            return redirect()->route('auctions');
+        }
 
-       return view('pages.activity.main');
+        return view('pages.activity.main');
+    }
+
+    public function deleteAccount(Request $request, Bazooker $bazooker){
+        $this->authorize('editProfile', $bazooker);
+
+        return redirect('auctions');
     }
 }

@@ -16,6 +16,11 @@ class Moderator extends Authenticatable implements User
 
     protected $guard = 'mod';
 
+    protected $fillable = [
+        'email',
+        'password'
+    ];
+
     public function isMod() {
         return true;
     }

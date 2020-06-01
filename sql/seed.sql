@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS payment_method;
 DROP TYPE IF EXISTS payment_type;
 CREATE TYPE payment_type AS ENUM ('visa', 'maestro', 'mastercard');
 CREATE TABLE payment_method(id BIGSERIAL PRIMARY KEY, 
-                           bazooker_id BIGSERIAL NOT NULL REFERENCES bazooker(id),
+                           bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                            card_number TEXT NOT NULL,
                            type payment_type NOT NULL,
                            validated BOOLEAN NOT NULL DEFAULT FALSE
@@ -27,16 +27,17 @@ DROP TABLE IF EXISTS moderator CASCADE;
 CREATE TABLE moderator(id BIGSERIAL PRIMARY KEY, email TEXT NOT NULL UNIQUE, password TEXT NOT NULL);    
 
 DROP TABLE IF EXISTS administrator CASCADE;
-CREATE TABLE administrator(mod_id BIGSERIAL PRIMARY KEY NOT NULL REFERENCES moderator(id));
+CREATE TABLE administrator(mod_id BIGINT PRIMARY KEY NOT NULL REFERENCES moderator(id));
 
 DROP TABLE IF EXISTS auction CASCADE;
 CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
-                    owner BIGSERIAL NOT NULL REFERENCES bazooker(id),
+                    owner BIGINT NOT NULL REFERENCES bazooker(id),
                     base_bid INT NOT NULL,
                     start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     duration INT NOT NULL CHECK (duration >= 60*30) DEFAULT (3600*24*7),
                     insta_buy INT CHECK (insta_buy > 0),
                     current_price INT,
+                    highest_bidder BIGINT REFERENCES bazooker(id),
 					item_name TEXT NOT NULL,
 					item_description TEXT NOT NULL,
                     item_short_description TEXT NOT NULL,
@@ -47,29 +48,29 @@ CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
 DROP TABLE IF EXISTS item_image;
 CREATE TABLE item_image(
     id BIGSERIAL PRIMARY KEY,
-    auction_id BIGSERIAL NOT NULL REFERENCES auction,
+    auction_id BIGINT NOT NULL REFERENCES auction,
     image_path TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS auction_category CASCADE;
 DROP TABLE IF EXISTS category CASCADE; 
 CREATE TABLE category(id BIGSERIAL PRIMARY KEY, name TEXT UNIQUE NOT NULL);
-CREATE TABLE auction_category(auction_id BIGSERIAL NOT NULL REFERENCES auction(id),
-                           cat_id BIGSERIAL NOT NULL REFERENCES category(id),
+CREATE TABLE auction_category(auction_id BIGINT NOT NULL REFERENCES auction(id),
+                           cat_id BIGINT NOT NULL REFERENCES category(id),
                            PRIMARY KEY(auction_id, cat_id));
                            
 DROP TABLE IF EXISTS certification;
 DROP TYPE IF EXISTS certification_status;
 CREATE TYPE certification_status AS ENUM ('pending', 'rejected', 'accepted');
 CREATE TABLE certification(id BIGSERIAL PRIMARY KEY,
-                        auction_id BIGSERIAL NOT NULL REFERENCES auction(id),
+                        auction_id BIGINT NOT NULL REFERENCES auction(id),
                         status certification_status NOT NULL DEFAULT 'pending',
                         certification_doc_path TEXT NOT NULL
                         );
 
 DROP TABLE IF EXISTS bid CASCADE;
 CREATE TABLE bid(id BIGSERIAL PRIMARY KEY, 
-                auction_id BIGSERIAL NOT NULL REFERENCES auction(id),
+                auction_id BIGINT NOT NULL REFERENCES auction(id),
                 bidder_id BIGSERIAL NOT NULL REFERENCES bazooker(id),
                 amount INT NOT NULL CHECK (amount > 0),
                 TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
@@ -82,8 +83,8 @@ CREATE TABLE auction_moderator_action(id BIGSERIAL PRIMARY KEY,
                                       activate BOOL NOT NULL DEFAULT TRUE,
                                       time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                       action moderator_action,
-                                      auction_id BIGSERIAL NOT NULL REFERENCES auction(id),
-                                      mod_id BIGSERIAL NOT NULL REFERENCES moderator(id));
+                                      auction_id BIGINT NOT NULL REFERENCES auction(id),
+                                      mod_id BIGINT NOT NULL REFERENCES moderator(id));
 
 DROP TABLE IF EXISTS bid_moderator_action;
 CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
@@ -91,35 +92,35 @@ CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
                                    activate BOOL NOT NULL DEFAULT TRUE,
                                    time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
                                    action moderator_action,
-                                   bid_id BIGSERIAL NOT NULL REFERENCES bid(id),
-                                   mod_id BIGSERIAL NOT NULL REFERENCES moderator(id));
+                                   bid_id BIGINT NOT NULL REFERENCES bid(id),
+                                   mod_id BIGINT NOT NULL REFERENCES moderator(id));
 
 DROP TABLE IF EXISTS auction_transaction;
 CREATE TABLE auction_transaction(value int NOT NULL CHECK (value > 0),
                                  date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                 auction_id BIGSERIAL NOT NULL REFERENCES auction(id),
-                                 receiver BIGSERIAL NOT NULL REFERENCES bazooker(id),
-                                 sender BIGSERIAL NOT NULL REFERENCES bazooker(id),
+                                 auction_id BIGINT NOT NULL REFERENCES auction(id),
+                                 receiver BIGINT NOT NULL REFERENCES bazooker(id),
+                                 sender BIGINT NOT NULL REFERENCES bazooker(id),
                                  PRIMARY KEY(auction_id, receiver, sender),
                                  CONSTRAINT sender_receiver CHECK (sender <> receiver));
 
 DROP TABLE IF EXISTS watch_list;
-CREATE TABLE watch_list(auction_id BIGSERIAL NOT NULL REFERENCES auction(id),
-                        mod_id BIGSERIAL NOT NULL REFERENCES moderator(id),
+CREATE TABLE watch_list(auction_id BIGINT NOT NULL REFERENCES auction(id),
+                        mod_id BIGINT NOT NULL REFERENCES moderator(id),
                         PRIMARY KEY (auction_id, mod_id));
 
 DROP TABLE IF EXISTS suspension;
 CREATE TABLE suspension(id BIGSERIAL PRIMARY KEY,
-                        mod_id BIGSERIAL NOT NULL REFERENCES moderator(id),
-                        bazooker_id BIGSERIAL NOT NULL REFERENCES bazooker(id), 
+                        mod_id BIGINT NOT NULL REFERENCES moderator(id),
+                        bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                         reason TEXT NOT NULL, 
                         time_of_suspension TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         duration INT NOT NULL CHECK (duration >0));
 
 DROP TABLE IF EXISTS ban;
 CREATE TABLE ban(id BIGSERIAL PRIMARY KEY,
-                 admin_id BIGSERIAL NOT NULL REFERENCES administrator(mod_id), 
-                 bazooker_id BIGSERIAL NOT NULL REFERENCES bazooker(id), 
+                 admin_id BIGINT NOT NULL REFERENCES administrator(mod_id),
+                 bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                  reason TEXT NOT NULL, 
                  time_of_ban TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                  activate BOOLEAN NOT NULL DEFAULT TRUE);
@@ -131,9 +132,9 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
                         ftype feedback_type, 
                         rating INT CHECK(0 <= RATING AND RATING <= 10),
                         opinion TEXT, 
-                        rater_id BIGSERIAL NOT NULL REFERENCES bazooker(id),
-                        rated_id BIGSERIAL NOT NULL REFERENCES bazooker(id),
-                        auction BIGSERIAL NOT NULL REFERENCES auction(id),
+                        rater_id BIGINT NOT NULL REFERENCES bazooker(id),
+                        rated_id BIGINT NOT NULL REFERENCES bazooker(id),
+                        auction BIGINT NOT NULL REFERENCES auction(id),
 						UNIQUE (rater_id, rated_id, auction),
 						CONSTRAINT cant_rate_same CHECK (rater_id != rated_id));
 
@@ -273,7 +274,7 @@ CREATE TRIGGER prevent_lower_value_bid
 DROP Function if exists update_auction_current_price();
 create function update_auction_current_price() returns trigger as $$
 Begin
-    update auction set current_price = NEW.amount where auction.id = NEW.auction_id;
+    update auction set current_price = NEW.amount, highest_bidder = NEW.bidder_id where auction.id = NEW.auction_id;
     return NEW;
 END
 $$ LANGUAGE  'plpgsql';

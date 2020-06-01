@@ -15,6 +15,9 @@ class Administrator extends Authenticatable implements User
     public $table = 'administrator';
     protected $primaryKey = 'mod_id';
 
+    protected $fillable = [
+        'mod_id'
+    ];
 
     protected $guard = 'admin';
 

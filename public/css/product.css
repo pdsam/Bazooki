@@ -37,8 +37,36 @@ input[type=number] {
 #bid-button{
     border-radius: 5rem;
 }
+#bid-button:disabled{
+    background-color: var(--highlight-purple);
+    opacity: 0.3;
+}
 
+#bid-button:disabled:hover{
+    background-color: var(--highlight-purple);
+}
 
 .color-purple{
     color:var(--highlight-purple);
+}   
+
+@media print{
+
+    #bid-div{
+        display: none;
+    }
+
+    .navbar{
+        display: flex;
+    }
+
+}
+
+#product_info_header {
+    padding-bottom: .5rem;
+    text-align: center;
+}
+
+#product_info_header h3 {
+    padding-bottom: 0;
 }

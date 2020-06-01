@@ -43,25 +43,33 @@
 
     </div>
     <div class="col-lg-5">
-        <div class="card">
+        <div id="product_info" class="card">
             <div class="card-body">
-                <h3 class="card-title text-center card-c-element card-body">{{ $name }}</h3>
+                <div id="product_info_header" class="card-c-element">
+                    <h3 class="card-title text-center card-body">{{ $name }}</h3>
+                    @foreach($categories as $cat)
+                        <span class="badge badge-primary bg-olive">{{ $cat->name }}</span>
+                    @endforeach
+                </div>
                 <div class="card-c-element card-body">
-                    <h3 class="card-title text-center" id="price">{{ $base_bid }}</h3>
+                    <h3 class="card-title text-center" id="price">€{{ $base_bid }}</h3>
                     <h3 id="duration-place" class="card-title text-center"></h3>
                     <p hidden id="timer-start-time">{{ $start_time }}</p>
                     <p hidden id="timer-duration">{{ $duration }}</p>
                 </div>
-                <div class="card-body w-100">
-                    <div class="row">
+                <div class="card-body w-100" id="bid-div">
+                    <div class="row justify-content-center align-self-center">
                         <form id="bid-form" class="form-inline" action="POST">
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" name="form-id" value="{{ $id }}">
-                                <input id="money" type="number" class="form-control text-center col-12 col-md-8" name="amount" value="110"></input>
+                                <input id="money" type="number" class="form-control text-center col-12 col-md-8" name="amount" value="{{$base_bid +1}}"></input>
                                 <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
-                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
-
+                                    @if(!Auth::check() || Auth::id() == $owner )
+                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now" disabled></input>
+                                    @else
+                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
+                                    @endif
                                 </div>
                         </form>
                     </div>
