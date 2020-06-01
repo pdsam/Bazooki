@@ -39,11 +39,11 @@ Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('r
 Route::post('/register', 'Auth\RegisterController@register');
 
 // Dashboard
-Route::get('/mod', 'Dashboard\DashboardController@mainPage')->name('dashboard');
-Route::get('/mod/auctions', 'Dashboard\DashboardController@viewAuctions');
-Route::get('/mod/certifications', 'Dashboard\DashboardController@viewCertifications');
-Route::get('/mod/users', 'Dashboard\DashboardController@viewUsers');
-Route::get('/mod/moderators', 'Dashboard\DashboardController@viewModerators');
+Route::view('/mod', 'dashboard.main')->name('dashboard');
+Route::get('/mod/auctions', 'Dashboard\AuctionController@show');
+Route::get('/mod/certifications', 'Dashboard\CertificationController@show');
+Route::get('/mod/users', 'Dashboard\UserController@show');
+Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');
