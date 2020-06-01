@@ -56,6 +56,9 @@ input[type=number] {
         display: none;
     }
 
+    .navbar{
+        display: flex;
+    }
 
 }
 
