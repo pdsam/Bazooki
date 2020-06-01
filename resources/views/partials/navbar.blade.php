@@ -22,9 +22,6 @@
             <ul class="navbar-nav">
                 @auth('bazooker')
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url()->route('mybids') }}">My Bids</a>
-                    </li>
-                    <li class="nav-item active">
                         <a class="nav-link" href="/auctions/add">Create Auction</a>
                     </li>
                 @endauth
@@ -44,7 +41,8 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if(Auth::check())
                             <a class="dropdown-item" href="/profile">Profile</a>
-                            <a class="dropdown-item" href="/activity">My activity</a>
+                            <a class="dropdown-item" href="/activity/mybids">My Bids</a>
+                            <a class="dropdown-item" href="/activity/myauctions">My Auctions</a>
                             <a class="dropdown-item" href="/account/settings">Account Settings</a>
                         @endif
                         @if(Auth::guard('mod')->check() || Auth::guard('admin')->check())
