@@ -39,10 +39,10 @@ class LoginController extends Controller
         $password = $request->password;
 
         if (Auth::guard('admin')->attempt(['email' => $username, 'password'=>$password])) {
-            return redirect('/dashboard');
+            return redirect()->route('dashboard');
         }
         if (Auth::guard('mod')->attempt(['email' => $username, 'password'=>$password])) {
-            return redirect('/dashboard');
+            return redirect()->route('dashboard');
         }
         if (Auth::guard('bazooker')->attempt(['username' => $username, 'password'=>$password])) {
             return redirect()->route('profile');

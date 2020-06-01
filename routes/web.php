@@ -38,6 +38,13 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
 
+// Dashboard
+Route::get('/mod', 'Dashboard\DashboardController@mainPage')->name('dashboard');
+Route::get('/mod/auctions', 'Dashboard\DashboardController@viewAuctions');
+Route::get('/mod/certifications', 'Dashboard\DashboardController@viewCertifications');
+Route::get('/mod/users', 'Dashboard\DashboardController@viewUsers');
+Route::get('/mod/moderators', 'Dashboard\DashboardController@viewModerators');
+
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');
 Route::view('/about', 'pages.about')->name('about');
