@@ -5,6 +5,7 @@ namespace App;
 use App\Bid;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class Auction extends Model
 {
@@ -51,7 +52,7 @@ class Auction extends Model
     }
 
     public function hasModAction() {
-        return $this->moderatorActions()->where('activate', '=', 'true')->exists();
+        return $this->moderatorActions()->where('active', '=', 'true')->exists();
     }
 
     public function currentPrice() {
@@ -76,5 +77,28 @@ class Auction extends Model
 
     public function hasStarted() {
         return $this->start_time <= new DateTime('now');
+    }
+
+    public function isFrozen(){
+        $actions = $this->moderatorActions()->get();
+        foreach($actions as $action){
+            if(strcmp($action->action,'freezed') === 0 && $action->active){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public function getFreezingAction(){
+        $actions = $this->moderatorActions()->get();
+        foreach($actions as $action){
+            if(strcmp($action->action,'freezed') === 0 && $action->active){
+                return $action;
+            }
+
+        }
+        return null;
+
     }
 }

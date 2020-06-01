@@ -20,3 +20,7 @@
 .sidebar li:hover {
   background-color: #eee;
 }
+
+.certification_actions button{
+  width: 100%;
+}
