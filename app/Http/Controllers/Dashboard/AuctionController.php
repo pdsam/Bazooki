@@ -115,7 +115,7 @@ class AuctionController extends Controller
         }
 
             
-        try{
+        //try{
         $action = AuctionModeratorAction::create([
             'reason' => 'Please email us for that',
             'active' => true,
@@ -124,10 +124,10 @@ class AuctionController extends Controller
             'auction_id' => $id
 
         ]);
-        }
-        catch(Exception $e){
-          return  Redirect::back()->withErrors(['Error in db: Already Removed (╯°□°）╯︵ ┻━┻']);
-        }
+        //}
+       // catch(Exception $e){
+       //   return  Redirect::back()->withErrors(['Error in db: Already Removed (╯°□°）╯︵ ┻━┻']);
+       // }
 
        
         

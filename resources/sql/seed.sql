@@ -344,6 +344,7 @@ BEGIN
             UPDATE auction set status = 'live' where id = NEW.auction_id;
         END IF;
     END IF;
+	RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
 
