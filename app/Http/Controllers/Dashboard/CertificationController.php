@@ -23,9 +23,11 @@ class CertificationController extends Controller
         
         // TODO check auction has not ended
 
-        $auctions = Auction::whereHas('certification', function(Builder $query) {
-            $query->where('status', 'pending');
-        })->get(['id', 'owner', 'item_name', 'item_short_description']);
+        $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')
+            ->whereHas('certification', function(Builder $query) {
+                    $query->where('status', 'pending');
+                })
+            ->get(['id', 'owner', 'item_name', 'item_short_description']);
         
         foreach($auctions as $auction) {
             $certification = $auction->certification()->get()[0];
