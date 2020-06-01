@@ -210,7 +210,7 @@ class AuctionController extends Controller
 
         $auctionsQuery = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')
             ->whereDoesntHave('moderatorActions', function (Builder $builder) {
-                $builder->where('activate', '=', 'true');
+                $builder->where('active', '=', 'true');
             });
         if (isset($filters['s']) && !empty($filters['s'])) {
             $auctionsQuery = $auctionsQuery->whereRaw('"search" @@ plainto_tsquery(\'english\', ?)', ['\''.$filters['s'].'\'']);

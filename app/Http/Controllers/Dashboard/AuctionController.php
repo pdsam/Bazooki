@@ -7,6 +7,9 @@ use App\AuctionModeratorAction;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Log;
+use Exception;
+
 
 class AuctionController extends Controller
 {
@@ -23,43 +26,75 @@ class AuctionController extends Controller
     }
 
     public function freeze($id){
-         /*
+         
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
-        */
-
         
+
+        if(Auth::guard('mod')->check()){
+            $modID = Auth::guard('mod')->user()->id;
+
+        }
+        if(Auth::guard('admin')->check()){
+            $modID = Auth::guard('admin')->user()->mod->id;
+
+        }
+
+        $auction = Auction::find($id);
+        if($auction->isFrozen()){
+            return  Redirect::back()->withErrors(["Can't freeze what's already frozen"]);
+        }
+
+
+        try{
         $action = AuctionModeratorAction::create([
             'reason' => 'Please email us for that',
             'active' => true,
             'action' => 'freezed',
-            'mod_id' => Auth::user()->id,
+            'mod_id' => $modID,
             'auction_id' => $id
 
         ]);
+        }
+        catch(Exception $e){
+          return  Redirect::back()->withErrors(['Error in db: (╯°□°）╯︵ ┻━┻']);
+        }
 
-            
-        $auction = Auction::find($id);
-        $actions = $auction->moderatorActions();
-
-
-
-        return $actions->get();
-        //return redirect('mod/auctions');
+       
+        
+        
+        return Redirect::back();
     }
 
     public function unfreeze($id){
+        if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
+            return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+        }
+
+        
+        $auction = Auction::find($id);
+        $action = $auction->getFreezingAction();
+        
+        if(is_null($action)){
+            return  Redirect::back()->withErrors(["Can't unfreeze what's not frozen"]);
+        }
+        
+        $action->active = false;
+        $action->save();
+
+
+        return Redirect::back();
 
     }
 
     public function delete($id){
 
-         /*
+         
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
-        */
+        
 
         return redirect('mod/auctions');
     }
