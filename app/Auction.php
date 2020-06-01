@@ -34,7 +34,7 @@ class Auction extends Model
     }
 
     public function owner() {
-        return $this->belongsTo('App\Bazooker.php');
+        return $this->belongsTo('App\Bazooker');
     }
 
     public function certification() {
