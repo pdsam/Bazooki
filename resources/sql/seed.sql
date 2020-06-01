@@ -30,6 +30,8 @@ DROP TABLE IF EXISTS administrator CASCADE;
 CREATE TABLE administrator(mod_id BIGINT PRIMARY KEY NOT NULL REFERENCES moderator(id));
 
 DROP TABLE IF EXISTS auction CASCADE;
+DROP TYPE IF EXISTS auction_status;
+CREATE TYPE auction_status AS ENUM('pending', 'live', 'over', 'frozen', 'deleted');
 CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     owner BIGINT NOT NULL REFERENCES bazooker(id),
                     base_bid INT NOT NULL,
@@ -38,6 +40,7 @@ CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     insta_buy INT CHECK (insta_buy > 0),
                     current_price INT,
                     highest_bidder BIGINT REFERENCES bazooker(id),
+                    status auction_status NOT NULL DEFAULT 'live',
 					item_name TEXT NOT NULL,
 					item_description TEXT NOT NULL,
                     item_short_description TEXT NOT NULL,
@@ -344,6 +347,27 @@ CREATE TRIGGER prevent_repeated_bid_action
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_bid_action();
 
+-- CHECK AUCTION STATUS
+DROP FUNCTION IF EXISTS check_auction_still_live();
+CREATE FUNCTION check_auction_still_live() RETURNS VOID AS $$
+DECLARE
+    A RECORD;
+BEGIN
+    FOR A IN (select * from auction where status = 'live') LOOP
+        IF ((A.start_time + A.duration * interval '1 second') < CURRENT_TIMESTAMP) THEN
+            -- SET STATUS TO OVER
+            UPDATE auction set status = 'over' WHERE id = A.id;
+
+            --CREATE TRANSACTION
+            IF A.highest_bidder IS NOT NULL THEN
+                INSERT INTO auction_transaction(auction_id, receiver, sender, value) values (A.id, A.owner, A.highest_bidder, A.current_price);
+            END IF;
+
+        END IF;
+    END LOOP;
+END
+$$ LANGUAGE 'plpgsql';
+
 
 CREATE INDEX bid_auction_id ON bid USING hash(auction_id);
 CREATE INDEX bid_bidder_id ON bid USING hash(bidder_id);
@@ -353,5 +377,6 @@ CREATE INDEX bid_moderator_action_activate ON bid_moderator_action USING hash(ac
 CREATE INDEX auction_moderator_action_activate ON auction_moderator_action USING hash(activate);
 CREATE INDEX start_auction ON auction USING btree(start_time);
 CREATE INDEX end_time on auction using btree((start_time + duration * interval '1 second'));
+CREATE INDEX auction_status on auction using hash(status);
 CREATE INDEX auction_search_dix ON auction USING GIST(search);
 

@@ -18,7 +18,8 @@ class Auction extends Model
         'owner', 
         'base_bid', 
         'start_time', 
-        'duration', 
+        'duration',
+        'status',
         'insta_buy', 
         'item_name', 
         'item_description', 
@@ -71,5 +72,9 @@ class Auction extends Model
 
     public function isOver() {
         return $this->endDateTime() < new DateTime('now');
+    }
+
+    public function hasStarted() {
+        return $this->start_time <= new DateTime('now');
     }
 }

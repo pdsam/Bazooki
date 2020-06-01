@@ -20,12 +20,14 @@
         </form>
         @if(Auth::guard('bazooker')->check() || Auth::guard('mod')->check() || Auth::guard('admin')->check())
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url()->route('mybids') }}">My Bids</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/auctions/add">Create Auction</a>
-                </li>
+                @auth('bazooker')
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url()->route('mybids') }}">My Bids</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/auctions/add">Create Auction</a>
+                    </li>
+                @endauth
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user p-0"></i>
@@ -36,17 +38,17 @@
                             {{ Auth::guard('mod')->user()->email }}
                         @endauth
                         @auth('admin')
-                            {{ Auth::guard('admin')->user()->email }}
+                            {{ Auth::guard('admin')->user()->mod->email }}
                         @endauth
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if(Auth::check())
-                        <a class="dropdown-item" href="/profile">Profile</a>
-                        <a class="dropdown-item" href="/activity">My activity</a>
-                        <a class="dropdown-item" href="/account/settings">Account Settings</a>
+                            <a class="dropdown-item" href="/profile">Profile</a>
+                            <a class="dropdown-item" href="/activity">My activity</a>
+                            <a class="dropdown-item" href="/account/settings">Account Settings</a>
                         @endif
                         @if(Auth::guard('mod')->check() || Auth::guard('admin')->check())
-                        <a class="dropdown-item" href="/mod">Dashboard</a>
+                            <a class="dropdown-item" href="/mod">Dashboard</a>
                         @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Log out</a>
