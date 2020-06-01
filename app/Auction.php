@@ -19,7 +19,8 @@ class Auction extends Model
         'owner', 
         'base_bid', 
         'start_time', 
-        'duration', 
+        'duration',
+        'status',
         'insta_buy', 
         'item_name', 
         'item_description', 
@@ -74,27 +75,20 @@ class Auction extends Model
         return $this->endDateTime() < new DateTime('now');
     }
 
-    public function isFrozen(){
-        $actions = $this->moderatorActions()->get();
-        foreach($actions as $action){
-            if(strcmp($action->action,'freezed') === 0 && $action->active){
-                return true;
-            }
+    public function hasStarted() {
+        return $this->start_time <= new DateTime('now');
+    }
 
-        }
-        return false;
+    public function isFrozen(){
+        return $this->moderatorActions()
+            ->where('action', '=', 'freezed')
+            ->Where('active', '=', true)
+            ->exists();
     }
 
     public function getFreezingAction(){
-        $actions = $this->moderatorActions()->get();
-        foreach($actions as $action){
-            if(strcmp($action->action,'freezed') === 0 && $action->active){
-                return $action;
-            }
-
-        }
-        return null;
-
+        return $this->moderatorActions()
+            ->where('action', '=', 'freezed')
+            ->Where('active', '=', true)->get();
     }
-
 }

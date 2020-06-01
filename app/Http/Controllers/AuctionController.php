@@ -208,7 +208,9 @@ class AuctionController extends Controller
     public function query(Request $request) {
         $filters = $request->only(['s', 'c', 'm', 'o']);
 
-        $auctionsQuery = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')
+        $auctionsQuery = Auction::where('status', '=', 'live')
+            ->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')
+            ->whereRaw('start_time <= CURRENT_TIMESTAMP')
             ->whereDoesntHave('moderatorActions', function (Builder $builder) {
                 $builder->where('active', '=', 'true');
             });

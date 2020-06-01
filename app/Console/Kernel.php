@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Auction;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function() {
+            DB::select('SELECT check_auction_still_live()');
+        })->everyMinute()->name('auction_live_to_over')->withoutOverlapping();
     }
 
     /**
