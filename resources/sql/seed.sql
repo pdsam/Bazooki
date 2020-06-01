@@ -327,6 +327,32 @@ CREATE TRIGGER prevent_repeated_auction_action
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_auction_action();
 
+-- UPDATE AUCTION STATUS BASED WHEN ADDING/UPDATING MOD ACTIONS
+DROP FUNCTION IF EXISTS mod_action_update_auctions_status();
+CREATE FUNCTION mod_action_update_auctions_status() RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        IF NEW.action = 'freezed' THEN
+            UPDATE auction set status = 'frozen' where id = NEW.auction_id;
+        END IF;
+        IF NEW.action = 'removed' THEN
+            UPDATE auction set status = 'removed' where id = NEW.auction_id;
+        END IF;
+    END IF;
+    IF TG_OP = 'UPDATE' THEN
+        IF NEW.active = false THEN
+            UPDATE auction set status = 'live' where id = NEW.auction_id
+        END IF;
+    END IF;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS mod_action_update_auctions_status ON auction_moderator_action;
+CREATE TRIGGER mod_action_update_auctions_status
+    AFTER INSERT OR UPDATE ON auction_moderator_action
+    FOR EACH ROW
+    EXECUTE PROCEDURE mod_action_update_auctions_status();
+
 -- PREVENT MULTIPLE BID ACTIONS
 DROP FUNCTION IF EXISTS prevent_repeated_bid_action();
 CREATE FUNCTION prevent_repeated_bid_action() RETURNS TRIGGER AS $$
