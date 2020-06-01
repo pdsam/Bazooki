@@ -45,17 +45,16 @@
                                 <h5>Add a New Payment Method</h5>
                             </div>
                             <div class="modal-body">
-                                <form class="form" action="/account/settings/payment" method="POST">
+                                <p>Valid card types are Visa, Maestro and MasterCard.</p>
+                                <form id="paymentMethodForm" class="form" action="/account/settings/payment" method="POST">
                                     @csrf
                                     @method('POST')
+                                    <input id="cardTypeInput" type="hidden" name="cardType">
                                     <div class="form-group">
                                         <label for="cardNumber">Card Number:</label>
                                         <input class="form-control" type="text" name="cardNumber" id="cardNumber">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="cardType">Card Type:</label>
-                                        <input class="form-control" type="text" name="cardType" id="cardtype">
-                                    </div>
+                                    <p id="cardTypeLabel"></p>
                                     <input class="form-control" type="submit" value="Add Card">
                                 </form>
                             </div>
@@ -86,7 +85,7 @@
         </div>
 
         <div class="mb-5">
-            <h2 class="text-danger">Danger zone</h5>
+            <h2 class="text-danger">Danger zone</h2>
             <p class="text-muted">The things in this area are very <span class="font-weight-bold">D A N G E R O U S</span></p>
             <div id="danger-zone-area" class="collapse mb-3 border border-danger">
                 <div class="row justify-content-between border mx-0 p-3">
@@ -104,5 +103,90 @@
             <button class="btn btn-outline-danger" data-toggle="collapse" data-target="#danger-zone-area">Show</button>
         </div>
     </div>
-    </div>
+    <script>
+        //Maestro 	    50, 56–69
+        //Mastercard 	2221-2720
+        //              51–55
+        //Visa 	        4
+
+        $('#paymentMethodForm').on('submit', function (e) {
+            e.preventDefault();
+            const input = $('#cardTypeInput');
+            const label = $('#cardTypeLabel');
+            const value = $('#cardNumber').val();
+            input.val(null);
+            if (!$.isNumeric(value)) {
+                label.html('Invalid card number');
+                return;
+            }
+
+            if (value.length === 16) {
+                if (value.charAt(0) === '4') {
+                    input.val('visa');
+                }
+
+                let initial = parseInt(value.substring(0,2));
+                if (initial >= 51 && initial <= 55) {
+                    input.val('mastercard');
+                }
+                initial = parseInt(value.substring(0,4));
+                if (initial >= 2221 && initial <= 2720) {
+                    input.val('mastercard');
+                }
+            }
+            if (value.length >= 12 && value.length <= 19) {
+                let initial = parseInt(value.substring(0,2));
+                if ((initial >= 56 && initial <= 69) || initial === 50) {
+                    input.val('maestro');
+                }
+            }
+            if (input.val !== null) {
+                this.submit();
+            }
+        });
+
+        $('#cardNumber').on('change', function() {
+            const input = $('#cardTypeInput');
+            const label = $('#cardTypeLabel');
+            if (!$.isNumeric(this.value)) {
+                input.val(null);
+                label.html('Invalid card number');
+                return;
+            }
+
+            const value = this.value;
+
+            if (value.length === 16) {
+                if (value.charAt(0) === '4') {
+                    input.val('visa');
+                    label.html('Visa');
+                    return;
+                }
+
+                let initial = parseInt(value.substring(0,2));
+                if (initial >= 51 && initial <= 55) {
+                    input.val('mastercard');
+                    label.html('MasterCard');
+                    return;
+                }
+                initial = parseInt(value.substring(0,4));
+                if (initial >= 2221 && initial <= 2720) {
+                    input.val('mastercard');
+                    label.html('MasterCard');
+                    return;
+                }
+            }
+            if (value.length >= 12 && value.length <= 19) {
+                let initial = parseInt(value.substring(0,2));
+                if ((initial >= 56 && initial <= 69) || initial === 50) {
+                    input.val('maestro');
+                    label.html('Maestro');
+                    return;
+                }
+            }
+
+            input.value = null;
+            label.innerHTML = 'Invalid card type';
+        });
+    </script>
 @endsection
