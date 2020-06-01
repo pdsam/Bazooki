@@ -49,6 +49,7 @@ Route::patch('/mod/certifications/{certification}', 'Dashboard\CertificationCont
 Route::get('/mod/users', 'Dashboard\UserController@show');
 Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
 Route::post('mod/auctions/freeze/{id?}','Dashboard\AuctionController@freeze');
+Route::patch('mod/auctions/freeze/{id?}','Dashboard\AuctionController@unfreeze');
 Route::delete('mod/auctions/{id?}','Dashboard\AuctionController@delete');
 
 // Static
