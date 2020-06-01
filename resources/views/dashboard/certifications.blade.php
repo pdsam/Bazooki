@@ -4,53 +4,52 @@
 
 @section('tab-content')
     <h2>Certifications</h2>
-    <?php for ($i=0; $i < 10; $i++) { ?>
-        <div class="shadow-sm border mt-3 mt-lg-1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    @if(count($auctions) == 0)
+        <p class="mt-3">There are no certificates requiring validation \_(ツ)_/¯</p>
+    @endif
+    
+    @foreach ($auctions as $auction)
+        <div class="shadow-sm border mt-3 mt-lg-1 certification-card">
             <div class="card rounded-0 border-0">
                 <div class="row align-items-center no-gutters">
                     <div class="col-12 col-sm-4">
-                        <img src="/assets/gun.jpg" class="card-img rounded-0" alt="logo">
+                        <img src="{{ asset($auction->photo) }}" class="card-img rounded-0" alt="logo">
                     </div>
                     <div class="col-12 col-sm-8">
                         <div class="card-body">
-                            <h4 class="card-title">Super cool gun</h4>
-                            <h6 class="card-subtitle text-muted">Owned by: <a href="profile.php">super_cool_man</a></h6>
+                            <h4 class="card-title">{{ $auction->item_name }}</h4>
+                            <h6 class="card-subtitle text-muted">Owned by: <a href="/profile/{{ $auction->owner }}">{{ $auction->owner_name }}</a></h6>
                             <div class="mt-3">
                                 <p>
-                                This is a genuine revolver, I got it from my grandfather. It dates back to WWII.
+                                    {{ $auction->item_short_description }}
                                 </p>
                             </div>
+                            <a class="btn btn-primary" href="{{ asset($auction->certification_path) }}" target="_blank" rel="noopener noreferrer">View certification</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="certification<?= $i ?>" class="collapse p-3">
-                <div class="my-3 mx-2">
-                    Certification documents:
-                    <ul>
-                        <li>
-                            <a href="/assets/cert1.pdf">document1</a>
-                        </li>
-                        <li>
-                            <a href="/assets/cert2.pdf">document2</a>
-                        </li>
-                        <li>
-                            <a href="/assets/cert3.pdf">document3</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mt-2">
-                    <button class="btn btn-success">
-                        Accept
-                    </button>
-                    <button class="btn btn-danger">
-                        Reject
-                    </button>
+            <div id="certification{{ $auction->id }}" class="certification_actions collapse">
+                <div class="row my-3 mx-2">                    
+                    <div class="col-lg-6">
+                        <button class="btn btn-success" onclick="updateCertificationStatus({{ $auction->id }}, {{ $auction->certification_id }}, 'accepted')">
+                            Accept
+                        </button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn btn-danger" onclick="updateCertificationStatus({{ $auction->id }}, {{ $auction->certification_id }}, 'rejected')">
+                            Reject
+                        </button>
+                    </div>
                 </div>
             </div>
-            <a href="#certification<?= $i ?>" class="cert-toggle justify-content-center d-flex py-3 text-muted bg-light" data-toggle="collapse" data-target="#certification<?= $i?>">
-                <p class="m-0">Documents <span class="fa fa-chevron-down"></span></p>
+            <a href="#certification{{ $auction->id }}" class="cert-toggle justify-content-center d-flex py-3 text-muted bg-light" data-toggle="collapse" data-target="#certification{{ $auction->id }}">
+                <p class="m-0">Actions <span class="fa fa-chevron-down"></span></p>
             </a>
         </div>
-    <?php } ?>
+    @endforeach
+
+    <script src="{{ asset('js/dashboard_certifications.js') }}" defer></script>
 @endsection

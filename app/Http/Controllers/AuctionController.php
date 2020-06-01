@@ -52,9 +52,9 @@ class AuctionController extends Controller
             'start_time' => 'required|date_format:d-m-Y',
             'duration' => 'required|numeric|gt:0',
             'photos' => 'nullable|array',
-            'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff |max:10240',
+            'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff|max:10240',
             'insta_buy' => 'nullable|numeric|gt:0',
-            'certification' => 'nullable|mimes:pdf |max:4096',
+            'certification' => 'nullable|mimetypes:application/pdf|max:4096',
             'categories' => 'nullable|array',
             'categories.*' => 'numeric'
         ], $messages = [
@@ -68,7 +68,7 @@ class AuctionController extends Controller
             'photos.array' => "Photos must be an array",
             'photos.*.mimes' => 'Photos must be of image format',
             'photos.*.max' => 'Photos must be less than 10 MB',
-            'certification.mimes' => 'Certification must be a PDF',
+            'certification.mimetypes' => 'Certification must be a PDF',
             'certification.max' => 'Certification should be less than 4 MB',
             'categories.array' => "Categories must be an array",
             'categories.*.numeric' => "Categories must be numeric"
@@ -122,7 +122,7 @@ class AuctionController extends Controller
 
         if($request->hasFile('certification')) {
             $certification = $request->file('certification');
-            $filename = $certification->store('certifications');
+            $filename = $certification->store('public/certifications');
             $newCert = Certification::create([
                 'auction_id' => $newAuction->id,
                 'certification_doc_path' => $filename
