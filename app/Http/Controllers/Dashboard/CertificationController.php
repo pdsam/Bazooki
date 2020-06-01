@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Certification;
 use App\Auction;
@@ -41,5 +42,21 @@ class CertificationController extends Controller
         }
 
         return view('dashboard.certifications', ["auctions" => $auctions]);
+    }
+
+    public function updateStatus(Request $request, Certification $certification) {
+        if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
+            return response()->json(['error' => 'You do not have permission to access that resource.']);
+        }
+
+        $newStatus = $request->input('certificationStatus');
+        if($newStatus != 'accepted' && $newStatus != 'rejected') {
+            return response()->json(['error' => 'Invalid certification status.']);
+        }
+
+        $certification->status = $newStatus;
+        $certification->save();
+
+        return response()->json(['success' => 'Successfully updated certification status.']);
     }
 }

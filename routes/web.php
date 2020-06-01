@@ -42,6 +42,7 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/mod', 'Dashboard\IndexController@show')->name('dashboard');
 Route::get('/mod/auctions', 'Dashboard\AuctionController@show');
 Route::get('/mod/certifications', 'Dashboard\CertificationController@show');
+Route::patch('/mod/certifications/{certification}', 'Dashboard\CertificationController@updateStatus');
 Route::get('/mod/users', 'Dashboard\UserController@show');
 Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
 

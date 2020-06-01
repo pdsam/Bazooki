@@ -4,8 +4,12 @@
 
 @section('tab-content')
     <h2>Certifications</h2>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        
+    @if(count($auctions) == 0)
+        <p class="mt-3">There are no certificates requiring validation \_(ツ)_/¯</p>
+    @endif
+    
     @foreach ($auctions as $auction)
         <div class="shadow-sm border mt-3 mt-lg-1 certification-card">
             <div class="card rounded-0 border-0">
@@ -30,12 +34,12 @@
             <div id="certification{{ $auction->id }}" class="certification_actions collapse">
                 <div class="row my-3 mx-2">                    
                     <div class="col-lg-6">
-                        <button class="btn btn-success" onclick="updateCertificationStatus({{ $auction->id }}, 'accepted')">
+                        <button class="btn btn-success" onclick="updateCertificationStatus({{ $auction->id }}, {{ $auction->certification_id }}, 'accepted')">
                             Accept
                         </button>
                     </div>
                     <div class="col-lg-6">
-                        <button class="btn btn-danger" onclick="updateCertificationStatus({{ $auction->id }}, 'rejected')">
+                        <button class="btn btn-danger" onclick="updateCertificationStatus({{ $auction->id }}, {{ $auction->certification_id }}, 'rejected')">
                             Reject
                         </button>
                     </div>
