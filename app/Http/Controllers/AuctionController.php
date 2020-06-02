@@ -21,6 +21,7 @@ use App\Bid;
 use Illuminate\Database\QueryException;
 use App\Category;
 use App\AuctionCategory;
+use Datetime;
 
 class AuctionController extends Controller
 {
@@ -49,7 +50,7 @@ class AuctionController extends Controller
             'description' => 'required|string|max:2000',
             'short_description' => 'required|string|max:500',
             'base_bid' => 'required|numeric|gte:0',
-            'start_time' => 'required|date_format:d-m-Y',
+            'start_time' => 'required|date_format:m/d/Y h:i A',
             'duration' => 'required|numeric|gt:0',
             'photos' => 'nullable|array',
             'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff|max:10240',
@@ -62,7 +63,7 @@ class AuctionController extends Controller
             'description.max' => 'Name has a maximum of 2000 characters',
             'short_description.max' => 'Name has a maximum of 500 characters',
             'base_bid.gte' => "Base bid must be greater than or equal to 0",
-            'start_time.date_format' => "Invalid date format, must be d-m-Y",
+            'start_time.date_format' => "Invalid date format, must be m/d/Y h:i A",
             'duration.gt' => "Duration must be greater than 0",
             'insta_buy.gt' => "Instant buy price must be greater than 0",
             'photos.array' => "Photos must be an array",
@@ -79,11 +80,8 @@ class AuctionController extends Controller
         }
 
         $userID = Auth::user()->id;
-        $startDate = date('Y-m-d', strtotime($request->start_time));
-        $insta_buy = null;
-        if ($request->has('insta_buy')) {
-            $insta_buy = $request->insta_buy;
-        }
+        $startDate = DateTime::createFromFormat('m/d/Y h:i A', $request->start_time)->format('Y-m-d H:i:s');
+        $insta_buy = $request->has('insta_buy') ? $request->insta_buy : null;
         $newAuction = Auction::create([
             'owner' => $userID,
             'base_bid' => $request->base_bid,

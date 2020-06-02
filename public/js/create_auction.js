@@ -1,21 +1,5 @@
 $(function () {
-
-    // INITIALIZE DATEPICKER PLUGIN
-    $('.datepicker-start').datepicker({
-        clearbtn: true,
-        format: "dd-mm-yyyy"
-    });
-
-    $('.datepicker-end').datepicker({
-        clearbtn: true,
-        format: "dd-mm-yyyy"
-    });
-
-    // FOR DEMO PURPOSE
-    $('#reservationDate').on('change', function () {
-        var pickedDate = $('input').val();
-        $('#pickedDate').html(pickedDate);
-    });
+    $('#datetimepicker1').datetimepicker();
 });
 
 

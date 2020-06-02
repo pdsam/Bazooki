@@ -3,8 +3,9 @@
 @section('title', 'Bazooki - Create auction')
 
 @section('head')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
     <script type="text/javascript" src="{{ asset('/js/create_auction.js') }}" defer></script>
     <link rel="stylesheet" href={{ asset('css/create_auction.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
@@ -50,9 +51,11 @@
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group ml-4 mr-4">
                         <h3>Start date</h3>    
-                        <div class="datepicker-start date input-group p-0">
-                            <input name="start_time" type="text" placeholder="Start date" class="form-control" id="reservationDate" required>
-                            <div class="input-group-append"></div>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input name="start_time" placeholder="Start time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text bg-olive"><i class="fa fa-calendar"></i></div>
+                            </div>
                         </div>
                     </div>
                 </div>
