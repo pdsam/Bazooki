@@ -346,6 +346,56 @@ class AuctionController extends Controller
             ]);
     }
 
+    public function wonItems(Request $request) {
+        $baz = Auth::guard('bazooker')->user();
+
+        if (is_null($baz)) {
+            return redirect()->route('auctions');
+        }
+
+        $auctions = $baz->wonItems();
+
+        if ($request->exists('o')) {
+            switch ($request->input('o')) {
+                case 'dateEarl':
+                    $auctions->orderByRaw('(start_time + duration * interval \'1 second\') asc');
+                    break;
+                case 'dateLate':
+                    $auctions->orderByRaw('(start_time + duration * interval \'1 second\') desc');
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            $auctions->orderByRaw('(start_time + duration * interval \'1 second\') desc');
+        }
+
+        $pageNum = 0;
+        if ($request->exists('p') && is_numeric($request->input('p'))) {
+            $pageNum = intval($request->input('p'));
+        }
+
+        $pageSize = 20;
+        $total = $auctions->count();
+
+        $offset = 0;
+        $num_pages = ceil($total / $pageSize);
+        if ($num_pages > $pageNum && $pageNum >= 0) {
+            $offset = $pageSize * $pageNum;
+        } else {
+            return redirect()->route('wonitems', ['p'=>0]);
+        }
+
+        $auctions = $auctions->offset($offset)->limit($pageSize)->get();
+
+        return view('pages.activity.wonitems', [
+            'auctions' => $auctions,
+            'sortOrder'=>$request->input('o'),
+            'current_page' => $pageNum,
+            'num_pages'=> $num_pages
+        ]);
+    }
+
     public function myBids(Request $request) {
         $baz = Auth::guard('bazooker')->user();
 

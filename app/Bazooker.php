@@ -46,8 +46,8 @@ class Bazooker extends Authenticatable implements User
         return $this->hasMany('App\Auction', 'owner');
     }
 
-    public function wonAuctions() {
-        return $this->hasMany('App\Auction', 'highest_bidder')->whereRaw('start_time + duration * interval \'1 second\'');
+    public function wonItems() {
+        return $this->hasMany('App\Auction', 'highest_bidder')->where('status', '=', 'over');
     }
 
     public function bids() {

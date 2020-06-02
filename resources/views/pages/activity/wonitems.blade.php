@@ -7,22 +7,14 @@
 @endsection
 
 @section('content')
-    <h1>Your auctions</h1>
+    <h1>Your won items</h1>
     <div class="d-flex justify-content-end align-items-baseline mb-2 p-1 m-2 m-sm-0" style="margin-left:-15px; margin-right:-15px;">
-        <form id="sortOrderForm" class="form-inline" action="/activity/myauctions" method="GET">
+        <form id="sortOrderForm" class="form-inline" action="{{ route('wonitems') }}" method="GET">
             <div class="form-group">
                 <label class="mr-1" for="sortByInput">Sort by:</label>
                 <select class="w-auto custom-select rounded-0" id="sortByInput" name="o">
                     <option value="dateEarl" @if(isset($sortOrder) && strcmp($sortOrder, 'dateEarl') == 0) selected="selected" @endif>End date (Earliest)</option>
                     <option value="dateLate" @if(!isset($sortOrder) || strcmp($sortOrder, 'dateLate') == 0) selected="selected" @endif>End date (Latest)</option>
-                </select>
-            </div>
-            <div class="form-group ml-0 ml-lg-3">
-                <label class="mr-1" for="filter">Filter: </label>
-                <select class="w-auto custom-select rounded-0" id="filter" name="f">
-                    <option value="both" @if(!isset($filter) || strcmp($filter, 'both') == 0) selected="selected" @endif>Live and finished auctions</option>
-                    <option value="onlyLive" @if(isset($filter) && strcmp($filter, 'onlyLive') == 0) selected="selected" @endif>Only live auctions</option>
-                    <option value="onlyOver" @if(isset($filter) && strcmp($filter, 'onlyOver') == 0) selected="selected" @endif>Only finished auctions</option>
                 </select>
             </div>
         </form>
@@ -32,7 +24,7 @@
             <div class="card shadow-sm rounded-0 border-0 mb-2">
                 <div class="row align-items-top no-gutters">
                     <div class="col-xs-12 col-sm-4">
-                        <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0 w-100" alt="logo">
+                        <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
                     </div>
                     <div class="col-xs-12 col-sm-8">
                         <div class="card-body">
@@ -41,45 +33,22 @@
                                     <a href="{{ route('auction', $auction->id) }}">
                                         <h4 class="card-title">{{ $auction->item_name }}</h4>
                                     </a>
-                                    @if ($auction->isOver())
-                                        <h6 class="card-subtitle text-muted">Already over, ended on: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
-                                    @else
-                                        <h6 class="card-subtitle text-muted">Ends: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
-                                    @endif
+                                    <h6 class="card-subtitle text-muted">Ended on: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
 
                                     <div>
                                         @foreach($auction->categories as $cat)
                                             <span class="badge badge-light border mr-1 mt-2">{{ $cat->name }}</span>
                                         @endforeach
                                     </div>
-                                </div>
-                                <div>
-                                    <span class="mr-1 auction-price">{{ $auction->currentPrice() }}</span>$
+
+                                    <div class="mt-3">
+                                        <p class="font-weight-bold">This auction was created by {{ $auction->ownerBaz->name }}.</p>
+                                        @if (!$auction->transaction->auctioneerReview()->exists())
+                                            <a class="pr-0" style="color: var(--purple)" href="{{ route('reviewauctioneer', $auction->transaction->id) }}">Click here</a> to leave him/her some feedback.
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                            <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
-
-                            @if ($auction->isOver())
-                                <div>
-                                    @if ($auction->highest_bidder !== null)
-                                        <p>Auction won by:
-                                        <a style="color: var(--purple)" class="pr-0" href="{{ route('profile', $auction->highestBidder->id) }}">
-                                            {{ $auction->highestBidder->name }}
-                                        </a>
-                                        :
-                                        @if ($auction->transaction !== null)
-                                            <a class="font-weight-bold" style="color: var(--olive)" href="{{ route('reviewwinner', [$auction->transaction->id]) }}">
-                                                Leave a review.
-                                            </a>
-                                        @else
-                                            <p class="text-muted">Setting up transaction, you'll be able to post a review in a couple of minutes.</p>
-                                        @endif
-                                        </p>
-                                    @else
-                                        <p class="text-danger">This auction had no bids.</p>
-                                    @endif
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -112,9 +81,6 @@
     </div>
     <script>
         $('#sortByInput').change(function(e) {
-            $('#sortOrderForm').submit();
-        });
-        $('#filter').change(function(e) {
             $('#sortOrderForm').submit();
         });
         $('.page-btn').on('click', function(e) {

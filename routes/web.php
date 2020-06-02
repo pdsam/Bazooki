@@ -30,6 +30,7 @@ Route::post('/account/settings/payment', 'PaymentMethodController@create');
 Route::delete('/account/settings/payment', 'PaymentMethodController@remove');
 
 Route::get('/activity/myauctions', 'AuctionController@myAuctions')->name('myauctions');
+Route::get('/activity/wonitems', 'AuctionController@wonitems')->name('wonitems');
 Route::get('/activity/mybids', 'AuctionController@myBids')->name('mybids');
 
 Route::get('/transaction/{transaction}/reviewauctioneer', 'FeedbackController@reviewAuctioneer')->name('reviewauctioneer');

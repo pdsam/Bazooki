@@ -6,15 +6,16 @@
 @endsection
 
 @section('content')
-    <h1>Post review on <a href="{{ route('profile', $auctioneer->id) }}">{{ $auctioneer->name }}</a></h1>
+    <h1>Post review on <a style="color: var(--purple)" href="{{ route('profile', $auctioneer->id) }}">{{ $auctioneer->name }}</a></h1>
 
-    <form class="mb-5" action="/transaction/{{ $transaction_id }}/reviewwinner" method="POST">
+    <form class="mb-5" action="/transaction/{{ $transaction_id }}/reviewauctioneer" method="POST">
+        @csrf
         <div class="form-group">
             <label for="rating">Rating (1/10)</label>
             <input class="form-control" type="number" name="rating" id="rating" min="1" max="10" required="required">
         </div>
         <div class="form-group">
-            <label for="opinion">Write your explanation</label>
+            <label for="opinion">Write something about this bazooker</label>
             <textarea class="form-control" name="opinion" id="opinion" cols="80" rows="15"></textarea>
         </div>
 
