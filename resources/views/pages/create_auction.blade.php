@@ -3,10 +3,8 @@
 @section('title', 'Bazooki - Create auction')
 
 @section('head')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
     <script type="text/javascript" src="{{ asset('/js/create_auction.js') }}" defer></script>
     <link rel="stylesheet" href={{ asset('css/create_auction.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
@@ -92,8 +90,8 @@
                         <h3>Pictures</h3>
                         <p>May select more than one</p>
                     </div>
-                    <select class="image-picker show-html">
-                    </select>
+                    <ul class="thumbnails">
+                    </ul>
                     <input name="photos[]" type="file" accept='image/*' class="form-control-file" id="auctionImageInput" multiple>
                     
                 </div>

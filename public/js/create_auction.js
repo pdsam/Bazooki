@@ -18,8 +18,6 @@ $(function () {
     });
 });
 
-$(function(){$("select.image-picker").imagepicker();});
-
 
 function addRequiredInputs() {
 

@@ -4,6 +4,24 @@
     font-size: 0.85rem;
 }
 
+.thumbnails {
+    overflow: auto;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.thumbnails li {
+    margin: 0 12px 12px 0;
+    float: left;
+}
+
+.thumbnail {
+    padding: 6px;
+    border: 1px solid #ddd;
+}
+
 .thumbnails img {
     width: 100px;
     height: 100px;
