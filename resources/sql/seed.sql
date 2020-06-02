@@ -99,13 +99,14 @@ CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
                                    bid_id BIGINT NOT NULL REFERENCES bid(id),
                                    mod_id BIGINT NOT NULL REFERENCES moderator(id));
 
-DROP TABLE IF EXISTS auction_transaction;
-CREATE TABLE auction_transaction(value int NOT NULL CHECK (value > 0),
+DROP TABLE IF EXISTS auction_transaction CASCADE;
+CREATE TABLE auction_transaction(id BIGSERIAL PRIMARY KEY,
+                                 value int NOT NULL CHECK (value > 0),
                                  date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                  auction_id BIGINT NOT NULL REFERENCES auction(id),
                                  receiver BIGINT NOT NULL REFERENCES bazooker(id),
                                  sender BIGINT NOT NULL REFERENCES bazooker(id),
-                                 PRIMARY KEY(auction_id, receiver, sender),
+                                 UNIQUE(auction_id, receiver, sender),
                                  CONSTRAINT sender_receiver CHECK (sender <> receiver));
 
 DROP TABLE IF EXISTS watch_list;
@@ -138,8 +139,8 @@ CREATE TABLE feedback(id BIGSERIAL PRIMARY KEY,
                         opinion TEXT, 
                         rater_id BIGINT NOT NULL REFERENCES bazooker(id),
                         rated_id BIGINT NOT NULL REFERENCES bazooker(id),
-                        auction BIGINT NOT NULL REFERENCES auction(id),
-						UNIQUE (rater_id, rated_id, auction),
+                        transaction_id BIGINT NOT NULL REFERENCES auction_transaction(id),
+						UNIQUE (rater_id, rated_id, transaction_id),
 						CONSTRAINT cant_rate_same CHECK (rater_id != rated_id));
 
 

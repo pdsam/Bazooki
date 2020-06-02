@@ -56,11 +56,19 @@ class Auction extends Model
     }
 
     public function currentPrice() {
-        $maxBid = $this->bids()->max('amount');
+        $maxBid = $this->current_price;
         if (is_null($maxBid)) {
             return $this->base_bid;
         }
         return $maxBid;
+    }
+
+    public function highestBidder() {
+        return $this->belongsTo('App\Bazooker', 'highest_bidder');
+    }
+
+    public function transaction() {
+        return $this->hasOne('App\AuctionTransaction', 'auction_id');
     }
 
     public function categories() {

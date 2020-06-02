@@ -1,9 +1,7 @@
-<?php $path = explode('/', $_SERVER['REQUEST_URI']); array_pop($path); array_pop($path); $files_path = join("/", $path);?>
 <footer id="sticky-footer" class="py-4">
-  <link rel="stylesheet" href="../css/components/footer.css">
   <div class="container text-center">
     <div class="">
-      <h6>© 2020 Copyright <a href="<?= $files_path ?>/auctions"> Bazooki.com </a><br>
+      <h6>© 2020 Copyright <a href="{{ route('auctions') }}"> Bazooki.com </a><br>
       </h6>
     </div>
 

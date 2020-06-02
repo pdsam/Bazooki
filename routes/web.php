@@ -32,6 +32,10 @@ Route::delete('/account/settings/payment', 'PaymentMethodController@remove');
 Route::get('/activity/myauctions', 'AuctionController@myAuctions')->name('myauctions');
 Route::get('/activity/mybids', 'AuctionController@myBids')->name('mybids');
 
+Route::get('/transaction/{transaction}/reviewauctioneer', 'FeedbackController@reviewAuctioneer')->name('reviewauctioneer');
+Route::post('/transaction/{transaction}/reviewauctioneer', 'FeedbackController@postAuctioneerReview');
+Route::get('/transaction/{transaction}/reviewwinner', 'FeedbackController@reviewWinner')->name('reviewwinner');
+Route::post('/transaction/{transaction}/reviewwinner', 'FeedbackController@postWinnerReview');
 
 // Authentication
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\AuctionTransaction;
+use App\Policies\AuctionTransactionPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Services\Auth\AdminProvider;
@@ -19,7 +21,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Bazooker::class => BazookerPolicy::class,
-        PaymentMethod::class => PaymentMethodPolicy::class
+        PaymentMethod::class => PaymentMethodPolicy::class,
+        AuctionTransaction::class => AuctionTransactionPolicy::class
     ]; 
     /**
      * Register any authentication / authorization services.

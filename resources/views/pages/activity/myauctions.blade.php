@@ -38,7 +38,9 @@
                         <div class="card-body">
                             <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                                 <div class="">
-                                    <h4 class="card-title">{{ $auction->item_name }}</h4>
+                                    <a href="{{ route('auction', $auction->id) }}">
+                                        <h4 class="card-title">{{ $auction->item_name }}</h4>
+                                    </a>
                                     @if ($auction->isOver())
                                         <h6 class="card-subtitle text-muted">Already over</h6>
                                     @else
@@ -56,9 +58,29 @@
                                 </div>
                             </div>
                             <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
+
+                            @if ($auction->isOver())
+                                <div>
+                                    @if ($auction->highest_bidder !== null)
+                                        Auction won by:
+                                        <a href="{{ route('profile', $auction->highestBidder->id) }}">
+                                            {{ $auction->highestBidder->name }}
+                                        </a>
+                                        :
+                                        @if ($auction->transaction !== null)
+                                            <a href="{{ route('reviewwinner', [$auction->transaction->id]) }}">
+                                                Leave a review.
+                                            </a>
+                                        @else
+                                            <p class="text-muted">Setting up transaction, you'll be able to post a review about this bazooker in a minute.</p>
+                                        @endif
+                                    @else
+                                        This auction had no bids.
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
-                    <a href="{{ route('auction', $auction->id) }}" class="stretched-link"></a>
                 </div>
             </div>
         @endforeach
