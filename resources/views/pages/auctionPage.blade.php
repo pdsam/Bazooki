@@ -84,14 +84,15 @@
 <div class="card mb-4">
     <div class="card-body">
         <h3 class="card-title">Details </h3>
-        <p class="card-text">{{ $description }}
+        <span class="card-text">Posted by: </span><a href="/profile/{{$owner}}"><span>BIG TODO</span></a>
+        <h4>Description:</h4>
+        <p class="card-text">{{ $description }}</p>
     </div>
 </div>
 
 <div class="card">
     <div class="card-body">
         <h3 class="card-title">Price variation</h3>
-        <!--<img src="../assets/chart.png" class="img-responsive" width="100%" />-->
         <canvas id="chart"  width="400" height="200"></canvas>
     </div>
 
