@@ -1,6 +1,6 @@
 @extends('layouts.dashboard_page')
 
-@section('active-certifications', 1)
+@section('active-users', 1)
 
 @section('tab-content')
     <h2>Users</h2>

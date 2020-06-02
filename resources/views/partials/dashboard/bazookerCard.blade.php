@@ -13,9 +13,17 @@
                             {{ $bazooker->description }}
                         </p>
                     </div>
-                    <div class="row ml-0">
-                        <button type="submit" class="btn btn-large btn-primary">Freeze</button>
-                        <button type='submit' class="btn btn-large btn-danger">Remove</button>
+                    <div class="row ml-0 justify-content-between">
+                        <form method="post" action="/mod/users/suspend/{{$bazooker->id}}">
+                            @csrf
+                            <label for="duration">Duration</label>
+                            <input type="numric" value="0" id="duration"></input>
+                            <button type="submit" class="btn btn-large bg-warning">Suspend</button>
+                        </form>
+                        <form method="post" class="mr-2" action="/mod/users/ban/{{$bazooker->id}}">
+                            @csrf
+                            <button type='submit' class="btn btn-large btn-danger">Ban</button>
+                        </form>
                     </div>
                 </div>
             </div>

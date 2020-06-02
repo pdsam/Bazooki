@@ -20,21 +20,21 @@ class UserController extends Controller
         return view('dashboard.users',['bazookers'=> $bazookers]);
     }
 
-    public function suspend(){
+    public function suspend($id){
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
 
-        Redirect::back()->withErrors(["WIP SUSPEND"]);
+        return Redirect::back()->withErrors(["WIP SUSPEND"]);
     }
 
-    public function ban(){
+    public function ban($id){
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
 
 
-        Redirect::back()->withErrors(["WIP BAN"]);
+        return Redirect::back()->withErrors(["WIP BAN"]);
     }
 
 }
