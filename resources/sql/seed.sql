@@ -424,7 +424,7 @@ BEGIN
 	IF(TG_OP = 'INSERT') THEN
 		UPDATE bazooker set status = 'suspended' where id = NEW.bazooker_id AND status='live';
 	ELSIF(TG_OP = 'UPDATE') THEN 
-		UPDATE bazooker set status = 'live' where id = NEW.bazooker_id AND status='suspended';
+		UPDATE bazooker set status = 'live' where id = NEW.bazooker_id AND status='suspended' and OLD.duration=0;
 	END IF;
 	RETURN NEW;
 END

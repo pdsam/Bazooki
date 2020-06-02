@@ -25,7 +25,7 @@ class BazookerController extends Controller
 
         $user = Bazooker::find($id);
 
-        if ($user == null) {
+        if ($user == null || $user->isBanned()) {
             return redirect('auctions');
         }
 
