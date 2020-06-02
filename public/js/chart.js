@@ -18,7 +18,7 @@ function buildChart(response) {
     let aux = response[i];
     data.push({t:new Date(aux["time"]), y:aux["amount"]});
   }
-  console.log(data)
+  //console.log(data)
   var ctx = document.getElementById("chart");
   let myChart = new Chart(ctx, {
     type: "line",
