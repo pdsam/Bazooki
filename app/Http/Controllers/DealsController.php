@@ -23,7 +23,8 @@ class DealsController extends Controller
                 ON auction_id=auction.id
                 LEFT JOIN item_image
                 ON ignore.auction_id = auction.id
-                 WHERE date_hour=max_date_hour  and auction.status='live' ORDER BY num_bids DESC LIMIT 8;
+                 WHERE date_hour=max_date_hour  and auction.status='live' AND start_time < now() ORDER BY num_bids DESC LIMIT 8;
+		
             ") );
 
 
@@ -61,6 +62,7 @@ class DealsController extends Controller
                     WHERE auction.status = 'live'
                     ) ignore
                 WHERE end_time > now()
+		AND start_time < now()
                 ORDER BY time_left ASC LIMIT 8;
             ")
 
@@ -95,6 +97,7 @@ class DealsController extends Controller
 		ON 
 		auction_id=auction.id
 		WHERE status='live'
+		AND start_time < now()
 		 ORDER BY start_time DESC LIMIT 8;
             ")
 
