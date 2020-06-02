@@ -37,8 +37,9 @@ class LoginController extends Controller
     public function login(Request $request) {
         $username = $request->username;
         $password = $request->password;
+        $remember = !is_null($request->input('remember-me'));
 
-        if (Auth::guard('admin')->attempt(['email' => $username, 'password'=>$password])) {
+        if (Auth::guard('admin')->attempt(['email' => $username, 'password'=>$password], $remember)) {
             return redirect()->route('dashboard');
         }
         if (Auth::guard('mod')->attempt(['email' => $username, 'password'=>$password])) {
@@ -49,6 +50,7 @@ class LoginController extends Controller
         }
 
         return redirect()->route('login')
-                         ->withErrors([ 'username' => 'Invalid username or password.', ]);
+            ->withErrors([ 'username' => 'Invalid username or password.', ])
+            ->withInput(['username' => $username]);
     }
 }

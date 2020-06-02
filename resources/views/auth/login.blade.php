@@ -31,7 +31,7 @@
 
                     <div class="font-weight-bold">
                         <label>
-                            <input type="checkbox" value="remember-me"> Keep me logged in 
+                            <input type="checkbox"  name="remember-me"> Keep me logged in
                         </label>
                     </div>
 

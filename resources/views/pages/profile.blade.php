@@ -39,21 +39,17 @@
                                     </h5>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="d-flex">
-                                        <div>
-                                            <div class="form-group">
-                                                <input type="file" name="profilePic" id="profilePic">
-                                            </div>
+                                    <div>
+                                        <div class="form-group">
+                                            <input type="file" name="profilePic" id="profilePic">
                                         </div>
-                                        <div>
-                                            <div class="form-group">
-                                                <label for="name">Name:</label>
-                                                <input class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="description">Description:</label>
-                                                <textarea class="form-control" id="dsription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea class="form-control" id="dsription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
                                         </div>
                                     </div>
                                 </div>

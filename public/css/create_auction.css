@@ -1,7 +1,19 @@
-.datepicker td, .datepicker th {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 0.85rem;
+.thumbnails {
+    overflow: auto;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.thumbnails li {
+    margin: 0 12px 12px 0;
+    float: left;
+}
+
+.thumbnail {
+    padding: 6px;
+    border: 1px solid #ddd;
 }
 
 .thumbnails img {
@@ -22,4 +34,13 @@
 
 .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove {
     color: white !important;
+}
+
+#datetimepicker1 .input-group-text {
+    text-align: center;
+    color: white;
+}
+
+#datetimepicker1 .input-group-text i {
+    padding-left: 1rem;
 }

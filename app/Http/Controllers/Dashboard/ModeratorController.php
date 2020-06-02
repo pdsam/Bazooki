@@ -40,10 +40,10 @@ class ModeratorController extends Controller
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
 
         }$validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:100|unique:moderator',
+            'email' => 'required|string|email|max:100|unique:moderator|unique:bazooker',
             'password' => 'required|string|max:100'
         ], $messages = [
-            'email.unique' => 'Moderator with given email already exists',
+            'email.unique' => 'Email already being used.',
             'email.email' => 'Invalid email format',
             'email.max' => 'Email is too big',
             'password.max' => 'Password is too big'
