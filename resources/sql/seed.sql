@@ -399,6 +399,37 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
+-- UPDATE BAZOOKER STATUS on ban 
+DROP FUNCTION IF EXISTS bazooker_update_status_ban();
+CREATE FUNCTION bazooker_update_status_ban() RETURNS TRIGGER AS $$
+BEGIN
+
+
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS bazooker_update_status_ban ON ban;
+CREATE TRIGGER bazooker_update_status_ban
+    AFTER INSERT OR UPDATE ON ban
+    FOR EACH ROW
+    EXECUTE PROCEDURE bazooker_update_status();
+
+
+-- UPDATE BAZOOKER STATUS on suspension 
+DROP FUNCTION IF EXISTS bazooker_update_status();
+CREATE FUNCTION bazooker_update_status() RETURNS TRIGGER AS $$
+BEGIN
+
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS bazooker_update_status ON auction_moderator_action;
+CREATE TRIGGER mod_action_update_auctions_status
+    AFTER INSERT OR UPDATE ON auction_moderator_action
+    FOR EACH ROW
+    EXECUTE PROCEDURE bazooker_update_status();
+
+
 
 CREATE INDEX bid_auction_id ON bid USING hash(auction_id);
 CREATE INDEX bid_bidder_id ON bid USING hash(bidder_id);
