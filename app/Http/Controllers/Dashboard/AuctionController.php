@@ -15,11 +15,11 @@ class AuctionController extends Controller
 {
     public function show()
     {
-        /*
+        
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
-        */
+        
         $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->where('status', '!=', 'removed');
         //return dd($auctions->get());
         $auctions = $auctions->get();
@@ -48,7 +48,7 @@ class AuctionController extends Controller
         }
 
 
-        //try{
+        try{
         $action = AuctionModeratorAction::create([
             'reason' => 'Please email us for that',
             'active' => true,
@@ -57,10 +57,10 @@ class AuctionController extends Controller
             'auction_id' => $id
 
         ]);
-       // }
-        //catch(Exception $e){
-        //  return  Redirect::back()->withErrors(['Error in db: (╯°□°）╯︵ ┻━┻']);
-        //}
+        }
+        catch(Exception $e){
+          return  Redirect::back()->withErrors(['Something went wrong... I am sure that our highly skilled monkeys will fix it someday (╯°□°）╯︵ ┻━┻']);
+        }
 
        
         
@@ -115,7 +115,7 @@ class AuctionController extends Controller
         }
 
             
-        //try{
+        try{
         $action = AuctionModeratorAction::create([
             'reason' => 'Please email us for that',
             'active' => true,
@@ -124,10 +124,10 @@ class AuctionController extends Controller
             'auction_id' => $id
 
         ]);
-        //}
-       // catch(Exception $e){
-       //   return  Redirect::back()->withErrors(['Error in db: Already Removed (╯°□°）╯︵ ┻━┻']);
-       // }
+        }
+        catch(Exception $e){
+          return  Redirect::back()->withErrors(['Something went wrong... I am sure that our highly skilled monkeys will fix it someday (╯°□°）╯︵ ┻━┻']);
+        }
 
        
         
