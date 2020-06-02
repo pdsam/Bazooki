@@ -101,7 +101,7 @@ class UserController extends Controller
         }
 
         if(Bazooker::find($id)->isBanned()){
-            return Redirect::back()->withErrors(["User already banend"]);
+            return Redirect::back()->withErrors(["User already banned"]);
         }
 
        // try{

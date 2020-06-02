@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <h1>Your auctions</h1>
+    <h1>My auctions</h1>
     <div class="d-flex justify-content-end align-items-baseline mb-2 p-1 m-2 m-sm-0" style="margin-left:-15px; margin-right:-15px;">
         <form id="sortOrderForm" class="form-inline" action="/activity/myauctions" method="GET">
             <div class="form-group">
@@ -32,7 +32,7 @@
             <div class="card shadow-sm rounded-0 border-0 mb-2">
                 <div class="row align-items-top no-gutters">
                     <div class="col-xs-12 col-sm-4">
-                        <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
+                        <img src="{{ asset($auction->thumbnail_photo) }}" class="auction-img card-img rounded-0" alt="logo">
                     </div>
                     <div class="col-xs-12 col-sm-8">
                         <div class="card-body">

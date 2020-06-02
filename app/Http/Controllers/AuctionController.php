@@ -164,6 +164,10 @@ class AuctionController extends Controller
 
         $categories = $auction->categories()->get();
 
+        $certified = count(Certification::where('auction_id', $auction->id)
+                        ->where('status', 'accepted')
+                        ->get()) > 0;
+
         return view('pages.auctionPage',[
             'owner' => $auction->owner,
             'id' => $auction->id,
@@ -173,7 +177,8 @@ class AuctionController extends Controller
             'duration'=>$auction->duration,
             'start_time'=>$auction->start_time,
             'photos'=>$photo_paths,
-            'categories'=>$categories
+            'categories'=>$categories,
+            'certified'=>$certified
         ]);
 
     }
@@ -336,6 +341,21 @@ class AuctionController extends Controller
         }
 
         $auctions = $auctions->offset($offset)->limit($pageSize)->get();
+        foreach($auctions as $auction) {     
+        
+            $auction_photos = $auction->photos()->get();
+            $photo_paths = array();
+            foreach($auction_photos as $photo) {
+                $path = str_replace("public", "storage", $photo->image_path);
+                array_push($photo_paths, $path);
+            }
+
+            if (count($photo_paths) == 0) {
+                $photo_paths = array("assets/unknown_item.png");
+            }
+
+            $auction->thumbnail_photo = $photo_paths[0];
+        }
 
         return view('pages.activity.myauctions', [
             'auctions' => $auctions,
