@@ -403,31 +403,38 @@ $$ LANGUAGE 'plpgsql';
 DROP FUNCTION IF EXISTS bazooker_update_status_ban();
 CREATE FUNCTION bazooker_update_status_ban() RETURNS TRIGGER AS $$
 BEGIN
-
-
+	IF(TG_OP = 'INSERT') THEN
+	UPDATE bazooker set status = 'banned' where id = NEW.bazooker_id;
+	END IF;
+	RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
 
 DROP TRIGGER IF EXISTS bazooker_update_status_ban ON ban;
 CREATE TRIGGER bazooker_update_status_ban
-    AFTER INSERT OR UPDATE ON ban
+    AFTER INSERT ON ban
     FOR EACH ROW
-    EXECUTE PROCEDURE bazooker_update_status();
+    EXECUTE PROCEDURE bazooker_update_status_ban();
 
 
 -- UPDATE BAZOOKER STATUS on suspension 
-DROP FUNCTION IF EXISTS bazooker_update_status();
-CREATE FUNCTION bazooker_update_status() RETURNS TRIGGER AS $$
+DROP FUNCTION IF EXISTS bazooker_update_status_suspension();
+CREATE FUNCTION bazooker_update_status_suspension() RETURNS TRIGGER AS $$
 BEGIN
-
+	IF(TG_OP = 'INSERT') THEN
+		UPDATE bazooker set status = 'suspended' where id = NEW.bazooker_id AND status='live';
+	ELSIF(TG_OP = 'UPDATE') THEN 
+		UPDATE bazooker set status = 'live' where id = NEW.bazooker_id AND status='suspended';
+	END IF;
+	RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
 
-DROP TRIGGER IF EXISTS bazooker_update_status ON auction_moderator_action;
-CREATE TRIGGER mod_action_update_auctions_status
-    AFTER INSERT OR UPDATE ON auction_moderator_action
+DROP TRIGGER IF EXISTS bazooker_update_status_suspension ON suspension;
+CREATE TRIGGER bazooker_update_status_suspension
+    AFTER INSERT OR UPDATE ON suspension
     FOR EACH ROW
-    EXECUTE PROCEDURE bazooker_update_status();
+    EXECUTE PROCEDURE bazooker_update_status_suspension();
 
 
 

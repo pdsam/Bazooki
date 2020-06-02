@@ -100,7 +100,7 @@ class UserController extends Controller
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
 
-        try{
+       // try{
        $ban =  Ban::create([
             'reason' => 'Please email us for that',
             'admin_id' => Auth::guard('admin')->user()->mod->id,
@@ -108,10 +108,10 @@ class UserController extends Controller
 
 
        ]);
-        }
-        catch(Exception $e){
-            return Redirect::back()->withErrors(["User already banend"]);
-        }
+        //}
+        //catch(Exception $e){
+        //    return Redirect::back()->withErrors(["User already banend"]);
+       // }
 
 
         return Redirect::back();
