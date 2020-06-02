@@ -25,6 +25,10 @@
   width: 100%;
 }
 
+.user_actions button{
+  width: 100%;
+}
+
 .moderator-delete {
   height: 100%;
   width: 100%;

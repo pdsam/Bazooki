@@ -13,21 +13,84 @@
                             {{ $bazooker->description }}
                         </p>
                     </div>
-                    <div class="row ml-0 justify-content-between">
-                        <form method="post" action="/mod/users/suspend/{{$bazooker->id}}">
-                            @csrf
-                            <label for="duration">Duration</label>
-                            <input type="numric" value="0" id="duration"></input>
-                            <button type="submit" class="btn btn-large bg-warning">Suspend</button>
-                        </form>
-                        <form method="post" class="mr-2" action="/mod/users/ban/{{$bazooker->id}}">
-                            @csrf
-                            <button type='submit' class="btn btn-large btn-danger">Ban</button>
-                        </form>
-                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="actions{{ $bazooker->id }}" class="user_actions collapse">
+        <div class="row my-3 mx-2">                    
+            <div class="col-lg-6">
+                <button class="btn btn-warning" data-toggle="modal" data-target="#suspensionModal{{ $bazooker->id }}">
+                    Suspend
+                </button>
+            </div>
+            <div class="col-lg-6">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#banModal{{ $bazooker->id }}">
+                    Ban
+                </button>
+            </div>
+        </div>
+    </div>
+    <a href="#actions{{ $bazooker->id }}" class="cert-toggle justify-content-center d-flex py-3 text-muted bg-light" data-toggle="collapse" data-target="#actions{{ $bazooker->id }}">
+        <p class="m-0">Actions <span class="fa fa-chevron-down"></span></p>
+    </a>
+
+    <!-- Suspension modal -->
+    <div class="modal fade" id="suspensionModal{{ $bazooker->id }}" tabindex="-1" role="dialog" aria-labelledby="suspensionModalLabel{{ $bazooker->id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="suspensionModalLabel{{ $bazooker->id }}">Suspend User: {{ $bazooker->name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/mod/users/suspend/{{$bazooker->id}}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="suspension_duration">Duration</label>
+                            <input name="duration" type="number" class="form-control" min="1" step="1" id="suspension_duration" placeholder="How many days?"></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="suspension_reason">Reason</label>
+                            <textarea name="reason" id="suspension_reason" class="form-control" rows="3" placeholder="Why is the user being suspended?"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning form-modal-button">Suspend</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Ban modal -->
+    <div class="modal fade" id="banModal{{ $bazooker->id }}" tabindex="-1" role="dialog" aria-labelledby="banModalLabel{{ $bazooker->id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="banModalLabel{{ $bazooker->id }}">Ban User: {{ $bazooker->name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/mod/users/ban/{{$bazooker->id}}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="ban_reason">Reason</label>
+                            <textarea name="reason" id="ban_reason" class="form-control" rows="3" placeholder="Why is the user being banned?"></textarea>
+                        </div>
+                        <p>Note: this action is irreversible!
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger form-modal-button">Ban</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
