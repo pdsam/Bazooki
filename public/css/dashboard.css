@@ -24,3 +24,32 @@
 .certification_actions button{
   width: 100%;
 }
+
+.moderator-delete {
+  height: 100%;
+  width: 100%;
+}
+
+.moderator-card .btn-danger {
+  height: 100%;
+  width: 100%;
+}
+
+.moderator-card h5 {
+  margin-bottom: 0;
+}
+
+.add-moderator-card .btn-success {
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .moderator-card .card-body {
+    padding-bottom: 0;
+  }
+  .moderator-card .moderator-delete .card-body {
+    padding-bottom: 1.25rem;
+  }
+}

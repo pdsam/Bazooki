@@ -4,6 +4,8 @@
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('/css/query.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 @endsection
 
 @section('searchContent', isset($filters['s']) ? $filters['s'] : '')
@@ -40,15 +42,13 @@
                             <i class="fa fa-chevron-up"></i>
                         </div>
                     </a>
-                    @foreach(\App\Category::all() as $category)
-                        <div id="categoriesGroup" class="collapse show">
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input m-0" type="checkbox" name="c[]"
-                                       id="cat{{ $category->id }}" value="{{ $category->id }}" @if(isset($filters['c']) && in_array($category->id, $filters['c'])) checked="checked" @endif>
-                                <label class="custom-control-label" for="cat{{ $category->id }}">{{ $category->name }}</label>
-                            </div>
-                        </div>
-                    @endforeach
+                    <div id="categoriesGroup" class="collapse show">
+                        <select id="categoriesSelection" class="w-100" name="c[]" multiple="multiple">
+                            @foreach(\App\Category::all() as $category)
+                                <option value="{{ $category->id }}" @if(isset($filters['c']) && in_array($category->id, $filters['c'])) selected="selected" @endif>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <a class="d-block mt-2 section-toggle mb-2 mt-3" href="#maxBidPriceGroup" data-toggle="collapse" data-target="#maxBidPriceGroup">
                         <div class="d-flex justify-content-between align-items-center">
@@ -100,18 +100,24 @@
             </div>
         </div>
     </div>
-            <script>
-                $('#sortByInput').change(function(e) {
-                    $('#sortOrder').val(this.value);
-                    $('#filtersForm').submit();
-                });
+    <script>
+        $('#sortByInput').change(function(e) {
+            $('#sortOrder').val(this.value);
+            $('#filtersForm').submit();
+        });
 
-                $('.page-btn').on('click', function(e) {
-                    $("<input type='hidden'/>")
-                        .attr("name", "p")
-                        .attr("value", this.getAttribute('data-content'))
-                        .prependTo("#filtersForm");
-                    $('#filtersForm').submit();
-                });
-            </script>
+        $('.page-btn').on('click', function(e) {
+            $("<input type='hidden'/>")
+                .attr("name", "p")
+                .attr("value", this.getAttribute('data-content'))
+                .prependTo("#filtersForm");
+            $('#filtersForm').submit();
+        });
+
+        $('#categoriesSelection').select2({
+            theme: "classic",
+            closeOnSelect: false,
+            placeholder: "Categories",
+        });
+    </script>
 @endsection
