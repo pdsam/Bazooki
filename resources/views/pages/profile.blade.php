@@ -40,7 +40,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <div>
-                                        <div class="form-group">
+                                        <div class="form-group mb-4">
+                                            <label class="mb-2" for="profilePic"><span class="font-weight-bold">Profile picture</span> (<2MB, jpg, png, dif...):</label>
                                             <input type="file" name="profilePic" id="profilePic">
                                         </div>
                                         <div class="form-group">
@@ -55,7 +56,7 @@
                                 </div>
                                 <div class="modal-footer justify-content-start">
                                     <input class="btn btn-olive mr-3" type="submit" value="Done">
-                                    <button class="btn btn-purple" data-toggle="modal" data-target="#edit-form">Cancel</button>
+                                    <button class="btn btn-purple" type="button" data-toggle="modal" data-target="#edit-form">Cancel</button>
                                 </div>
                             </div>
                         </div>

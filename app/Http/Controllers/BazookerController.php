@@ -37,8 +37,13 @@ class BazookerController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:200',
+            'description' => 'nullable|string|max:512',
             'profilePic' => 'image|max:2048'
+        ], [
+            'name.max' => 'Name is too long',
+            'description' => 'Description is too long.',
+            'profilePic.image' => 'Profile picture must be of format jpeg, png, bmp, gif, svg, or webp',
+            'profilePic.max' => 'Image must not exceed 2MB'
         ]);
 
         if ($validator->fails()) {
