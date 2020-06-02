@@ -22,4 +22,8 @@ class BazookerPolicy
     public function editProfile(Bazooker $auth, Bazooker $toChange) {
         return $auth->id == $toChange->id;
     }
+
+    public function deleteAccount(Bazooker $auth, Bazooker $toChange){
+        return $auth->id == $toChange->id;
+    }
 }

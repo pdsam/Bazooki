@@ -79,7 +79,9 @@ class BazookerController extends Controller
     }
 
     public function deleteAccount(Request $request, Bazooker $bazooker){
-        $this->authorize('editProfile', $bazooker);
+        $this->authorize('deleteAccount', $bazooker);
+        
+
 
         return redirect('auctions')->with('successMsg', 'Successfully deleted account');
     }

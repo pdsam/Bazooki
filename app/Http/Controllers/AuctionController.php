@@ -560,7 +560,4 @@ class AuctionController extends Controller
             'num_pages'=> $num_pages
         ]);
     }
-    //TODO bids
-    //TODO won auctions
-    //TODO transactions
 }
