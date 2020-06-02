@@ -1,6 +1,10 @@
 /* globals Chart:false, feather:false */
 
-(function () {
+let ctx = null;
+let myChart = null;
+let dirtyWorker = null;
+
+(function createChart(workerUrl) {
   'use strict'
 
   // Graphs
@@ -10,23 +14,9 @@
     type: 'line',
     data: {
       labels: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
       ],
       datasets: [{
         data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          23489,
-          24092,
-          12034
         ],
         lineTension: 0,
         backgroundColor: 'transparent',
@@ -47,5 +37,18 @@
         display: false
       }
     }
-  })
+  });
+
+    window.setInterval(function(){
+            fetch("/api/sales")
+                .then((response) =>{
+                    return response.json();
+            })
+            .then((jsonResponse) =>{
+                //TODO seperate in lists and actually update
+                myChart.data.datasets = [jsonResponse];
+                myChart.update();
+            });
+    }, 5000);
 }())
+
