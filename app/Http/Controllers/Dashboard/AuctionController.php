@@ -20,7 +20,7 @@ class AuctionController extends Controller
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
         */
-        $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->where('status', '!=', 'deleted');
+        $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->where('status', '!=', 'removed');
         //return dd($auctions->get());
         $auctions = $auctions->get();
         return view('dashboard.auctions',['auctions' =>$auctions]);

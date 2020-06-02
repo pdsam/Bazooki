@@ -31,7 +31,7 @@ CREATE TABLE administrator(mod_id BIGINT PRIMARY KEY NOT NULL REFERENCES moderat
 
 DROP TABLE IF EXISTS auction CASCADE;
 DROP TYPE IF EXISTS auction_status;
-CREATE TYPE auction_status AS ENUM('pending', 'live', 'over', 'frozen', 'deleted');
+CREATE TYPE auction_status AS ENUM('pending', 'live', 'over', 'frozen', 'removed');
 CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     owner BIGINT NOT NULL REFERENCES bazooker(id),
                     base_bid INT NOT NULL,
