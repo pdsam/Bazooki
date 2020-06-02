@@ -45,6 +45,7 @@ CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
 					item_description TEXT NOT NULL,
                     item_short_description TEXT NOT NULL,
 					search tsvector,
+					remember_token VARCHAR(100),
                     CONSTRAINT base_bid_lower_than_insta CHECK (base_bid >=0 AND base_bid < insta_buy)
                     );
 
