@@ -17,7 +17,7 @@ class UserController extends Controller
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
 
-        $bazookers = Bazooker::all();
+        $bazookers = Bazooker::where('status' != 'banned');
 
         return view('dashboard.users',['bazookers'=> $bazookers]);
     }
