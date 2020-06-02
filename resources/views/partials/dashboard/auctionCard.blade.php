@@ -39,7 +39,7 @@
                         <button type="submit" class="btn btn-large btn-primary">Unfreeze</button>
                     </form>
                     @endif
-                    <form>
+                    <form method="post" action="/mod/auctions/{{$auction->id}}">
                         @method('DELETE')
                         @csrf
                         <button type='submit' class="btn btn-large btn-danger">Remove</button>
