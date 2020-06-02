@@ -1,5 +1,17 @@
 let adress = ""
 
+function compare( a, b ) {
+    if ( a['amount'] < b['amount'] ){
+      return -1;
+    }
+    if ( a['amount'] > b['amount'] ){
+      return 1;
+    }
+    return 0;
+  }
+  
+
+
 function getBids(){
     let request = new XMLHttpRequest();
         request.open("GET",adress , true)
@@ -8,9 +20,9 @@ function getBids(){
         request.addEventListener("load",() =>{
             const res = JSON.parse(request.responseText);
             if(res.length != 0){
-                postMessage(res[0]['amount'])//TODO
+                res = res.sort(compare)
+                postMessage(res[0]['amount'])
             }
-            
             
 
 

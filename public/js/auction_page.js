@@ -55,7 +55,7 @@ if (typeof Worker !== "undefined") {
     );
     //console.log("sending message");
     w.onmessage = function (event) {
-      document.getElementById("price").innerHTML = event.data;
+      document.getElementById("price").innerHTML = "€" + event.data;
     };
   }
 }

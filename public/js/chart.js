@@ -36,6 +36,7 @@ function buildChart(response) {
         }]
       },
     options: {
+      bezierCurve: false,
         scales: {
           xAxes: [{
             type: 'time'
