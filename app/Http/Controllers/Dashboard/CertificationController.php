@@ -20,8 +20,6 @@ class CertificationController extends Controller
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
-        
-        // TODO check auction has not ended
 
         $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')
             ->whereHas('certification', function(Builder $query) {

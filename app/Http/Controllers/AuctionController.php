@@ -21,19 +21,16 @@ use App\Bid;
 use Illuminate\Database\QueryException;
 use App\Category;
 use App\AuctionCategory;
+use App\Bazooker;
 use Datetime;
 
 class AuctionController extends Controller
 {
-     /**
-     * Show the form to create a new auction
-     *
-     * @return View
-     */
+     
     public function createForm()
     {
         if(!Auth::check()) {
-            return redirect('auctions');
+            return redirect('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         $categories = Category::all();
@@ -42,15 +39,15 @@ class AuctionController extends Controller
     
     public function create(Request $request) {
         if(!Auth::check()) {
-            return redirect('auctions');
+            return redirect('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
-
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:2000',
             'short_description' => 'required|string|max:500',
             'base_bid' => 'required|numeric|gte:0',
-            'start_time' => 'required|date_format:m/d/Y h:i A',
+            'start_time' => 'required|date_format:m/d/Y g:i A',
             'duration' => 'required|numeric|gt:0',
             'photos' => 'nullable|array',
             'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff|max:10240',
@@ -127,8 +124,9 @@ class AuctionController extends Controller
             ]);
         }
 
-        return redirect("auctions/$newAuction->id");
+        return redirect("auctions/$newAuction->id")->with('successMsg', 'Successfully created auction');
     }
+
     public function show($id = null)
     {
         if($id == null){
@@ -164,6 +162,10 @@ class AuctionController extends Controller
 
         $categories = $auction->categories()->get();
 
+        $certified = count(Certification::where('auction_id', $auction->id)
+                        ->where('status', 'accepted')
+                        ->get()) > 0;
+
         return view('pages.auctionPage',[
             'owner' => $auction->owner,
             'id' => $auction->id,
@@ -173,8 +175,79 @@ class AuctionController extends Controller
             'duration'=>$auction->duration,
             'start_time'=>$auction->start_time,
             'photos'=>$photo_paths,
-            'categories'=>$categories
+            'categories'=>$categories,
+            'certified'=>$certified
         ]);
+
+    }
+
+    public function showEditForm($id){
+
+        $auction = Auction::find($id);
+        $categories = Category::all();
+        return view('pages.editAuctionPage',[
+            'owner' => $auction->owner,
+            'id' => $auction->id,
+            'name'=>$auction->item_name,
+            'base_bid'=>$auction->currentPrice(),
+            'description'=>$auction->item_description,
+            'sDescription' =>$auction->item_short_description,
+            'duration'=>$auction->duration,
+            'start_time'=>$auction->start_time,
+            'categories'=>$categories,
+            'sCategories'=>$auction->categories()->get()
+            //'owner_name' => Bazooker::find($auction->id)->name,
+        ]);
+    }
+
+    public function editAuction(Request $request,$id){
+
+        $auction  = Auction::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:2000',
+            'short_description' => 'required|string|max:500',
+            'photos' => 'nullable|array',
+            'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff|max:10240',
+            'categories' => 'nullable|array',
+            'categories.*' => 'numeric'
+        ], $messages = [
+            'name.max' => 'Name has a maximum of 100 characters',
+            'description.max' => 'Name has a maximum of 2000 characters',
+            'short_description.max' => 'Name has a maximum of 500 characters',
+            'photos.array' => "Photos must be an array",
+            'photos.*.mimes' => 'Photos must be of image format',
+            'photos.*.max' => 'Photos must be less than 10 MB',
+            'categories.array' => "Categories must be an array",
+            'categories.*.numeric' => "Categories must be numeric"
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
+
+
+
+        $auction->name = $request->name;
+        $auction->description = $request->description;
+        $auction->item_short_description = $request->short_description;
+        
+
+        if ($request->has('categories')) {
+            $categories = $request->categories;
+            AuctionCategory::where('auction_id',$id)->delete();
+            foreach($categories as $cat) {
+                if(Category::where('id', $cat)->exists()) {
+                    DB::table('auction_category')->insert([
+                        ['auction_id' => $auction->id, 'cat_id' => $cat]
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('auction', ['id'=>$id]);
 
     }
 
@@ -183,8 +256,6 @@ class AuctionController extends Controller
         $validator = Validator::make($request->all(),[
             'form-id' => 'required|numeric',
             'amount' => 'required|numeric',
-
-
         ]);
 
         try{
@@ -197,8 +268,6 @@ class AuctionController extends Controller
         catch(QueryException $e){
             abort(403,"Invalid bid");
         }
-        
-
 
         return response($request->input('amount'));
     }
@@ -284,7 +353,7 @@ class AuctionController extends Controller
         $baz = Auth::guard('bazooker')->user();
 
         if (is_null($baz)) {
-            return redirect()->route('auctions');
+            return redirect()->route('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         $auctions = $baz->ownAuctions();
@@ -336,6 +405,21 @@ class AuctionController extends Controller
         }
 
         $auctions = $auctions->offset($offset)->limit($pageSize)->get();
+        foreach($auctions as $auction) {     
+        
+            $auction_photos = $auction->photos()->get();
+            $photo_paths = array();
+            foreach($auction_photos as $photo) {
+                $path = str_replace("public", "storage", $photo->image_path);
+                array_push($photo_paths, $path);
+            }
+
+            if (count($photo_paths) == 0) {
+                $photo_paths = array("assets/unknown_item.png");
+            }
+
+            $auction->thumbnail_photo = $photo_paths[0];
+        }
 
         return view('pages.activity.myauctions', [
             'auctions' => $auctions,
@@ -400,7 +484,7 @@ class AuctionController extends Controller
         $baz = Auth::guard('bazooker')->user();
 
         if (is_null($baz)) {
-            return redirect()->route('auctions');
+            return redirect()->route('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         $bids = $baz->bids();

@@ -2,6 +2,8 @@
 
 @section('title', 'Bazooki - Register')
 
+@section('sidebar', '')
+
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">       
 @endsection

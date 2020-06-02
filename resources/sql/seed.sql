@@ -1,8 +1,11 @@
 -- noinspection SqlDialectInspectionForFile
 
 DROP TABLE IF EXISTS bazooker CASCADE;
-CREATE TABLE bazooker(id BIGSERIAL PRIMARY KEY, 
-                      name text NOT NULL, 
+DROP TYPE IF EXISTS bazooker_status;
+CREATE TYPE bazooker_status AS ENUM('live', 'suspended', 'banned');
+CREATE TABLE bazooker(id BIGSERIAL PRIMARY KEY,
+                      name text NOT NULL,
+		      status bazooker_status NOT NULL DEFAULT 'live',
                       username TEXT UNIQUE NOT NULL,
                       password TEXT, 
                       email TEXT UNIQUE NOT NULL,
@@ -396,6 +399,44 @@ BEGIN
     END LOOP;
 END
 $$ LANGUAGE 'plpgsql';
+
+-- UPDATE BAZOOKER STATUS on ban 
+DROP FUNCTION IF EXISTS bazooker_update_status_ban();
+CREATE FUNCTION bazooker_update_status_ban() RETURNS TRIGGER AS $$
+BEGIN
+	IF(TG_OP = 'INSERT') THEN
+	UPDATE bazooker set status = 'banned' where id = NEW.bazooker_id;
+	END IF;
+	RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS bazooker_update_status_ban ON ban;
+CREATE TRIGGER bazooker_update_status_ban
+    AFTER INSERT ON ban
+    FOR EACH ROW
+    EXECUTE PROCEDURE bazooker_update_status_ban();
+
+
+-- UPDATE BAZOOKER STATUS on suspension 
+DROP FUNCTION IF EXISTS bazooker_update_status_suspension();
+CREATE FUNCTION bazooker_update_status_suspension() RETURNS TRIGGER AS $$
+BEGIN
+	IF(TG_OP = 'INSERT') THEN
+		UPDATE bazooker set status = 'suspended' where id = NEW.bazooker_id AND status='live';
+	ELSIF(TG_OP = 'UPDATE') THEN 
+		UPDATE bazooker set status = 'live' where id = NEW.bazooker_id AND status='suspended' and OLD.duration=0;
+	END IF;
+	RETURN NEW;
+END
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS bazooker_update_status_suspension ON suspension;
+CREATE TRIGGER bazooker_update_status_suspension
+    AFTER INSERT OR UPDATE ON suspension
+    FOR EACH ROW
+    EXECUTE PROCEDURE bazooker_update_status_suspension();
+
 
 
 CREATE INDEX bid_auction_id ON bid USING hash(auction_id);

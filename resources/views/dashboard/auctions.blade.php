@@ -7,4 +7,7 @@
     @foreach ($auctions as $auction)
         @include('partials.dashboard.auctionCard',['auction'=> $auction])
     @endforeach
+
+    <script src="{{ asset('js/collapse.js') }}" defer></script>
+    <script src="{{ asset('js/dashboard_auctions.js') }}" defer></script>
 @endsection

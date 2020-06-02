@@ -23,7 +23,7 @@ class DealsController extends Controller
                 ON auction_id=auction.id
                 LEFT JOIN item_image
                 ON ignore.auction_id = auction.id
-                 WHERE date_hour=max_date_hour ORDER BY num_bids DESC LIMIT 8;
+                 WHERE date_hour=max_date_hour  and auction.status='live' ORDER BY num_bids DESC LIMIT 8;
             ") );
 
 
@@ -32,15 +32,12 @@ class DealsController extends Controller
         $value["img"] = "../assets/gun.jpg";
     }
     
-    $numDeals = count($hotdeals)/5 + (count($hotdeals)%5 != 0 ? 1 : 0);
-    $hotdeals_gil[] = array();
-    /*
+    $numDeals = count($hotdeals)/4 + (count($hotdeals)%4 != 0 ? 1 : 0);
+    $hotdeals_gil = array();
+
     for($i = 0; $i < $numDeals; $i = $i + 1)
         array_push($hotdeals_gil, array());
-     */
     
-    $hotdeals_gil[0] = array();
-    $hotdeals_gil[1] = array();
 
     for($i = 0; $i < count($hotdeals); $i = $i +1){
         array_push($hotdeals_gil[$i/4], $hotdeals[$i]);
@@ -49,110 +46,87 @@ class DealsController extends Controller
     return $hotdeals_gil;
     }
 
+    public function flashdeals(){
+
+        $flashdeals = DB::select(
+
+            DB::raw("
+                SELECT title, img,  id,  description
+                FROM
+                    (
+                    SELECT item_name as title, image_path as img, auction.id as id, item_short_description as description, start_time, duration, start_time+make_interval(secs := duration) as end_time, now()-start_time+make_interval(secs := duration) as time_left
+                    FROM auction
+                    LEFT JOIN item_image
+                    ON auction_id=auction.id
+                    WHERE auction.status = 'live'
+                    ) ignore
+                WHERE end_time > now()
+                ORDER BY time_left ASC LIMIT 8;
+            ")
+
+        );
+
+        foreach ($flashdeals as &$value){
+            $value = (array)$value;
+            $value["img"] = "../assets/gun.jpg";
+        }
+        
+        $numDeals = count($flashdeals)/4 + (count($flashdeals)%4 != 0 ? 1 : 0);
+        $flashdeals_gil = array();
+
+        for($i = 0; $i < $numDeals; $i = $i + 1)
+            array_push($flashdeals_gil, array());
+        
+
+        for($i = 0; $i < count($flashdeals); $i = $i +1){
+            array_push($flashdeals_gil[$i/4], $flashdeals[$i]);
+        }
+
+        return $flashdeals_gil;
+
+    }
+
+    private function latest(){
+        $latestdeals = DB::select(
+
+            DB::raw("
+            SELECT item_name as title, image_path as img, auction.id as id, item_short_description as description
+                FROM auction LEFT JOIN item_image
+		ON 
+		auction_id=auction.id
+		WHERE status='live'
+		 ORDER BY start_time DESC LIMIT 8;
+            ")
+
+        );
+
+        foreach ($latestdeals as &$value){
+            $value = (array)$value;
+            $value["img"] = "../assets/gun.jpg";
+        }
+
+        
+        $numDeals = count($latestdeals)/4 + (count($latestdeals)%4 != 0 ? 1 : 0);
+        $latestdeals_gil = array();
+
+        for($i = 0; $i < $numDeals; $i = $i + 1)
+            array_push($latestdeals_gil, array());
+
+        
+        for($i = 0; $i < count($latestdeals); $i = $i +1){
+            array_push($latestdeals_gil[$i/4], $latestdeals[$i]);
+        }
+
+        return $latestdeals_gil;
+    }
 
     public function deals(){
 
-    $flash = array(
-        0 => array(
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            )
-        ),
-        1 => array(
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun0",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            )
-        )        
-    );
-    $main = array(
-        0 => array(
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            )
-        ),
-        1 => array(
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            ),
-            array(
-                "title" => "Super cool gun",
-                "img" => "../assets/gun.jpg",
-                        "id" => 1,
-                "description" => "This gun is very strong. It is also very pretty."
-            )
-        )        
-    );
     return view('pages.auctions',
         [
-            'main'=>$main,
+	    'main'=>$this->latest(),
             'hotdeals'=>$this->hotdeals(),
-            'flash'=>$flash
+            'flash'=>$this->flashdeals()
         ]
     );
 

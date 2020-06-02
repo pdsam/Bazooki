@@ -45,7 +45,7 @@
     <div class="col-lg-5">
         <div id="product_info" class="card">
             <div class="card-body">
-                <div id="product_info_header" class="card-c-element">
+                <div id="product_info_header" @if(!$certified) class="card-c-element" @endif>
                     <h3 class="card-title text-center card-body">{{ $name }}</h3>
                     @foreach($categories as $cat)
                         <span class="badge badge-primary bg-olive">{{ $cat->name }}</span>
@@ -58,7 +58,7 @@
                     <p hidden id="timer-duration">{{ $duration }}</p>
                 </div>
                 <div class="card-body w-100" id="bid-div">
-                    <div class="row justify-content-center align-self-center">
+                    <div class="justify-content-center align-self-center">
                         <form id="bid-form" class="form-inline" action="POST">
                             @csrf
                             <div class="form-group">
@@ -71,30 +71,41 @@
                                      <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
                                     @endif
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
+
+        @if($certified)
+            <div id="certification" class="card mt-3">
+                <div class="card-body">
+                    <div class="certification-text">
+                        <h4 class="text-center">
+                        <img src="{{asset('/assets/small_panda.png')}}">Certified by Bazooki</h4>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
 </div>
 
 <div class="card mb-4">
     <div class="card-body">
         <h3 class="card-title">Details </h3>
-        <p class="card-text">{{ $description }}
+        <span class="card-text">Posted by: </span><a href="/profile/{{$owner}}"><span>BIG TODO</span></a>
+        <h4>Description:</h4>
+        <p class="card-text">{{ $description }}</p>
     </div>
 </div>
 
 <div class="card">
     <div class="card-body">
         <h3 class="card-title">Price variation</h3>
-        <!--<img src="../assets/chart.png" class="img-responsive" width="100%" />-->
         <canvas id="chart"  width="400" height="200"></canvas>
     </div>
-
 </div>
 <p id="aux-id" hidden>{{$id}}</p>
 

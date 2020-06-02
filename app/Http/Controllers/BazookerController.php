@@ -20,13 +20,13 @@ class BazookerController extends Controller
                 $id = Auth::guard('bazooker')->user();
                 return redirect()->route('profile', ['id'=>$id]);
             }
-            return redirect('auctions');
+            return redirect('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         $user = Bazooker::find($id);
 
-        if ($user == null) {
-            return redirect('auctions');
+        if ($user == null || $user->isBanned()) {
+            return redirect('auctions')->withErrors(['User does not exist']);
         }
 
         return view('pages.profile', ['user' => $user]);
@@ -66,13 +66,13 @@ class BazookerController extends Controller
 
         $bazooker->update($updateContent);
 
-        return redirect()->route('profile', ['id'=>$bazooker->id]);
+        return redirect()->route('profile', ['id'=>$bazooker->id])->with('successMsg', 'Successfully edited profile');
     }
 
     public function settings() {
         $bazooker = Auth::guard('bazooker')->user();
         if (is_null($bazooker)) {
-            return redirect('auctions');
+            return redirect('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         return view('pages.settings', ['payment_methods' => $bazooker->paymentMethods]);
@@ -81,6 +81,6 @@ class BazookerController extends Controller
     public function deleteAccount(Request $request, Bazooker $bazooker){
         $this->authorize('editProfile', $bazooker);
 
-        return redirect('auctions');
+        return redirect('auctions')->with('successMsg', 'Successfully deleted account');
     }
 }

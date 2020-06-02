@@ -52,4 +52,5 @@
     @endforeach
 
     <script src="{{ asset('js/dashboard_certifications.js') }}" defer></script>
+    <script src="{{ asset('js/collapse.js') }}" defer></script>
 @endsection

@@ -57,8 +57,8 @@ class ModeratorController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
-        return view('dashboard.moderators', ['moderators' => $this->getModerators()]);
+        
+        return redirect()->route('dashboard_moderators', ['moderators' => $this->getModerators()])->with('successMsg', 'Successfully created moderator');
     }
 
     public function delete(Request $request, Moderator $moderator)
