@@ -20,6 +20,8 @@ Route::get('/auctions/add', 'AuctionController@createForm');
 Route::get('/auctions/{id?}', 'AuctionController@show')->name('auction');
 Route::post('/auctions/add', 'AuctionController@create');
 Route::post('/auctions/{id}/bid', 'AuctionController@bid');
+Route::get('/auctions/{id?}/edit','AuctionController@showEditForm');
+Route::patch('/auctions/{id?}/edit','AuctionController@editAuction');
 
 // User aka Bazooker
 Route::get('/profile/{id?}', 'BazookerController@show')->name('profile');

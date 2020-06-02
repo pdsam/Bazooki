@@ -21,15 +21,12 @@ use App\Bid;
 use Illuminate\Database\QueryException;
 use App\Category;
 use App\AuctionCategory;
+use App\Bazooker;
 use Datetime;
 
 class AuctionController extends Controller
 {
-     /**
-     * Show the form to create a new auction
-     *
-     * @return View
-     */
+     
     public function createForm()
     {
         if(!Auth::check()) {
@@ -181,6 +178,29 @@ class AuctionController extends Controller
             'categories'=>$categories,
             'certified'=>$certified
         ]);
+
+    }
+
+    public function showEditForm($id){
+
+        $auction = Auction::find($id);
+        $categories = Category::all();
+        return view('pages.editAuctionPage',[
+            'owner' => $auction->owner,
+            'id' => $auction->id,
+            'name'=>$auction->item_name,
+            'base_bid'=>$auction->currentPrice(),
+            'description'=>$auction->item_description,
+            'sDescription' =>$auction->item_short_description,
+            'duration'=>$auction->duration,
+            'start_time'=>$auction->start_time,
+            'categories'=>$categories,
+            'sCategories'=>$auction->categories()->get()
+            //'owner_name' => Bazooker::find($auction->id)->name,
+        ]);
+    }
+
+    public function editAuction($id){
 
     }
 
