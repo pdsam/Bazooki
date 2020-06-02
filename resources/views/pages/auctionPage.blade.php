@@ -4,6 +4,7 @@
 <link rel="stylesheet" href={{ asset('css/product.css') }}>
 <script src="{{ asset('js/auction_page.js') }}" defer></script>
 <script src="{{ asset('js/chart.js') }}" defer></script>
+<script src="{{ asset('js/modal_form.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -43,6 +44,13 @@
 
     </div>
     <div class="col-lg-5">
+
+        @if (Auth::id() == $owner)
+            <div id="editAuction" class="card mb-3">
+                <a href="/auctions/{{$id}}/edit" class="btn btn-olive">Edit Auction</a>
+            </div>
+        @endif
+
         <div id="product_info" class="card">
             <div class="card-body">
                 <div id="product_info_header" @if(!$certified) class="card-c-element" @endif>

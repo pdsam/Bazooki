@@ -9,5 +9,5 @@
     @endforeach
 
     <script src="{{ asset('js/collapse.js') }}" defer></script>
-    <script src="{{ asset('js/dashboard_users.js') }}" defer></script>
+    <script src="{{ asset('js/modal_form.js') }}" defer></script>
 @endsection

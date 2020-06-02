@@ -38,7 +38,7 @@ input[type=number] {
     border-radius: 0;
     border-top-right-radius: .25rem;
     border-bottom-right-radius: .25rem;
-    border: 1px solid var(--purple);
+    border: 1px solid var(--highlight-purple);
 }
 
 #money {
@@ -57,7 +57,11 @@ input[type=number] {
 
 .color-purple{
     color:var(--highlight-purple);
-}   
+}
+
+#editAuction {
+    border: none;
+}
 
 @media print{
 
