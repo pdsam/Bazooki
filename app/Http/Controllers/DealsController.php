@@ -92,7 +92,10 @@ class DealsController extends Controller
             DB::raw("
             SELECT item_name as title, image_path as img, auction.id as id, item_short_description as description
                 FROM auction LEFT JOIN item_image
-                ON auction_id=auction.id ORDER BY start_time DESC LIMIT 8;
+		ON 
+		auction_id=auction.id
+		WHERE status='live'
+		 ORDER BY start_time DESC LIMIT 8;
             ")
 
         );
