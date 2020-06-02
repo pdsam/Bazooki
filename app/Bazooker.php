@@ -79,6 +79,6 @@ class Bazooker extends Authenticatable implements User
     }
     public function isSuspended(){
         
-        return $this->suspensions()->whereRaw('time_of_suspension + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
+        return $this->suspensions()->whereRaw('time_of_suspension + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->exists();
     }
 }

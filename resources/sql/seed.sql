@@ -1,6 +1,7 @@
 -- noinspection SqlDialectInspectionForFile
 
 DROP TABLE IF EXISTS bazooker CASCADE;
+DROP TYPE IF EXISTS bazooker_status;
 CREATE TYPE bazooker_status AS ENUM('live', 'suspended', 'banned');
 CREATE TABLE bazooker(id BIGSERIAL PRIMARY KEY,
                       name text NOT NULL,

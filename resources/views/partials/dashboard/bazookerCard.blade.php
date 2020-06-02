@@ -18,17 +18,33 @@
         </div>
     </div>
     <div id="actions{{ $bazooker->id }}" class="user_actions collapse">
-        <div class="row my-3 mx-2">                    
+        <div class="row my-3 mx-2">     
+            @if(!$bazooker->isSuspended())               
             <div class="col-lg-6">
                 <button class="btn btn-warning" data-toggle="modal" data-target="#suspensionModal{{ $bazooker->id }}">
                     Suspend
                 </button>
             </div>
+            @else
+            <div class="col-lg-6">
+                <button class="btn btn-warning" data-toggle="modal" data-target="#suspensionModal{{ $bazooker->id }}">
+                    Unsuspend
+                </button>
+            </div>
+            @endif
+            @if(Auth::guard('admin')->check())  
             <div class="col-lg-6">
                 <button class="btn btn-danger" data-toggle="modal" data-target="#banModal{{ $bazooker->id }}">
                     Ban
                 </button>
             </div>
+            @else
+            <div class="col-lg-6">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#banModal{{ $bazooker->id }}" disabled>
+                    Ban
+                </button>
+            </div>
+            @endif
         </div>
     </div>
     <a href="#actions{{ $bazooker->id }}" class="cert-toggle justify-content-center d-flex py-3 text-muted bg-light" data-toggle="collapse" data-target="#actions{{ $bazooker->id }}">
@@ -50,11 +66,11 @@
                         @csrf
                         <div class="form-group">
                             <label for="suspension_duration">Duration</label>
-                            <input name="duration" type="number" class="form-control" min="1" step="1" id="suspension_duration" placeholder="How many days?"></input>
+                            <input name="duration" type="number" class="form-control" min="1" step="1" id="suspension_duration" placeholder="How many days?" required></input>
                         </div>
                         <div class="form-group">
                             <label for="suspension_reason">Reason</label>
-                            <textarea name="reason" id="suspension_reason" class="form-control" rows="3" placeholder="Why is the user being suspended?"></textarea>
+                            <textarea name="reason" id="suspension_reason" class="form-control" rows="3" placeholder="Why is the user being suspended?" required></textarea>
                         </div>
                     </form>
                 </div>
@@ -81,7 +97,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="ban_reason">Reason</label>
-                            <textarea name="reason" id="ban_reason" class="form-control" rows="3" placeholder="Why is the user being banned?"></textarea>
+                            <textarea name="reason" id="ban_reason" class="form-control" rows="3" placeholder="Why is the user being banned?" required></textarea>
                         </div>
                         <p>Note: this action is irreversible!
                     </form>
@@ -93,4 +109,6 @@
             </div>
         </div>
     </div>
+
+    
 </div>
