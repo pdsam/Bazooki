@@ -166,8 +166,13 @@ class AuctionController extends Controller
                         ->where('status', 'accepted')
                         ->get()) > 0;
 
+	$ownerName = $auction->owner()->select('name')->first()['name'];
+	error_log($ownerName);
+	error_log($ownerName);
+
         return view('pages.auctionPage',[
             'owner' => $auction->owner,
+            'ownerName' => $ownerName,
             'id' => $auction->id,
             'name'=>$auction->item_name,
             'base_bid'=>$auction->currentPrice(),

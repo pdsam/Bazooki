@@ -35,7 +35,7 @@ class Auction extends Model
         return $this->hasMany('App\AuctionPhoto');
     }
 
-    public function ownerBaz() {
+    public function owner() {
         return $this->belongsTo('App\Bazooker', 'owner');
     }
 

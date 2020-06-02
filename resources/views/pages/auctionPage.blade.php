@@ -95,7 +95,7 @@
 <div class="card mb-4">
     <div class="card-body">
         <h3 class="card-title">Details </h3>
-        <span class="card-text">Posted by: </span><a href="/profile/{{$owner}}"><span>BIG TODO</span></a>
+        <span class="card-text">Posted by: </span><a href="/profile/{{$owner}}"><span>@php echo $ownerName; @endphp</span></a>
         <h4>Description:</h4>
         <p class="card-text">{{ $description }}</p>
     </div>
