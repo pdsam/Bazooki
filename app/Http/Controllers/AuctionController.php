@@ -196,7 +196,6 @@ class AuctionController extends Controller
             'start_time'=>$auction->start_time,
             'categories'=>$categories,
             'sCategories'=>$auction->categories()->get()
-            //'owner_name' => Bazooker::find($auction->id)->name,
         ]);
     }
 
