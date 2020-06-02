@@ -52,6 +52,10 @@ Route::delete('/mod/moderators/{moderator}', 'Dashboard\ModeratorController@dele
 Route::post('/mod/auctions/freeze/{id?}','Dashboard\AuctionController@freeze');
 Route::patch('/mod/auctions/freeze/{id?}','Dashboard\AuctionController@unfreeze');
 Route::delete('/mod/auctions/{id?}','Dashboard\AuctionController@delete');
+Route::post('/mod/users/suspend/{id?}','Dashboard\UserController@suspend');
+Route::post('/mod/users/ban/{id?}','Dashboard\UserController@ban');
+
+
 
 // Static
 Route::view('/faq', 'pages.faq')->name('FAQ');
