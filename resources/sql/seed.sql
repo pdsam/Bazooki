@@ -341,9 +341,10 @@ BEGIN
     END IF;
     IF TG_OP = 'UPDATE' THEN
         IF NEW.active = false THEN
-            UPDATE auction set status = 'live' where id = NEW.auction_id
+            UPDATE auction set status = 'live' where id = NEW.auction_id;
         END IF;
     END IF;
+    RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
 

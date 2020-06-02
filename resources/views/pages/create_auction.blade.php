@@ -24,7 +24,7 @@
 
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Short product description</h3>
-                <input name="short_description" class="form-control" id="short_description" placeholder="Short description" required></input>
+                <input name="short_description" class="form-control" id="short_description" placeholder="Short description" required>
             </div>
             
             <div class="form-group mt-4 ml-4 mr-4">
