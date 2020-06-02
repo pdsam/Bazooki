@@ -21,7 +21,6 @@ class AuctionController extends Controller
         }
         
         $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->where('status', '!=', 'removed');
-        //return dd($auctions->get());
         $auctions = $auctions->get();
         return view('dashboard.auctions',['auctions' =>$auctions]);
     }
