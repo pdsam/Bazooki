@@ -29,7 +29,7 @@
 
         <div class="form-group mt-4 ml-4 mr-4">
             <h3>Product description</h3>
-            <textarea name="description" class="form-control" rows="5" id="description" placeholder="Description" value="{{$description}}"></textarea>
+            <textarea name="description" class="form-control" rows="5" id="description" placeholder="Description" >{{$description}}</textarea>
         </div>
 
 
