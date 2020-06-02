@@ -73,6 +73,13 @@ input[type=number] {
         display: flex;
     }
 
+    a:link {
+        text-decoration: none;
+      }
+
+    #navbarSupportedContent{
+        display: none !important;
+    }
 }
 
 #product_info_header {
