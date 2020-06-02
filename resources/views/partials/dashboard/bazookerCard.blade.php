@@ -6,14 +6,17 @@
             </div>
             <div class="col-12 col-sm-8">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $bazooker->name }}</h4>
+                    <h4 class="card-title"><a href="/profile/{{ $bazooker->id }}">{{ $bazooker->name }}</a></h4>
                     <h6 class="card-subtitle text-muted"><a href="/profile/{{ $bazooker->id }}">{{ $bazooker->username }}</a></h6>
                     <div class="mt-3">
                         <p>
                             {{ $bazooker->description }}
                         </p>
                     </div>
-                    <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">View certification</a>
+                    <div class="row ml-0">
+                        <button type="submit" class="btn btn-large btn-primary">Freeze</button>
+                        <button type='submit' class="btn btn-large btn-danger">Remove</button>
+                    </div>
                 </div>
             </div>
         </div>
