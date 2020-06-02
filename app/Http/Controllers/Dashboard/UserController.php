@@ -100,6 +100,10 @@ class UserController extends Controller
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
 
+        if(Bazooker::find($id)->isBanned()){
+            return Redirect::back()->withErrors(["User already banend"]);
+        }
+
        // try{
        $ban =  Ban::create([
             'reason' => 'Please email us for that',
@@ -110,7 +114,7 @@ class UserController extends Controller
        ]);
         //}
         //catch(Exception $e){
-        //    return Redirect::back()->withErrors(["User already banend"]);
+        //    return Redirect::back()->withErrors(["Something went wrong"]);
        // }
 
 
