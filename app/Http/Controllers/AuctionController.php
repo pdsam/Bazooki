@@ -204,6 +204,32 @@ class AuctionController extends Controller
 
         $auction  = Auction::find($id);
 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:2000',
+            'short_description' => 'required|string|max:500',
+            'photos' => 'nullable|array',
+            'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff|max:10240',
+            'categories' => 'nullable|array',
+            'categories.*' => 'numeric'
+        ], $messages = [
+            'name.max' => 'Name has a maximum of 100 characters',
+            'description.max' => 'Name has a maximum of 2000 characters',
+            'short_description.max' => 'Name has a maximum of 500 characters',
+            'photos.array' => "Photos must be an array",
+            'photos.*.mimes' => 'Photos must be of image format',
+            'photos.*.max' => 'Photos must be less than 10 MB',
+            'categories.array' => "Categories must be an array",
+            'categories.*.numeric' => "Categories must be numeric"
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
+
+
+
         $auction->name = $request->name;
         $auction->description = $request->description;
         $auction->item_short_description = $request->short_description;
