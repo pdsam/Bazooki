@@ -2,7 +2,7 @@
     <div class="card rounded-0 border-0">
         <div class="row align-items-center no-gutters">
             <div class="col-12 col-sm-4">
-                <img src="{{ asset($bazooker->profile_pic) }}" class="card-img rounded-0" alt="logo">
+                <img src="{{ asset($bazooker->photo()) }}" class="card-img rounded-0" alt="logo">
             </div>
             <div class="col-12 col-sm-8">
                 <div class="card-body">

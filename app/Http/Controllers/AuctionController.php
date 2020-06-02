@@ -44,13 +44,13 @@ class AuctionController extends Controller
         if(!Auth::check()) {
             return redirect('auctions');
         }
-
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:2000',
             'short_description' => 'required|string|max:500',
             'base_bid' => 'required|numeric|gte:0',
-            'start_time' => 'required|date_format:m/d/Y h:i A',
+            'start_time' => 'required|date_format:m/d/Y g:i A',
             'duration' => 'required|numeric|gt:0',
             'photos' => 'nullable|array',
             'photos.*' => 'mimes:png,jpg,jpeg,bmp,tiff|max:10240',
