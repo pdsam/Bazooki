@@ -39,15 +39,27 @@
     <body class="bg-light">
         <div class="container">
             @include('partials.navbar')
-            @if ($errors->any())
-                <div class="alert alert-danger">
+
+            @if (session('successMsg'))
+                <div class="alert alert-success">
                     <ul class="m-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                        <li>{{ session('successMsg') }}</li>
                     </ul>
                 </div>
             @endif
+
+            @section('sidebar')
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="m-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            @show
+            
             @yield('content')
         </div>
         @include('partials.footer')

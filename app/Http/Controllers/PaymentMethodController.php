@@ -34,7 +34,7 @@ class PaymentMethodController extends Controller
             'validated' => true
         ]);
 
-        return redirect()->route('settings');
+        return redirect()->route('settings')->with('successMsg', 'Successfully added payment method');
     }
 
     public function remove(Request $request) {
@@ -43,6 +43,6 @@ class PaymentMethodController extends Controller
 
         $method->delete();
 
-        return redirect()->route('settings');
+        return redirect()->route('settings')->with('successMsg', 'Successfully removed payment method');
     }
 }

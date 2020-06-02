@@ -31,6 +31,6 @@ class ChangePasswordController extends Controller
         }
 
         Bazooker::find(Auth::user()->id)->update(['password' => Hash::make($request->newPass)]);
-        return redirect()->route('settings');
+        return redirect()->route('settings')->with('successMsg', 'Successfully changed password');
     }
 }

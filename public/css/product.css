@@ -70,3 +70,13 @@ input[type=number] {
 #product_info_header h3 {
     padding-bottom: 0;
 }
+
+.certification-text {
+    padding-bottom: 0;
+    color: var(--purple);
+}
+
+.certification-text h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+}

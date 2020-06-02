@@ -15,12 +15,9 @@
                     <img class="mb-4 mx-auto" src="{{ asset('../assets/panda_transparency.png') }}" alt="" width="150" height="150">
                     <h1 class="h3 mb-3 font-weight-normal">Welcome back Bazooker!</h1>
 
-                    @error('username')
+                    @if (session('invalidUsername') || session('invalidPassword'))
                         <p class="text-danger">Invalid username or password.</p>
-                    @enderror
-                    @error('password')
-                        <p class="text-danger">Invalid username or password.</p>
-                    @enderror
+                    @endif
 
                     <div class="form-group">
                         <input type="text" class="form-control h-auto p-2" id="loginUsername" aria-describedby="userHelp" placeholder="Username" name="username" required>

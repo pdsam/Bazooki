@@ -51,44 +51,36 @@ class AuctionController extends Controller
 
         if(Auth::guard('mod')->check()){
             $modID = Auth::guard('mod')->user()->id;
-
         }
         if(Auth::guard('admin')->check()){
             $modID = Auth::guard('admin')->user()->mod->id;
-
         }
 
         $auction = Auction::find($id);
         if($auction->isFrozen()){
-            return  Redirect::back()->withErrors(["Can't freeze what's already frozen"]);
+            return Redirect::back()->withErrors(["Can't freeze what's already frozen!"]);
         }
 
-
         try{
-        $action = AuctionModeratorAction::create([
-            'reason' => 'Please email us for that',
-            'active' => true,
-            'action' => 'freezed',
-            'mod_id' => $modID,
-            'auction_id' => $id
-
-        ]);
+            $action = AuctionModeratorAction::create([
+                'reason' => 'Please email us for that',
+                'active' => true,
+                'action' => 'freezed',
+                'mod_id' => $modID,
+                'auction_id' => $id
+            ]);
         }
         catch(Exception $e){
           return  Redirect::back()->withErrors(['Something went wrong... I am sure that our highly skilled monkeys will fix it someday (╯°□°）╯︵ ┻━┻']);
         }
-
-       
-        
-        
-        return Redirect::back();
+                
+        return Redirect::back()->with('successMsg', 'Successfully freezed auction');
     }
 
     public function unfreeze($id){
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
-
         
         $auction = Auction::find($id);
         $action = $auction->getFreezingAction()[0];
@@ -101,8 +93,7 @@ class AuctionController extends Controller
         $action->save();
 
 
-        return Redirect::back();
-
+        return Redirect::back()->with('successMsg', 'Successfully unfreezed auction');
     }
 
     public function delete($id){
@@ -110,16 +101,13 @@ class AuctionController extends Controller
          
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
-        }
-        
+        }        
 
         if(Auth::guard('mod')->check()){
             $modID = Auth::guard('mod')->user()->id;
-
         }
         if(Auth::guard('admin')->check()){
             $modID = Auth::guard('admin')->user()->mod->id;
-
         }
         
         $auction = Auction::find($id);
@@ -129,26 +117,22 @@ class AuctionController extends Controller
             $freezing->active = false;
             $freezing->save();
         }
-
             
         try{
-        $action = AuctionModeratorAction::create([
-            'reason' => 'Please email us for that',
-            'active' => true,
-            'action' => 'removed',
-            'mod_id' => $modID,
-            'auction_id' => $id
+            $action = AuctionModeratorAction::create([
+                'reason' => 'Please email us for that',
+                'active' => true,
+                'action' => 'removed',
+                'mod_id' => $modID,
+                'auction_id' => $id
 
-        ]);
+            ]);
         }
         catch(Exception $e){
           return  Redirect::back()->withErrors(['Something went wrong... I am sure that our highly skilled monkeys will fix it someday (╯°□°）╯︵ ┻━┻']);
-        }
-
-       
+        }       
         
-        
-        return Redirect::back();
+        return Redirect::back()->with('successMsg', 'Successfully deleted auction');
     }
 
 }
