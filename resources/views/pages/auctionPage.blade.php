@@ -4,6 +4,7 @@
 <link rel="stylesheet" href={{ asset('css/product.css') }}>
 <script src="{{ asset('js/auction_page.js') }}" defer></script>
 <script src="{{ asset('js/chart.js') }}" defer></script>
+<script src="{{ asset('js/modal_form.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -43,6 +44,13 @@
 
     </div>
     <div class="col-lg-5">
+
+        @if (Auth::id() == $owner)
+            <div id="editAuction" class="card mb-3">
+                <a href="/auctions/{{$id}}/edit" class="btn btn-olive">Edit Auction</a>
+            </div>
+        @endif
+
         <div id="product_info" class="card">
             <div class="card-body">
                 <div id="product_info_header" @if(!$certified) class="card-c-element" @endif>
@@ -57,20 +65,20 @@
                     <p hidden id="timer-start-time">{{ $start_time }}</p>
                     <p hidden id="timer-duration">{{ $duration }}</p>
                 </div>
-                <div class="card-body w-100" id="bid-div">
+                <div class="card-body w-100 pb-0" id="bid-div">
                     <div class="justify-content-center align-self-center">
-                        <form id="bid-form" class="form-inline" action="POST">
+                        <form id="bid-form" class="row pb-0" action="POST">
                             @csrf
-                            <div class="form-group">
-                                <input type="hidden" name="form-id" value="{{ $id }}">
-                                <input id="money" type="number" class="form-control text-center col-12 col-md-8" name="amount" value="{{$base_bid +1}}"></input>
-                                <div class="col-12 col-md-4 mt-2 mt-md-0 d-flex justify-content-center">
-                                    @if(!Auth::check() || Auth::id() == $owner )
-                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now" disabled></input>
-                                    @else
-                                     <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
-                                    @endif
-                                </div>
+                            <input type="hidden" name="form-id" value="{{ $id }}">
+                            <div class="col-lg-8 col-12 form-group pr-0 pl-0">
+                                <input id="money" type="number" class="form-control text-center" name="amount" value="{{$base_bid +1}}"></input>
+                            </div>
+                            <div class="col-lg-4 col-12 form-group pr-0 pl-0">
+                                @if(!Auth::check() || Auth::id() == $owner )
+                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now" disabled></input>
+                                @else
+                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
+                                @endif
                             </div>
                         </form>
                     </div>

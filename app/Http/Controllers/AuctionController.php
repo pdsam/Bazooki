@@ -201,7 +201,6 @@ class AuctionController extends Controller
             'start_time'=>$auction->start_time,
             'categories'=>$categories,
             'sCategories'=>$auction->categories()->get()
-            //'owner_name' => Bazooker::find($auction->id)->name,
         ]);
     }
 
@@ -232,13 +231,10 @@ class AuctionController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-
-
-
-        $auction->name = $request->name;
-        $auction->description = $request->description;
+        $auction->item_name = $request->name;
+        $auction->item_description = $request->description;
         $auction->item_short_description = $request->short_description;
-        
+        $auction->save();
 
         if ($request->has('categories')) {
             $categories = $request->categories;
@@ -252,8 +248,21 @@ class AuctionController extends Controller
             }
         }
 
-        return redirect()->route('auction', ['id'=>$id]);
+        if($request->hasFile('photos')) {
+            $oldPhotos = AuctionPhoto::where('auction_id', $auction->id)->get();
+            foreach($oldPhotos as $photo) $photo->delete();
 
+            $files = $request->file('photos');
+            foreach($files as $file){
+                $filename = $file->store('public/auction_images'); //store image in storage/app/public/auction_images
+                AuctionPhoto::create([
+                    'auction_id' => $auction->id,
+                    'image_path' => $filename
+                ]);
+            }
+        }
+
+        return redirect()->route('auction', ['id'=>$id])->with('successMsg', 'Successfully edited auction');
     }
 
     public function bid(Request $request, $id) {

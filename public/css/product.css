@@ -35,8 +35,17 @@ input[type=number] {
 }
 
 #bid-button{
-    border-radius: 5rem;
+    border-radius: 0;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border: 1px solid var(--highlight-purple);
 }
+
+#money {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 #bid-button:disabled{
     background-color: var(--highlight-purple);
     opacity: 0.3;
@@ -48,7 +57,11 @@ input[type=number] {
 
 .color-purple{
     color:var(--highlight-purple);
-}   
+}
+
+#editAuction {
+    border: none;
+}
 
 @media print{
 
@@ -79,4 +92,15 @@ input[type=number] {
 .certification-text h4 {
     font-size: 1.6rem;
     margin-bottom: 0;
+}
+
+@media only screen and (max-width: 990px) {
+
+    #bid-button{
+        border-radius: .25rem;
+    }
+    
+    #money {
+        border-radius: .25rem;
+    }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Bazooki - Create auction')
+@section('title', 'Bazooki - Edit auction')
 
 @section('head')
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
@@ -57,29 +57,14 @@
                 <div class="card-title">
                     <h3>Pictures</h3>
                     <p>May select more than one</p>
+                    <p>Choosing new photos will delete the previous ones</p>
                 </div>
                 <ul class="thumbnails">
                 </ul>
                 <input name="photos[]" type="file" accept='image/*' class="form-control-file" id="auctionImageInput" multiple>
+            </div>
+        </div>
 
-            </div>
-        </div>
-<!--
-        <div class="card mt-4 ml-4 mr-4">
-            <div class="card-body">
-                <div class="card-title">
-                    <h3>Certification (optional)</h3>
-                </div>
-                <div class="form-check" style="margin-bottom: 10px;">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="certification_check">
-                    <label class="form-check-label" for="defaultCheck1">
-                        I confirm I have a certificate in PDF format and it's genuine.
-                    </label>
-                </div>
-                <input name="certification" accept="application/pdf" type="file" class="form-control-file" id="exampleFormControlFile1">
-            </div>
-        </div>
-    -->
         <div class="mt-4 ml-4 mr-4">
             <button class="btn btn-olive" style="width:100%;">Submit</button>
         </div>
