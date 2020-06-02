@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PaymentMethod;
+use App\Rules\ValidPaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +18,11 @@ class PaymentMethodController extends Controller
         $bazooker = Auth::guard('bazooker')->user();
 
         $validator = Validator::make($request->all(), [
+            'cardNumber' => ['required','numeric',new ValidPaymentMethod],
             'cardType' => ['required', Rule::in(['visa', 'maestro', 'mastercard'])],
+        ], [
+            'cardNumber'=>'Please provide a valid card number.',
+            'cardType' => 'Must provide a valid card type.'
         ]);
 
         $validator->validate();

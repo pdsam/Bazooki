@@ -20,4 +20,4 @@ Route::get('/auctions/bids/{id?}', 'ApiController@auction_bids');
 Route::get('/reviews/bidder/{id?}', 'ApiController@bidder_review');
 Route::get('/reviews/auctioneer/{id?}', 'ApiController@auctioneer_review');
 Route::get('/sales', 'ApiController@sales');
-Route::get('/auctions', 'ApiController@auctions');
+Route::get('/auctions', 'ApiController@auctions')->name('api_query');
