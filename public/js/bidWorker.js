@@ -18,7 +18,7 @@ function getBids(){
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
         
         request.addEventListener("load",() =>{
-            const res = JSON.parse(request.responseText);
+            let res = JSON.parse(request.responseText);
             if(res.length != 0){
                 res = res.sort(compare)
                 postMessage(res[0]['amount'])
