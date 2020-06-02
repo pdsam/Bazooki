@@ -14,7 +14,7 @@
 
 @section('content')
 <div>
-    <form action="/auctions/{{$id}}"/edit method="POST" id="createAuctionForm" onsubmit="return addRequiredInputs();" enctype="multipart/form-data">
+    <form action="/auctions/{{$id}}/edit" method="POST" id="createAuctionForm" onsubmit="return addRequiredInputs();" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group mt-4 ml-4 mr-4">

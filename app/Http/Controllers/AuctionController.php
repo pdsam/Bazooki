@@ -200,7 +200,28 @@ class AuctionController extends Controller
         ]);
     }
 
-    public function editAuction($id){
+    public function editAuction(Request $request,$id){
+
+        $auction  = Auction::find($id);
+
+        $auction->name = $request->name;
+        $auction->description = $request->description;
+        $auction->item_short_description = $request->short_description;
+        
+
+        if ($request->has('categories')) {
+            $categories = $request->categories;
+            AuctionCategory::where('auction_id',$id)->delete();
+            foreach($categories as $cat) {
+                if(Category::where('id', $cat)->exists()) {
+                    DB::table('auction_category')->insert([
+                        ['auction_id' => $auction->id, 'cat_id' => $cat]
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('auction', ['id'=>$id]);
 
     }
 
