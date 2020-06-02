@@ -33,7 +33,7 @@ class AuctionController extends Controller
     public function createForm()
     {
         if(!Auth::check()) {
-            return redirect('auctions');
+            return redirect('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         $categories = Category::all();
@@ -42,7 +42,7 @@ class AuctionController extends Controller
     
     public function create(Request $request) {
         if(!Auth::check()) {
-            return redirect('auctions');
+            return redirect('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
         
         $validator = Validator::make($request->all(), [
@@ -127,8 +127,9 @@ class AuctionController extends Controller
             ]);
         }
 
-        return redirect("auctions/$newAuction->id");
+        return redirect("auctions/$newAuction->id")->with('successMsg', 'Successfully created auction');
     }
+
     public function show($id = null)
     {
         if($id == null){
@@ -188,8 +189,6 @@ class AuctionController extends Controller
         $validator = Validator::make($request->all(),[
             'form-id' => 'required|numeric',
             'amount' => 'required|numeric',
-
-
         ]);
 
         try{
@@ -202,8 +201,6 @@ class AuctionController extends Controller
         catch(QueryException $e){
             abort(403,"Invalid bid");
         }
-        
-
 
         return response($request->input('amount'));
     }
@@ -289,7 +286,7 @@ class AuctionController extends Controller
         $baz = Auth::guard('bazooker')->user();
 
         if (is_null($baz)) {
-            return redirect()->route('auctions');
+            return redirect()->route('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         $auctions = $baz->ownAuctions();
@@ -370,7 +367,7 @@ class AuctionController extends Controller
         $baz = Auth::guard('bazooker')->user();
 
         if (is_null($baz)) {
-            return redirect()->route('auctions');
+            return redirect()->route('auctions')->withErrors(['You must be authenticated to access that resource']);
         }
 
         $bids = $baz->bids();

@@ -42,11 +42,11 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 // Dashboard
 Route::get('/mod', 'Dashboard\IndexController@show')->name('dashboard');
-Route::get('/mod/auctions', 'Dashboard\AuctionController@show');
-Route::get('/mod/certifications', 'Dashboard\CertificationController@show');
+Route::get('/mod/auctions', 'Dashboard\AuctionController@show')->name('dashboard_auctions');
+Route::get('/mod/certifications', 'Dashboard\CertificationController@show')->name('dashboard_certifications');;
 Route::patch('/mod/certifications/{certification}', 'Dashboard\CertificationController@updateStatus');
-Route::get('/mod/users', 'Dashboard\UserController@show');
-Route::get('/mod/moderators', 'Dashboard\ModeratorController@show');
+Route::get('/mod/users', 'Dashboard\UserController@show')->name('dashboard_users');;
+Route::get('/mod/moderators', 'Dashboard\ModeratorController@show')->name('dashboard_moderators');;
 Route::post('/mod/moderators', 'Dashboard\ModeratorController@create');
 Route::delete('/mod/moderators/{moderator}', 'Dashboard\ModeratorController@delete');
 Route::post('/mod/auctions/freeze/{id?}','Dashboard\AuctionController@freeze');

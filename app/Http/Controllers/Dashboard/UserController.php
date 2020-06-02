@@ -19,11 +19,7 @@ class UserController extends Controller
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
-
-        //$bazookers = Bazooker::all();
         $bazookers = Bazooker::where('status', '!=', 'banned')->get();
-
-       // return dd($bazookers);
 
         return view('dashboard.users',['bazookers'=> $bazookers]);
     }
@@ -35,23 +31,19 @@ class UserController extends Controller
 
         if(Auth::guard('mod')->check()){
             $modID = Auth::guard('mod')->user()->id;
-
         }
         if(Auth::guard('admin')->check()){
             $modID = Auth::guard('admin')->user()->mod->id;
-
         }
 
         $validator = Validator::make($request->all(), [
             'reason' =>'required|string|max:500',
             'bazooker_id' => 'required|numeric|gt',
             'duration' => 'required|numeric|gt'
-
         ],$messages = [
             'reason' =>'Reasons can have a max of 500 caracters',
             'bazooker_id' => 'Invalid bazooker_id',
             'duration' => 'Duration must be greater than 0'
-
         ]);
 
         if(is_null(Bazooker::find($id))){
@@ -63,13 +55,9 @@ class UserController extends Controller
             'mod_id' => $modID,
             'bazooker_id' => $id,
             'duration' => $request->duration
-
-
        ]);
 
-        
-
-        return Redirect::back();
+        return Redirect::back()->with('successMsg', 'Successfully suspended user');
     }
 
     public function unsuspend($id){
@@ -89,10 +77,9 @@ class UserController extends Controller
         foreach($suspensions as $suspension){
             $suspension->duration = 0;
             $suspension->save();
-
         }
 
-        return Redirect::back();
+        return Redirect::back()->with('successMsg', 'Successfully unsuspended user');
     }
 
     public function ban($id){
@@ -101,24 +88,16 @@ class UserController extends Controller
         }
 
         if(Bazooker::find($id)->isBanned()){
-            return Redirect::back()->withErrors(["User already banned"]);
+            return Redirect::back()->withErrors(["Stop, he is already banned..."]);
         }
 
-       // try{
-       $ban =  Ban::create([
+       $ban = Ban::create([
             'reason' => 'Please email us for that',
             'admin_id' => Auth::guard('admin')->user()->mod->id,
             'bazooker_id' => $id
-
-
        ]);
-        //}
-        //catch(Exception $e){
-        //    return Redirect::back()->withErrors(["Something went wrong"]);
-       // }
 
-
-        return Redirect::back();
+        return Redirect::back()->with('successMsg', 'Successfully banned user');
     }
 
 }

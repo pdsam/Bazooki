@@ -40,17 +40,17 @@ class LoginController extends Controller
         $remember = !is_null($request->input('remember-me'));
 
         if (Auth::guard('admin')->attempt(['email' => $username, 'password'=>$password], $remember)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('successMsg', 'Welcome back :)');
         }
         if (Auth::guard('mod')->attempt(['email' => $username, 'password'=>$password])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('successMsg', 'Welcome back :)');
         }
         if (Auth::guard('bazooker')->attempt(['username' => $username, 'password'=>$password])) {
-            return redirect()->route('profile');
+            return redirect()->route('profile')->with('successMsg', 'Welcome back :)');
         }
 
         return redirect()->route('login')
-            ->withErrors([ 'username' => 'Invalid username or password.', ])
+            ->with('invalidUsername', 1)
             ->withInput(['username' => $username]);
     }
 }
