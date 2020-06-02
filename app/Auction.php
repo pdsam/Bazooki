@@ -87,6 +87,17 @@ class Auction extends Model
         return $this->start_time <= new DateTime('now');
     }
 
+    public function thumbnailPhoto() {
+        $photo = $this->photos()->first();
+        if (!is_null($photo)) {
+            $photo = str_replace("public", "storage", $photo->image_path);
+        } else {
+            $photo = "assets/unknown_item.png";
+        }
+
+        return $photo;
+    }
+
     public function isFrozen(){
         return $this->moderatorActions()
             ->where('action', '=', 'freezed')

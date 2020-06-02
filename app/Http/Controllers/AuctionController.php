@@ -419,21 +419,6 @@ class AuctionController extends Controller
         }
 
         $auctions = $auctions->offset($offset)->limit($pageSize)->get();
-        foreach($auctions as $auction) {     
-        
-            $auction_photos = $auction->photos()->get();
-            $photo_paths = array();
-            foreach($auction_photos as $photo) {
-                $path = str_replace("public", "storage", $photo->image_path);
-                array_push($photo_paths, $path);
-            }
-
-            if (count($photo_paths) == 0) {
-                $photo_paths = array("assets/unknown_item.png");
-            }
-
-            $auction->thumbnail_photo = $photo_paths[0];
-        }
 
         return view('pages.activity.myauctions', [
             'auctions' => $auctions,
@@ -569,7 +554,4 @@ class AuctionController extends Controller
             'num_pages'=> $num_pages
         ]);
     }
-    //TODO bids
-    //TODO won auctions
-    //TODO transactions
 }

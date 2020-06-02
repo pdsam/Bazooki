@@ -24,7 +24,7 @@
             <div class="card shadow-sm rounded-0 border-0 mb-2">
                 <div class="row align-items-top no-gutters">
                     <div class="col-xs-12 col-sm-4">
-                        <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
+                        <img src="{{ asset( $auction->thumbnailPhoto() ) }}" class="auction-img card-img rounded-0" alt="logo">
                     </div>
                     <div class="col-xs-12 col-sm-8">
                         <div class="card-body">
