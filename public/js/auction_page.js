@@ -8,7 +8,7 @@ let end_time = start_time + parseInt(duration) * 1000;
 
 let f = setInterval(function () {
   let now = new Date().getTime();
-  let distance = end_time - now;
+  let distance = end_time - now - 3600000;
   let days = Math.floor(distance / (1000 * 60 * 60 * 24));
   let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
