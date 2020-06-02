@@ -8,5 +8,6 @@
         @include('partials.dashboard.bazookerCard',['bazooker'=> $bazooker])
     @endforeach
 
+    <script src="{{ asset('js/collapse.js') }}" defer></script>
     <script src="{{ asset('js/dashboard_users.js') }}" defer></script>
 @endsection
