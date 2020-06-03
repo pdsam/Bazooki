@@ -62,9 +62,5 @@ class ApiController extends Controller
             ->select(DB::raw("date_trunc('hour', date) as hour, SUM(value) as value"))
             ->get();
     }
-
-    public function auctions(Request $req){
-        return app('App\Http\Controllers\AuctionController')->query($req);
-    }
 }
 ?>
