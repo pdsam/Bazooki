@@ -61,7 +61,7 @@
                 </div>
                 <div class="card-c-element card-body">
                     <h3 class="card-title text-center" id="price">€{{ $base_bid }}</h3>
-                    <h3 id="duration-place" class="card-title text-center"></h3>
+                    <h3 id="duration-place" class="card-title text-center">Calculating Remaining Time</h3>
                     <noscript>JavaScript must be enable to use this function of the website</noscript>
                     <p hidden id="timer-start-time">{{ $start_time }}</p>
                     <p hidden id="timer-duration">{{ $duration }}</p>
