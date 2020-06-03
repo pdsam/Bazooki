@@ -20,8 +20,9 @@
             <div class="form-group ml-0 ml-lg-3">
                 <label class="mr-1" for="filter">Filter: </label>
                 <select class="w-auto custom-select rounded-0" id="filter" name="f">
-                    <option value="both" @if(!isset($filter) || strcmp($filter, 'both') == 0) selected="selected" @endif>Live and finished auctions</option>
+                    <option value="both" @if(!isset($filter) || strcmp($filter, 'both') == 0) selected="selected" @endif>All</option>
                     <option value="onlyLive" @if(isset($filter) && strcmp($filter, 'onlyLive') == 0) selected="selected" @endif>Only live auctions</option>
+                    <option value="onlyPending" @if(isset($filter) && strcmp($filter, 'onlyPending') == 0) selected="selected" @endif>Only pending auctions</option>
                     <option value="onlyOver" @if(isset($filter) && strcmp($filter, 'onlyOver') == 0) selected="selected" @endif>Only finished auctions</option>
                 </select>
             </div>
@@ -44,7 +45,19 @@
                                     @if ($auction->isOver())
                                         <h6 class="card-subtitle text-muted">Already over, ended on: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
                                     @else
-                                        <h6 class="card-subtitle text-muted">Ends: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
+					<h6 class="card-subtitle text-muted"> @php 
+
+						if($auction->isOver()){
+							echo 'Over';		
+						}
+						else if(!$auction->hasStarted()){
+							echo 'Not started';		
+						}
+						else{
+							echo $auction->endDateTime()->format('d M Y H:i:s');
+						}
+
+					@endphp</h6>
                                     @endif
 
                                     <div>

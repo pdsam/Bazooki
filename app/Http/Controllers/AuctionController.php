@@ -405,6 +405,11 @@ class AuctionController extends Controller
                         ->where('status', '=', 'live')
                         ->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
                     break;
+                case 'onlyPending':
+                    $auctions
+                        ->where('status', '=', 'pending')
+                        ->whereRaw('start_time > CURRENT_TIMESTAMP');
+                    break;
                 case 'onlyOver':
                     $auctions
                         ->where('status', '=', 'over')
