@@ -33,7 +33,9 @@
             <div class="card shadow-sm rounded-0 border-0 mb-2">
                 <div class="row align-items-top no-gutters">
                     <div class="col-xs-12 col-sm-4">
-                        <img src="{{ asset($auction->thumbnailPhoto()) }}" class="auction-img card-img rounded-0" alt="logo">
+                        <a href="{{ route('auction', $auction->id) }}">
+                            <img src="{{ asset($auction->thumbnailPhoto()) }}" class="auction-img card-img rounded-0" alt="logo">
+                        </a>
                     </div>
                     <div class="col-xs-12 col-sm-8">
                         <div class="card-body">
@@ -67,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <span class="mr-1 auction-price">{{ $auction->currentPrice() }}</span>$
+                                    <span class="mr-1 auction-price">{{ $auction->currentPrice() }}</span>€
                                 </div>
                             </div>
                             <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>

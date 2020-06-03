@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                     <div class="">
-                        <h4 class="card-title">{{ $auction->item_name }}</h4>
+                        <a href="{{ route('auction', $auction->id) }}"><h4 class="card-title">{{ $auction->item_name }}</h4></a>
                         @if ($auction->isOver())
                         <h6 class="card-subtitle text-muted">Already over</h6>
                         @else
