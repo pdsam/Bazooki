@@ -37,13 +37,15 @@
                         {{ $bid->auction->item_name }}
                     </h5>
                 </a>
-                @if ($bid->auction->isOver())
-                    <span class="col-6 text-danger" style="font-size: 0.8rem">Ended</span>
-                @endif
+                <div class="col-12 d-flex align-items-baseline">
+                    @if ($bid->bidder_id == $bid->auction->highest_bidder && $bid->amount == $bid->auction->current_price)
+                        <p class="m-0 mr-2" style="color: var(--olive)">Winning Bid</p>
+                    @endif
 
-                @if ($bid->bidder_id == $bid->auction->highest_bidder && $bid->amount == $bid->auction->current_price)
-                    <p class="col-6 m-0" style="color: var(--olive)">Winning Bid</p>
-                @endif
+                    @if ($bid->auction->isOver())
+                        <span class="text-danger" style="font-size: 0.8rem">Auction Ended</span>
+                    @endif
+                </div>
             </div>
         @endforeach
     </div>
