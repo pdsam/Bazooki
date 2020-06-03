@@ -103,7 +103,8 @@
             <div class="card mt-4 ml-4 mr-4">
                 <div class="card-body">
                     <div class="card-title">
-                        <h3>Certification (optional)</h3>
+                        <h3>Certification</h3>
+                        <p>You many annex one file in PDF format.</p>
                     </div>
                     <div class="form-check" style="margin-bottom: 10px;">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="certification_check">
