@@ -27,20 +27,20 @@ class AccountAccessible
         }
 
         if ($baz->isBanned()) {
+            $ban = $baz->ban();
             Auth::logout();
             return redirect()->route('auctions')->withErrors([
-                'banned' => 'This account was banned.'
+                'banned' => "This account was banned, reason: $ban->reason"
             ]);
         }
         if ($baz->isSuspended()) {
-            //dd($baz->suspensions);
             $suspended = $baz->mostRecentSuspension();
             $seconds = $suspended->duration;
             $time = $suspended->time_of_suspension->modify("+$seconds seconds");
 
             Auth::logout();
             return redirect()->route('auctions')->withErrors([
-                'suspended' => "This account is suspended until $time."
+                'suspended' => "This account is suspended until $time, reason: $suspended->reason."
             ]);
         }
 

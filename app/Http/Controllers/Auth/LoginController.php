@@ -52,19 +52,20 @@ class LoginController extends Controller
                 return back()->withErrors(['problem'=>'Invalid username or password.']);
             }
             if ($user->isBanned()) {
+                $ban = $user->ban()->first();
                 Auth::logout();
                 return back()->withErrors([
-                    'banned' => 'This account was banned.'
+                    'banned' => "This account was banned, reason: $ban->reason"
                 ]);
             }
             if ($user->isSuspended()) {
-                $suspended = $baz->mostRecentSuspension();
+                $suspended = $user->mostRecentSuspension();
                 $seconds = $suspended->duration;
                 $time = $suspended->time_of_suspension->modify("+$seconds seconds");
 
                 Auth::logout();
                 return back()->withErrors([
-                    'suspended' => "This account is suspended until $time."
+                    'suspended' => "This account is suspended until $time, reason: $suspended->reason."
                 ]);
             }
             return redirect('profile/'.$user->id)->with('successMsg', 'Welcome back :)');

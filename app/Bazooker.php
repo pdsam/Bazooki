@@ -70,6 +70,10 @@ class Bazooker extends Authenticatable implements User
         return $this->hasMany('App\Ban','bazooker_id');
     }
 
+    public function ban() {
+        return $this->bans()->where('active', '=', true);
+    }
+
     public function suspensions(){
         return $this->hasMany('App\Suspension','bazooker_id');
     }

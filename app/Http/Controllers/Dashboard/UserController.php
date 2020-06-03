@@ -39,11 +39,12 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'reason' =>'required|string|max:500',
             'bazooker_id' => 'required|numeric|gt',
-            'duration' => 'required|numeric|gt'
+            'duration' => 'required|numeric|gt:0|max:30'
         ],$messages = [
             'reason' =>'Reasons can have a max of 500 caracters',
             'bazooker_id' => 'Invalid bazooker_id',
-            'duration' => 'Duration must be greater than 0'
+            'duration.gt' => 'Duration must be greater than 0',
+            'duration.max' => 'Suspention must not exceed 30 days'
         ]);
 
         if ($validator->fails()) {
