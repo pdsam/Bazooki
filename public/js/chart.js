@@ -24,6 +24,7 @@ function buildChart(response) {
     type: "line",
     data: {
         datasets: [{
+	lineTension: 0,
           label: 'Price',
           data: data,
           backgroundColor: [

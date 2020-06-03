@@ -13,7 +13,10 @@ let f = setInterval(function () {
   let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  if (distance > 0) {
+  if(start_time > Date.now()){
+	      output.innerHTML = "Not started";
+    }
+  else if (distance > 0) {
     output.innerHTML =
       days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   } else {
