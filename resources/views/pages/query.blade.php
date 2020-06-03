@@ -42,8 +42,8 @@
                             <i class="fa fa-chevron-up"></i>
                         </div>
                     </a>
-                    <div id="categoriesGroup" class="collapse show">
-                        <select id="categoriesSelection" class="w-100" name="c[]" multiple="multiple">
+                    <div id="categoriesGroup" class="collapse show form-row">
+                        <select id="categoriesSelection" name="c[]" multiple="multiple">
                             @foreach(\App\Category::all() as $category)
                                 <option value="{{ $category->id }}" @if(isset($filters['c']) && in_array($category->id, $filters['c'])) selected="selected" @endif>{{ $category->name }}</option>
                             @endforeach
@@ -57,7 +57,7 @@
                         </div>
                     </a>
                     <div id="maxBidPriceGroup" class="collapse show form-row">
-                        <input class="control-form col-auto" type="number" name="m" id="maxBid" min="0"
+                        <input placeholder="€" class="control-form col-auto" type="number" name="m" id="maxBid" min="0" style="padding-bottom: 3px; padding-top: 3px; width:100%; border-radius: 4px; border: 1px solid #aaa;"
                                value="@if ( isset($filters['m']) ){{ $filters['m'] }}@endif">
                     </div>
 
