@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         <div id="profile_pic" class="col-12 col-md-4 d-flex text-center align-items-center justify-content-center">
-            <img class="rounded-circle" style="max-width: 200px" src={{ asset($user->photo()) }}>
+            <img class="rounded-circle" alt="profile picture" style="max-width: 200px" src={{ asset($user->photo()) }}>
         </div>
         <div id="profile_description" class="col-12 col-md-8 mt-3 mt-md-0 text-left">
             <div class="d-flex justify-content-between">
@@ -41,16 +41,16 @@
                                 <div class="modal-body">
                                     <div>
                                         <div class="form-group mb-4">
-                                            <label class="mb-2" for="profilePic"><span class="font-weight-bold">Profile picture</span> (<2MB, jpg, png, dif...):</label>
+                                            <label class="mb-2" for="profilePic"><span class="font-weight-bold">Profile picture</span> (less 2MB, jpg, png, dif...):</label>
                                             <input type="file" name="profilePic" id="profilePic">
                                         </div>
                                         <div class="form-group">
                                             <label for="name">Name:</label>
-                                            <input class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+                                            <input class="form-control" type="text" id="name" name="name" placeholder="Name" value="{{ $user->name }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description:</label>
-                                            <textarea class="form-control" id="dsription-in" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
+                                            <textarea class="form-control" id="description" name="description" cols="30" rows="10">{{ $user->description }}</textarea>
                                         </div>
                                     </div>
                                 </div>

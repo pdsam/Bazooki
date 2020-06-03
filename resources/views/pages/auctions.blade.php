@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <script type="text/javascript" defer>
+    <script >
         $(document).ready(function(){
             //Event for pushed the video
             $('.carousel').carousel({

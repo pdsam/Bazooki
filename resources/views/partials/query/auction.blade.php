@@ -1,7 +1,7 @@
 <div class="card shadow-sm rounded-0 border-0 @if (!$first) mt-3 mt-sm-2 @endif">
     <div class="row align-items-top no-gutters">
         <div class="col-xs-12 col-sm-4">
-            <img src="{{ asset('assets/gun.jpg') }}" class="auction-img card-img rounded-0" alt="logo">
+            <img src="{{ '/' . $auction->thumbnailPhoto() }}" @endphp class="auction-img card-img rounded-0" alt="logo">
         </div>
         <div class="col-xs-12 col-sm-8">
             <div class="card-body">

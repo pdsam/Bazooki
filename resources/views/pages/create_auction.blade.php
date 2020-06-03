@@ -3,10 +3,10 @@
 @section('title', 'Bazooki - Create auction')
 
 @section('head')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-    <script type="text/javascript" src="{{ asset('/js/create_auction.js') }}" defer></script>
+    <script src="{{ asset('/js/create_auction.js') }}" defer></script>
     <link rel="stylesheet" href={{ asset('css/create_auction.css') }}>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -18,7 +18,7 @@
             @csrf
             <div class="form-group mt-4 ml-4 mr-4">
                 <h3>Product title*</h3>
-                <input name="name" type="text" class="form-control" id="productTitle" aria-describedby="prodTitle" placeholder="Title" required>
+                <input name="name" type="text" class="form-control" id="productTitle" placeholder="Title" required>
             </div>
 
             <div class="form-group mt-4 ml-4 mr-4">
@@ -35,14 +35,14 @@
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group ml-4 mr-4">
                         <h3>Base bid*</h3>
-                        <input name="base_bid" type="number" placeholder="Base bid" step="1" min="0" class="form-control" required></input>
+                        <input name="base_bid" type="number" placeholder="Base bid" step="1" min="0" class="form-control" required>
                     </div>
                 </div>
                 
                 <div class="col-lg-6 col-sm-12" hidden>
                     <div class="form-group ml-4 mr-4">
                         <h3>Instant buy price (optional)</h3>
-                        <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="1" min="0" class="form-control"></input>
+                        <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="1" min="0" class="form-control">
                     </div>
                 </div>
             </div>

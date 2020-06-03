@@ -68,17 +68,17 @@
                 </div>
                 <div class="card-body w-100 pb-0" id="bid-div">
                     <div class="justify-content-center align-self-center">
-                        <form id="bid-form" class="row pb-0" action="POST" action="/auctions/{{$id}}/bid">
+                        <form id="bid-form" class="row pb-0" method="POST" action="/auctions/{{$id}}/bid">
                             @csrf
                             <input type="hidden" name="form-id" value="{{ $id }}">
                             <div class="col-lg-8 col-12 form-group pr-0 pl-0">
-                                <input id="money" type="number" class="form-control text-center" name="amount" value="{{$base_bid +1}}"></input>
+                                <input id="money" type="number" class="form-control text-center" name="amount" value="{{$base_bid +1}}">
                             </div>
                             <div class="col-lg-4 col-12 form-group pr-0 pl-0">
                                 @if(!Auth::check() || Auth::id() == $owner )
-                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now" disabled></input>
+                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now" disabled>
                                 @else
-                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now"></input>
+                                    <input type="submit" class="btn btn-purple w-100" id="bid-button" value="Bid Now">
                                 @endif
                             </div>
                         </form>
