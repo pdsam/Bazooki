@@ -13,17 +13,17 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="oldPass">Old password</label>
+                    <label for="oldPass">Old password*</label>
                     <input class="form-control w-auto" type="password" name="oldPass" id="oldPass">
                 </div>
 
                 <div class="form-group">
-                    <label for="newPass">New password</label>
+                    <label for="newPass">New password*</label>
                     <input class="form-control w-auto" type="password" name="newPass" id="newPass">
                 </div>
 
                 <div class="form-group">
-                    <label for="confirmPass">Confirm new password</label>
+                    <label for="confirmPass">Confirm new password*</label>
                     <input class="form-control w-auto" type="password" name="confirmPass" id="confirmPass">
                 </div>
                 <button class="btn btn-olive" type="submit">Update</button>
