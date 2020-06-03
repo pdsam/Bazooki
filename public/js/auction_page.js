@@ -14,7 +14,7 @@ let f = setInterval(function () {
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
   if(start_time > Date.now()){
-	      output.innerHTML = "Not started";
+	      output.innerHTML = "Starting at " + document.getElementById("timer-start-time").textContent;
     }
   else if (distance > 0) {
     if(days ==0){
