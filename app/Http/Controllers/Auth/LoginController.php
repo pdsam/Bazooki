@@ -61,7 +61,7 @@ class LoginController extends Controller
                     'suspended' => 'This account was suspended until'
                 ]);
             }
-            return redirect()->route('profile')->with('successMsg', 'Welcome back :)');
+            return redirect('profile/'.$user->id)->with('successMsg', 'Welcome back :)');
         }
 
         return redirect()->route('login')

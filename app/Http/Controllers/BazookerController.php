@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Bazooker;
 use Illuminate\Support\Arr;
@@ -33,13 +35,19 @@ class BazookerController extends Controller
     }
 
     public function editProfile(Request $request, Bazooker $bazooker) {
-        $this->authorize('editProfile', $bazooker);
+        try {
+            $this->authorize('editProfile', $bazooker);
+        }
+        catch (AuthorizationException $exception) {
+            return redirect('profile/'.$bazooker->id)->withErrors(['You are not authorized to perform that operation']);
+        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:512',
             'profilePic' => 'image|max:2048'
         ], [
+            'name.required' => 'Name must not be null',
             'name.max' => 'Name is too long',
             'description' => 'Description is too long.',
             'profilePic.image' => 'Profile picture must be of format jpeg, png, bmp, gif, svg, or webp',
@@ -47,8 +55,7 @@ class BazookerController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('profile')
-                ->withErrors($validator);
+            return redirect('profile/'.$bazooker->id)->withErrors($validator);
         }
 
         $updateContent = $request->only('name','description');
