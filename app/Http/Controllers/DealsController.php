@@ -45,7 +45,7 @@ ORDER BY  num_bids DESC limit 8;
     foreach ($hotdeals as &$value){
         $value = (array)$value;
     if(is_null($value["img"]))
-	    $value["img"] = "../assets/gun.jpg";
+	    $value["img"] = "/assets/unknown_item.png";
     else
 	    $value['img'] = str_replace("public", "storage", $value['img']);
     }
@@ -88,7 +88,7 @@ ORDER BY  num_bids DESC limit 8;
         foreach ($flashdeals as &$value){
             $value = (array)$value;
 	    if(is_null($value["img"]))
-		    $value["img"] = "../assets/gun.jpg";
+		    $value["img"] = "/assets/unknown_item.png";
 	    else
 		    $value['img'] = str_replace("public", "storage", $value['img']);
         }
@@ -126,7 +126,7 @@ ORDER BY  num_bids DESC limit 8;
         foreach ($latestdeals as &$value){
             $value = (array)$value;
 	    if(is_null($value["img"]))
-		    $value["img"] = "../assets/gun.jpg";
+		    $value["img"] = "/assets/unknown_item.png";
 	    else
 		    $value['img'] = str_replace("public", "storage", $value['img']);
 		    
