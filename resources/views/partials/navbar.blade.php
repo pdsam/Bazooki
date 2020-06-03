@@ -43,7 +43,7 @@
                             <a class="dropdown-item" href="/profile">Profile</a>
                             <a class="dropdown-item" href="/activity/myauctions">My Auctions</a>
                             <a class="dropdown-item" href="/activity/wonitems">Won Items</a>
-                            <a class="dropdown-item" href="/activity/mybids">Active Bids</a>
+                            <a class="dropdown-item" href="/activity/mybids">My Bids</a>
                             <a class="dropdown-item" href="/account/settings">Account Settings</a>
                         @endif
                         @if(Auth::guard('mod')->check() || Auth::guard('admin')->check())

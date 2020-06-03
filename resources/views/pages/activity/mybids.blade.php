@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <h1>Your bids</h1>
+    <h1>My bids</h1>
     <div class="d-flex justify-content-end align-items-baseline mb-2 p-1 m-2 m-sm-0" style="margin-left:-15px; margin-right:-15px;">
         <form id="sortOrderForm" class="form-inline" action="/activity/mybids" method="GET">
             <div class="form-group">
