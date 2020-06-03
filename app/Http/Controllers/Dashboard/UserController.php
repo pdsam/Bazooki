@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Exception;
 
 class UserController extends Controller
 {
@@ -94,12 +93,11 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'reason' =>'required|string|max:500',
-            'bazooker_id' => 'required|numeric|gt',
-            'duration' => 'required|numeric|gt'
+            'duration' => 'required|numeric|gt:0'
         ],$messages = [
             'reason' =>'Reasons can have a max of 500 caracters',
-            'bazooker_id' => 'Invalid bazooker_id',
-            'duration' => 'Duration must be greater than 0'
+            'duration' => 'Duration must be greater than 0',
+            
         ]);
 
         if ($validator->fails()) {
