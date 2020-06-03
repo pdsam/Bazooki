@@ -47,7 +47,7 @@
 
         @if (Auth::id() == $owner)
             <div id="editAuction" class="card mb-3">
-                <a href="/auctions/{{$id}}/edit" class="btn btn-olive">Edit Auction</a>
+                <a href="/auctions/{{$id}}/edit" class="btn btn-olive">Edit</a>
             </div>
         @endif
 
@@ -104,7 +104,7 @@
     <div class="card-body">
         <h3 class="card-title">Details </h3>
         <span class="card-text">Posted by: </span><a href="/profile/{{$owner}}"><span>@php echo $ownerName; @endphp</span></a>
-        <h4>Description:</h4>
+        <h4 class="mt-3">Description:</h4>
         <p class="card-text">{{ $description }}</p>
     </div>
 </div>

@@ -61,6 +61,8 @@ input[type=number] {
 
 #editAuction {
     border: none;
+    width: 20%;
+    margin-left: 80%;
 }
 
 @media print{
@@ -109,5 +111,11 @@ input[type=number] {
     
     #money {
         border-radius: .25rem;
+    }
+
+    #editAuction {
+        margin-top: 10px;
+        width: 100%;
+        margin-left: 0;
     }
 }
