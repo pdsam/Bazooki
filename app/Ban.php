@@ -18,4 +18,8 @@ class Ban extends Model
     public function bazooker(){
         return $this->belongsTo('App\Bazooker');
     }
+    public function getDateFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 }

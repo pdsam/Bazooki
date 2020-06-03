@@ -27,4 +27,9 @@ class Bid extends Model
     public function auction() {
         return $this->belongsTo('App\Auction');
     }
+
+    public function getDateFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 }

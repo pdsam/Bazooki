@@ -19,4 +19,8 @@ class Suspension extends Model
         return $this->belongsTo('App\Bazooker');
     }
 
+    public function getDateFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 }

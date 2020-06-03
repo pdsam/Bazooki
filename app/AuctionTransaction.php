@@ -33,4 +33,8 @@ class AuctionTransaction extends Model
     public function winnerReview() {
         return $this->hasOne('App\Feedback', 'transaction_id')->where('ftype', '=', 'winner');
     }
+    public function getDateFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 }

@@ -210,7 +210,7 @@ CREATE TRIGGER precalculate_auction_fts
  DROP FUNCTION IF EXISTS check_auction_time_bounds();
     CREATE FUNCTION check_auction_time_bounds() RETURNS TRIGGER AS $$
 BEGIN
-    IF NEW.time = NULL THEN
+    IF NEW.time IS NULL THEN
         NEW.time = CURRENT_TIMESTAMP;
     END IF;
     IF NEW.time > (SELECT start_time + duration * interval '1 second' FROM auction WHERE id = NEW.auction_id ) THEN

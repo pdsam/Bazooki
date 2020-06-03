@@ -111,4 +111,9 @@ class Auction extends Model
             ->where('action', '=', 'freezed')
             ->Where('active', '=', true)->get();
     }
+
+    public function getDateFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 }
