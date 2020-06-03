@@ -32,6 +32,7 @@
         @foreach($auctions as $auction)
             <div class="card shadow-sm rounded-0 border-0 mb-2">
                 <div class="row align-items-top no-gutters">
+		    <a class="stretched-link" href="{{ route('auction', $auction->id) }}"> </a>
                     <div class="col-xs-12 col-sm-4">
                         <a href="{{ route('auction', $auction->id) }}">
                             <img src="{{ asset($auction->thumbnailPhoto()) }}" class="auction-img card-img rounded-0" alt="logo">
@@ -41,9 +42,7 @@
                         <div class="card-body">
                             <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                                 <div class="">
-                                    <a href="{{ route('auction', $auction->id) }}">
                                         <h4 class="card-title">{{ $auction->item_name }}</h4>
-                                    </a>
                                     @if ($auction->isOver())
                                         <h6 class="card-subtitle text-muted">Already over, ended on: {{ $auction->endDateTime()->format('d M Y H:i:s') }}</h6>
                                     @else

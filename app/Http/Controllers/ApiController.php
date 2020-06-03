@@ -60,6 +60,7 @@ class ApiController extends Controller
         return AuctionTransaction::whereRaw("date >= now()-interval '1 day'")
             ->groupBy(DB::raw("date_trunc('hour', date)"))
             ->select(DB::raw("date_trunc('hour', date) as hour, SUM(value) as value"))
+	    ->orderBy("hour")
             ->get();
     }
 }

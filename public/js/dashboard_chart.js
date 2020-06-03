@@ -10,14 +10,13 @@ let dirtyWorker = null;
   // Graphs
   var ctx = document.getElementById('myChart')
   // eslint-disable-next-line no-unused-vars
-  var myChart = new Chart(ctx, {
+  myChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: [
       ],
       datasets: [{
-        data: [
-        ],
+	      data: [],
         lineTension: 0,
         backgroundColor: 'transparent',
         borderColor: '#007bff',
@@ -39,16 +38,37 @@ let dirtyWorker = null;
     }
   });
 
-    window.setInterval(function(){
+	salesUpdater();
+    window.setInterval(salesUpdater, 5000);
+}())
+
+
+function salesUpdater(){
             fetch("/api/sales")
                 .then((response) =>{
                     return response.json();
             })
             .then((jsonResponse) =>{
-                //TODO seperate in lists and actually update
-                myChart.data.datasets = [jsonResponse];
+		myChart.data.labels = jsonResponse.map((entry) => { return  entry.hour; });
+		myChart.data.datasets[0].data = jsonResponse.map((entry) => { return entry.value; });
                 myChart.update();
-            });
-    }, 5000);
-}())
 
+		table = document.getElementById("profitTable");
+		table.innerHTML = '';
+
+		jsonResponse.forEach( (entry) => {
+			table.innerHTML += `<tr>
+						<td>
+				${entry.hour}
+						</td>
+
+						<td>
+				${entry.value}
+						</td>
+
+						</tr>`
+			
+
+		});
+            });
+}

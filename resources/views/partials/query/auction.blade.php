@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div>
-                        <span class="mr-1 auction-price">{{ $auction->currentPrice() }}</span>$
+                        <span class="mr-1 auction-price">{{ $auction->currentPrice() }}</span>€
                     </div>
                 </div>
                 <p class="mt-2 card-text auction-short-desc">{{ $auction->item_short_description }}</p>
