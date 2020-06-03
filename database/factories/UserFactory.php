@@ -18,7 +18,7 @@ $factory->define(App\Bazooker::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'username' => $faker->unique()->userName,
-        'password' => Hash::make($faker->password), // secret
+        'password' => Hash::make('123456'), // secret
         'email' => $faker->unique()->safeEmail
     ];
 });

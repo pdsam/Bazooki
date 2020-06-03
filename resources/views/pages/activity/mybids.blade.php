@@ -37,7 +37,7 @@
 </h4>
                 <a class="col-12" href="{{ url()->route('auction', [$bid->auction->id]) }}">
                     <h5>
-				
+
                         {{ $bid->auction->item_name }}
                     </h5>
                 </a>
