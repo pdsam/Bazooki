@@ -412,7 +412,7 @@ class AuctionController extends Controller
 
         $offset = 0;
         $num_pages = ceil($total / $pageSize);
-        if ($num_pages > $pageNum && $pageNum >= 0) {
+        if ($num_pages == 0 || ($num_pages > $pageNum && $pageNum >= 0)) {
             $offset = $pageSize * $pageNum;
         } else {
             return redirect()->route('myauctions', ['p'=>0]);
@@ -463,7 +463,7 @@ class AuctionController extends Controller
 
         $offset = 0;
         $num_pages = ceil($total / $pageSize);
-        if ($num_pages > $pageNum && $pageNum >= 0) {
+        if ($num_pages == 0 || ($num_pages > $pageNum && $pageNum >= 0)) {
             $offset = $pageSize * $pageNum;
         } else {
             return redirect()->route('wonitems', ['p'=>0]);
@@ -538,7 +538,7 @@ class AuctionController extends Controller
 
         $offset = 0;
         $num_pages = ceil($total / $pageSize);
-        if ($num_pages > $pageNum && $pageNum >= 0) {
+        if ($num_pages == 0 || ($num_pages > $pageNum && $pageNum >= 0)) {
             $offset = $pageSize * $pageNum;
         } else {
             return redirect()->route('mybids', ['p'=>0]);

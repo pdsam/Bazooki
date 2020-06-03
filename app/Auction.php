@@ -76,7 +76,8 @@ class Auction extends Model
     }
 
     public function endDateTime() {
-        return $this->start_time->modify("+$this->duration seconds");
+        $start = new DateTime($this->start_time);
+        return $start->modify("+$this->duration seconds");
     }
 
     public function isOver() {

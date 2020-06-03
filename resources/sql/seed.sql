@@ -379,28 +379,7 @@ CREATE TRIGGER prevent_repeated_bid_action
     FOR EACH ROW
     EXECUTE PROCEDURE prevent_repeated_bid_action();
 
--- CHECK AUCTION STATUS
-DROP FUNCTION IF EXISTS check_auction_still_live();
-CREATE FUNCTION check_auction_still_live() RETURNS VOID AS $$
-DECLARE
-    A RECORD;
-BEGIN
-    FOR A IN (select * from auction where status = 'live') LOOP
-        IF ((A.start_time + A.duration * interval '1 second') < CURRENT_TIMESTAMP) THEN
-            -- SET STATUS TO OVER
-            UPDATE auction set status = 'over' WHERE id = A.id;
-
-            --CREATE TRANSACTION
-            IF A.highest_bidder IS NOT NULL THEN
-                INSERT INTO auction_transaction(auction_id, receiver, sender, value) values (A.id, A.owner, A.highest_bidder, A.current_price);
-            END IF;
-
-        END IF;
-    END LOOP;
-END
-$$ LANGUAGE 'plpgsql';
-
--- UPDATE BAZOOKER STATUS on ban 
+-- UPDATE BAZOOKER STATUS on ban
 DROP FUNCTION IF EXISTS bazooker_update_status_ban();
 CREATE FUNCTION bazooker_update_status_ban() RETURNS TRIGGER AS $$
 BEGIN
@@ -424,7 +403,7 @@ CREATE FUNCTION bazooker_update_status_suspension() RETURNS TRIGGER AS $$
 BEGIN
 	IF(TG_OP = 'INSERT') THEN
 		UPDATE bazooker set status = 'suspended' where id = NEW.bazooker_id AND status='live';
-	ELSIF(TG_OP = 'UPDATE') THEN 
+	ELSIF(TG_OP = 'UPDATE') THEN
 		UPDATE bazooker set status = 'live' where id = NEW.bazooker_id AND status='suspended' and OLD.duration=0;
 	END IF;
 	RETURN NEW;
@@ -437,7 +416,48 @@ CREATE TRIGGER bazooker_update_status_suspension
     FOR EACH ROW
     EXECUTE PROCEDURE bazooker_update_status_suspension();
 
+-- CHECK AUCTION LIVE STATUS
+DROP FUNCTION IF EXISTS check_auction_still_live();
+CREATE FUNCTION check_auction_still_live() RETURNS VOID AS $$
+DECLARE
+    A RECORD;
+BEGIN
+    FOR A IN (select * from auction where status = 'live') LOOP
+        IF ((A.start_time + A.duration * interval '1 second') < CURRENT_TIMESTAMP) THEN
+            -- SET STATUS TO OVER
+            UPDATE auction set status = 'over' WHERE id = A.id;
 
+            --CREATE TRANSACTION
+            IF A.highest_bidder IS NOT NULL THEN
+                INSERT INTO auction_transaction(auction_id, receiver, sender, value) values (A.id, A.owner, A.highest_bidder, A.current_price);
+            END IF;
+
+        END IF;
+    END LOOP;
+END
+$$ LANGUAGE 'plpgsql';
+
+-- CHECK AUCTION PENDING STATUS
+DROP FUNCTION IF EXISTS check_auction_still_pending();
+CREATE FUNCTION check_auction_still_pending() RETURNS VOID AS $$
+BEGIN
+    UPDATE auction set status='live' where status='pending' AND start_time < CURRENT_TIMESTAMP;
+END
+$$ LANGUAGE 'plpgsql';
+
+-- CHECK USER SUSPENDED STATUS
+DROP FUNCTION IF EXISTS check_user_suspended_status();
+CREATE FUNCTION check_user_suspended_status() RETURNS VOID AS $$
+DECLARE
+    A RECORD;
+BEGIN
+    FOR A IN (select * from bazooker where status = 'suspended') LOOP
+        IF NOT EXISTS(select * from suspension where bazooker_id = A.id and ((time_of_suspension + duration * interval '1 second') > CURRENT_TIMESTAMP)) THEN
+            update bazooker set status='live' where id = A.id;
+        END IF;
+    END LOOP;
+END
+$$ LANGUAGE 'plpgsql';
 
 CREATE INDEX bid_auction_id ON bid USING hash(auction_id);
 CREATE INDEX bid_bidder_id ON bid USING hash(bidder_id);

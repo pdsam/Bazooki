@@ -46,6 +46,21 @@ class LoginController extends Controller
             return redirect()->route('dashboard')->with('successMsg', 'Welcome back :)');
         }
         if (Auth::guard('bazooker')->attempt(['username' => $username, 'password'=>$password])) {
+            $user = Auth::guard('bazooker')->user();
+            if ($user->isBanned()) {
+                Auth::logout();
+                return back()->withErrors([
+                    'banned' => 'This account was banned.'
+                ]);
+            }
+            if ($user->isSuspended()) {
+                $suspended = $user->suspensions()->whenRaw('time_of_suspension + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->get()[0];
+
+                Auth::logout();
+                return back()->withErrors([
+                    'suspended' => 'This account was suspended until'
+                ]);
+            }
             return redirect()->route('profile')->with('successMsg', 'Welcome back :)');
         }
 

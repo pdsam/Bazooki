@@ -67,15 +67,24 @@
                 @foreach($payment_methods as $method)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4 mx-auto" style="max-width: 16rem">
-                            <img src="{{ asset('assets/master-card-logo.jpg') }}" alt="" class="card-img-top">
+                            @switch($method->type)
+                                @case('visa')
+                                    <img src="{{ asset("assets/visa-logo.png") }}" alt="card brand logo" class="card-img-top m-auto">
+                                    @break
+                                @case('maestro')
+                                <img src="{{ asset("assets/maestro-logo.png") }}" alt="card brand logo" class="card-img-top m-auto">
+                                @break
+                                @case('mastercard')
+                                <img src="{{ asset("assets/mastercard-logo.png") }}" alt="card brand logo" class="card-img-top m-auto">
+                                @break
+                            @endswitch
                             <div class="card-body">
                                 <h5 class="card-title">{{ $method->card_number }}</h5>
-                                <p class="card-text">{{ $method->type }}</p>
                                 <form method="POST" action="/account/settings/payment">
                                     @csrf
                                     @method("DELETE")
                                     <input type="hidden" name="methodId" value="{{ $method->id }}">
-                                    <input class="btn btn-olive" type="submit" value="Remove">
+                                    <input class="btn btn-danger" type="submit" value="Remove">
                                 </form>
                             </div>
                         </div>

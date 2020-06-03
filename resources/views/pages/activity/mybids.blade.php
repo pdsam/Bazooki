@@ -31,7 +31,7 @@
     <div>
         @foreach($bids as $bid)
             <div class="row bg-white shadow-sm p-2 m-2">
-                <h4 class="col-12">{{ $bid->amount }}<span style="font-size: 1.2rem">$</span> - {{ $bid->time }}</h4>
+                <h4 class="col-12">{{ $bid->amount }}<span style="font-size: 1.2rem">$</span> - {{ $bid->time->format('Y-m-d H-i-s') }}</h4>
                 <a class="col-12" href="{{ url()->route('auction', [$bid->auction->id]) }}">
                     <h5>
                         {{ $bid->auction->item_name }}
