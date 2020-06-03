@@ -39,7 +39,7 @@ CREATE TYPE auction_status AS ENUM('pending', 'live', 'over', 'frozen', 'removed
 CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     owner BIGINT NOT NULL REFERENCES bazooker(id),
                     base_bid INT NOT NULL,
-                    start_time TIMESTAMP(0) with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                    start_time TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                     duration INT NOT NULL CHECK (duration >= 60*30) DEFAULT (3600*24*7),
                     insta_buy INT CHECK (insta_buy > 0),
                     current_price INT,
@@ -80,7 +80,7 @@ CREATE TABLE bid(id BIGSERIAL PRIMARY KEY,
                 auction_id BIGINT NOT NULL REFERENCES auction(id),
                 bidder_id BIGSERIAL NOT NULL REFERENCES bazooker(id),
                 amount INT NOT NULL CHECK (amount > 0),
-                TIME TIMESTAMP(0) with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP(0));
+                TIME TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0));
 
 DROP TABLE IF EXISTS auction_moderator_action;
 DROP TYPE IF EXISTS moderator_action CASCADE;
@@ -88,7 +88,7 @@ CREATE TYPE moderator_action AS ENUM('freezed', 'removed');
 CREATE TABLE auction_moderator_action(id BIGSERIAL PRIMARY KEY,
                                       reason TEXT NOT NULL,
                                       active BOOL NOT NULL DEFAULT TRUE,
-                                      time timestamp(0) with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                                      time timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                                       action moderator_action,
                                       auction_id BIGINT NOT NULL REFERENCES auction(id),
                                       mod_id BIGINT NOT NULL REFERENCES moderator(id));
@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS bid_moderator_action;
 CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
                                    reason TEXT NOT NULL,
                                    active BOOL NOT NULL DEFAULT TRUE,
-                                   time timestamp(0) with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                                   time timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                                    action moderator_action,
                                    bid_id BIGINT NOT NULL REFERENCES bid(id),
                                    mod_id BIGINT NOT NULL REFERENCES moderator(id));
@@ -105,7 +105,7 @@ CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
 DROP TABLE IF EXISTS auction_transaction CASCADE;
 CREATE TABLE auction_transaction(id BIGSERIAL PRIMARY KEY,
                                  value int NOT NULL CHECK (value > 0),
-                                 date TIMESTAMP(0) with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                                 date TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                                  auction_id BIGINT NOT NULL REFERENCES auction(id),
                                  receiver BIGINT NOT NULL REFERENCES bazooker(id),
                                  sender BIGINT NOT NULL REFERENCES bazooker(id),
@@ -122,7 +122,7 @@ CREATE TABLE suspension(id BIGSERIAL PRIMARY KEY,
                         mod_id BIGINT NOT NULL REFERENCES moderator(id),
                         bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                         reason TEXT NOT NULL, 
-                        time_of_suspension TIMESTAMP(0) with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                        time_of_suspension TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                         duration INT NOT NULL CHECK (duration >0));
 
 DROP TABLE IF EXISTS ban;
@@ -130,7 +130,7 @@ CREATE TABLE ban(id BIGSERIAL PRIMARY KEY,
                  admin_id BIGINT NOT NULL REFERENCES administrator(mod_id),
                  bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                  reason TEXT NOT NULL, 
-                 time_of_ban TIMESTAMP(0) with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                 time_of_ban TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                  active BOOLEAN NOT NULL DEFAULT TRUE);
 
 DROP TABLE IF EXISTS feedback;
@@ -466,7 +466,7 @@ CREATE INDEX feedback_f_type ON feedback USING hash(ftype);
 CREATE INDEX bid_moderator_action_active ON bid_moderator_action USING hash(active);
 CREATE INDEX auction_moderator_action_active ON auction_moderator_action USING hash(active);
 CREATE INDEX start_auction ON auction USING btree(start_time);
---CREATE INDEX end_time on auction using btree((start_time + duration * interval '1 second'));
+CREATE INDEX end_time on auction using btree((start_time + duration * interval '1 second'));
 CREATE INDEX auction_status on auction using hash(status);
 CREATE INDEX auction_search_dix ON auction USING GIST(search);
 
