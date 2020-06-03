@@ -2,9 +2,9 @@
     <div class="row align-items-top no-gutters">
         <div class="col-xs-12 col-sm-4">
             <img src="{{ asset($auction->thumbnailPhoto()) }}" class="auction-img card-img rounded-0" alt="logo">
-            <a href="{{ route('auction', $auction->id) }}" class="stretched-link pr-0"></a>
         </div>
         <div class="col-xs-12 col-sm-8">
+            <a href="{{ route('auction', $auction->id) }}" class="stretched-link pr-0"></a>
             <div class="card-body">
                 <div class="d-flex flex-column-reverse flex-sm-row justify-content-between align-items-top">
                     <div class="">
