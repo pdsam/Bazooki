@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+    <h1>Profile</h1>
     <div class="row">
         <div id="profile_pic" class="col-12 col-md-4 d-flex text-center align-items-center justify-content-center">
             <img class="rounded-circle" alt="profile picture" style="max-width: 200px" src={{ asset($user->photo()) }}>

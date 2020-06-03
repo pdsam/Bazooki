@@ -3,6 +3,7 @@
 @section('title', 'Account settings - Bazooker')
 
 @section('content')
+    <h1 class="mb-4">Settings</h1>
     <div class="px-2">
         <div class="mb-5">
             <h2>Change Password</h2>
