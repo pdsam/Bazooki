@@ -27,6 +27,7 @@ let f = setInterval(function () {
 
 $("#bid-form").submit(async (e) => {
   e.preventDefault();
+  document.getElementById("bid-button").disabled = true;
 
   const form = $("#bid-form :input");
 
