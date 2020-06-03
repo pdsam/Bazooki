@@ -16,9 +16,9 @@
       </h6>
     </div>
     <div id="social-media" class="">
-      <a href="http://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="http://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="http://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/Bazooki-100374585047691/" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://twitter.com/bazooki/" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/bazooki.kun/" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
   </div>    
 </footer>
