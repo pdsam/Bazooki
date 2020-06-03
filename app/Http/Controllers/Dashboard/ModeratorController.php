@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use App\Moderator;
 use App\Administrator;
 
@@ -28,7 +27,12 @@ class ModeratorController extends Controller
     public function show()
     {
         if(!Auth::guard('admin')->check()) {
-            return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+            $referer = Request::header('referer');
+            if (empty($referer)) {
+                return Redirect::to(route('auctions'));
+            } else {
+                return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+            }
         }
 
         return view('dashboard.moderators', ['moderators' => $this->getModerators()]);
