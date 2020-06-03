@@ -78,15 +78,13 @@ class AuctionController extends Controller
 
         $userID = Auth::user()->id;
         $startDate = DateTime::createFromFormat('m/d/Y h:i A', $request->start_time)->getTimestamp();
+	$startDate = $startDate - 3600*24;
         $insta_buy = $request->has('insta_buy') ? $request->insta_buy : null;
 
-
-	error_log($startDate);
-	error_log(time());
 	$auctionStatus = ($startDate <= time() ? 'live' : 'pending');
 
-	error_log($auctionStatus);
-
+	if($startDate < time())
+		$startDate = time();
 
         $newAuction = Auction::create([
             'owner' => $userID,
@@ -178,8 +176,6 @@ class AuctionController extends Controller
                         ->get()) > 0;
 
 	$ownerName = $auction->owner()->select('name')->first()['name'];
-	error_log($ownerName);
-	error_log($ownerName);
 
         return view('pages.auctionPage',[
             'owner' => $auction->owner,

@@ -35,14 +35,14 @@
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group ml-4 mr-4">
                         <h3>Base bid*</h3>
-                        <input name="base_bid" type="number" placeholder="Base bid" step="0.1" min="0" class="form-control" required></input>
+                        <input name="base_bid" type="number" placeholder="Base bid" step="1" min="0" class="form-control" required></input>
                     </div>
                 </div>
                 
                 <div class="col-lg-6 col-sm-12" hidden>
                     <div class="form-group ml-4 mr-4">
                         <h3>Instant buy price (optional)</h3>
-                        <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="0.1" min="0" class="form-control"></input>
+                        <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="1" min="0" class="form-control"></input>
                     </div>
                 </div>
             </div>

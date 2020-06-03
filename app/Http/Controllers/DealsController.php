@@ -16,21 +16,38 @@ class DealsController extends Controller
     public function hotdeals(){
 
         $hotdeals = DB::select( DB::raw("
-            SELECT auction.item_name as title, image_path as img, auction.id as id, auction.item_short_description as description FROM 
-                (SELECT auction_id, date_trunc('hour', time) as date_hour, MAX(date_trunc('hour', time) ) OVER (PARTITION BY auction_id) as max_date_hour, COUNT(amount) as num_bids FROM bid GROUP BY auction_id, date_hour)
-                ignore
-                JOIN auction
-                ON auction_id=auction.id
-                LEFT JOIN item_image
-                ON ignore.auction_id = auction.id
-                 WHERE date_hour=max_date_hour  and auction.status='live' AND start_time < now() ORDER BY num_bids DESC LIMIT 8;
+		SELECT    auction.item_name              AS title, 
+          image_path                     AS img, 
+          auction.id                     AS id, 
+          auction.item_short_description AS description 
+FROM      ( 
+                   SELECT   auction_id, 
+                            Count(amount) AS num_bids 
+                   FROM     ( 
+                                   SELECT auction_id, 
+                                          Date_trunc('hour', TIME)                                      AS date_hour,
+                                          Max(Date_trunc('hour', TIME) ) over (PARTITION BY auction_id) AS max_date_hour,
+                                          amount 
+                                   FROM   bid) not_considered 
+                   WHERE    max_date_hour=date_hour 
+                   GROUP BY auction_id) ignore 
+join      auction 
+ON        auction_id=auction.id 
+left join item_image 
+ON        item_image.auction_id = auction.id 
+WHERE     auction.status='live'
+AND       start_time < Now() 
+ORDER BY  num_bids DESC limit 8;
 		
             ") );
 
 
     foreach ($hotdeals as &$value){
         $value = (array)$value;
-        $value["img"] = "../assets/gun.jpg";
+    if(is_null($value["img"]))
+	    $value["img"] = "../assets/gun.jpg";
+    else
+	    $value['img'] = str_replace("public", "storage", $value['img']);
     }
     
     $numDeals = count($hotdeals)/4 + (count($hotdeals)%4 != 0 ? 1 : 0);
@@ -70,7 +87,10 @@ class DealsController extends Controller
 
         foreach ($flashdeals as &$value){
             $value = (array)$value;
-            $value["img"] = "../assets/gun.jpg";
+	    if(is_null($value["img"]))
+		    $value["img"] = "../assets/gun.jpg";
+	    else
+		    $value['img'] = str_replace("public", "storage", $value['img']);
         }
         
         $numDeals = count($flashdeals)/4 + (count($flashdeals)%4 != 0 ? 1 : 0);
@@ -105,7 +125,11 @@ class DealsController extends Controller
 
         foreach ($latestdeals as &$value){
             $value = (array)$value;
-            $value["img"] = "../assets/gun.jpg";
+	    if(is_null($value["img"]))
+		    $value["img"] = "../assets/gun.jpg";
+	    else
+		    $value['img'] = str_replace("public", "storage", $value['img']);
+		    
         }
 
         
