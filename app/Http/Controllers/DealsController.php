@@ -19,7 +19,7 @@ class DealsController extends Controller
 		SELECT    auction.item_name              AS title, 
           image_path                     AS img, 
           auction.id                     AS id, 
-          auction.item_short_description AS description 
+          auction.current_price AS description 
 FROM      ( 
                    SELECT   auction_id, 
                             Count(amount) AS num_bids 
@@ -72,7 +72,7 @@ ORDER BY  num_bids DESC limit 8;
                 SELECT title, img,  id,  description
                 FROM
                     (
-                    SELECT item_name as title, image_path as img, auction.id as id, item_short_description as description, start_time, duration, start_time+make_interval(secs := duration) as end_time, now()-start_time+make_interval(secs := duration) as time_left
+                    SELECT item_name as title, image_path as img, auction.id as id, current_price as description, start_time, duration, start_time+make_interval(secs := duration) as end_time, now()-start_time+make_interval(secs := duration) as time_left
                     FROM auction
                     LEFT JOIN item_image
                     ON auction_id=auction.id
@@ -112,7 +112,7 @@ ORDER BY  num_bids DESC limit 8;
         $latestdeals = DB::select(
 
             DB::raw("
-            SELECT item_name as title, image_path as img, auction.id as id, item_short_description as description
+            SELECT item_name as title, image_path as img, auction.id as id, current_price as description
                 FROM auction LEFT JOIN item_image
 		ON 
 		auction_id=auction.id

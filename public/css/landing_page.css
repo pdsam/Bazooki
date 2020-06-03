@@ -9,6 +9,12 @@
     padding-bottom: 2em;
 }
 
+@media (min-width: 768px) { 
+	.card-image-sexy{
+			height: 15vw !important;
+			object-fit: cover !important;
+	}
+}
 #landing-page .carouselParent:last-child {
     border-bottom: none;
     margin-bottom: 2rem;
