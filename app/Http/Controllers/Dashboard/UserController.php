@@ -82,7 +82,7 @@ class UserController extends Controller
         return Redirect::back()->with('successMsg', 'Successfully unsuspended user');
     }
 
-    public function ban($id){
+    public function ban(Request $request,$id){
         if(!Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
@@ -92,7 +92,7 @@ class UserController extends Controller
         }
 
        $ban = Ban::create([
-            'reason' => 'Please email us for that',
+            'reason' => $request->reason,
             'admin_id' => Auth::guard('admin')->user()->mod->id,
             'bazooker_id' => $id
        ]);
