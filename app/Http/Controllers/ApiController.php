@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Feedback;
 use App\AuctionTransaction;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {

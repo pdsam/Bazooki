@@ -79,7 +79,7 @@ class AuctionController extends Controller
         $userID = Auth::user()->id;
         $startDate = DateTime::createFromFormat('m/d/Y h:i A', $request->start_time)->getTimestamp();
         $insta_buy = $request->has('insta_buy') ? $request->insta_buy : null;
-
+	$startDate -= 3600;
 	$auctionStatus = ($startDate <= time() ? 'live' : 'pending');
 
 	if($startDate < time())
