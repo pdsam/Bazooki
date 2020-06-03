@@ -17,40 +17,40 @@
         <form action="/auctions/add" method="POST" id="createAuctionForm" onsubmit="return addRequiredInputs();" enctype="multipart/form-data">
             @csrf
             <div class="form-group mt-4 ml-4 mr-4">
-                <h3>Product title</h3>
+                <h3>Product title*</h3>
                 <input name="name" type="text" class="form-control" id="productTitle" aria-describedby="prodTitle" placeholder="Title" required>
             </div>
 
             <div class="form-group mt-4 ml-4 mr-4">
-                <h3>Short product description</h3>
+                <h3>Short product description*</h3>
                 <input name="short_description" class="form-control" id="short_description" placeholder="Short description" required>
             </div>
             
             <div class="form-group mt-4 ml-4 mr-4">
-                <h3>Product description</h3>
+                <h3>Product description*</h3>
                 <textarea name="description" class="form-control" rows="5" id="description" placeholder="Description"></textarea>
             </div>
             
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group ml-4 mr-4">
-                        <h3>Base bid</h3>
+                        <h3>Base bid*</h3>
                         <input name="base_bid" type="number" placeholder="Base bid" step="0.1" min="0" class="form-control" required></input>
                     </div>
                 </div>
                 
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-lg-6 col-sm-12" hidden>
                     <div class="form-group ml-4 mr-4">
                         <h3>Instant buy price (optional)</h3>
                         <input name="instant_buy" type="number" placeholder="Instant Buy Price" step="0.1" min="0" class="form-control"></input>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group ml-4 mr-4">
-                        <h3>Start date</h3>    
+                        <h3>Start date*</h3>    
                         <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                             <input name="start_time" placeholder="Start time" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
                             <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
@@ -62,7 +62,7 @@
                 
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group ml-4 mr-4">
-                        <h3>Duration</h3>
+                        <h3>Duration*</h3>
                         <div class="input-group">
                             <input type="number" class="form-control" placeholder="Days" id="days" step="1" min="0" required>
                             <input type="number" class="form-control" placeholder="Hours" id="hours" step="1" min="0" max="24" required>
