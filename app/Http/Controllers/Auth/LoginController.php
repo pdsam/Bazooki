@@ -47,6 +47,10 @@ class LoginController extends Controller
         }
         if (Auth::guard('bazooker')->attempt(['username' => $username, 'password'=>$password])) {
             $user = Auth::guard('bazooker')->user();
+            if (strcmp($user->status, 'deleted') == 0) {
+                Auth::logout();
+                return back()->withErrors(['problem'=>'Invalid username or password.']);
+            }
             if ($user->isBanned()) {
                 Auth::logout();
                 return back()->withErrors([
@@ -55,10 +59,12 @@ class LoginController extends Controller
             }
             if ($user->isSuspended()) {
                 $suspended = $user->suspensions()->whenRaw('time_of_suspension + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->get()[0];
+                $seconds = $suspended->duration;
+                $time = $suspended->time_of_suspension->modify("+$seconds seconds");
 
                 Auth::logout();
                 return back()->withErrors([
-                    'suspended' => 'This account was suspended until'
+                    'suspended' => "This account is suspended until $time."
                 ]);
             }
             return redirect('profile/'.$user->id)->with('successMsg', 'Welcome back :)');

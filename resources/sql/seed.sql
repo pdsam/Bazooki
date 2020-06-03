@@ -2,10 +2,10 @@
 
 DROP TABLE IF EXISTS bazooker CASCADE;
 DROP TYPE IF EXISTS bazooker_status;
-CREATE TYPE bazooker_status AS ENUM('live', 'suspended', 'banned');
+CREATE TYPE bazooker_status AS ENUM('deleted', 'live', 'suspended', 'banned');
 CREATE TABLE bazooker(id BIGSERIAL PRIMARY KEY,
                       name text NOT NULL,
-		      status bazooker_status NOT NULL DEFAULT 'live',
+		              status bazooker_status NOT NULL DEFAULT 'live',
                       username TEXT UNIQUE NOT NULL,
                       password TEXT, 
                       email TEXT UNIQUE NOT NULL,

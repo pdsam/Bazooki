@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Bazooker;
 use Illuminate\Support\Arr;
@@ -15,6 +14,10 @@ use Intervention\Image\Facades\Image;
 
 class BazookerController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:bazooker')->only('deleteAccount');
+    }
+
     public function show($id = null)
     {
         if ($id == null) {
@@ -85,8 +88,30 @@ class BazookerController extends Controller
         return view('pages.settings', ['payment_methods' => $bazooker->paymentMethods]);
     }
 
-    public function deleteAccount(Request $request, Bazooker $bazooker){
-        $this->authorize('editProfile', $bazooker);
+    public function deleteAccount(Request $request){
+        $user = Auth::guard('bazooker')->user();
+
+        if (is_null($user)) {
+            return redirect()->route('auctions');
+        }
+        //dd($request->password, $request->confirmPassword, $user->password);
+
+        if (strcmp($request->password, $request->confirmPassword) != 0) {
+            return back()->withErrors([
+                'password' => 'Wrong password'
+            ]);
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'password' => 'Wrong password'
+            ]);
+        }
+
+        $user->status = 'deleted';
+        $user->save();
+
+        Auth::logout();
 
         return redirect('auctions')->with('successMsg', 'Successfully deleted account');
     }

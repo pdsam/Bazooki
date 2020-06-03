@@ -30,6 +30,7 @@ Route::get('/account/settings', 'BazookerController@settings')->name('settings')
 Route::put('/account/settings/password', 'ChangePasswordController@changeBazookerPass');
 Route::post('/account/settings/payment', 'PaymentMethodController@create');
 Route::delete('/account/settings/payment', 'PaymentMethodController@remove');
+Route::post('/account/delete', 'BazookerController@deleteAccount');
 
 Route::get('/activity/myauctions', 'AuctionController@myAuctions')->name('myauctions');
 Route::get('/activity/wonitems', 'AuctionController@wonitems')->name('wonitems');

@@ -105,7 +105,33 @@
                         <p class="m-0">Once you delete your account, you can't get it back.</p>
                     </div>
                     <div class="col-12 col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
-                        <button class="btn btn-danger mt-2 mt-md-0">Delete Account</button>
+                        <button class="btn btn-danger mt-2 mt-md-0" data-toggle="modal" data-target="#delete-account-form">Delete Account</button>
+                    </div>
+                    <div id="delete-account-form" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="text-danger">Delete account</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-danger">Please type your password.</p>
+                                    <form id="deleteAccountForm" class="form" action="/account/delete" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        <input id="cardTypeInput" type="hidden" name="cardType">
+                                        <div class="form-group">
+                                            <label for="password">Password:</label>
+                                            <input class="form-control" type="password" name="password" id="password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="confirmPassword">Confirm Password:</label>
+                                            <input class="form-control" type="password" name="confirmPassword" id="confirmPassword">
+                                        </div>
+                                        <input class="form-control" type="submit" value="Delete Account">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,11 +139,6 @@
         </div>
     </div>
     <script>
-        //Maestro 	    50, 56–69
-        //Mastercard 	2221-2720
-        //              51–55
-        //Visa 	        4
-
         $('#paymentMethodForm').on('submit', function (e) {
             e.preventDefault();
             const input = $('#cardTypeInput');
