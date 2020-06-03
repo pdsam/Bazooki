@@ -403,8 +403,8 @@ CREATE FUNCTION bazooker_update_status_suspension() RETURNS TRIGGER AS $$
 BEGIN
 	IF(TG_OP = 'INSERT') THEN
 		UPDATE bazooker set status = 'suspended' where id = NEW.bazooker_id AND status='live';
-	ELSIF(TG_OP = 'UPDATE') THEN
-		UPDATE bazooker set status = 'live' where id = NEW.bazooker_id AND status='suspended' and OLD.duration=0;
+	ELSIF TG_OP = 'UPDATE' AND NEW.duration = 0 THEN
+		UPDATE bazooker set status = 'live' where id = NEW.bazooker_id AND status='suspended';
 	END IF;
 	RETURN NEW;
 END

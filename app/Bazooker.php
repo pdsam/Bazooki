@@ -90,4 +90,28 @@ class Bazooker extends Authenticatable implements User
     public function isSuspended(){
         return strcmp($this->status, 'suspended') == 0;
     }
+
+    public function winnerFeedbackAVG() {
+        return $this->hasMany('App\Feedback', 'rated_id')
+            ->where('ftype', '=', 'winner')
+            ->avg('rating');
+    }
+
+    public function winnerFBCount() {
+        return $this->hasMany('App\Feedback', 'rated_id')
+            ->where('ftype', '=', 'winner')
+            ->count();
+    }
+
+    public function auctioneerFeedbackAVG() {
+        return $this->hasMany('App\Feedback', 'rated_id')
+            ->where('ftype', '=', 'auction')
+            ->avg('rating');
+    }
+
+    public function auctioneerFBCount() {
+        return $this->hasMany('App\Feedback', 'rated_id')
+            ->where('ftype', '=', 'auction')
+            ->count();
+    }
 }

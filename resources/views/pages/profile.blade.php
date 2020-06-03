@@ -68,4 +68,22 @@
     </div>
 
     <hr class="customhr">
+
+    <div>
+        <h2 class="mb-5">Bazooker Ratings</h2>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                @php $avg = $user->winnerFeedbackAVG(); @endphp
+                <h2>As a bidder</h2>
+                <p><span style="font-size: 2rem">{{ is_null($avg) ? 0 : $avg }}</span><span style="font-size: 1.5rem">/10</span></p>
+                <p>Out of {{ $user->winnerFBCount() }} reviews.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                @php $avg = $user->auctioneerFeedbackAVG(); @endphp
+                <h2>As an auctioneer</h2>
+                <p><span style="font-size: 2rem">{{ is_null($avg) ? 0 : $avg }}</span><span style="font-size: 1.5rem">/10</span></p>
+                <p>Out of {{ $user->auctioneerFBCount() }} reviews.</p>
+            </div>
+        </div>
+    </div>
 @endsection
