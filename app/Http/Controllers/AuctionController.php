@@ -254,6 +254,9 @@ class AuctionController extends Controller
                 }
             }
         }
+        else{
+            AuctionCategory::where('auction_id',$id)->delete();
+        }
 
         if($request->hasFile('photos')) {
             $oldPhotos = AuctionPhoto::where('auction_id', $auction->id)->get();
