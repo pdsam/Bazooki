@@ -21,6 +21,7 @@ let f = setInterval(function () {
       days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   } else {
     output.innerHTML = "Expired";
+    document.getElementById("bid-button").disabled = true;
     clearInterval(f);
   }
 }, 1000);
