@@ -27,7 +27,7 @@
             </div>
             @else
             <div class="col-lg-6">
-                <button class="btn btn-warning" data-toggle="modal" data-target="#suspensionModal{{ $bazooker->id }}">
+                <button class="btn btn-warning" data-toggle="modal" data-target="#unsuspensionModal{{ $bazooker->id }}">
                     Unsuspend
                 </button>
             </div>
@@ -77,6 +77,31 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-warning form-modal-button">Suspend</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unsuspension modal -->
+    <div class="modal fade" id="unsuspensionModal{{ $bazooker->id }}" tabindex="-1" role="dialog" aria-labelledby="unsuspensionModalLabel{{ $bazooker->id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="unsuspensionModalLabel{{ $bazooker->id }}">Unsuspend User: {{ $bazooker->name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/mod/users/suspend/{{$bazooker->id}}">
+                        @csrf
+                        @method('PATCH')
+                        <p>Are you sure you want to unsuspend this user?</p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning form-modal-button">Unsuspend</button>
                 </div>
             </div>
         </div>
