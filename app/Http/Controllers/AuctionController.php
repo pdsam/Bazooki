@@ -282,6 +282,12 @@ class AuctionController extends Controller
             'form-id' => 'required|numeric',
             'amount' => 'required|numeric',
         ]);
+            $auction = Auction::find($request->input('form-id'));
+            
+            if($auction->isFrozen()){
+                return Redirect::back()->withErrors(["Can't bid on a frozen auction"]);
+            }
+
 
         try{
         $bid = Bid::create([
