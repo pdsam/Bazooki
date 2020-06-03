@@ -17,7 +17,7 @@ class AuctionController extends Controller
     {
         
         if(!Auth::guard('mod')->check() && !Auth::guard('admin')->check()) {
-            return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+            return redirect('auctions')->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
         }
         
         $auctions = Auction::whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP')

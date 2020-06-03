@@ -17,8 +17,14 @@ let f = setInterval(function () {
 	      output.innerHTML = "Not started";
     }
   else if (distance > 0) {
+    if(days ==0){
+      output.innerHTML =
+      hours + "h " + minutes + "m " + seconds + "s ";
+    }
+    else{
     output.innerHTML =
       days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    }
   } else {
     output.innerHTML = "Expired";
     document.getElementById("bid-button").disabled = true;
