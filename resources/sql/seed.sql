@@ -39,7 +39,7 @@ CREATE TYPE auction_status AS ENUM('pending', 'live', 'over', 'frozen', 'removed
 CREATE TABLE auction(id BIGSERIAL PRIMARY KEY,
                     owner BIGINT NOT NULL REFERENCES bazooker(id),
                     base_bid INT NOT NULL,
-                    start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                     duration INT NOT NULL CHECK (duration >= 60*30) DEFAULT (3600*24*7),
                     insta_buy INT CHECK (insta_buy > 0),
                     current_price INT,
@@ -80,7 +80,7 @@ CREATE TABLE bid(id BIGSERIAL PRIMARY KEY,
                 auction_id BIGINT NOT NULL REFERENCES auction(id),
                 bidder_id BIGSERIAL NOT NULL REFERENCES bazooker(id),
                 amount INT NOT NULL CHECK (amount > 0),
-                TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
+                TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(0));
 
 DROP TABLE IF EXISTS auction_moderator_action;
 DROP TYPE IF EXISTS moderator_action CASCADE;
@@ -88,7 +88,7 @@ CREATE TYPE moderator_action AS ENUM('freezed', 'removed');
 CREATE TABLE auction_moderator_action(id BIGSERIAL PRIMARY KEY,
                                       reason TEXT NOT NULL,
                                       active BOOL NOT NULL DEFAULT TRUE,
-                                      time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                      time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                                       action moderator_action,
                                       auction_id BIGINT NOT NULL REFERENCES auction(id),
                                       mod_id BIGINT NOT NULL REFERENCES moderator(id));
@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS bid_moderator_action;
 CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
                                    reason TEXT NOT NULL,
                                    active BOOL NOT NULL DEFAULT TRUE,
-                                   time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+                                   time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                                    action moderator_action,
                                    bid_id BIGINT NOT NULL REFERENCES bid(id),
                                    mod_id BIGINT NOT NULL REFERENCES moderator(id));
@@ -105,7 +105,7 @@ CREATE TABLE bid_moderator_action(id BIGSERIAL PRIMARY KEY,
 DROP TABLE IF EXISTS auction_transaction CASCADE;
 CREATE TABLE auction_transaction(id BIGSERIAL PRIMARY KEY,
                                  value int NOT NULL CHECK (value > 0),
-                                 date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                 date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                                  auction_id BIGINT NOT NULL REFERENCES auction(id),
                                  receiver BIGINT NOT NULL REFERENCES bazooker(id),
                                  sender BIGINT NOT NULL REFERENCES bazooker(id),
@@ -122,7 +122,7 @@ CREATE TABLE suspension(id BIGSERIAL PRIMARY KEY,
                         mod_id BIGINT NOT NULL REFERENCES moderator(id),
                         bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                         reason TEXT NOT NULL, 
-                        time_of_suspension TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                        time_of_suspension TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                         duration INT NOT NULL CHECK (duration >0));
 
 DROP TABLE IF EXISTS ban;
@@ -130,7 +130,7 @@ CREATE TABLE ban(id BIGSERIAL PRIMARY KEY,
                  admin_id BIGINT NOT NULL REFERENCES administrator(mod_id),
                  bazooker_id BIGINT NOT NULL REFERENCES bazooker(id),
                  reason TEXT NOT NULL, 
-                 time_of_ban TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                 time_of_ban TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
                  active BOOLEAN NOT NULL DEFAULT TRUE);
 
 DROP TABLE IF EXISTS feedback;
@@ -211,7 +211,7 @@ CREATE TRIGGER precalculate_auction_fts
     CREATE FUNCTION check_auction_time_bounds() RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.time IS NULL THEN
-        NEW.time = CURRENT_TIMESTAMP;
+        NEW.time = CURRENT_TIMESTAMP(0);
     END IF;
     IF NEW.time > (SELECT start_time + duration * interval '1 second' FROM auction WHERE id = NEW.auction_id ) THEN
         RAISE EXCEPTION 'Auction has already closed.';
@@ -423,7 +423,7 @@ DECLARE
     A RECORD;
 BEGIN
     FOR A IN (select * from auction where status = 'live') LOOP
-        IF ((A.start_time + A.duration * interval '1 second') < CURRENT_TIMESTAMP) THEN
+        IF ((A.start_time + A.duration * interval '1 second') < CURRENT_TIMESTAMP(0)) THEN
             -- SET STATUS TO OVER
             UPDATE auction set status = 'over' WHERE id = A.id;
 
@@ -441,7 +441,7 @@ $$ LANGUAGE 'plpgsql';
 DROP FUNCTION IF EXISTS check_auction_still_pending();
 CREATE FUNCTION check_auction_still_pending() RETURNS VOID AS $$
 BEGIN
-    UPDATE auction set status='live' where status='pending' AND start_time < CURRENT_TIMESTAMP;
+    UPDATE auction set status='live' where status='pending' AND start_time < CURRENT_TIMESTAMP(0);
 END
 $$ LANGUAGE 'plpgsql';
 
@@ -452,7 +452,7 @@ DECLARE
     A RECORD;
 BEGIN
     FOR A IN (select * from bazooker where status = 'suspended') LOOP
-        IF NOT EXISTS(select * from suspension where bazooker_id = A.id and ((time_of_suspension + duration * interval '1 second') > CURRENT_TIMESTAMP)) THEN
+        IF NOT EXISTS(select * from suspension where bazooker_id = A.id and ((time_of_suspension + duration * interval '1 second') > CURRENT_TIMESTAMP(0))) THEN
             update bazooker set status='live' where id = A.id;
         END IF;
     END LOOP;

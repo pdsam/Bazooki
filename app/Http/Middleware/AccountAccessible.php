@@ -33,7 +33,8 @@ class AccountAccessible
             ]);
         }
         if ($baz->isSuspended()) {
-            $suspended = $baz->suspensions()->whenRaw('time_of_suspension + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->get()[0];
+            //dd($baz->suspensions);
+            $suspended = $baz->mostRecentSuspension();
             $seconds = $suspended->duration;
             $time = $suspended->time_of_suspension->modify("+$seconds seconds");
 

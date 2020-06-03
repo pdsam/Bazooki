@@ -58,7 +58,7 @@ class LoginController extends Controller
                 ]);
             }
             if ($user->isSuspended()) {
-                $suspended = $user->suspensions()->whenRaw('time_of_suspension + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->get()[0];
+                $suspended = $baz->mostRecentSuspension();
                 $seconds = $suspended->duration;
                 $time = $suspended->time_of_suspension->modify("+$seconds seconds");
 
