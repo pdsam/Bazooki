@@ -96,6 +96,9 @@
                             <i class="p-0 fa fa-chevron-right"></i>
                         </div>
                     @endif
+                    @if($auctions->isEmpty())
+                        <p>No Auctions were found</p>
+                    @endif
                 </div>
             </div>
         </div>
