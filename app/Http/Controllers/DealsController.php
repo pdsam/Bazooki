@@ -15,6 +15,7 @@ class DealsController extends Controller
 {
     public function hotdeals(){
 
+	//For each auction takes, bids from the latest hour and displays it
         $hotdeals = DB::select( DB::raw("
 		SELECT    auction.item_name              AS title, 
           image_path                     AS img, 
