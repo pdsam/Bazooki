@@ -64,7 +64,7 @@
                             </div>
                         @enderror
                         <label>
-                            <input class="p-2" type="checkbox" name="accepted" required="required"> I accept the Terms and Conditions
+                            <input class="p-2" type="checkbox" name="accepted" required="required">  I accept the <a href="/terms">Terms and Conditions</a>
                         </label>
                     </div>
 
