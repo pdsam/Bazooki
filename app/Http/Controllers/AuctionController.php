@@ -78,7 +78,6 @@ class AuctionController extends Controller
 
         $userID = Auth::user()->id;
         $startDate = DateTime::createFromFormat('m/d/Y h:i A', $request->start_time)->getTimestamp();
-	$startDate = $startDate - 3600*24;
         $insta_buy = $request->has('insta_buy') ? $request->insta_buy : null;
 
 	$auctionStatus = ($startDate <= time() ? 'live' : 'pending');
@@ -281,26 +280,30 @@ class AuctionController extends Controller
             'form-id' => 'required|numeric',
             'amount' => 'required|numeric',
         ]);
-            $auction = Auction::find($request->input('form-id'));
-            
-            if($auction->isFrozen()){
-                return Redirect::back()->withErrors(["Can't bid on a frozen auction"]);
-            }
 
+        $auction = Auction::find($request->input('form-id'));
+
+        if($request->input('amount') <= $auction->currentPrice()) {
+            return Redirect::back()->withErrors(["Invalid bid, there has already been a higher one"]);
+        }
+        
+        if($auction->isFrozen()){
+            return Redirect::back()->withErrors(["Can't bid on a frozen auction"]);
+        }
 
         try{
-        $bid = Bid::create([
-            'auction_id'=> $request->input('form-id'),
-            'bidder_id'=> Auth::user()->id,
-            'time'=> time(),
-            'amount'=> $request->input('amount'),
-        ]);
+            $bid = Bid::create([
+                'auction_id'=> $request->input('form-id'),
+                'bidder_id'=> Auth::user()->id,
+                'time'=> time(),
+                'amount'=> $request->input('amount'),
+            ]);
         }
         catch(QueryException $e){
-            abort(403,"Invalid bid");
+            return Redirect::back()->withErrors(["Invalid bid, there has already been a higher one"]);
         }
 
-        return response($request->input('amount'));
+        return redirect("/auctions/".$auction->id)->with('successMsg', 'Successfully placed bid');
     }
 
     public function query(Request $request) {

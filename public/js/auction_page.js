@@ -32,31 +32,6 @@ let f = setInterval(function () {
   }
 }, 1000);
 
-$("#bid-form").submit(async (e) => {
-  e.preventDefault();
-  document.getElementById("bid-button").disabled = true;
-
-  const form = $("#bid-form :input");
-
-  const valArray = form.serializeArray();
-  const id = valArray[1].value;
-
-  const amount = await fetch(`/auctions/${id}/bid`, {
-    method: "POST",
-    headers: {
-      "X-CSRF-TOKEN": valArray[0].value,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: form.serialize(),
-  }).then((response) => {
-    if (response.status >= 400 && response.status < 600) {
-    }
-    location.reload();
-  });
-
-  const val = await amount.text();
-  $("#price").html(val);
-});
 
 if (typeof Worker !== "undefined") {
   if (typeof w == "undefined") {
