@@ -401,10 +401,14 @@ class AuctionController extends Controller
         if ($request->exists('f')) {
             switch($request->input('f')) {
                 case 'onlyLive':
-                    $auctions->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
+                    $auctions
+                        ->where('status', '=', 'live')
+                        ->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
                     break;
                 case 'onlyOver':
-                    $auctions->whereRaw('start_time + duration * interval \'1 second\' < CURRENT_TIMESTAMP');
+                    $auctions
+                        ->where('status', '=', 'over')
+                        ->whereRaw('start_time + duration * interval \'1 second\' < CURRENT_TIMESTAMP');
                     break;
                 case 'both':
                 default:
@@ -524,12 +528,16 @@ class AuctionController extends Controller
             switch($request->input('f')) {
                 case 'onlyLive':
                     $bids->whereHas('auction', function($q) {
-                        $q->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
+                        $q
+                            ->where('status', '=', 'live')
+                            ->whereRaw('start_time + duration * interval \'1 second\' > CURRENT_TIMESTAMP');
                     });
                     break;
                 case 'onlyOver':
                     $bids->whereHas('auction', function($q) {
-                        $q->whereRaw('start_time + duration * interval \'1 second\' < CURRENT_TIMESTAMP');
+                        $q
+                            ->where('status', '=', 'over')
+                            ->whereRaw('start_time + duration * interval \'1 second\' < CURRENT_TIMESTAMP');
                     });
                     break;
                 case 'both':
