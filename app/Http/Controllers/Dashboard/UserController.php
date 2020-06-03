@@ -46,6 +46,10 @@ class UserController extends Controller
             'duration' => 'Duration must be greater than 0'
         ]);
 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
         if(is_null(Bazooker::find($id))){
             Redirect::back()->withErrors(["Can't suspend a bazooker that does not exist"]);
         }
@@ -85,6 +89,24 @@ class UserController extends Controller
     public function ban(Request $request,$id){
         if(!Auth::guard('admin')->check()) {
             return Redirect::back()->withErrors(['You do not have permission to access that resource.', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴']);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'reason' =>'required|string|max:500',
+            'bazooker_id' => 'required|numeric|gt',
+            'duration' => 'required|numeric|gt'
+        ],$messages = [
+            'reason' =>'Reasons can have a max of 500 caracters',
+            'bazooker_id' => 'Invalid bazooker_id',
+            'duration' => 'Duration must be greater than 0'
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
+        if(is_null(Bazooker::find($id))){
+            Redirect::back()->withErrors(["Can't ban a bazooker that does not exist"]);
         }
 
         if(Bazooker::find($id)->isBanned()){
