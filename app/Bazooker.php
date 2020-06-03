@@ -69,8 +69,13 @@ class Bazooker extends Authenticatable implements User
     public function bans(){
         return $this->hasMany('App\Ban','bazooker_id');
     }
+
     public function suspensions(){
         return $this->hasMany('App\Suspension','bazooker_id');
+    }
+
+    public function mostRecentSuspension() {
+        return $this->suspensions()->orderBy('time_of_suspension')->first();
     }
 
     public function isBanned(){
@@ -79,6 +84,6 @@ class Bazooker extends Authenticatable implements User
     }
 
     public function isSuspended(){
-        return $this->suspensions()->whereRaw('time_of_suspension + duration * interval \'1 second\' > CURRENT_TIMESTAMP')->exists();
+        return strcmp($this->status, 'suspended') == 0;
     }
 }

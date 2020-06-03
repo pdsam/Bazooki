@@ -118,7 +118,6 @@
                                     <form id="deleteAccountForm" class="form" action="/account/delete" method="POST">
                                         @csrf
                                         @method('POST')
-                                        <input id="cardTypeInput" type="hidden" name="cardType">
                                         <div class="form-group">
                                             <label for="password">Password:</label>
                                             <input class="form-control" type="password" name="password" id="password">

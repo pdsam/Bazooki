@@ -54,7 +54,7 @@ class UserController extends Controller
             'reason' => $request->reason,
             'mod_id' => $modID,
             'bazooker_id' => $id,
-            'duration' => $request->duration
+            'duration' => $request->duration * 3600 * 24
        ]);
 
         return Redirect::back()->with('successMsg', 'Successfully suspended user');
