@@ -24,6 +24,10 @@ class AuctionTableSeeder extends Seeder
                 ]);
             }
 
+            if (!$auction->hasStarted()) {
+                return;
+            }
+
             $owner = $auction->owner;
             $last = DB::table('bazooker')->whereNotIn('id', [$owner])->inRandomOrder()->first();
 
