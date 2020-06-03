@@ -37,6 +37,7 @@ left join item_image
 ON        item_image.auction_id = auction.id 
 WHERE     auction.status='live'
 AND       start_time < Now() 
+AND 	  start_time + duration * interval '1 second' > Now()
 ORDER BY  num_bids DESC limit 8;
 		
             ") );
@@ -118,6 +119,7 @@ ORDER BY  num_bids DESC limit 8;
 		auction_id=auction.id
 		WHERE status='live'
 		AND start_time < now()
+		AND 	  start_time + duration * interval '1 second' > Now()
 		 ORDER BY start_time DESC LIMIT 8;
             ")
 
