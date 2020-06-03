@@ -77,18 +77,29 @@ class AuctionController extends Controller
         }
 
         $userID = Auth::user()->id;
-        $startDate = DateTime::createFromFormat('m/d/Y h:i A', $request->start_time)->format('Y-m-d H:i:s');
+        $startDate = DateTime::createFromFormat('m/d/Y h:i A', $request->start_time)->getTimestamp();
         $insta_buy = $request->has('insta_buy') ? $request->insta_buy : null;
+
+
+	error_log($startDate);
+	error_log(time());
+	$auctionStatus = ($startDate <= time() ? 'live' : 'pending');
+
+	error_log($auctionStatus);
+
+
         $newAuction = Auction::create([
             'owner' => $userID,
             'base_bid' => $request->base_bid,
             'start_time' => $startDate,
             'duration' => $request->duration,
+	    'status' => $auctionStatus,
             'item_name' => $request->name,
             'item_description' => $request->description,
             'item_short_description' => $request->short_description,
             'insta_buy' => $insta_buy
         ]);
+
 
         if(empty($newAuction)) return redirect('auctions');
 
