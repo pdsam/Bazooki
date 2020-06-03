@@ -18,17 +18,17 @@
         @csrf
         @method('PATCH')
         <div class="form-group mt-4 ml-4 mr-4">
-            <h3>Product title</h3>
+            <h3>Product title*</h3>
             <input name="name" type="text" class="form-control" id="productTitle" aria-describedby="prodTitle" placeholder="Title" value="{{$name}}" required>
         </div>
 
         <div class="form-group mt-4 ml-4 mr-4">
-            <h3>Short product description</h3>
+            <h3>Short product description*</h3>
             <input name="short_description" class="form-control" id="short_description" placeholder="Short description" value={{$sDescription}} required>
         </div>
 
         <div class="form-group mt-4 ml-4 mr-4">
-            <h3>Product description</h3>
+            <h3>Product description*</h3>
             <textarea name="description" class="form-control" rows="5" id="description" placeholder="Description" >{{$description}}</textarea>
         </div>
 
