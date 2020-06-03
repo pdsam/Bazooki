@@ -2,6 +2,16 @@
 
 @section('title', 'Bazooki - Edit auction')
 
+@section('error_handling')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="m-0">
+                <li>Invalid input provided</li>
+            </ul>
+        </div>
+    @endif
+@endsection
+
 @section('head')
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
@@ -18,16 +28,31 @@
         @csrf
         @method('PATCH')
         <div class="form-group mt-4 ml-4 mr-4">
+            @error('name')
+                <div class="text-left">
+                    <p class="text-danger m-0">{{ $message }}</p>
+                </div>
+            @enderror
             <h3>Product title*</h3>
             <input name="name" type="text" class="form-control" id="productTitle" aria-describedby="prodTitle" placeholder="Title" value="{{$name}}" required>
         </div>
 
         <div class="form-group mt-4 ml-4 mr-4">
+            @error('short_description')
+                <div class="text-left">
+                    <p class="text-danger m-0">{{ $message }}</p>
+                </div>
+            @enderror
             <h3>Short product description*</h3>
             <input name="short_description" class="form-control" id="short_description" placeholder="Short description" value={{$sDescription}} required>
         </div>
 
         <div class="form-group mt-4 ml-4 mr-4">
+            @error('description')
+                <div class="text-left">
+                    <p class="text-danger m-0">{{ $message }}</p>
+                </div>
+            @enderror
             <h3>Product description*</h3>
             <textarea name="description" class="form-control" rows="5" id="description" placeholder="Description" >{{$description}}</textarea>
         </div>
@@ -37,6 +62,16 @@
         <div class="card mt-4 ml-4 mr-4">
             <div class="card-body">
                 <div class="card-title">
+                    @error('categories')
+                        <div class="text-left">
+                            <p class="text-danger m-0">{{ $message }}</p>
+                        </div>
+                    @enderror
+                    @error('categories.*')
+                        <div class="text-left">
+                            <p class="text-danger m-0">{{ $message }}</p>
+                        </div>
+                    @enderror
                     <h3>Categories</h3>
                     <p>Select all that apply</p>
                 </div>
@@ -54,6 +89,16 @@
 
         <div class="card mt-4 ml-4 mr-4">
             <div class="card-body">
+                @error('photos')
+                    <div class="text-left">
+                        <p class="text-danger m-0">{{ $message }}</p>
+                    </div>
+                @enderror
+                @error('photos.*')
+                    <div class="text-left">
+                        <p class="text-danger m-0">{{ $message }}</p>
+                    </div>
+                @enderror
                 <div class="card-title">
                     <h3>Pictures</h3>
                     <p>May select more than one</p>

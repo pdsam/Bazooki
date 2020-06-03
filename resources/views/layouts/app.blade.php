@@ -49,7 +49,7 @@
                 </div>
             @endif
 
-            @section('sidebar')
+            @section('error_handling')
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="m-0">
