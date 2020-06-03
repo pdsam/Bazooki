@@ -292,6 +292,7 @@ class AuctionController extends Controller
         $bid = Bid::create([
             'auction_id'=> $request->input('form-id'),
             'bidder_id'=> Auth::user()->id,
+            'time'=> time(),
             'amount'=> $request->input('amount'),
         ]);
         }
