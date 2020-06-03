@@ -9,8 +9,9 @@ class AuctionModeratorAction extends Model
     public $timestamps  = false;
     public $table = 'auction_moderator_action';
 
-
     protected $fillable = ['reason','active','action','mod_id','auction_id'];
+
+    protected $dates = ['time_of_suspension'];
 
     public function mod(){
         return $this->belongsTo('App\Moderator');

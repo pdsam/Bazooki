@@ -16,11 +16,13 @@ class Bid extends Model
         'time'
     ];
 
+    protected $dates = [
+        'time'
+    ];
+
     public function bidder() {
         return $this->belongsTo('App\Bazooker');
     }
-
-    
 
     public function auction() {
         return $this->belongsTo('App\Auction');

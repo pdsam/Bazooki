@@ -53,12 +53,18 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:bazooker',
+            'username' => 'required|string|max:255|unique:bazooker|unique:moderator,email',
             'email' => 'required|string|email|unique:bazooker|unique:moderator',
             'password' => 'required|string|min:6',
-            //'accepted' => 'accepted'
+            'accepted' => 'accepted'
         ], [
-            //'accepted.accepted' => 'You must accept the Terms and Conditions'
+            'name.max' => 'Name is too long (max. 255 characters)',
+            'username.max' => 'Username is too long (max. 255 characters)',
+            'username.unique' => 'Username already in use',
+            'email.unique'=>'Email already in use',
+            'email.email'=>'Please enter a valid email',
+            'password.min' => 'Password is too short (min. 6 characters)',
+            'accepted.accepted' => 'You must accept the Terms and Conditions'
         ]);
     }
 

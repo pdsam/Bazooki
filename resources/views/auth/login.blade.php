@@ -33,11 +33,6 @@
                     </div>
 
                     <button class="btn btn-lg btn-primary btn-block mb-4 rounded-pill font-weight-bold p-3" type="submit">SIGN IN</button>
-                    <button class="btn btn-lg btn-google btn-block text-uppercase rounded-pill font-weight-bold p-3" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-
-                    <div id="forgot-password" class="my-4">
-                        <a href="#recover-password">Forgot your password?</a>
-                    </div>
 
                     <div id="register-prompt" class="text-left">
                         <p>Want to become a bazooker? <a href="/register">Register here!</a></p>

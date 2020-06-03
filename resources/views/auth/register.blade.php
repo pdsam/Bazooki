@@ -64,12 +64,11 @@
                             </div>
                         @enderror
                         <label>
-                            <input class="p-2" type="checkbox" value="terms-and-conditions" name="accepted" required> I accept the Terms and Conditions 
+                            <input class="p-2" type="checkbox" name="accepted" required="required"> I accept the Terms and Conditions
                         </label>
                     </div>
 
                     <button class="btn btn-lg btn-primary btn-block mb-4 rounded-pill font-weight-bold p-3" type="submit">REGISTER</button>
-                    <button class="btn btn-lg btn-google btn-block text-uppercase rounded-pill font-weight-bold p-3" type="submit"><i class="fab fa-google mr-2"></i> Register with Google</button>
 
                 </form>
             </div>
