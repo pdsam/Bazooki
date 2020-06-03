@@ -29,6 +29,12 @@ class Kernel extends ConsoleKernel
         $schedule->call(function() {
             DB::select('SELECT check_auction_still_live()');
         })->everyMinute()->name('auction_live_to_over')->withoutOverlapping();
+        $schedule->call(function() {
+            DB::select('SELECT check_auction_still_pending()');
+        })->everyMinute()->name('auction_pending_to_live')->withoutOverlapping();
+        $schedule->call(function() {
+            DB::select('SELECT check_user_suspended_status()');
+        })->everyMinute()->name('user_unsuspend')->withoutOverlapping();
     }
 
     /**
