@@ -1,10 +1,10 @@
 let adress = ""
 
 function compare( a, b ) {
-    if ( a['amount'] < b['amount'] ){
+    if ( a['amount'] > b['amount'] ){
       return -1;
     }
-    if ( a['amount'] > b['amount'] ){
+    if ( a['amount'] < b['amount'] ){
       return 1;
     }
     return 0;
