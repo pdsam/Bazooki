@@ -4,7 +4,7 @@
 
 The goal of the project is to create a platform for online auctions which will allow a registered user to place items up for auction or bid on existing ones.
 
-## Membros do grupo:
+## Group Members:
 
 * José Silva, up201705591@fe.up.pt
 * Mário Gil Mesquita, up201705723@fe.up.pt
